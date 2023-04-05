@@ -41,15 +41,15 @@ const config = {
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+          // editUrl:
+          //   'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
         },
         blog: {
           showReadingTime: true,
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+          // editUrl:
+          //   'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
@@ -64,22 +64,28 @@ const config = {
       // Replace with your project's social card
       image: 'img/docusaurus-social-card.jpg',
       navbar: {
-        title: 'Law in a Digital Age Textbook',
+        title: 'Law in a Digital Age',
         logo: {
           alt: 'Flinders University Logo',
-          src: 'img/Flinders_University_Logo_Stacked_RGB_Master_Cropped.png',
+          src: 'img/Flinders_University_Logo_Horizontal_RGB_Master.png',
         },
         items: [
           {
             type: 'docSidebar',
-            sidebarId: 'tutorialSidebar',
+            sidebarId: 'textbookSidebar',
             position: 'left',
-            label: 'Tutorial',
+            label: 'Textbook',
+          },
+          {
+            type: 'docSidebar',
+            sidebarId: 'codingExercisesSidebar',
+            position: 'left',
+            label: 'Coding Exercises'
           },
           {to: '/blog', label: 'Blog', position: 'left'},
           {
-            href: 'https://github.com/facebook/docusaurus',
-            label: 'GitHub',
+            href: 'https://github.com/LLAW3301',
+            label: 'Digital Age GitHub',
             position: 'right',
           },
         ],
