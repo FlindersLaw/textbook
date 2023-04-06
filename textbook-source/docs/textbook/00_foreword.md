@@ -5,7 +5,9 @@ slug: /
 *By Mark Ferraretto*
 
 ## Welcome!
-Welcome to *LLAW3301: Law in a Digital Age*  I'm sure you've heard a lot about this topic. It's a very unusual topic as law topics go.  Yes, it is challenging but we find that students also find it very rewarding.  I sincerely hope you do so as well.
+Welcome to *LLAW3301: Law in a Digital Age*!
+
+I'm sure you've heard a lot about this topic. It's a very unusual topic as law topics go.  Yes, it is challenging but we find that students also find it very rewarding.  I sincerely hope you do so as well.
 
 I would like to outline for you the rationale behind teaching what we teach in this topic. I hope it gives you a better understanding of why we teach what we teach and what we hope you can take away from your experience.
 
