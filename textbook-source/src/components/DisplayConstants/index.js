@@ -1,0 +1,27 @@
+import React from "react";
+import * as Constants from '@site/src/constants.js';
+
+export function DisplayConstants(props) {
+    // Expect: props.data - key to constant to display
+    //         props.text - optional text to display in <a> tag
+    // Return: JSX with information requested
+    // Displays constants that we have set, such as the 
+    // name and URL of the docassemble server
+
+    // Display the name or href of the DA server
+    if (props.data == 'daurl') {
+        return Constants.docassemble_server_url;
+    } else if ( props.data == 'dahref') {
+        // return an <a> tag.  
+        let display_text = props.text || Constants.docassemble_server_name;
+        return <a href={Constants.docassemble_server_url}>{display_text}</a>
+    } else if ( props.data == 'daorghref' ) {
+        // Return link to docassemble.org
+        let display_text = props.text || 'Docassemble'
+        return <a href="https://docassemble.org">{display_text}</a>
+    } else if ( props.data == 'github' ) {
+        return <a href="https://github.com">GitHub</a>
+    } else {
+        return <span className="TODOerror">Unknown data supplied: {props.data}</span>
+    }
+}

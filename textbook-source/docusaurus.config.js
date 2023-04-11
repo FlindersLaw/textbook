@@ -94,11 +94,19 @@ const config = {
         style: 'dark',
         links: [
           {
-            title: 'Docs',
+            title: 'Resources',
             items: [
+              {
+                label: 'Docassemble Server',
+                href: 'https://docassemble.flinders.edu.au'
+              },
               {
                 label: 'Docassemble Manual',
                 href: 'https://docassemble.org/docs.html',
+              },
+              {
+                label: 'Digital Age GitHub',
+                href: 'https://github.com/LLAW3301',
               },
             ],
           },
@@ -118,10 +126,6 @@ const config = {
           {
             title: 'More',
             items: [
-              {
-                label: 'GitHub',
-                href: 'https://github.com/LLAW3301',
-              },
               {
                 label: 'FLO',
                 href: 'https://flo.flinders.edu.au',
