@@ -1,7 +1,65 @@
 ---
 title: Connect to GitHub
 ---
-# Creating a GitHub account
-The instructions in the video are out of date.  GitHub has since substantially changed its licensing regime
+import {DisplayConstants} from '@site/src/components/DisplayConstants'
+import {DisplayChapter} from '@site/src/components/DisplayChapters'
 
-## Setting up integration
+## What is GitHub?
+<DisplayConstants data='github' /> is a tool used by coders to work together on code.  The good news about GitHub is that it's an industry standard and it integrates with Docassemble.
+The bad news about GitHub is that it can be a bit fiddly to use.  It's designed with coders in mind (obviously!) and it scales up to manage very
+large projects.  We'll only be using a subset of GitHub's features and <DisplayChapter chapter='6' /> will take you through how to use GitHub in detail.  For now, we just need to sign up and connect GitHub and Docassemble together.
+
+Let's get started
+
+## Get a GitHub account
+You do this in the usual way.  
+
+1. Go to <DisplayConstants data='github' />, click on the *Sign up* button
+  > ![image](/img/textbook/chapter_1/github_signup1.png)
+1. Enter your Flinders email address, a password and press *Continue*
+  > ![image](/img/textbook/chapter_1/github_signup2.png)
+
+  :::note
+
+  You must sign up with your Flinders email ie: ***your_fan*@flinders.edu.au** and you must use your FAN as your GitHub username. 
+
+  You should sign up with your Flinders email even if you already have a FAN.
+  This makes it easier for teaching staff to establish your identity on GitHub.
+
+  :::
+
+1. You will then be asked for a username.  Enter your FAN.  Press *Continue* again.
+  > ![image](/img/textbook/chapter_1/github_signup3.png)
+1. Type in 'n' for product updates and press *Continue* again.
+  > ![image](/img/textbook/chapter_1/github_signup4.png)
+1. Work through the CAPTCHA puzzle and then press *Create Account*
+1. You'll be asked to enter a code that has been emailed to your Flinders email.  Enter that code.
+1. You're then taken to a Welcome screen.  Identify yourself as a student and that you'll be working with a group of 2 - 5 others.
+  > ![image](/img/textbook/chapter_1/github_signup5.png)
+1. Scroll to the bottom of the next screen and press *Continue*
+  > ![image](/img/textbook/chapter_1/github_signup6.png)
+1. At the next screen you have the option to sign up for Student benefits.  You may if you're interested but we won't need these.  Signing up for a free account is fine.
+  > ![image](/img/textbook/chapter_1/github_signup7.png)
+1. You'll then be taken to your GitHub landing page.
+  > ![image](/img/textbook/chapter_1/github_signup8.png)
+
+That's all we need for now.  You're signed up to GitHub.  Now we need to connect GitHub and Docassemble together.
+
+## Set up GitHub integration
+Now that you have a GitHub account we need to let Docassemble know.
+1. Log in to Docassemble.  You should end up at the *Resume Interview* page
+  > ![image](/img/textbook/chapter_1/docassemble_after_signin_screen.png)
+1. Select *Profile* from the right-hand menu
+  > ![image](/img/textbook/chapter_1/github_integration1.png)
+1. Click on *Other Settings* and then *GitHub integration*
+  > ![image](/img/textbook/chapter_1/github_integration2.png)
+1. Click on *Configure*
+  > ![image](/img/textbook/chapter_1/github_integration3.png)
+1. If you signed out of GitHub you may be asked to sign in again.
+  > ![image](/img/textbook/chapter_1/github_integration4.png)
+1. Otherwise, you'll be presented with this authorisation screen.
+  > ![image](/img/textbook/chapter_1/github_integration5.png)
+1. Click on *Authorize LLAW3301*.  After some time you'll be taken back to Docassemble and you'll see a message stating that the integration was configured.
+  > ![image](/img/textbook/chapter_1/github_integration6.png)
+
+That's it! You now have Docassemble and GitHub connected to each other.
