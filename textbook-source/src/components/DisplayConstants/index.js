@@ -1,5 +1,5 @@
 import React from "react";
-import * as Constants from '@site/src/constants.js';
+import * as Constants from '@site/src/constants';
 
 export function DisplayConstants(props) {
     // Expect: props.data - key to constant to display
@@ -18,10 +18,18 @@ export function DisplayConstants(props) {
     } else if ( props.data == 'daorghref' ) {
         // Return link to docassemble.org
         let display_text = props.text || 'Docassemble'
-        return <a href="https://docassemble.org">{display_text}</a>
+        return <a href={Constants.da_website_url}>{display_text}</a>
     } else if ( props.data == 'github' ) {
-        return <a href="https://github.com">GitHub</a>
+        return <a href={Constants.github_server_url}>{Constants.github_server_name}</a>
+    } else if ( props.data == 'damanual' ) {
+        return <a href={Constants.da_manual_url}>{Constants.da_manual_name}</a>
     } else {
         return <span className="TODOerror">Unknown data supplied: {props.data}</span>
     }
+}
+
+export function DisplayDAManualParts(props) {
+    // Expect: props.endpoint - path to part of docs manual to display.
+    //         this will be added to Constants.da_manual_url_root
+    //      
 }
