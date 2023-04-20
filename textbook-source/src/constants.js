@@ -15,3 +15,8 @@ export const da_manual_name = 'Docassemble Manual';
 // one day!
 export const github_server_url = 'https://github.com';
 export const github_server_name = 'GitHub';
+
+// Docassemble variable panel colours
+export const da_undeclared_variable = '#BB2D3B';
+export const da_declared_variable = '#0B5ED7';
+export const da_unused_variable = '#FFCA2C';
