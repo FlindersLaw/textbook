@@ -139,9 +139,14 @@ const config = {
         ],
         copyright: `Copyright © ${new Date().getFullYear()} Flinders University. Built with Docusaurus.`,
       },
-      prism: {
+      /*prism: {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
+      },*/
+      colorMode: {
+        defaultMode: 'light',
+        disableSwitch: true,
+        respectPrefersColorScheme: false,
       },
     }),
 };
