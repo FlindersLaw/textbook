@@ -20,3 +20,20 @@ export const github_server_name = 'GitHub';
 export const da_undeclared_variable = '#BB2D3B';
 export const da_declared_variable = '#0B5ED7';
 export const da_unused_variable = '#FFCA2C';
+
+// Docassemble save, save and run button colours
+export const da_save_prop = 'save';
+export const da_save_and_run_prop = 'snr';
+export const da_button_map = {
+    [da_save_prop] : {
+        button_colour: '#0D6EFD',
+        text_colour  : '#fff',
+        button_text  : 'Save'
+    },
+    [da_save_and_run_prop] : {
+        button_colour: '#FFCA2C',
+        text_colour  : '#000',
+        button_text  : 'Save and Run'
+
+    }
+}
