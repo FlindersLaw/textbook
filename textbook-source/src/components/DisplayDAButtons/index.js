@@ -5,16 +5,15 @@ import React from "react";
 import * as Constants from '@site/src/constants.js';
 
 export function DisplayDAButtons(props) {
-    let button_props = {};
     if (props.button) {
-        button_props = Constants.da_button_map[props.button.prop];
+        let button_props = Constants.da_button_map[props.button];
         return (
             <span
                 style={{
                     backgroundColor: button_props.button_colour,
-                    borderRadius: '2px',
+                    borderRadius: '6px',
                     color: button_props.text_colour,
-                    padding: '0.2rem',
+                    padding: '6px',
                 }}
             >
                 {button_props.button_text}

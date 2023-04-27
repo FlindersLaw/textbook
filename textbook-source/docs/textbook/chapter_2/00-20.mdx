@@ -1,10 +1,10 @@
 ---
 title: Hello World 2
 ---
-import {da_declared_variable, da_unused_variable} from '@site/src/constants'
+import * as Constants from '@site/src/constants'
 import {Highlight} from '@site/src/components/Highlight'
-import {da_save_prop, da_save_and_run_prop} from '@site/src/constants'
 import {DisplayDAButtons} from '@site/src/components/DisplayDAButtons'
+import {DisplayImage} from '@site/src/components/DisplayImage'
 
 Let's take the [Hello World](./00-10) program you just wrote and add some more features,
 namely:
@@ -17,15 +17,20 @@ First thing is to create a new file and copy the code over.
 
 1. Before you create the new file, copy the existing code in the text editor.
 We'll paste it into the new file shortly.
-1. Click on the ![Add](/img/textbook/add_button.png) button and create a new file called `hello_world2.yml`.
+1. Click on the <DisplayImage 
+    borderStyle={Constants.DI_inline_shadow}
+    altText='Add' 
+    imageURL='/img/textbook/add_button.png' />
+button and create a new file called `hello_world2.yml`.
 :::tip
 Refer to how we did this [previously](./00-10/#your-first-program).
 :::
+:::tip TODO
+Use `DisplayImage()` to display the Add button.  Need to change
+`display: block` and the `margin` and the borders as well.  Need 
+a clean inline style
+:::
 1. Paste the code you copied from `hello_world.yml` into this new file and 
-press <Highlight color={da_declared_variable}>Save</Highlight>.
-1. Then press <Highlight color={da_unused_variable}>Save and Run</Highlight> 
+press <DisplayDAButtons button={Constants.da_save_prop} />.
+1. Then press <DisplayDAButtons button={Constants.da_save_and_run_prop} />
 to make sure the program still runs OK.
-
-Blank line
-
-Testing <DisplayDAButtons button={da_save_prop} />

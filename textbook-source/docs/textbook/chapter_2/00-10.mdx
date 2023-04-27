@@ -1,8 +1,10 @@
 ---
 title: Hello World!
 ---
-import {da_declared_variable, da_unused_variable} from '@site/src/constants'
+import * as Constants from '@site/src/constants'
 import {Highlight} from '@site/src/components/Highlight'
+import {DisplayDAButtons} from '@site/src/components/DisplayDAButtons'
+import {DisplayImage} from '@site/src/components/DisplayImage'
 
 It is a tradition in coding, long before this author was a boy, that the first program a programmer should write is
 one that simply announces its presence to the world by way of simply displaying the text 'Hello World!'.
@@ -14,9 +16,9 @@ As tradition dictates, let's make a 'Hello World' program:
 1. Go to your [Playground](/docs/textbook/chapter_1/00-30#the-playground)
 1. Click on the 'Add' button
 1. Call your program `hello_world.yml`
-  > ![image](/img/textbook/chapter_2/hello_world1.png)
+<DisplayImage imageURL='/img/textbook/chapter_2/hello_world1.png' />
 1. Enter the code displayed in the code snippet below into the [text editor](/docs/textbook/chapter_1/00-30#3-text-editor)
-1. Press Save
+1. Press <DisplayDAButtons button={Constants.da_save_prop} />
 
 ```docassemble title="hello_world.yml" showLineNumbers
 ---
@@ -38,12 +40,12 @@ comes with some useful features:
 into the text editor correctly.  Just check the line numbers match up.
 1. If you hover your mouse over the top right of the code block a 'Copy' button will appear.  Use this to copy code in the code block into the text editor (or anywhere else for that matter)
 
-![image](/img/textbook/chapter_2/code_block1.png)
+<DisplayImage imageURL='/img/textbook/chapter_2/code_block1.png' />
 </details>
 
 Your text editor should look like this:
 
-![Code in text editor](/img/textbook/chapter_2/hello_world2.png)
+<DisplayImage imageURL='/img/textbook/chapter_2/hello_world2.png' altText='Code in text editor' />
 
 :::note
 The line numbers in the text editor match up with the line numers in the
@@ -152,14 +154,10 @@ We also might need to link the bold terms into a glossary.
 :::
 ## Run the program
 
-Press <Highlight color={da_unused_variable}>Save and Run</Highlight>. Your program
+Press <DisplayDAButtons button={Constants.da_save_and_run_prop} />. Your program
 will run and should display this output:
 
-:::tip TODO
-Save and Run should be displayed as a rounded button.
-:::
-
-![Hello World output](/img/textbook/chapter_2/hello_world3.png)
+<DisplayImage altText='Hello World output' imageURL='/img/textbook/chapter_2/hello_world3.png' />
 
 Congratulations! You have run your first Docassemble program!
 

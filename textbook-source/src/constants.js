@@ -23,6 +23,8 @@ export const da_unused_variable = '#FFCA2C';
 
 // Docassemble save, save and run button colours
 export const da_save_prop = 'save';
+export const da_download_prop = 'download';
+export const da_delete_prop = 'delete';
 export const da_save_and_run_prop = 'snr';
 export const da_button_map = {
     [da_save_prop] : {
@@ -35,5 +37,34 @@ export const da_button_map = {
         text_colour  : '#000',
         button_text  : 'Save and Run'
 
+    },
+    [da_download_prop] : {
+        button_colour: '#0DCAF0',
+        text_colour  : '#000',
+        button_text  : 'Download',
+
+    },
+    [da_delete_prop] : {
+        button_colour: '#BB2D3B',
+        text_colour  : '#fff',
+        button_text  : 'Delete'
+
+    }
+}
+
+// Constants for DisplayImage. 
+// Border styles
+export const DI_shadow_block = 'disb';
+export const DI_inline_shadow = 'diis';
+export const DI_border_styles = {
+    [DI_shadow_block]: {
+        borderRadius: '5px',
+        display: 'block',
+        margin: '20px auto',
+        boxShadow: '0px 2px 5px rgba(0,0,0,0.25)'
+    },
+    [DI_inline_shadow] : {
+        borderRadius: '5px',
+        boxShadow: '0px 2px 5px rgba(0,0,0,0.25)'
     }
 }
