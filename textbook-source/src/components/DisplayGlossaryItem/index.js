@@ -18,24 +18,74 @@ export function DisplayGlossaryItem(props) {
     // what will be displayed.  I envisage this data structure will be 
     // expanded in future
     const glossaryItemMap = new Map([
-        ['block', { text: 'block' }],
-        ['comment', { text: 'comment' }],
+        ['block', {
+            text: 'block',
+            plural: 'blocks' }
+        ],
+        ['brace', {
+            text: 'brace',
+            plural: 'braces' }
+        ],
+        ['bracket', {
+            text: 'bracket',
+            plural: 'brackets' }
+        ],
+        ['comment', {
+            text: 'comment',
+            plural: 'comments' }
+        ],
+        ['curlybrace', {
+            text: 'curly brace',
+            plural: 'curly braces' }
+        ],
+        ['field', {
+            text: 'field',
+            plural: 'fields'}
+        ],
+        ['fieldlabel', {
+            text: 'field label',
+            plural: 'field labels'}
+        ],
+        ['mako', { text: 'mako' }],
         ['mandatory', { text: 'mandatory' }],
         ['mandatoryblock', {
             text: 'mandatory block',
-            description: 'A block with the tag `mandatory: True` set. This indicates to Docassemble that this block must be executed'
-        }],
-        ['mandatoryquestionblock', { text: 'mandatory question block' }],
+            description: 'A block with the tag `mandatory: True` set. This indicates to Docassemble that this block must be executed',
+            plural: 'mandatory blocks' }
+        ],
+        ['mandatoryquestionblock', {
+            text: 'mandatory question block',
+            plural: 'mandatory question blocks' }
+        ],
+        ['markdown', { text: 'markdown' }],
+        ['parentheses', { text: 'parentheses' }],
         ['playground', { text: 'playground' }],
+        ['questionblock', {
+            text: 'question block',
+            plural: `question blocks` }
+        ],
+        ['reservedword', { text: 'reserved word' }],
+        ['squarebracket', {
+            text: 'square bracket',
+            plural: 'square backets' }
+        ],
+        ['variable', {
+            text: 'variable',
+            plural: 'variables' }
+        ],
     ]);
 
     let glossaryItem = glossaryItemMap.get(props.item);
     let display_text;
 
     if (glossaryItem) {
-    display_text = glossaryItem.text;
+        if (props.plural) {
+            display_text = glossaryItem.plural || glossaryItem.text + ' - NO PLURAL';
+        } else {
+            display_text = glossaryItem.text;
+        }
     } else {
-    display_text = props.item + ' - NOT DEFINED';
+        display_text = props.item + ' - NOT DEFINED';
     }
 
     if ( props.upper ) {
