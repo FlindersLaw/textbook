@@ -2,11 +2,7 @@
 title: Introducing Docassemble
 ---
 import * as Constants from '@site/src/constants'
-import {DisplayConstants} from '@site/src/components/DisplayConstants'
-import {DisplayChapter} from '@site/src/components/DisplayChapters'
-import {Highlight} from '@site/src/components/Highlight'
-import {DisplayDAButtons} from '@site/src/components/DisplayDAButtons'
-import {DisplayImage} from '@site/src/components/DisplayImage'
+import * as Components from '@site/src/components'
 
 :::caution
 
@@ -38,9 +34,9 @@ link to jinja in the textbook
 :::
 
 ## The Main Screen
-Let's log in to Docassemble again.  Go to the <DisplayConstants data='dahref' />.  You should end up at this screen.
+Let's log in to Docassemble again.  Go to the <Components.DisplayConstants data='dahref' />.  You should end up at this screen.
 
-<DisplayImage imageURL='/img/textbook/chapter_1/docassemble_after_signin_screen_annotated.png' />
+<Components.DisplayImage imageURL='/img/textbook/chapter_1/docassemble_after_signin_screen_annotated.png' />
 
 Let's discuss this screen:
 
@@ -65,7 +61,7 @@ test, debug and run your code.  Let's explore it.
 
 Select *Playground* from the down menu.  You'll be taken to a screen that looks like this:
 
-<DisplayImage imageURL='/img/textbook/chapter_1/docassemble_main_screen1.png' />
+<Components.DisplayImage imageURL='/img/textbook/chapter_1/docassemble_main_screen1.png' />
 
 Let's break this screen into its parts:
 
@@ -108,12 +104,12 @@ Your file name should not contain any spaces and it should always end with a `.y
 (eg: use `Assessment_C4.yml` instead of `Assessment C4.yml` or `Assessment C4`)
 :::
 3. Enter something in the main text window
-4. Press <DisplayDAButtons button={Constants.da_save_prop} />
+4. Press <Components.DisplayDAButtons button={Constants.da_save_prop} />
 
 #### Folders
 We only have five folders.  We cannot, and do not need to, create any more.
 
-<DisplayImage imageURL='/img/textbook/chapter_1/docassemble_main_screen2.png' />
+<Components.DisplayImage imageURL='/img/textbook/chapter_1/docassemble_main_screen2.png' />
 
 Each folder serves a special purpose:
 * **Packages** - contains information about the software you create.  It allows you to bundle
@@ -143,11 +139,11 @@ to different elements of your code. This helps coders to quickly identify errors
 and understand the structure of their code, leading to faster and more accurate coding.
 
 ### 4. Buttons
-The <DisplayDAButtons button={Constants.da_save_prop} />
-and <DisplayDAButtons button={Constants.da_save_and_run_prop} /> buttons
+The <Components.DisplayDAButtons button={Constants.da_save_prop} />
+and <Components.DisplayDAButtons button={Constants.da_save_and_run_prop} /> buttons
 do what you would expect, as do
-the <DisplayDAButtons button={Constants.da_download_prop} />
- and <DisplayDAButtons button={Constants.da_delete_prop} /> buttons.
+the <Components.DisplayDAButtons button={Constants.da_download_prop} />
+ and <Components.DisplayDAButtons button={Constants.da_delete_prop} /> buttons.
 
 The *Share* button will give you a link to a running version of the current file in the Playground.  This is 
 a useful way to share an application you're working on with a client or your team.
@@ -160,9 +156,9 @@ Insert link to wherever we will discuss variables
 
 This panel contains a list of the variables used in your program.  It is a useful debugging tool because:
 
-* variables properly defined appear in <Highlight color={Constants.da_declared_variable}>blue</Highlight>
-* variables that are not used appear in <Highlight color={Constants.da_unused_variable}>orange</Highlight>;
-* variables that Docassemble expects to find but can't (ie: 'undefined variables') appear in <Highlight color={Constants.da_undeclared_variable}>dark red</Highlight>.
+* variables properly defined appear in <Components.Highlight color={Constants.da_declared_variable}>blue</Components.Highlight>
+* variables that are not used appear in <Components.Highlight color={Constants.da_unused_variable}>orange</Components.Highlight>;
+* variables that Docassemble expects to find but can't (ie: 'undefined variables') appear in <Components.Highlight color={Constants.da_undeclared_variable}>dark red</Components.Highlight>.
 
 If you see a sea of blue in this panel it's a good sign that your program will run.
 
@@ -171,4 +167,4 @@ The bottom half of the screen contains a quick reference to Docassemble.  The re
 and, usefully, contains example code and a preview of what the code looks like when run.  The screen below
 shows the different way to use Markdown to format text and images in your code.
 
-<DisplayImage imageURL='/img/textbook/chapter_1/docassemble_main_screen3.png' />
+<Components.DisplayImage imageURL='/img/textbook/chapter_1/docassemble_main_screen3.png' />

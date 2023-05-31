@@ -2,22 +2,20 @@
 title: Hello World 2
 ---
 import * as Constants from '@site/src/constants'
-import {Highlight} from '@site/src/components/Highlight'
-import {DisplayDAButtons} from '@site/src/components/DisplayDAButtons'
-import {DisplayImage} from '@site/src/components/DisplayImage'
+import * as Components from '@site/src/components'
 
-Let's take the [Hello World](./00-10) program you just wrote and add some more features,
-namely:
+Our existing [Hello World](./00-10) program, while truly a software engineering masterpiece,
+is somewhat impersonal.  What we *really* want it to do is to display the user's name and,
+for good measure, display their **name in bold**.
 
-* we'll get Docassemble to ask for the user's name before displaying the final screen; and
-* we'll get Docassemble to display the user's name in **bold text**.
+Let's get to making that happen.
 
 ## Create a new file
 First thing is to create a new file and copy the code over.
 
 1. Before you create the new file, copy the existing code in the text editor.
 We'll paste it into the new file shortly.
-1. Click on the <DisplayImage 
+1. Click on the <Components.DisplayImage 
     borderStyle={Constants.DI_inline_shadow}
     altText='Add' 
     imageURL='/img/textbook/add_button.png' />
@@ -25,12 +23,173 @@ button and create a new file called `hello_world2.yml`.
 :::tip
 Refer to how we did this [previously](./00-10/#your-first-program).
 :::
-:::tip TODO
-Use `DisplayImage()` to display the Add button.  Need to change
-`display: block` and the `margin` and the borders as well.  Need 
-a clean inline style
-:::
 1. Paste the code you copied from `hello_world.yml` into this new file and 
-press <DisplayDAButtons button={Constants.da_save_prop} />.
-1. Then press <DisplayDAButtons button={Constants.da_save_and_run_prop} />
+press <Components.DisplayDAButtons button={Constants.da_save_prop} />.
+1. Then press <Components.DisplayDAButtons button={Constants.da_save_and_run_prop} />
 to make sure the program still runs OK.
+
+## Make some changes
+Make the file in your playground look like this. Remember to pay particular
+attention to [indents, spacing and dashes](./00-10/#indents-spacing-and-dashes-oh-my) and your braces and brackes (more on this [below](./00-20/#mako))
+
+```docassemble title="hello_world2.yml" showLineNumbers
+---
+# Our second program!  Now with personality!
+mandatory: True
+question: Hello World!
+subquestion: |
+  Hello **${ MJFname }**
+
+  Welcome to Docassemble!
+---
+question: Name
+fields:
+    - What is your name?: MJFname
+---
+```
+Let's work through this new code.
+
+### Line 6
+Our boring old `Hello,` looks much more complex.  We've actuall introduced 
+three new concepts here:
+1. A <Components.DisplayGlossaryItem item='variable' />
+1. <Components.DisplayGlossaryItem item='mako' upper />
+1. <Components.DisplayGlossaryItem item='markdown' upper />
+
+Let's work through each of these.
+
+#### Variables
+The text `MJFname` is a <Components.DisplayGlossaryItem item='variable' />. We're going to use it store the user's name.
+
+A variable is kind of like a bucket.  You can put stuff in a bucket and you can put stuff in a variable.
+
+Variable|Bucket
+---|---
+Used to store stuff|Used to store stuff
+Must have a name|Doesn't usually have a name
+Can (usually) only store one thing|Can store lots of stuff
+
+:::tip TODO
+Picture of a bucket in the table.  Picture of a variable TODO
+:::
+
+A variable is useful because we can change what we put in it each time we run the program.
+
+In our code, our variable is called `MJFname`.  We want to store a name in 
+our variable `MJFname`.
+
+The variable's name is broken into two parts.  The `name` part should be pretty clear.  It describes what we're going to store in this variable
+(ie: someone's name).  The `MJF` part is the initials of the author of the code
+(Mark Ferraretto).  Adding initials to a variable is optional.  We don't *need* to add `MJF` to the beginning of this
+variable's name, but if we do we get two benefits:
+1. When we do a search through the code it's easy to identify where the variables are; and
+1. Our variables will never be named after a <Components.DisplayGlossaryItem item='reservedword' />.  Docassemble attaches special meaning to certain
+words, like `if`, `and`, `for` and a number of others. By putting `MJF` in front of the variable's name we'll ensure that we'll never accidentally use
+a reserved word as a variable.
+
+:::info
+The prefix to the variable's name doesn't necessarily need to be `MJF`.  It 
+could be your own initials, or something that represents the program - we 
+could have used `HWname` (for Hello World) instead of `MJFname`.  
+:::
+
+#### Mako
+At line 6 our variable `MJFname` is enclosed by a pair of braces (`{}`) and a 
+dollar sign (`$`).  This is called <Components.DisplayGlossaryItem item='mako' upper />.  
+
+We use Mako to tell Docassemble to display what we have stored in a variable, 
+or to display the **value** of a variable.  We will usually find Mako in a `subquestion:` as we use `subquestion`s to display our detailed output in 
+Docassemble.
+
+:::note
+Mako is used to display the value stored in a variable.  But how do we store
+something in a variable?  We do that using <Components.DisplayGlossaryItem item='field' plural />, which we discuss below
+:::
+
+:::tip TODO
+Complete URL for 'discuss below' above
+:::
+
+:::info
+You can also use Mako in <Components.DisplayGlossaryItem item='fieldlabel' plural />.
+We'll get to that later in this book.
+:::
+
+:::caution
+Just like the [indents, spacing and dashes](./00-10/#indents-spacing-and-dashes-oh-my), Docassemble is also very fussy about 
+brackets.  
+There's few different kinds that you should remember:
+* `{ }` are <Components.DisplayGlossaryItem item='brace' plural /> or <Components.DisplayGlossaryItem item='curlybrace' plural />
+* `[ ]` are <Components.DisplayGlossaryItem item='bracket' plural /> or <Components.DisplayGlossaryItem item='squarebracket' plural />
+* `( )` are <Components.DisplayGlossaryItem item='parentheses' />
+
+Make sure you remember these terms as we will use them extensively in this book.
+:::
+
+#### Markdown
+Finally, let's get to these asterisks (`*`).
+
+:::info
+In nerdy-nerdy coding land we call asterisks 'stars'.  We'll be referring to
+`*` as 'stars' in this book.
+:::
+
+If we place two stars around some text (eg `**some text**`) Docassemble will
+format that text as **bold** (ie: **some text**).  This double-star syntax is 
+part of a formatting language called <Components.DisplayGlossaryItem item='markdown' upper />.  Markdown is very useful for doing simple text
+formatting.  In fact, this textbook is written using Markdown.  Markdown allows you to display text in **bold** and *italics*.  It can create headings
+and subheadings (as we use in this book).  It can be used to display images
+and links to webpages.
+
+There are two great Markdown references.  The first is the [Quick Reference](../chapter_1/00-30#6-quick-reference) in your Playground.  There is also an
+official [Markdown manual](https://docs.github.com/en/get-started/writing-on-github) which contains a more comprehensive explanation of 
+Markdown.
+
+#### Putting Line 6 Together
+Now that we know all about variables, Mako and Markdown we can see that line 6
+does the following:
+1. It displays the word 'Hello'
+1. It uses Mako to display the value in `MJFname`, and
+1. It formats that value in bold using Markdown.
+
+Next step then is to get the value of the variable.  We now know how to display
+what's in there, but how do we put a value into `MJFname`? Read on!
+
+### Lines 10 to 12
+Lines 10 to 12 are another <Components.DisplayGlossaryItem item='questionblock' />.  Line 10 will display the text 'Name' as the title of
+this question block.  Line 11 and 12 are what we use to collect and store data
+into a variable - `MJFname` in this case.
+
+Line 11 is a `fields:` tag.  This tells Docassemble that this question block 
+will be used to collect data and store them in variables.  Line 12 is a <Components.DisplayGlossaryItem item='field' /> line.  A `fields:` tag can be
+followed by many fields.  We only need one for now though.
+
+The field line in line 12 tells Docassemble to display a friendly <Components.DisplayGlossaryItem item='fieldlabel' /> ('What is your name?') and a text field to 
+collect the value for the variable `MJFname` from the user.
+
+## Execution Order
+Our code now has two question blocks, one at lines lines 3 to 8, and the second at lines 10 to 12.  Only the first block is a <Components.DisplayGlossaryItem item='mandatoryquestionblock' /> though.  How does 
+Docassemble know to execute the second block.
+
+Docassemble runs this program as follows.
+
+```mermaid
+flowchart TD
+    A[User presses 'Save and Run']
+    B[Docassemble scans the code from<br>the top down looking for a mandatory block]
+    C[Docassemble finds the mandatory<br>question block at line 3<br>and starts to process it]
+    D[Docassemble comes to line 6. <br>It realises it needs the value of <code>MJFname</code>]
+    E[Docassemble pauses executing the mandatory<br>block at line 6. Starts looking for another<br>question block that contains a field line for <code>MJFname</code>]
+    F[Docassemble finds the question block at line 10]
+    G[Docassemble displays the question block.]
+    H[The user is asked to enter their name]
+    I[The user presses 'Continue']
+    J[Docassemble now has the value <br>for <code>MJFname</code>.  It displays line 6]
+    K[Docassemble displays the rest<br>of the mandatory block]
+
+    A-->B-->C-->D-->E-->F-->G-->H-->I-->J-->K
+
+```
+
+
+
