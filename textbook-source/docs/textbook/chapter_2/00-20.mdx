@@ -2,22 +2,20 @@
 title: Hello World 2
 ---
 import * as Constants from '@site/src/constants'
-import {Highlight} from '@site/src/components/Highlight'
-import {DisplayDAButtons} from '@site/src/components/DisplayDAButtons'
-import {DisplayImage} from '@site/src/components/DisplayImage'
+import * as Components from '@site/src/components'
 
-Let's take the [Hello World](./00-10) program you just wrote and add some more features,
-namely:
+Our existing [Hello World](./00-10) program, while truly a software engineering masterpiece,
+is somewhat impersonal.  What we *really* want it to do is to display the user's name and,
+for good measure, display their **name in bold**.
 
-* we'll get Docassemble to ask for the user's name before displaying the final screen; and
-* we'll get Docassemble to display the user's name in **bold text**.
+Let's get to making that happen.
 
 ## Create a new file
 First thing is to create a new file and copy the code over.
 
 1. Before you create the new file, copy the existing code in the text editor.
 We'll paste it into the new file shortly.
-1. Click on the <DisplayImage 
+1. Click on the <Components.DisplayImage 
     borderStyle={Constants.DI_inline_shadow}
     altText='Add' 
     imageURL='/img/textbook/add_button.png' />
@@ -25,12 +23,10 @@ button and create a new file called `hello_world2.yml`.
 :::tip
 Refer to how we did this [previously](./00-10/#your-first-program).
 :::
-:::tip TODO
-Use `DisplayImage()` to display the Add button.  Need to change
-`display: block` and the `margin` and the borders as well.  Need 
-a clean inline style
-:::
 1. Paste the code you copied from `hello_world.yml` into this new file and 
-press <DisplayDAButtons button={Constants.da_save_prop} />.
-1. Then press <DisplayDAButtons button={Constants.da_save_and_run_prop} />
+press <Components.DisplayDAButtons button={Constants.da_save_prop} />.
+1. Then press <Components.DisplayDAButtons button={Constants.da_save_and_run_prop} />
 to make sure the program still runs OK.
+
+## Make some changes
+First we need to  <Components.DisplayGlossaryItem item='dunno' />

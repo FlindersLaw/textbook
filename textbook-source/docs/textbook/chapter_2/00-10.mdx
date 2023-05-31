@@ -2,9 +2,7 @@
 title: Hello World!
 ---
 import * as Constants from '@site/src/constants'
-import {Highlight} from '@site/src/components/Highlight'
-import {DisplayDAButtons} from '@site/src/components/DisplayDAButtons'
-import {DisplayImage} from '@site/src/components/DisplayImage'
+import * as Components from '@site/src/components'
 
 It is a tradition in coding, long before this author was a boy, that the first program a programmer should write is
 one that simply announces its presence to the world by way of simply displaying the text 'Hello World!'.
@@ -16,9 +14,9 @@ As tradition dictates, let's make a 'Hello World' program:
 1. Go to your [Playground](/docs/textbook/chapter_1/00-30#the-playground)
 1. Click on the 'Add' button
 1. Call your program `hello_world.yml`
-<DisplayImage imageURL='/img/textbook/chapter_2/hello_world1.png' />
+<Components.DisplayImage imageURL='/img/textbook/chapter_2/hello_world1.png' />
 1. Enter the code displayed in the code snippet below into the [text editor](/docs/textbook/chapter_1/00-30#3-text-editor)
-1. Press <DisplayDAButtons button={Constants.da_save_prop} />
+1. Press <Components.DisplayDAButtons button={Constants.da_save_prop} />
 
 ```docassemble title="hello_world.yml" showLineNumbers
 ---
@@ -40,12 +38,12 @@ comes with some useful features:
 into the text editor correctly.  Just check the line numbers match up.
 1. If you hover your mouse over the top right of the code block a 'Copy' button will appear.  Use this to copy code in the code block into the text editor (or anywhere else for that matter)
 
-<DisplayImage imageURL='/img/textbook/chapter_2/code_block1.png' />
+<Components.DisplayImage imageURL='/img/textbook/chapter_2/code_block1.png' />
 </details>
 
 Your text editor should look like this:
 
-<DisplayImage imageURL='/img/textbook/chapter_2/hello_world2.png' altText='Code in text editor' />
+<Components.DisplayImage imageURL='/img/textbook/chapter_2/hello_world2.png' altText='Code in text editor' />
 
 :::note
 The line numbers in the text editor match up with the line numers in the
@@ -57,7 +55,7 @@ Let's work through that code line by line.
 ### Lines 1 and 9
 These are **block delimiters**.
 
-In Docassemble, we write our code in **blocks**.  We might use blocks to ask questions, display screens,
+In Docassemble, we write our code in <Components.DisplayGlossaryItem item='block' />s.  We might use blocks to ask questions, display screens,
 run code to make decisions and so-on. Every block of code we write must start and end with three dash characters (`---`).
 If we have multiple blocks together then we separate each block with `---`, for example:
 ```docassemble
@@ -74,18 +72,18 @@ subquestion: |
 ```
 
 ### Line 2
-This is a **comment line**.  Comment lines start with a `#` character.  When Docassemble
+This is a <Components.DisplayGlossaryItem item='comment' /> line.  Comment lines start with a `#` character.  When Docassemble
 sees the `#` it skips over the line and doesn't process it.  We use comment lines to describe
 what code does.  It makes our code easier to read.
 
 ### Line 3
-This is a **mandatory** tag. Adding a mandatory tag and setting it to `True` tells Docassemble that it
-must execute this block.  Docassemble does not always execute each block.  We'll to more about that
+This is a <Components.DisplayGlossaryItem item='mandatory' /> tag. Adding a mandatory tag and setting it to `True` tells Docassemble that it
+must execute this block.  Docassemble does not always execute each block.  We'll to more about block execution
 later in this textbook.  For now, just remember that to force a block to run you must set it as
 `mandatory: True`.
 
 :::info
-We usually refer to a block with `mandatory: True` in it as a **mandatory block**
+We usually refer to a block with `mandatory: True` in it as a <Components.DisplayGlossaryItem item='mandatoryblock' />
 :::
 
 ### Lines 4 and 5
@@ -151,13 +149,16 @@ by two spaces.
 We should link all the different tags to the Docassemble manual.
 
 We also might need to link the bold terms into a glossary.
+
+UPDATE: I have a `DisplayGlossaryItem` component.  Glossary items need to
+be stored either in there or in chapter 6 (as originally planned)
 :::
 ## Run the program
 
-Press <DisplayDAButtons button={Constants.da_save_and_run_prop} />. Your program
+Press <Components.DisplayDAButtons button={Constants.da_save_and_run_prop} />. Your program
 will run and should display this output:
 
-<DisplayImage altText='Hello World output' imageURL='/img/textbook/chapter_2/hello_world3.png' />
+<Components.DisplayImage altText='Hello World output' imageURL='/img/textbook/chapter_2/hello_world3.png' />
 
 Congratulations! You have run your first Docassemble program!
 

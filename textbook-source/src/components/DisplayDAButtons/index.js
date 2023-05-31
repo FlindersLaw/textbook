@@ -2,7 +2,7 @@
 // and modified to display the docassemble save and save and run buttons
 // in the textbook text.
 import React from "react";
-import * as Constants from '@site/src/constants.js';
+import * as Constants from '@site/src/constants';
 
 export function DisplayDAButtons(props) {
     if (props.button) {

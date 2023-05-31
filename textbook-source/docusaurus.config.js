@@ -82,6 +82,12 @@ const config = {
             position: 'left',
             label: 'Coding Exercises'
           },
+          {
+            type: 'docSidebar',
+            sidebarId: 'recipesSidebar',
+            position: 'left',
+            label: 'Coding Recipes'
+          },
           {to: '/blog', label: 'Blog', position: 'left'},
           {
             href: 'https://github.com/LLAW3301',
