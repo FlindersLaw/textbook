@@ -174,11 +174,21 @@ Docassemble know to execute the second block.
 Docassemble runs this program as follows.
 
 ```mermaid
-graph TD;
- A-->B;
- A-->C;
- B-->D;
- C-->D;
+flowchart TD
+    A[User presses 'Save and Run']
+    B[Docassemble scans the code from<br>the top down looking for a mandatory block]
+    C[Docassemble finds the mandatory<br>question block at line 3<br>and starts to process it]
+    D[Docassemble comes to line 6. <br>It realises it needs the value of <code>MJFname</code>]
+    E[Docassemble pauses executing the mandatory<br>block at line 6. Starts looking for another<br>question block that contains a field line for <code>MJFname</code>]
+    F[Docassemble finds the question block at line 10]
+    G[Docassemble displays the question block.]
+    H[The user is asked to enter their name]
+    I[The user presses 'Continue']
+    J[Docassemble now has the value <br>for <code>MJFname</code>.  It displays line 6]
+    K[Docassemble displays the rest<br>of the mandatory block]
+
+    A-->B-->C-->D-->E-->F-->G-->H-->I-->J-->K
+
 ```
 
 
