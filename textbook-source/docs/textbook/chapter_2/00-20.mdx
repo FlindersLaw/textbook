@@ -29,10 +29,11 @@ press <Components.DisplayDAButtons button={Constants.da_save_prop} />.
 to make sure the program still runs OK.
 
 ## Make some changes
-Make the file in your playground look like this. Remember to pay particular
+Edit the file in your playground and make it look like this.
+Remember to pay particular
 attention to [indents, spacing and dashes](./00-10/#indents-spacing-and-dashes-oh-my) and your braces and brackes (more on this [below](./00-20/#mako))
 
-```docassemble title="hello_world2.yml" showLineNumbers
+```yaml title="hello_world2.yml" showLineNumbers
 ---
 # Our second program!  Now with personality!
 mandatory: True
@@ -50,7 +51,7 @@ fields:
 Let's work through this new code.
 
 ### Line 6
-Our boring old `Hello,` looks much more complex.  We've actuall introduced 
+Our boring old `Hello,` looks a bit more complex.  We've actuall introduced 
 three new concepts here:
 1. A <Components.DisplayGlossaryItem item='variable' />
 1. <Components.DisplayGlossaryItem item='mako' upper />
@@ -169,27 +170,47 @@ collect the value for the variable `MJFname` from the user.
 
 ## Execution Order
 Our code now has two question blocks, one at lines lines 3 to 8, and the second at lines 10 to 12.  Only the first block is a <Components.DisplayGlossaryItem item='mandatoryquestionblock' /> though.  How does 
-Docassemble know to execute the second block.
+Docassemble know to execute the second block?
 
-Docassemble runs this program as follows.
+Let's work through the execution step using this diagram.
 
-```mermaid
-flowchart TD
-    A[User presses 'Save and Run']
-    B[Docassemble scans the code from<br>the top down looking for a mandatory block]
-    C[Docassemble finds the mandatory<br>question block at line 3<br>and starts to process it]
-    D[Docassemble comes to line 6. <br>It realises it needs the value of <code>MJFname</code>]
-    E[Docassemble pauses executing the mandatory<br>block at line 6. Starts looking for another<br>question block that contains a field line for <code>MJFname</code>]
-    F[Docassemble finds the question block at line 10]
-    G[Docassemble displays the question block.]
-    H[The user is asked to enter their name]
-    I[The user presses 'Continue']
-    J[Docassemble now has the value <br>for <code>MJFname</code>.  It displays line 6]
-    K[Docassemble displays the rest<br>of the mandatory block]
+<Components.DisplayImage imageURL='/img/textbook/chapter_2/execution_order1.png' />
 
-    A-->B-->C-->D-->E-->F-->G-->H-->I-->J-->K
+1. Docassemble scans the program code from the top of the file...
+2. ...until it finds a Mandatory block.  It then executes the Mandatory
+block line by line.
+3. When it enounters this Mako Docassemble tries to substitute the value of
+`MJFname` into this line.
+> * Only problem is that `MJFname` doesn't have a value yet.
+> * So, Docassemble stops processing the Mandatory block and starts looking
+  for a block that sets a value for `MJFname`.
+4. Docassemble scans our code file again looking for a block that sets
+a value for `MJFname`.  It finds our question block at line 10 and processes
+that block.  That causes this question to be asked:
+  <Components.DisplayImage imageURL='/img/textbook/chapter_2/execution_order2.png' />
+5. Now that it has the value of `MJFname` Docassemble starts processing the
+mandatory question block again.
+6. Docassemble comes to this Mako again.  Now it *does* have a value for
+`MJFname`, so it can display it.
+ Docassemble scans the rest of the question block.  Because there's no other
+Mako to process, Docassemble is ready to display this question block, which it does.
+  <Components.DisplayImage imageURL='/img/textbook/chapter_2/execution_order3.png' />
+7. The execution stops now.
 
-```
+:::note
+The reason execution stops at step 7 is because we haven't placed anything on the 
+screen, like a <Components.DisplayDAButtons button={Constants.da_save_prop} button_text='Continue' /> 
+button, that allows the user to continue to run the application.  If we did have a <Components.DisplayDAButtons button={Constants.da_save_prop} button_text='Continue' /> button
+Docassemble would have continued scanning the rest of our file looking for
+another mandatory block to execute.  We don't have any other mandatory
+blocks.  Docassemble therefore would have scanned our code, not found any
+additional mandatory blocks and would then have generated this error.
+<Components.DisplayImage imageURL='/img/textbook/chapter_2/execution_order4.png' />
 
+As we generate more sophisticated code you'll see that we try to keep the 
+number of mandatory blocks in our code to a minimum.  In fact, we should never
+have more than two!
 
-
+Keep this in  mind for now.  It will become highly relevant when you start
+working on your projects.
+:::
