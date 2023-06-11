@@ -177,18 +177,18 @@ Let's work through the execution step using this diagram.
 <Components.DisplayImage imageURL='/img/textbook/chapter_2/execution_order1.png' />
 
 1. Docassemble scans the program code from the top of the file...
-2. ...until it finds a Mandatory block.  It then executes the Mandatory
+2. ...until it finds a mandatory block.  It then executes the mandatory
 block line by line.
-3. When it enounters this Mako Docassemble tries to substitute the value of
+3. When it enounters this Mako, Docassemble tries to substitute the value of
 `MJFname` into this line.
 > * Only problem is that `MJFname` doesn't have a value yet.
 > * So, Docassemble stops processing the Mandatory block and starts looking
   for a block that sets a value for `MJFname`.
-4. Docassemble scans our code file again looking for a block that sets
+4. Docassemble scans our code file again, now looking for a block that sets
 a value for `MJFname`.  It finds our question block at line 10 and processes
 that block.  That causes this question to be asked:
   <Components.DisplayImage imageURL='/img/textbook/chapter_2/execution_order2.png' />
-5. Now that it has the value of `MJFname` Docassemble starts processing the
+5. Now that it has the value of `MJFname`, Docassemble starts processing the
 mandatory question block again.
 6. Docassemble comes to this Mako again.  Now it *does* have a value for
 `MJFname`, so it can display it.
