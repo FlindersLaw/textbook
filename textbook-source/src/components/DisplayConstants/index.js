@@ -23,6 +23,8 @@ export function DisplayConstants(props) {
         return <a href={Constants.github_server_url}>{Constants.github_server_name}</a>
     } else if ( props.data == 'damanual' ) {
         return <a href={Constants.da_manual_url}>{Constants.da_manual_name}</a>
+    } else if ( props.data == 'teachingcodeurl' ) {
+        return <code>{Constants.github_teaching_code}</code>
     } else {
         return <span className="TODOerror">Unknown data supplied: {props.data}</span>
     }
