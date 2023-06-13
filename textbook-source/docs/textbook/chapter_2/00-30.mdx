@@ -154,11 +154,12 @@ We're experts at buttons now, so we know that:
 will clear out all the program data and start the program again.
 
 :::note The Free Continue Button
-Some of you may well be asking 'Why don't we have a `buttons:` tag in our
-second question block?' Good question.  You'll have noticed that the second
+You'll notice that the second
 question block, the one that asks for the value for `MJFname` displays
 a <Components.DisplayDAButtons button={Constants.da_save_prop} button_text="Continue" />
-button, well, for free!  No `buttons:` required.
+button, but we never asked it to.  There is no `buttons:` tag in the 
+second question block.  Why does it display a Continue button even though
+we haven't asked for one?
 
 When Docasemble sees that a question block contains `fields:` it assumes that
 the user must continue past that screen to the rest of the program.  So, 
