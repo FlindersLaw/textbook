@@ -2,11 +2,12 @@
 // and modified to display the docassemble save and save and run buttons
 // in the textbook text.
 import React from "react";
-import * as Constants from '@site/src/constants.js';
+import * as Constants from '@site/src/constants';
 
 export function DisplayDAButtons(props) {
     if (props.button) {
         let button_props = Constants.da_button_map[props.button];
+        let button_text = props.button_text || button_props.button_text;
         return (
             <span
                 style={{
@@ -16,7 +17,7 @@ export function DisplayDAButtons(props) {
                     padding: '6px',
                 }}
             >
-                {button_props.button_text}
+                {button_text}
             </span>
         );
     } else {
