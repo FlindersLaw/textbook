@@ -16,6 +16,11 @@ export const da_manual_name = 'Docassemble Manual';
 export const github_server_url = 'https://github.com';
 export const github_server_name = 'GitHub';
 
+// Topic repository
+export const github_topic_repo = github_server_url + '/LLAW3301';
+// Teaching code repo
+export const github_teaching_code = github_topic_repo + '/docassemble-LLAW3301TeachingCode';
+
 // Docassemble variable panel colours
 export const da_undeclared_variable = '#BB2D3B';
 export const da_declared_variable = '#0B5ED7';
