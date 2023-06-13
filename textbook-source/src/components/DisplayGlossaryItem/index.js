@@ -60,6 +60,7 @@ export function DisplayGlossaryItem(props) {
         ['markdown', { text: 'markdown' }],
         ['parentheses', { text: 'parentheses' }],
         ['playground', { text: 'playground' }],
+        ['python', { text: 'python' }],
         ['questionblock', {
             text: 'question block',
             plural: `question blocks` }
@@ -68,6 +69,10 @@ export function DisplayGlossaryItem(props) {
         ['squarebracket', {
             text: 'square bracket',
             plural: 'square backets' }
+        ],
+        ['string', {
+            text: 'string',
+            plural: 'strings' }
         ],
         ['variable', {
             text: 'variable',
