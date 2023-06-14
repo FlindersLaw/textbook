@@ -46,6 +46,7 @@ export function DisplayGlossaryItem(props) {
             text: 'field label',
             plural: 'field labels'}
         ],
+        ['jinja', { text: 'jinja' }],
         ['mako', { text: 'mako' }],
         ['mandatory', { text: 'mandatory' }],
         ['mandatoryblock', {
