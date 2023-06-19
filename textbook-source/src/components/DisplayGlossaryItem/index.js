@@ -22,6 +22,7 @@ export function DisplayGlossaryItem(props) {
             text: 'block',
             plural: 'blocks' }
         ],
+        ['boolean', { text: 'boolean'} ],
         ['brace', {
             text: 'brace',
             plural: 'braces' }

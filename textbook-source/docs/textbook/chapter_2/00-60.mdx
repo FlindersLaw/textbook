@@ -1,0 +1,180 @@
+---
+title: Vital Statistics - A More Sophisticated Example
+---
+import * as Constants from '@site/src/constants'
+import * as Components from '@site/src/components'
+
+We've learnt lots of things over this chapter.  We can write code!  We can also:
+*  ask questions;
+* use <Components.DisplayGlossaryItem item='markdown' upper /> to format and 
+display text;
+* we know the difference between <Components.DisplayGlossaryItem item='mandatoryblock' plural />
+and regular <Components.DisplayGlossaryItem item='questionblock' plural />;
+* We can use tables to set out our final screens;
+* We can present choices in a drop-down; and
+* We can create custom word and PDF documents based on the answers we receive.
+
+The code below is for an app called 'Vital Statistics'.  It presents some important
+information about the user and in the process makes more use of what we have
+learnt so far.  The code uses a lot of what we have learnt over the course of
+this chapter and also introduces a few new concepts.  Let's work through it.
+
+## Code
+```yaml title="C1_06_vital_statistics.yml" showLineNumbers
+---
+mandatory: True
+question: Vital Statistics
+subquestion: |
+  Thanks for completing the Vital Statistics Survey.
+  We have collected this data from you
+  
+  Information|Your Input
+  -----------|----------
+  Your name             | ${ MJFsalutation } ${ MJFfirstname } ${ MJFlastname }
+  Your age              | ${ MJFage }
+  Are you employed?     | ${ MJFisemployed }
+  Your annual income    | ${ currency(MJFannualincome) }
+  Your favourite hobbies| ${ MJFhobbies.true_values() }
+buttons:
+  - I'm done: exit
+  - Do it again!: restart
+---
+question: What is your name?
+fields:
+  - Salutation: MJFsalutation
+    choices:
+      - Dr
+      - Mr
+      - Mrs
+      - Ms
+  - First Name: MJFfirstname
+  - Last Name: MJFlastname
+---
+question: How old are you?
+fields:
+  - no label: MJFage
+    datatype: integer
+---
+question: Employment and Income
+fields:
+  - Are you employed?: MJFisemployed
+    datatype: radio
+    choices:
+      - Yes
+      - No
+  - What is your {income}?: MJFannualincome
+    datatype: currency
+    show if: 
+      variable: MJFisemployed
+      is: 'Yes'
+terms:
+  income: |
+    Your income should be your gross (ie: before tax) income
+---
+question: Hobbies
+subquestion: |
+  Please select all of your favourite hobbies.
+fields:
+  - no label: MJFhobbies
+    datatype: checkboxes
+    choices:
+      - Flying
+      - Running
+      - Playing music
+      - Writing code
+      - Studying (Yes, really!)
+      - Socialising
+---
+```
+
+## Lines 30 to 33
+We're starting at line 30 because this is where some of the new concepts are.
+If you read through lines 1 to 29 you'll see a mandatory question block that
+looks very similar to our [Hello World 5](./00-50) example.  The table has
+different information (and we'll come back to that) but otherwise this code
+is very similar to `hello_world5.yml`.
+
+Let's look at lines 30 to 33
+```yaml
+question: How old are you?
+fields:
+  - no label: MJFage
+    datatype: integer
+```
+First, we have [seen `no label` before](./00-30#the-second-question-block).
+What we haven't seen however is line 30:
+```yaml
+    dataype: integer
+```
+Firstly, we can see that the word `datatype` is aligned with `no label`.  You'll
+recall that line 29 has the dash-label-variable format that we have seen 
+[before](./00-42#presenting-choices-in-a-question) and which 'declares' a
+variable.  That is, line 29 is telling Docassemble how to ask a question so
+we can get a value for a variable, `MJFage` in this case.
+
+Line 30, because of the alignment and the lack of a dash, is tied to line 29.
+Line 30 is giving us more information about variable declared at line 29.
+We say that line 30 *describes*, or *modifies*,
+the variable declaration at line 29.
+
+Line 30 is sets the 'data type' of the variable `MJFage` to be an integer.
+
+:::info What is a Data Type?
+As we said [early on](./00-20#variables), `MJFage` is a variable and we 
+can 'put stuff in' a variable.  By stuff we mean data.  **We store data
+in a variable**.
+
+We can have different types of data.  Up until now we have been storing text,
+or <Components.DisplayGlossaryItem item='string' plural /> in our variables.
+Strings are the default data type.  There are also other data types, as we'll
+see as we work our way through this textbook.
+
+Line 30 sets the data type to be an **integer**.
+An [**integer** data type](https://docassemble.org/docs/fields.html#numbers)
+allows us to store whole numbers only (ie: 1, 2,
+3, 4 etc).  We can't store a string in an integer data type.  If we do we'll
+get an error:
+<Components.DisplayImage imageURL='/img/textbook/chapter_2/vitalstatistics-1.png' />
+
+Using a data type can be useful to control, or *validate* the input a user
+enters.  In our case, we are forcing the user to enter a number and not words
+into this text box.  This could come in handy later if we, say, wanted to 
+check the number was bigger or smaller than another number.  For example, we
+might want to check the age to make sure a user is over 18 years old and
+therefore an adult.
+:::
+
+## Lines 37 to 41
+```yaml
+  - Are you employed?: MJFisemployed
+    datatype: radio
+    choices:
+      - Yes
+      - No
+```
+Here we again see a variable declaration at line 37, with a `datatype` modifier
+at line 38.  This time, the data type is `radio`.
+A [radio data type](https://docassemble.org/docs/fields.html#radio) presents
+a list of choices to the user and requires them to select only one choice.
+<Components.DisplayImage imageURL='/img/textbook/chapter_2/vitalstatistics-1.png' />
+
+This means only the values `Yes` or `No` can be placed into `MJFisemployed`.
+
+:::note
+`Yes` and `No` are <Components.DisplayGlossaryItem item='string' /> values.
+As we'll see further in this text book, when we want to ask a 'yes or no' 
+question, a better way to do so is to use a <Components.DisplayGlossaryItem item='boolean' />
+data type.
+:::
+
+## Lines 42 and 47 to 49
+```yaml
+  - What is your {income}?: MJFannualincome
+...
+terms:
+  income: |
+    Your income should be your gross (ie: before tax) income
+```
+The braces (`{}`) surrounding the word `income` tell Docassemble to look for 
+a [term](https://docassemble.org/docs/modifiers.html#terms).  Terms are a
+great way to 
