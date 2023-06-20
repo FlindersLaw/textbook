@@ -1,0 +1,201 @@
+---
+title: Hello World 5 - Introducing Jinja
+---
+import * as Constants from '@site/src/constants'
+import * as Components from '@site/src/components'
+
+So far, we've seen how Docassemble can take input from a user, by way of 
+question blocks, and display output on the screen, using mandatory question
+blocks and Markdown.  Docassemble can also prepare Word documents and PDF 
+documents.  Let's explore this.
+
+Up to now we have constructed an output screen using Markdown in a mandatory
+question block.  When we want to input the value of a variable we 
+insert <Components.DisplayGlossaryItem item='mako' upper /> into our Markdown.
+With word documents we can do something similar.  We can prepare a template
+Word document with the text and styling and images that we want.  When we
+want to insert the value of a variable we
+use <Components.DisplayGlossaryItem item='jinja' upper /> instead of Mako. 
+That's very useful for us as we can prepare printable high-quality documents
+with corporate logos and styles that contain information from our app.
+
+Jinja works in a similar way to Mako but the syntax is a little different. 
+Where Mako looks like this:  
+```
+${ variable_name }
+```
+Jinja looks like this:  
+```
+{{ variable_name }}
+```
+Just like Mako, what's inside Jinja double-braces is evaluated as
+a <Components.DisplayGlossaryItem item='python' upper /> expression.  So,
+if we look at the Mako from [Hello World 4](../00-42#line-8),
+```
+${ MJFsalutation + ' ' + MJFlastname }
+```
+that line could be represented as follows as Jinja in a Word document.
+```
+{{ MJFsalutation + ' ' + MJFlastname }}
+```
+
+## A Simple Example
+Download and open this [Word document](/templates/First_Docassemble_Template.docx).
+Let's take a look at it.
+
+<Components.DisplayImage imageURL='/img/textbook/chapter_2/hello_world5-1.png' />
+
+Note how the first two Jinja variables are in bold.  We've done this by 
+simply bolding the text in Word, as we would any other text.  We control 
+text formatting using Word's usual formatting.
+
+We can, for example, change the colour of the Jina on the third line to red
+by using Word's usual formatting. No Markdown required!
+
+<Components.DisplayImage imageURL='/img/textbook/chapter_2/hello_world5-2.png' />
+
+Make change the colour of the third line to red and save the word document.  
+Then, let's upload it to Docassemble.
+
+## Adding a Word Document to Your Docassemble App
+There are two parts to adding a Word document to a Docassemble app:
+1. upload the document into the Playground; and
+1. point your app to the document.
+
+### Upload the Document to the Playground
+:::caution
+Before we upload, it is very important to be aware that Docassemble **does not**
+like spaces in document file names.  If you downloaded the Word document as
+[instructed above](#a-simple-example) you probably saved it as
+`First Docassemble Template.docx`.  We need to get rid of the spaces in 
+the document name before we upload it.
+
+Best practice is to change spaces to underscores (`_`).  So, rename
+`First Docassemble Template.docx` to `First_Docassemble_Template.docx`.
+
+Now we're ready to upload
+:::
+
+Word documents must be stored in the **Templates** folder of your app.
+<Components.DisplayImage imageURL='/img/textbook/chapter_2/hello_world5-3.png' />
+
+#### To upload your document:
+1. go to the Templates folder;
+1. click on Browse and select your Word document; and
+1. click on <Components.DisplayDAButtons button={Constants.da_save_prop} button_text='Upload' />.
+<Components.DisplayImage imageURL='/img/textbook/chapter_2/hello_world5-4.png' />
+
+
+The document will be uploaded and appear in your 'Existing template files' list.
+<Components.DisplayImage imageURL='/img/textbook/chapter_2/hello_world5-5.png' />
+
+:::note
+It's not clear from the screenshot but the file has actually been uploaded
+as `First_Docassemble_Template.docx` and not `First Docassemble Template.docx`.
+The hyperlink obscures the underscores but they are there.
+:::
+
+Your Word file is uploaded. Click `<Back` to go to your Playground.
+
+:::info
+You cannot edit a Word file that has been uploaded into the Templates folder.
+If you click on the file in the 'Existng template files' list Docassemble will
+allow you to download a copy of the file.
+
+If you want to make changes to your template file you need to go through a cycle
+of:
+1. download the file from the 'Existing template files' list;
+1. save the word document to your computer;
+1. edit the file and save your changes; and
+1. upload the saved file back into the Templates folder.
+
+When you upload your new file Docassemble will overwrite your existing uploaded
+file (provided the files have the same name of course!).
+:::
+
+### Point Your App to the Uploaded Document
+Docassemble uses an [`attachment`](https://docassemble.org/docs/documents.html#attachment) key to 
+connect an app to a Word document.
+
+We have an example of this below.  This example is essentially the code
+in [Hello World 4](./00-42#our-code) but with the `attachment:` specifier added.
+A copy of this code is also available in `C1_05_hello_world.yml` in the 
+teaching code repository.  Look at lines 26 and 27 of the code.
+
+```yaml
+---
+# My first Docassemble program
+mandatory: True
+question: Hello World!
+subquestion: |
+  ### Welcome to Docassemble!
+
+  Dear ${ MJFsalutation + ' ' + MJFlastname },
+
+  This is a quick introduction to Markdown.
+
+  Two lines for a line break
+  because a single line doesn't break at all.
+
+  - Here's a list
+  - with some items
+  - in it
+
+  **Here's some bold text** and *text in italics*.
+
+  Column1|Column2
+  -------|-------
+  Salutation|${ MJFsalutation }
+  First Name|${ MJFfirstname }
+  Last Name|${ MJFlastname }
+attachment:
+  docx template file: First_Docassemble_Template.docx
+buttons:
+  - I'm done: exit
+    url: https://flinders.edu.au
+  - Do it again: restart
+---
+question: Name
+fields:
+  - Salutation: MJFsalutation
+    choices:
+      - Dr
+      - Mr
+      - Mrs
+      - Ms
+  - First Name: MJFfirstname
+  - Last Name: MJFlastname
+---
+```
+This is enough to link our document to our app.
+
+## Running an App with an attachment
+When an attachment is added to a Docassemble app Docassemble will display 
+that attachment as part of the question block in which the attachment is
+declared.
+
+You will see from our code that our question block starts at line 2 (next
+line below the `---`) and finishes at line 32 (line before `---`).  That
+question block contains our `attachment` on lines 26 and 27.  So, Docassemble
+will display our file when it displays this question block.
+
+If you run the app you will see a final screen that looks something like this.
+<Components.DisplayImage imageURL='/img/textbook/chapter_2/hello_world5-6.png' />
+
+Additional content has been added below our exit and restart buttons.  This
+content allows a user to download the Word document, or the Word document as 
+a PDF.  It also allows the user to email the document to themselves.
+
+If we open the Word document we will see that our Jinja has been replaced with
+the variables from our app.  Note also that our formatting (including the
+red text!) has been preserved.
+<Components.DisplayImage imageURL='/img/textbook/chapter_2/hello_world5-7.png' />
+
+:::note
+You may not want your app users to download a Word *and* a PDF document.  
+Usually, you want users only to download a PDF or a Word version.
+
+The `attachment` specifier allows you to do this.  In fact, there's quite a 
+lot you can do with `attachment`s.  Get familiar with its capabilities
+in the [Docassemble manual](https://docassemble.org/docs/documents.html#attachment).
+:::

@@ -22,6 +22,7 @@ export function DisplayGlossaryItem(props) {
             text: 'block',
             plural: 'blocks' }
         ],
+        ['boolean', { text: 'boolean'} ],
         ['brace', {
             text: 'brace',
             plural: 'braces' }
@@ -46,6 +47,11 @@ export function DisplayGlossaryItem(props) {
             text: 'field label',
             plural: 'field labels'}
         ],
+        [ 'function', {
+            text: 'function',
+            plural: 'functions' }
+        ],
+        ['jinja', { text: 'jinja' }],
         ['mako', { text: 'mako' }],
         ['mandatory', { text: 'mandatory' }],
         ['mandatoryblock', {
@@ -58,6 +64,7 @@ export function DisplayGlossaryItem(props) {
             plural: 'mandatory question blocks' }
         ],
         ['markdown', { text: 'markdown' }],
+        ['method', { text: 'method', plural: 'methods' }],
         ['parentheses', { text: 'parentheses' }],
         ['playground', { text: 'playground' }],
         ['python', { text: 'python' }],
