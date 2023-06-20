@@ -370,3 +370,30 @@ the 'Are you employed' question and
 press <Components.DisplayDAButtons button={Constants.da_save_prop} button_text='Continue' />
 nothing happens.  Why is this?
 
+Docassemble gives us some debugging tools to help. For starters, Docassemble
+provides a debugging tool in the Navbar.  It looks like this: `</>`:
+<Components.DisplayImage imageURL='/img/textbook/chapter_2/vitalstatistics-11.png' />
+
+Click on this link and a whole wealth of information is displayed.  First of all,
+Docassemble displays the source code for the current question:
+<Components.DisplayImage imageURL='/img/textbook/chapter_2/vitalstatistics-12.png' />
+
+Underneath this, Docassemble tells why the current question is being asked.  In
+our case we can see that Docassemble is actually trying to execute the mandatory
+block:
+<Components.DisplayImage imageURL='/img/textbook/chapter_2/vitalstatistics-13.png' />
+
+Even more helpful than this, the last line tells us what Docassemble is looking for:
+<Components.DisplayImage imageURL='/img/textbook/chapter_2/vitalstatistics-14.png' />
+
+Well, that's very helpful indeed!  Docassemble is telling us this:
+1. it wants to display the details in our mandatory question block;
+1. but in order to do so it needs a value to be put into `MJFannualincome`
+1. so it tries to ask the employment question (as that question contains code 
+to ask for `MJFannualincome`)
+
+Our problem is that, because we said we're unemployed, no value is ever put into
+`MJFannualincome` as it's not displayed.
+
+
+
