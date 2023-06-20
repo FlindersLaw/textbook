@@ -362,7 +362,7 @@ the order in which Docassemble executes code and try to apply that logic to
 this Vital Statistics code.
 :::
 
-## Fixing the Bug
+## A Bug in the Code
 As alluded to [earlier](./00-60#line-13) there's a bug in this code.
 
 The code runs fine (I hope you've tried it!) but if you select 'No' to
@@ -394,6 +394,185 @@ to ask for `MJFannualincome`)
 
 Our problem is that, because we said we're unemployed, no value is ever put into
 `MJFannualincome` as it's not displayed.
+<Components.DisplayImage imageURL='/img/textbook/chapter_2/vitalstatistics-15.png' />
 
+Because we don't display the `MJFannualincome` question, we can't put a value into
+`MJFannualincome`.  But the mandatory question block *requires* a value for
+`MJFannualincome` so that it can display the table row in line 13 of our code, 
+otherwise it won't display. 
 
+The end result is us getting stuck at the employment screen. That's a problem.
 
+### Fixing the Bug
+To fix the bug we want to tell Docassemble to print out the table row in line 13
+*only if* we've collected a value for `MJFannualincome`.
+
+How do we do this?
+
+Well, once again, we're getting a bit ahead of ourselves.  We are going to use
+an 'if statement'.
+:::tip TODO
+Link 'if statement' to appropriate part of ch 3 once it appears
+:::
+An if statement allows us to code some 'if-this-then-that' logic into our application.
+In our case we want to code:
+> If there is no value in `MJFannualincome` then don't display line 13.
+
+We'll flip that statement around because it's easier to code a positive than 
+a negative.  So, we want to code:
+> If there *is* a value in `MJFannualincome` then display line 13
+
+(otherwise, we won't display it).
+
+How can we work out if `MJFannualincome` has a value?  Well, one way is to 
+check `MJFisemployed`.  If `MJFisemployed` is `Yes` then `MJFannualincome` will
+have a value put in it.
+
+:::info
+The very act of displaying the question on a screen causes Docassemble to assign
+a value to a variable. In our code, once the user selects 'Yes', then the 
+question for `MJFannualincome` is displayed and the user is required to put 
+a value into it.
+
+We could have told Docassemble not to make 
+`MJFannualincome` [a required field](https://docassemble.org/docs/fields.html#required).
+Had we done so, and then had a user not entered a value into `MJFannualincome`
+then Docassemble would have put a value, 0 in this case (as `MJFannualincome` is
+a `currency` data type), into `MJFannualincome`.
+
+So, in order to ensure a variable has a value, at a minimum it must be dispalayed
+on a screen.
+:::
+
+So, let's rephrase what we want to take this into account:
+> If the value of `MJFisemployed` is `Yes` then display line 13.
+
+We can express that code as follows:
+```python
+  % if MJFisemployed == 'Yes':
+  Your annual income    | ${ currency(MJFannualincome) }
+  % endif 
+```
+
+We have wrapped an 'if statement' around our line 13.  The first line (`% if ...`)
+is the 'If the value of `MJFisemployed` is `Yes`' part of our statement above.
+
+The line that follows is our original line 13.  If the value of `MJFisemployed`
+is `Yes` then this line will be included in our code and that row of the table
+will be displayed.
+
+The next line (`% endif`) tells Docassemble we're at the end of our 'if statement'
+and to resume processing as normal.
+
+This code will:
+* display our line 13 if `MJFisemployed` is set to `Yes`; and
+* skip over our line 13 otherwise
+
+That will solve our bug.
+
+As stated, we deal with if statements in more detail in [Chapter 3](../chapter_3),
+so don't worry too much if you don't understand this now.
+
+### The Fixed Code
+For completeness, here is an amended version of our Vital Statistics code 
+that fixes the bug by incorporating the if statement above.  Try and run it
+in your Playground and answer No to the employment question.
+
+:::tip TODO
+Change highlight colour to make it less subtle.  Defined in `theme-code-block-highlighted-line`
+and set to `--docusaurus-highlighted-code-line-bg: rgba(0,0,0.0.1)`
+:::
+```yaml
+---
+mandatory: True
+question: Vital Statistics
+subquestion: |
+  Thanks for completing the Vital Statistics Survey.
+  We have collected this data from you
+  
+  Information|Your Input
+  -----------|----------
+  Your name             | ${ MJFsalutation } ${ MJFfirstname } ${ MJFlastname }
+  Your age              | ${ MJFage }
+  Are you employed?     | ${ MJFisemployed }
+  // highlight-start
+  % if MJFisemployed == 'Yes':
+  Your annual income    | ${ currency(MJFannualincome) }
+  % endif
+  // highlight-end
+  Your favourite hobbies| ${ MJFhobbies.true_values() }
+buttons:
+  - I'm done: exit
+  - Do it again!: restart
+---
+question: What is your name?
+fields:
+  - Salutation: MJFsalutation
+    choices:
+      - Dr
+      - Mr
+      - Mrs
+      - Ms
+  - First Name: MJFfirstname
+  - Last Name: MJFlastname
+---
+question: How old are you?
+fields:
+  - no label: MJFage
+    datatype: integer
+---
+question: Employment and Income
+fields:
+  - Are you employed?: MJFisemployed
+    datatype: radio
+    choices:
+      - Yes
+      - No
+  - What is your {income}?: MJFannualincome
+    datatype: currency
+    show if: 
+      variable: MJFisemployed
+      is: 'Yes'
+terms:
+  income: |
+    Your income should be your gross (ie: before tax) income
+---
+question: Hobbies
+subquestion: |
+  Please select all of your favourite hobbies.
+fields:
+  - no label: MJFhobbies
+    datatype: checkboxes
+    choices:
+      - Flying
+      - Running
+      - Playing music
+      - Writing code
+      - Studying (Yes, really!)
+      - Socialising
+---
+```
+
+## A Recap
+In Chapter 2 we have progressed from making a basic 'hello world' 
+program to something quite more sophisticated.  We can ask questions,
+present choices, format text and make Word and PDF documents available to our
+user.  We are very much at the point where we can write 'real' applications.
+
+It's worth reflecting on where we are now and also remembering a few key points:
+* question blocks are not just for asking questions.  They can be used to 
+display output (and we will be doing that a lot);
+* Docassemble looks for mandatory blocks to execute from the top down and it
+calls other blocks only if it needs them.
+* [spacing, indenting, dashes](./00-10#indents-spacing-and-dashes-oh-my) are
+*really* important.  Docassemble gets grumpy if spacing and indentation is
+not what it should be;
+* [brackets and braces](./00-20#mako) are also very important.  Remember all
+the different types and what they're used for;
+* we use Markdown to format text in our app (but not in our attachments);
+* the Example Blocks in your Playground are *really really* useful!
+* <Components.DisplayGlossaryItem item='mako' upper /> is not a shark; and
+* <Components.DisplayGlossaryItem item='jinja' upper /> is not a spice!
+
+Let's move on to [Chapter 3](../chapter_3) where we start to discuss how to control
+the logic flow of our applications.
