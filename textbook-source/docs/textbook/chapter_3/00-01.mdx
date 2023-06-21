@@ -1,0 +1,82 @@
+---
+title: An Introduction to Coding Concepts
+---
+import * as Constants from '@site/src/constants'
+import * as Components from '@site/src/components'
+
+In Chapter Two, we learned that question blocks have two main purposes. First, they collect input from a user by asking questions. Second, they can display those answers back to the user, either on the screen or by generating a document such as a PDF or Word file.
+
+That's all well and good, but we need to be able to make decisions based on the input that we get from our users. That way, we can make decisions using that input, and display different output. For our app to make these decisions, we need to use **code blocks**. 
+
+In this section, we are going to introduce you to coding using Docassemble. You can write code in Docassemble code blocks using **Python**. Python is a programming language, and a very powerful one at that. A lot of what we can do in Python is beyond the scope of this course. All we're going to do is take a bit of Python and use it to do some powerful things. Let's start by looking at **variables**.
+
+## Variables
+To acheive, this, we are going to use variables. We've been working with variables already in Chapter Two, without even knowing what to call them. A variable is where you store information. It's called a 'variable' because you can store different stuff in there each time the program runs. We have already seen how you can use different variables.
+
+<Components.DisplayImage imageURL='/img/textbook/chapter_3/variable_example1.PNG' />
+
+For example, in Chapter Two we used the variable MJFfirstname as a place to store the first name. Each time we run the program, we can store a new value in this variable. 
+
+In Python, what we are doing is assigning a **value** to the variable. Values get assigned to variables. In addition to assigning variables via question blocks, we can also assign values to variables in code blocks. We can do that with a single equals sign. You can see how this is done below. 
+
+Note that what we are doing here is combining MJFfirstname and MJFlastname together to create MFJname. We have also added in a space, which creates a gap between the first name and last name. If you want to assign a text value to a variable, you must enclose it in quotes. Python treats anything in quotes as text, or what we call a string. 
+
+## Datatypes
+
+In the previous chapter, we encountered several variable datatypes, including integer, currency and checkboxes. Python has a set of datatypes which underpin Docassemble datatypes. Let's compare these datatypes:
+
+| Docassemble Datatype | Python Datatype | Example |
+| -------------------- | --------------- | ------- |
+| text/ string         | string          | `John Smith` |
+| currency             | float           | $55,000.00 |
+| integer              | int             | 33      |
+| Boolean              | boolean         | True/False |
+
+The first datatype - text - is called a 'string' in Python. When we refer to strings from now on in this textbook we are referring to text. You will see this term a lot in coding. 
+
+The second datatype - currency - is represented with what is called a floating point number or 'float'. A 'float' is the datatype for any number which is not a whole number, or has a decimal point. Fractions are always converted into decimals in Python.
+
+By contrast, the third datatype - integers - have no decimal points. They can only be positive or negative whole numbers.
+
+The final datatype is a new one - Boolean. A Boolean datatype can only ever be one of two values. True or False. This might seem a bit trivial, but Booleans are really important in programming. Many (if not all) of the questions that you present in your app can be reduce to a True or False proposition. We will see this a lot very soon.
+
+## Logic and Coding 
+This last datatype dovetails nicely into Logic. 
+
+As mentioned previously, most of your apps will be analysing True or False propositions. For example:
+* Are you an adult?
+* Is your income within this range?
+* Do you have this disability?
+* Are you a resident of Australia?
+
+In order to do this, we will need logical tests to assess whether something is True or False. Docassemble can rely on several types of logical tests, as seen in the table below:
+
+| Test | Means this |
+| ---- | ---------- |
+| `==`   | equals to  |
+| `!=`   | is not equal to |
+| `<`    | less than  |
+| `<=`   | less than or equal to |
+| `>`    | greater than |
+| `>=`   | greater than or equal to |
+
+The left side of this test indicates how we might write out the test in code. Let's take an example. In human readable text, we might write the following:
+
+'The income threshold for legal aid is $80,000 or less'.
+
+We would write this in code as follows:
+
+```LegalAidIncome <= 80000```
+
+Now let's consider some slightly more advanced logic operators.
+
+| Test | Means This |
+| ---- | ---------- |
+| `A == B` | A equals B |
+| `A != B` | A does not equal B |
+| `A >= B` | A is the same or bigger than B |
+| `A <= C <= B` | C is between B and A |
+
+One thing to note here is the equality test, which is represented by `==`. Note that this equality test is different from assignment, which is `=`. **Do not confuse these**. If you make a mistake, Python will not always raise an error message. Always check you have the right number of equal signs depending on what you intend to do. This should be the first step when looking for errors in your app, or **debugging**. 
+
+:::
