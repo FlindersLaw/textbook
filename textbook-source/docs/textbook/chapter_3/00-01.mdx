@@ -79,4 +79,41 @@ Now let's consider some slightly more advanced logic operators.
 
 One thing to note here is the equality test, which is represented by `==`. Note that this equality test is different from assignment, which is `=`. **Do not confuse these**. If you make a mistake, Python will not always raise an error message. Always check you have the right number of equal signs depending on what you intend to do. This should be the first step when looking for errors in your app, or **debugging**. 
 
+We can also combine logical operators together using `and`, `or` and `not` statements.
+
+| Test | Means This |
+| ---- | ---------- |
+| `A and B` | A and B are both true |
+| `A or B` | Either A or B is true |
+| `(A and B) or C` | Both A and B are true, or C is true |
+| `A and not B` | A is true and B is not true |
+
+These statements can be a very powerful way to express legislation in code. Let's consider an example. Say we wanted to examine the criteria to stand as a candidate for Federal Parliament in Australia. There are a few restrictions:
+* A candidate cannot be a member of a state or territory Parliament; and
+* A candidate cannot be a foreign national (including a dual citizen)
+
+We could represent a test for whether a candidate is eligible to stand using the following test:
+
+```not foreignNat and (not stateRep and not territoryRep) ```
+
+## Code Blocks
+How are we going to use all of this in practice? There are three ways:
+
+1. We can embed logic in our question blocks using `%` tags. You might recall we did this in Chapter Two:
+
+```
+  % if MJFisemployed == 'Yes':
+  Your annual income    | ${ currency(MJFannualincome) }
+  % endif 
+```
+2. We can use code blocks. A code block is similar to a question block in that it must appear between three dashes. It's also a block that Docassemble checks when it tries to satisfy a variable. The difference between a code block and a question block is that a code block contains Python code, as shown below:
+
+<Components.DisplayImage imageURL='/img/textbook/chapter_3/codeblock_example1.PNG' />
+
+3. We can embed code into Mako fields. Although you *can* do it, we do not cover it in too much detail in this textbook.
+
+## If Statements
+As you can see from the example above, to implement our decision making we use if statements.
+
+The structure of an if statement is pretty simple. If a test is true, then do something. We can also have an if statement that does something if a test is not true by using `else` (and it's good practice to have an else statement). 
 :::
