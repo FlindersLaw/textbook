@@ -146,7 +146,7 @@ One thing to note here are the spaces between the `if` and `elif` statements ver
 
 As discussed previously, you should also *always* end your if block with an else statement. The reason for that is the else statement will capture anything not caught by our if statements. This practice will also force you to consider all of the different branches of your if statement. 
 
-## An example of branching
+## An If Statement Example
 The code below is for an app called 'Immigration Alert'. It's designed to alert the department of immigration when someone isn't an Australian citizen.
 
 ```yaml title="C2_01_immigration_alert.yml" showLineNumbers
@@ -197,5 +197,102 @@ In addition to if statements in code blocks, you can also embed if statements in
 3. You must not indent these if statements like you would in a code if statement. 
 
 ## More complex if statements 
-Let's go back to our `and`, `or` and `not` statements. Remember that we can test for more than one thing at a time.
+Let's go back to our `and`, `or` and `not` statements. Remember that we can test for more than one thing at a time. We can demonstrate this by way of an example.
+
+```yaml title="C2_02_age_eligibility.yml" showLineNumbers
+# Example code to demonstrate how if statements operate
+---
+mandatory: True 
+question: Age eligibility
+subquestion: |
+  Your age eligibility is **${ MJFage_ok }**
+buttons:
+  - Exit: exit
+  - Restart: restart
+---
+code: |
+  if ( (MJFage >= 18) and
+       (MJFage < 65) ):
+    MJFage_ok = True
+  else:
+    MJFage_ok = False
+---
+question: What is your age?
+fields:
+  - no label: MJFage
+    datatype: integer
+---
+```
+
+In the code block that begins on line 11, you can see that we are testing for the truth of two criteria.
+
+1. MJFage must be greater than or equal to 18
+2. MJFage must be less than 65
+
+The entire test is enclosed in parentheses, as are each of the sub-tests. This isn't necessary, but it's good practice and it saves on confusion as your if statements will get complicated.
+
+## Execution Order
+Now, how will Docassemble execute this program?
+
+1. It will find the `mandatory` block at line 3 and start processing that.
+2. To display this mandatory block, it will need a value for `MJFage_ok` (which is displayed at line 6).
+3. It then searches for the code block which starts at line 11.
+4. It tries to execute that code block, buit finds it needs a value for `MJFage`
+5. It looks for a question block that sets `MJFage`, which it finds at line 18
+6. Docassemble first asks that question, and then executes the code block, using `MJFage` to evaluate the if statement. The output of MJFage_ok is then shown in the mandatory block.
+
+If you run through this code, and then click on the little `<\>` icon in the top left hand corner of the screen, you can see this execution order:
+
+<Components.DisplayImage imageURL='/img/textbook/chapter_3/show_execution_order1.PNG' />
+
+<Components.DisplayImage imageURL='/img/textbook/chapter_3/show_execution_order2.PNG' />
+
+## Embedded If Statements
+Let's come back to embedded if statements by reference to another example:
+
+```yaml title="C2_03_age_eligibility.yml" showLineNumbers
+# Example code to demonstrate the operation of if statements
+---
+mandatory: True 
+question: Age eligibility
+subquestion: |
+  You entered your age as **${ MJFage }**
+
+  You are
+  % if MJFage_ok:
+    **between 18 and 65**.
+  % else:
+    **not between 18 and 65**.
+  % endif
+
+  We have determined that you are
+  % if MJFage_ok:
+    **eligible**.
+  % else:
+    **not eligible**.
+  %endif
+buttons:
+  - Exit: exit
+  - Restart: restart
+---
+code: |
+  if ( (MJFage >= 18) and
+       (MJFage < 65 ) ):
+    MJFage_ok = True
+  else:
+    MJFage_ok = False
+---
+question: What is your age?
+fields:
+  - no label: MJFage
+    datatype: integer
+---
+```
+
+Note that for each of our embedded if statements, we have inserted some blank lines of text. This means that the results of the if statement will be displayed on the same line as the starting text, but on separate lines to one another. 
+
+## Operators 
+Let's finish this chapter by looking at operators:
+
+1. The `=` sign is an assignment operator. It's how you assign values to variables. make sure you do not confused `=` with `==`, which is used for equality.
 :::
