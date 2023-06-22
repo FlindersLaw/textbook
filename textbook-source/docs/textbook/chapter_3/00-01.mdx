@@ -115,5 +115,86 @@ How are we going to use all of this in practice? There are three ways:
 ## If Statements
 As you can see from the example above, to implement our decision making we use if statements.
 
-The structure of an if statement is pretty simple. If a test is true, then do something. We can also have an if statement that does something if a test is not true by using `else` (and it's good practice to have an else statement). 
+The structure of an if statement is pretty simple. If a test is true, then do something: 
+
+```
+if condition == True:
+    doSomething
+```
+We can also have an if statement that does something if a test is not true by using `else` (and it's good practice to have an else statement). 
+
+```
+if condition == True:
+    doSomething
+else:
+    doSomethingElse
+```
+
+In addition, we can test for multiple conditions in Python using an `elif` statement. 
+```
+if condition_one == True:
+    do_thing_one
+elif condition_two == True:
+    do_thing_two
+else:
+    do_thing_three
+```
+
+For example, returning to our previous example, you might want to test if someone is an Australian citizen, a permanent resident or is visiting on a visa. Using an if statement with two elifs is a good way to test this. We can then do a different thing on each branch. 
+
+One thing to note here are the spaces between the `if` and `elif` statements versus the tests, as well as the colon at the end of each line. It is important you get this right, otherwise Docassemble will throw an error. 
+
+As discussed previously, you should also *always* end your if block with an else statement. The reason for that is the else statement will capture anything not caught by our if statements. This practice will also force you to consider all of the different branches of your if statement. 
+
+## An example of branching
+The code below is for an app called 'Immigration Alert'. It's designed to alert the department of immigration when someone isn't an Australian citizen.
+
+```yaml title="C2_01_immigration_alert.yml" showLineNumbers
+---
+# A program to alert Immigration if a non-citizen is using the computer
+mandatory: True 
+question: Immigration Alert
+subquestion: |
+  Your Ozzie status is **${ MJFis_an_ozzie }**
+
+  %if MJFis_an_ozzie != 'Yes':
+  The Immigration alert status is **${ MJFalert_immigration }**
+  %endif
+buttons:
+  - Exit: exit
+  - Restart: restart
+---
+# This code block contains the logic that determines
+# whether we are all good from a citizenship point of view.
+code: |
+  if MJFis_citizen == 'Yes':
+    MJFis_an_ozzie = True
+  else:
+    MJFis_an_ozzie = False
+    MJFalert_immigration = True
+---
+question: Citizenship Status
+fields:
+  - Are you an Australian citizen?: MJFis_citizen
+    datatype: radio
+    choices:
+      - Yes
+      - No
+---
+```
+
+The if statement on line 18 tests a variable called `MJFis_citizen`. That variable is populated by asking the question in the block starting on line 23.
+
+If `MJFis_citizen` is equal to Yes, then the if statement sets another variable called `MJFis_an_ozzie` to contain the Boolean variable `True`. That is, the code block **assigns** the Boolean value True to `MJFis_an_ozzie`. If `MJFis_citizen` is set to No, the else block will be executed. That means `MJFis_an_ozzie` will be set to False and `MJFalert_immigration` will be set to True. 
+
+Again, note the use of spacing, indentation and colons in this example. All of this must be correct for Python code to run correctly. Spacing, colons and equal signs should be the first things you check when you run your code. 
+
+## Embedded If Statements 
+In addition to if statements in code blocks, you can also embed if statements into your question blocks.We can see how to do this in lines 8 to 10 of `C2_01_immigration_alert.yml`. Embedding an if statement into your output is a very useful way of controlling what gets displayed. When you embed an if statement into a subquestion, you must do three things differently from a code if statement:
+
+1. You must start the line with a %
+2. At the end of your if statement, you must add in an `%endif`
+3. You must not indent these if statements like you would in a code if statement. 
+
+## More complex if statements 
 :::
