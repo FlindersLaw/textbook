@@ -6,9 +6,11 @@ import * as Components from '@site/src/components'
 
 With if statements, we now have a way to make decisions. That is, our app can do one thing or another depending on the input it receives. This extends beyond just displaying `True` or `False` in our output. We can direct the flow of the program depending on how the user inputs certain information. 
 
-For example, you might want your app to perform a set of initial eligibility checks before proceeding with your main analysis. You might want to check for age or residency, because your app only applies to adults who are not pensioners or South Australian residents. These kinds of preliminary questions are good to resolve early in your processing flow. Otherwise, your user might have to run through the whole app to find out they should have never run it in the first place!
+For example, you might want your app to perform a set of initial eligibility checks before proceeding with your main analysis. You might want to check for age or residency, because your app only applies to adults who are not pensioners or South Australian residents. These kinds of preliminary questions are good to resolve early in your processing flow. Otherwise, your user might have to run through the whole app to find out they should have never run it in the first place! Therefore, we can ask the user a few preliminary questions and, based on those questions, decide which path the application should take. 
 
-Therefore, we can ask the user a few preliminary questions and, based on those questions, decide which path the application should take. Let's take a look at the following flowchart. We are going to be using flowcharts a lot to explain how applications work:
+## Using Flowcharts
+
+Let's take a look at the following flowchart. We are going to be using flowcharts a lot to explain how applications work:
 
 <Components.DisplayImage imageURL='/img/textbook/chapter_3/eligible_ineligible_flowchart.PNG' />
 
@@ -106,6 +108,18 @@ Second, the question block at line 6 does not define any variables. Instead, thi
 
 Third, we have replaced the restart button with a **continue** button. The continue button tells Docassemble to move onto the next mandatory block, which in this case is the code block at line 23.
 
-The mandatory code block tests the values of `MJFage_ok` and `MJFis_citizen`. Note the notation of the test for `MJFage_ok` here. This is the same as if we were to write `MJFage_ok == True`. 
+The mandatory code block tests the values of `MJFage_ok` and `MJFis_citizen`. Note the notation of the test for `MJFage_ok` here. This notation has the same meaning as if we were to write `MJFage_ok == True`. We use this test because, if you scroll down to the if statement on lines 51 to 53, you will see that `MJFage_ok` is only ever set to one of two values - `True` or `False`. 
+
+Note that we have also used the same notation for `MJFage_ok` in the if statement on line 32. Compare that to the test we have used for `MJFis_citizen`. `MJFis_citizen` is **not** a boolean variable. It is a string variable, and is only ever set to the string 'Yes' or `No`. Therefore, we need to modify our equality test to evaluate the contents of the variable. 
+
+## Implementing Two Endpoints
+
+What happens if our code meets both eligibility tests? We hit the code `endpoint['eligible']` on line 32. What does this do? Let's go back up to line 2. You can see that we have defined an `objects` block, and as part of this objects block we have defined a `DADict`. A `DADict` is what we call an **object** in programming terms. An object has certain properties that can be used to perform certain functions in an application. Here, we want to use `endpoint` to store endpoints. For this example, we have just two endpoints - `eligible` and `ineligible`. 
+
+To trigger our endpoint, we need to match it up with an `event` tag. This event tag will tell a particular codeblock to run. You can see that we have two `event` tags - one on line 56 and one on line 68. If we meet the condition in the if statement on line 31, our application will execute the `eligible` endpoint by calling that endpoint on line 32. Otherwise, our application will execute the `ineligible` endpoint on line 34. Make sure you run through the application and see how it works. 
+
+## Implementing Multiple Endpoints
+
+What happens if we want to implement multiple endpoints? 
 
 :::
