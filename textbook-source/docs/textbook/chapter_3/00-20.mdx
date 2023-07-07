@@ -6,6 +6,8 @@ import * as Components from '@site/src/components'
 
 With if statements, we now have a way to make decisions. That is, our app can do one thing or another depending on the input it receives. This extends beyond just displaying `True` or `False` in our output. We can direct the flow of the program depending on how the user inputs certain information. 
 
+## Why should we use if statements?
+
 For example, you might want your app to perform a set of initial eligibility checks before proceeding with your main analysis. You might want to check for age or residency, because your app only applies to adults who are not pensioners or South Australian residents. These kinds of preliminary questions are good to resolve early in your processing flow. Otherwise, your user might have to run through the whole app to find out they should have never run it in the first place! Therefore, we can ask the user a few preliminary questions and, based on those questions, decide which path the application should take. 
 
 ## Using Flowcharts
@@ -15,6 +17,8 @@ Let's take a look at the following flowchart. We are going to be using flowchart
 <Components.DisplayImage imageURL='/img/textbook/chapter_3/eligible_ineligible_flowchart.PNG' />
 
 Let's look at this flowchart a bit more. We ask some initial eligibility questions. If these criteria are met, then we execute the rest of the program. Otherwise, we drop the user out - after explaining why, of course. 
+
+## Turning our Flowchart into Docassemble Code
 
 Now, this flowchart is *technology neutral*. That means we can use any programming language to implement this flow of control. However, what we are going to do now is implement this flow of control using Docassemble.
 
@@ -73,7 +77,6 @@ code: |
     MJFage_ok = False
 ---
 # This is the ineligible endpoint
-# This is the ineligible endpoint
 event: endpoint['ineligible']
 question: Eligibility requirements not met
 subquestion:
@@ -118,8 +121,50 @@ What happens if our code meets both eligibility tests? We hit the code `endpoint
 
 To trigger our endpoint, we need to match it up with an `event` tag. This event tag will tell a particular codeblock to run. You can see that we have two `event` tags - one on line 56 and one on line 68. If we meet the condition in the if statement on line 31, our application will execute the `eligible` endpoint by calling that endpoint on line 32. Otherwise, our application will execute the `ineligible` endpoint on line 34. Make sure you run through the application and see how it works. 
 
+## Implementing Multiple Question Blocks at an Endpoint
+
+For both the ``eligible`` and ``ineligible`` endpoints, we have implemented a **Restart** button, which restarts our application, and an **Exit** button, which allows us to quit Docassemble. 
+
+However, we might want to introduce some screens after our endpoint screens. For example, if we are working with a non-for-profit, they might want to run a survey to see who is accessing their services. We can modify our code to achieve this.
+
+```yaml title="C3_01_multiple_endpoints.yml" showLineNumbers
+# Basic demonstration of using multiple endpoints for an interview
+---
+objects:
+  - endpoint: DADict
+---
+# This is our welcome screen. We can choose to exit here 
+# if we don't accept the disclaimer.
+mandatory: True 
+question: Welcome!
+subquestion: |
+  Welcome to our service (we don't know what it is yet). We hope you enjoy
+  using it!
+
+  ***Disclaimer:***
+  **This advice is not to be taken as genuine legal advice and is not a substitute 
+  for you seeking independent legal advice.**
+
+  If you continue, you accept these terms.
+buttons:
+  - "I accept and want to continue": continue
+  - "I do not accept": exit
+# This was the eligible endpoint but now it's just a screen called
+# on the way to the endpoint. We use a 'Continue button label' to call this
+# screen.
+question: Result of main program
+subquestion: |
+  The final report for whatever you are determining (such as eligibility for the NDIS
+  or the SACAT stay application or the relative homelessness service) will be
+  constructed in this subquiestion field in your eligible endpoint. By adding
+  variables and if statements into this field, you will drive the main body of
+  your application.
+continue button field: MJFmain_program_result
+---
+```
+
 ## Implementing Multiple Endpoints
 
-What happens if we want to implement multiple endpoints? 
+The style of app that we have developed works well for scenarios where there are only one of two options. What happens if we want to implement multiple endpoints, rather than just eligible or ineligible? We might want to ask multiple questions that take a user through to more than two different endpoints. In the next section of this chapter, we will walk through how to implement an app with multiple endpoints.
 
 :::
