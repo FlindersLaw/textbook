@@ -1,5 +1,5 @@
 ---
-title: Using Code to Implement a Flowchart
+title: How to Use Code to Implement a Flowchart
 ---
 import * as Constants from '@site/src/constants'
 import * as Components from '@site/src/components'
@@ -7,5 +7,18 @@ import * as Components from '@site/src/components'
 In this chapter, we are going to walk through how to construct a Docassemble application from a problem statement. We will first examine our problem statement, then we will construct a flowchart, and finally we will build out our application.
 
 ## The Problem Statement
+We have received a problem statement from ABC Incorporated. ABC are a not-for-profit agency that help people with intellectual disabilities apply for the National Disability Insurance Scheme (NDIS). They want us to write something that would allow people on the autism spectrum to determine for themselves how much NDIS funding they might be eligible for. 
+
+ABC have provided us with the following information:
+* ABC have told us that no one should be able to run this application unless they are between 7 and 65 years of age, currently reside in Australia, and are either a citizen, a permanent resident or hold a special visa category.
+* ABC have said it is important to know whether the user running the application has been diagnosed with autism spectrum disorder, and wants that displayed on the final report.
+* The app should ask two eligibility questions:
+1. Does the user have any issues in participating in certain daily activities (*as an aside, there are different levels of severity with respect to diagnosing autism*)?
+2. Is the user's disability permanent?
+* ABC tells us that if a user indicates they have any difficulty particpating in the activities listed in the first question, and that their disability will not improve, then they will be eligible. 
+
+Based on what ABC have told us, it looks like our app should do three key things:
+1. Ask the threshold question and exit the app immediately if the user does not meet the threshold.
+2. Ask the 
 
 :::
