@@ -7,18 +7,32 @@ import * as Components from '@site/src/components'
 In this chapter, we are going to walk through how to construct a Docassemble application from a problem statement. We will first examine our problem statement, then we will construct a flowchart, and finally we will build out our application.
 
 ## The Problem Statement
-We have received a problem statement from ABC Incorporated. ABC are a not-for-profit agency that help people with intellectual disabilities apply for the National Disability Insurance Scheme (NDIS). They want us to write something that would allow people on the autism spectrum to determine for themselves how much NDIS funding they might be eligible for. 
+We have received a problem statement from ABC Incorporated. ABC are a not-for-profit agency that help people with intellectual disabilities apply for the National Disability Insurance Scheme (NDIS). They want us to write something that would allow people on the autism spectrum to determine for themselves whether they might be eligible for NDIS funding they might be eligible for. 
 
 ABC have provided us with the following information:
 * ABC have told us that no one should be able to run this application unless they are between 7 and 65 years of age, currently reside in Australia, and are either a citizen, a permanent resident or hold a special visa category.
-* ABC have said it is important to know whether the user running the application has been diagnosed with autism spectrum disorder, and wants that displayed on the final report.
+* ABC have said it is important to know whether the user running the application has been diagnosed with autism spectrum disorder (ASD), and wants that displayed on the final report.
 * The app should ask two eligibility questions:
-1. Does the user have any issues in participating in certain daily activities (*as an aside, there are different levels of severity with respect to diagnosing autism*)?
+1. Does the user have any issues in participating in certain daily activities (*there are different levels of ASD severity*)?
 2. Is the user's disability permanent?
 * ABC tells us that if a user indicates they have any difficulty particpating in the activities listed in the first question, and that their disability will not improve, then they will be eligible. 
 
+## Requirements Analysis
+
 Based on what ABC have told us, it looks like our app should do three key things:
 1. Ask the threshold question and exit the app immediately if the user does not meet the threshold.
-2. Ask the 
+2. Ask the user whether they have been diagnosed with ASD and store that information to print on the final screen.
+3. Ask the user the eligibility questions that will determine whether the user is eligible for the NDIS or not
+
+We know that ABC have told us our user must have a permanent disability, and must have selected at least one of the checkboxes. If we look at the questions we must ask, we know that there are several potential question combinations given our eligibility questions:
+
+| Difficulty Question | Permanence Question | Result |
+| ---------------------------- | ----------------------- | -------- |
+| Select at least one checkbox | Disability is permanent | Eligible |
+| Select at least one checkbox | Disability may improve | Not Eligible |
+| Select at least one checkbox | Don't know | Maybe - Refer to ABC |
+| Do not select any checkboxes | Any answer | Not Eligible |
+
+We can see from this table as well that we have three potential endpoints - **Eligible**, **Not Eligible** and **Maybe**. With these questions, and these endpoints, we can construct a flowchart.
 
 :::
