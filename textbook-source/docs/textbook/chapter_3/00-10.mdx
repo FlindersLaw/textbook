@@ -4,7 +4,7 @@ title: An Introduction to Coding Concepts
 import * as Constants from '@site/src/constants'
 import * as Components from '@site/src/components'
 
-In [Chapter Two](../chapter_2), we learned
+In <Components.DisplayChapter chapter='chapter_2' /> , we learned
 that <Components.DisplayGlossaryItem item='questionblock' plural /> have two
 main purposes. First, they collect input from a user by asking questions. Second, they can display those answers back to the user, either on the screen or by generating a document such as a PDF or Word file.
 
@@ -20,25 +20,33 @@ at <Components.DisplayGlossaryItem item='variable' plural />.
 ## Variables
 To acheive, this, we are going to
 use <Components.DisplayGlossaryItem item='variable' plural />. We've
-been working with variables already in Chapter Two, without even knowing what to call them. A variable is where you store information. It's called a 'variable' because you can store different stuff in there each time the program runs. We have already seen how you can use different variables.
+been working with variables already
+in <Components.DisplayChapter chapter='chapter_2' nourl />,
+without even knowing what to call them. A variable is where you store information. It's called a 'variable' because you can store different stuff in there each time the program runs. We have already seen how you can use different variables.
 
 <Components.DisplayImage imageURL='/img/textbook/chapter_3/variable_example1.PNG' />
 
-For example, in Chapter Two we used the variable MJFfirstname as a place to store the first name. Each time we run the program, we can store a new value in this variable. 
+For example,
+in <Components.DisplayChapter chapter='chapter_2' nourl /> we
+used the variable `MJFfirstname` as a place to store the first name. Each time we run the program, we can store a new value in this variable. 
 
-In Python, what we are doing is assigning a **value** to the variable. Values get assigned to variables. In addition to assigning variables via question blocks, we can also assign values to variables in code blocks. We can do that with a single equals sign. You can see how this is done below. 
+In Python, what we are doing is assigning a **value** to the variable. Values get assigned to variables. In addition to assigning variables via question blocks, we can also assign values to variables in code blocks. We can do that with a single equals sign (`=`). You can see how this is done below. 
 
-Note that what we are doing here is combining MJFfirstname and MJFlastname together to create MFJname. We have also added in a space, which creates a gap between the first name and last name. If you want to assign a text value to a variable, you must enclose it in quotes. Python treats anything in quotes as text, or what we call a string. 
+:::tip TODO
+Suggest the example goes here
+:::
+
+Note that what we are doing here is combining `MJFfirstname` and `MJFlastname` together to create `MFJname`. We have also added in a space, which creates a gap between the first name and last name. If you want to assign a text value to a variable, you must enclose it in quotes. Python treats anything in quotes as text, or what we call a string. 
 
 ## Datatypes
 
-In the previous chapter, we encountered several variable datatypes, including integer, currency and checkboxes. Python has a set of datatypes which underpin Docassemble datatypes. Let's compare these datatypes:
+In the previous chapter, we encountered several variable datatypes, including `integer`, `currency` and `checkboxes`. Python has a set of datatypes which underpin Docassemble datatypes. Let's compare these datatypes:
 
 | Docassemble Datatype | Python Datatype | Example |
 | -------------------- | --------------- | ------- |
-| text/ string         | string          | `John Smith` |
-| currency             | float           | $55,000.00 |
-| integer              | int             | 33      |
+| `text`/`string`      | `string`        | 'John Smith' |
+| `currency`           | `float`         | $55,000.00 |
+| `integer`            | `int`           | 33      |
 | Boolean              | boolean         | True/False |
 
 The first datatype - text - is called a 'string' in Python. When we refer to strings from now on in this textbook we are referring to text. You will see this term a lot in coding. 
