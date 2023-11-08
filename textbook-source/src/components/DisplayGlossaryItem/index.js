@@ -31,6 +31,10 @@ export function DisplayGlossaryItem(props) {
             text: 'bracket',
             plural: 'brackets' }
         ],
+        ['codeblock', {
+            text: 'code block',
+            plural: `code blocks` }
+        ],
         ['comment', {
             text: 'comment',
             plural: 'comments' }

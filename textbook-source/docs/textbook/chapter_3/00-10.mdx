@@ -1,35 +1,55 @@
 ---
 title: An Introduction to Coding Concepts
 ---
-import * as Constants from '@site/src/constants'
-import * as Components from '@site/src/components'
+import * as Constants from '@site/src/constants';
+import * as Components from '@site/src/components';
+// Import these directly as we use it a lot and makes the syntax a little cleaner
+import {DisplayChapter} from '@site/src/components/DisplayChapter';
+import {DisplayGlossaryItem} from '@site/src/components/DisplayGlossaryItem';
 
-In Chapter Two, we learned that question blocks have two main purposes. First, they collect input from a user by asking questions. Second, they can display those answers back to the user, either on the screen or by generating a document such as a PDF or Word file.
+In <DisplayChapter chapter='chapter_2' /> , we learned
+that <DisplayGlossaryItem item='questionblock' plural /> have two
+main purposes. First, they collect input from a user by asking questions. Second, they can display those answers back to the user, either on the screen or by generating a document such as a PDF or Word file.
 
-That's all well and good, but we need to be able to make decisions based on the input that we get from our users. That way, we can make decisions using that input, and display different output. For our app to make these decisions, we need to use **code blocks**. 
+That's all well and good, but we need to be able to make decisions based on the input that we get from our users. That way, we can make decisions using that input, and display different output. For our app to make these decisions, we need 
+to use <DisplayGlossaryItem item='codeblock' plural />.
 
-In this section, we are going to introduce you to coding using Docassemble. You can write code in Docassemble code blocks using **Python**. Python is a programming language, and a very powerful one at that. A lot of what we can do in Python is beyond the scope of this course. All we're going to do is take a bit of Python and use it to do some powerful things. Let's start by looking at **variables**.
+In this section, we are going to introduce you to coding using Docassemble. You can write code in Docassemble code blocks
+using <DisplayGlossaryItem item='python' upper />. Python is a 
+programming language, and a very powerful one at that. A lot of what we can do in Python is beyond the scope of this course. All we're going to do is take a bit of Python and use it to do some powerful things. Let's start by looking
+at <DisplayGlossaryItem item='variable' plural />.
+
 
 ## Variables
-To acheive, this, we are going to use variables. We've been working with variables already in Chapter Two, without even knowing what to call them. A variable is where you store information. It's called a 'variable' because you can store different stuff in there each time the program runs. We have already seen how you can use different variables.
+To acheive, this, we are going to
+use <DisplayGlossaryItem item='variable' plural />. We've
+been working with variables already
+in <DisplayChapter chapter='chapter_2' nourl />,
+without even knowing what to call them. A variable is where you store information. It's called a 'variable' because you can store different stuff in there each time the program runs. We have already seen how you can use different variables.
 
-<Components.DisplayImage imageURL='/img/textbook/chapter_3/variable_example1.PNG' />
+<DisplayImage imageURL='/img/textbook/chapter_3/variable_example1.PNG' />
 
-For example, in Chapter Two we used the variable MJFfirstname as a place to store the first name. Each time we run the program, we can store a new value in this variable. 
+For example,
+in <DisplayChapter chapter='chapter_2' nourl /> we
+used the variable `MJFfirstname` as a place to store the first name. Each time we run the program, we can store a new value in this variable. 
 
-In Python, what we are doing is assigning a **value** to the variable. Values get assigned to variables. In addition to assigning variables via question blocks, we can also assign values to variables in code blocks. We can do that with a single equals sign. You can see how this is done below. 
+In Python, what we are doing is assigning a **value** to the variable. Values get assigned to variables. In addition to assigning variables via question blocks, we can also assign values to variables in code blocks. We can do that with a single equals sign (`=`). You can see how this is done below. 
 
-Note that what we are doing here is combining MJFfirstname and MJFlastname together to create MFJname. We have also added in a space, which creates a gap between the first name and last name. If you want to assign a text value to a variable, you must enclose it in quotes. Python treats anything in quotes as text, or what we call a string. 
+:::tip TODO
+Suggest the example goes here
+:::
+
+Note that what we are doing here is combining `MJFfirstname` and `MJFlastname` together to create `MFJname`. We have also added in a space, which creates a gap between the first name and last name. If you want to assign a text value to a variable, you must enclose it in quotes. Python treats anything in quotes as text, or what we call a string. 
 
 ## Datatypes
 
-In the previous chapter, we encountered several variable datatypes, including integer, currency and checkboxes. Python has a set of datatypes which underpin Docassemble datatypes. Let's compare these datatypes:
+In the previous chapter, we encountered several variable datatypes, including `integer`, `currency` and `checkboxes`. Python has a set of datatypes which underpin Docassemble datatypes. Let's compare these datatypes:
 
 | Docassemble Datatype | Python Datatype | Example |
 | -------------------- | --------------- | ------- |
-| text/ string         | string          | `John Smith` |
-| currency             | float           | $55,000.00 |
-| integer              | int             | 33      |
+| `text`/`string`      | `string`        | 'John Smith' |
+| `currency`           | `float`         | $55,000.00 |
+| `integer`            | `int`           | 33      |
 | Boolean              | boolean         | True/False |
 
 The first datatype - text - is called a 'string' in Python. When we refer to strings from now on in this textbook we are referring to text. You will see this term a lot in coding. 
@@ -108,7 +128,7 @@ How are we going to use all of this in practice? There are three ways:
 ```
 2. We can use code blocks. A code block is similar to a question block in that it must appear between three dashes. It's also a block that Docassemble checks when it tries to satisfy a variable. The difference between a code block and a question block is that a code block contains Python code, as shown below:
 
-<Components.DisplayImage imageURL='/img/textbook/chapter_3/codeblock_example1.PNG' />
+<DisplayImage imageURL='/img/textbook/chapter_3/codeblock_example1.PNG' />
 
 3. We can embed code into Mako fields. Although you *can* do it, we do not cover it in too much detail in this textbook.
 
@@ -243,9 +263,9 @@ Now, how will Docassemble execute this program?
 
 If you run through this code, and then click on the little `<\>` icon in the top left hand corner of the screen, you can see this execution order:
 
-<Components.DisplayImage imageURL='/img/textbook/chapter_3/show_execution_order1.PNG' />
+<DisplayImage imageURL='/img/textbook/chapter_3/show_execution_order1.PNG' />
 
-<Components.DisplayImage imageURL='/img/textbook/chapter_3/show_execution_order2.PNG' />
+<DisplayImage imageURL='/img/textbook/chapter_3/show_execution_order2.PNG' />
 
 ## Embedded If Statements
 Let's come back to embedded if statements by reference to another example:

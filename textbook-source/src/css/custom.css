@@ -34,7 +34,12 @@
   background-color: rgb(35,45,75);
 }
 
-/* for displaying chapters */
+/* for displaying chapters as URLs */
 .displayChapterURL {
   font-weight: bold;
+}
+/* for displaying chapters as text */
+.displayChapterSpan {
+  /* Currently not doing anything here */
+  content: "";
 }

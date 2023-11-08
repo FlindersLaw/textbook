@@ -1,4 +1,4 @@
-export * from './DisplayChapters'
+export * from './DisplayChapter'
 export * from './DisplayConstants'
 export * from './DisplayDAButtons'
 export * from './DisplayGlossaryItem'
