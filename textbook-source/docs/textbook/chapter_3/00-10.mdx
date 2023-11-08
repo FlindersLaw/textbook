@@ -1,33 +1,36 @@
 ---
 title: An Introduction to Coding Concepts
 ---
-import * as Constants from '@site/src/constants'
-import * as Components from '@site/src/components'
+import * as Constants from '@site/src/constants';
+import * as Components from '@site/src/components';
+// Import these directly as we use it a lot and makes the syntax a little cleaner
+import {DisplayChapter} from '@site/src/components/DisplayChapter';
+import {DisplayGlossaryItem} from '@site/src/components/DisplayGlossaryItem';
 
-In <Components.DisplayChapter chapter='chapter_2' /> , we learned
-that <Components.DisplayGlossaryItem item='questionblock' plural /> have two
+In <DisplayChapter chapter='chapter_2' /> , we learned
+that <DisplayGlossaryItem item='questionblock' plural /> have two
 main purposes. First, they collect input from a user by asking questions. Second, they can display those answers back to the user, either on the screen or by generating a document such as a PDF or Word file.
 
 That's all well and good, but we need to be able to make decisions based on the input that we get from our users. That way, we can make decisions using that input, and display different output. For our app to make these decisions, we need 
-to use <Components.DisplayGlossaryItem item='codeblock' plural />.
+to use <DisplayGlossaryItem item='codeblock' plural />.
 
 In this section, we are going to introduce you to coding using Docassemble. You can write code in Docassemble code blocks
-using <Components.DisplayGlossaryItem item='python' upper />. Python is a 
+using <DisplayGlossaryItem item='python' upper />. Python is a 
 programming language, and a very powerful one at that. A lot of what we can do in Python is beyond the scope of this course. All we're going to do is take a bit of Python and use it to do some powerful things. Let's start by looking
-at <Components.DisplayGlossaryItem item='variable' plural />.
+at <DisplayGlossaryItem item='variable' plural />.
 
 
 ## Variables
 To acheive, this, we are going to
-use <Components.DisplayGlossaryItem item='variable' plural />. We've
+use <DisplayGlossaryItem item='variable' plural />. We've
 been working with variables already
-in <Components.DisplayChapter chapter='chapter_2' nourl />,
+in <DisplayChapter chapter='chapter_2' nourl />,
 without even knowing what to call them. A variable is where you store information. It's called a 'variable' because you can store different stuff in there each time the program runs. We have already seen how you can use different variables.
 
-<Components.DisplayImage imageURL='/img/textbook/chapter_3/variable_example1.PNG' />
+<DisplayImage imageURL='/img/textbook/chapter_3/variable_example1.PNG' />
 
 For example,
-in <Components.DisplayChapter chapter='chapter_2' nourl /> we
+in <DisplayChapter chapter='chapter_2' nourl /> we
 used the variable `MJFfirstname` as a place to store the first name. Each time we run the program, we can store a new value in this variable. 
 
 In Python, what we are doing is assigning a **value** to the variable. Values get assigned to variables. In addition to assigning variables via question blocks, we can also assign values to variables in code blocks. We can do that with a single equals sign (`=`). You can see how this is done below. 
@@ -125,7 +128,7 @@ How are we going to use all of this in practice? There are three ways:
 ```
 2. We can use code blocks. A code block is similar to a question block in that it must appear between three dashes. It's also a block that Docassemble checks when it tries to satisfy a variable. The difference between a code block and a question block is that a code block contains Python code, as shown below:
 
-<Components.DisplayImage imageURL='/img/textbook/chapter_3/codeblock_example1.PNG' />
+<DisplayImage imageURL='/img/textbook/chapter_3/codeblock_example1.PNG' />
 
 3. We can embed code into Mako fields. Although you *can* do it, we do not cover it in too much detail in this textbook.
 
@@ -260,9 +263,9 @@ Now, how will Docassemble execute this program?
 
 If you run through this code, and then click on the little `<\>` icon in the top left hand corner of the screen, you can see this execution order:
 
-<Components.DisplayImage imageURL='/img/textbook/chapter_3/show_execution_order1.PNG' />
+<DisplayImage imageURL='/img/textbook/chapter_3/show_execution_order1.PNG' />
 
-<Components.DisplayImage imageURL='/img/textbook/chapter_3/show_execution_order2.PNG' />
+<DisplayImage imageURL='/img/textbook/chapter_3/show_execution_order2.PNG' />
 
 ## Embedded If Statements
 Let's come back to embedded if statements by reference to another example:
