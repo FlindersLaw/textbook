@@ -7,6 +7,17 @@ import * as Components from '@site/src/components';
 import {DisplayChapter} from '@site/src/components/DisplayChapter';
 import {DisplayGlossaryItem} from '@site/src/components/DisplayGlossaryItem';
 
+:::tip COMMENTS
+A summary of the changes I've made:
+
+- Any reference to a chapter should not be literal.  Instead use the `<DisplayChapter />` component.  Instructions on using `<DisplayChapter />` is in the code.
+- Likewise for glossary items, such as 'code block', 'question block', 'variable' etc.  I have a list of glossary items and when we refer to them, at least initially or the first few times, we should use `<DisplayGlossaryItem />`.  Currently this component doesn't do much but eventually I'm hoping to generate an index from it and/or allow users to click on a term and have a pop-up definition or something.
+- Literal terms ie: variable names, values etc should be `displayed as code` and not as plain text.
+- I changed 'Boolean' to 'boolean' :-)
+
+The Components are documents (maybe a bit poorly) in `src/components/<ComponentName>/index.js`.  Feel free to build them out or to add more data (eg: glossary items) to them.
+:::
+
 In <DisplayChapter chapter='chapter_2' /> , we learned
 that <DisplayGlossaryItem item='questionblock' plural /> have two
 main purposes. First, they collect input from a user by asking questions. Second, they can display those answers back to the user, either on the screen or by generating a document such as a PDF or Word file.
@@ -27,7 +38,7 @@ been working with variables already
 in <DisplayChapter chapter='chapter_2' nourl />,
 without even knowing what to call them. A variable is where you store information. It's called a 'variable' because you can store different stuff in there each time the program runs. We have already seen how you can use different variables.
 
-<DisplayImage imageURL='/img/textbook/chapter_3/variable_example1.PNG' />
+<Components.DisplayImage imageURL='/img/textbook/chapter_3/variable_example1.PNG' />
 
 For example,
 in <DisplayChapter chapter='chapter_2' nourl /> we
@@ -35,7 +46,7 @@ used the variable `MJFfirstname` as a place to store the first name. Each time w
 
 In Python, what we are doing is assigning a **value** to the variable. Values get assigned to variables. In addition to assigning variables via question blocks, we can also assign values to variables in code blocks. We can do that with a single equals sign (`=`). You can see how this is done below. 
 
-:::tip TODO
+:::tip SUGGESTION
 Suggest the example goes here
 :::
 
@@ -47,18 +58,22 @@ In the previous chapter, we encountered several variable datatypes, including `i
 
 | Docassemble Datatype | Python Datatype | Example |
 | -------------------- | --------------- | ------- |
-| `text`/`string`      | `string`        | 'John Smith' |
+| text/ string      | `string`        | 'John Smith' |
 | `currency`           | `float`         | $55,000.00 |
 | `integer`            | `int`           | 33      |
-| Boolean              | boolean         | True/False |
+| boolean              | boolean         | True/False |
 
-The first datatype - text - is called a 'string' in Python. When we refer to strings from now on in this textbook we are referring to text. You will see this term a lot in coding. 
+The first datatype - text - is called a <DisplayGlossaryItem item='string' /> in Python. When we refer to strings from now on in this textbook we are referring to text. You will see this term a lot in coding. 
 
-The second datatype - currency - is represented with what is called a floating point number or 'float'. A 'float' is the datatype for any number which is not a whole number, or has a decimal point. Fractions are always converted into decimals in Python.
+The second datatype - `currency` - is represented with what is called a floating point number or `float`. A `float` is the datatype for any number which is not a whole number, or has a decimal point. Fractions are always converted into decimals in Python.
 
-By contrast, the third datatype - integers - have no decimal points. They can only be positive or negative whole numbers.
+:::tip SUGGESTION
+Above should read '...for any number which is not a whole number, such as numbers with decimals. Fractions are always converted into `float`s in Python.
+:::
 
-The final datatype is a new one - Boolean. A Boolean datatype can only ever be one of two values. True or False. This might seem a bit trivial, but Booleans are really important in programming. Many (if not all) of the questions that you present in your app can be reduce to a True or False proposition. We will see this a lot very soon.
+By contrast, the third datatype - `integer` - has no decimal points. Integers can only be positive or negative whole numbers.
+
+The final datatype is a new one - <DisplayGlossaryItem item='boolean' />. A <DisplayGlossaryItem item='boolean' /> datatype can only ever be one of two values, true or false. This might seem a bit trivial, but booleans are really important in programming. Many (if not all) of the questions that you present in your app can be reduce to a true or false proposition. We will see this a lot very soon.
 
 ## Logic and Coding 
 This last datatype dovetails nicely into Logic. 
@@ -99,6 +114,10 @@ Now let's consider some slightly more advanced logic operators.
 
 One thing to note here is the equality test, which is represented by `==`. Note that this equality test is different from assignment, which is `=`. **Do not confuse these**. If you make a mistake, Python will not always raise an error message. Always check you have the right number of equal signs depending on what you intend to do. This should be the first step when looking for errors in your app, or **debugging**. 
 
+:::tip SUGGESTION
+We should have an admonition for the `=`/`==` confusion to bring more attention to it.
+:::
+
 We can also combine logical operators together using `and`, `or` and `not` statements.
 
 | Test | Means This |
@@ -119,9 +138,9 @@ We could represent a test for whether a candidate is eligible to stand using the
 ## Code Blocks
 How are we going to use all of this in practice? There are three ways:
 
-1. We can embed logic in our question blocks using `%` tags. You might recall we did this in Chapter Two:
+1. We can embed logic in our <DisplayGlossaryItem item='questionblock' plural /> using `%` tags. You might recall we did this in <DisplayChapter chapter='chapter_2' nourl />:
 
-```
+```python
   % if MJFisemployed == 'Yes':
   Your annual income    | ${ currency(MJFannualincome) }
   % endif 
@@ -130,7 +149,7 @@ How are we going to use all of this in practice? There are three ways:
 
 <DisplayImage imageURL='/img/textbook/chapter_3/codeblock_example1.PNG' />
 
-3. We can embed code into Mako fields. Although you *can* do it, we do not cover it in too much detail in this textbook.
+3. We can embed code into <DisplayGlossaryItem item='mako' upper /> fields. Although you *can* do it, we do not cover it in too much detail in this textbook.
 
 ## If Statements
 As you can see from the example above, to implement our decision making we use if statements.
@@ -205,16 +224,20 @@ fields:
 
 The if statement on line 18 tests a variable called `MJFis_citizen`. That variable is populated by asking the question in the block starting on line 23.
 
-If `MJFis_citizen` is equal to Yes, then the if statement sets another variable called `MJFis_an_ozzie` to contain the Boolean variable `True`. That is, the code block **assigns** the Boolean value True to `MJFis_an_ozzie`. If `MJFis_citizen` is set to No, the else block will be executed. That means `MJFis_an_ozzie` will be set to False and `MJFalert_immigration` will be set to True. 
+If `MJFis_citizen` is equal to `Yes`, then the if statement sets another variable called `MJFis_an_ozzie` to contain the boolean variable `True`. That is, the code block **assigns** the boolean value `True` to `MJFis_an_ozzie`. If `MJFis_citizen` is set to No, the `else` block will be executed. That means `MJFis_an_ozzie` will be set to `False` and `MJFalert_immigration` will be set to `True`. 
 
 Again, note the use of spacing, indentation and colons in this example. All of this must be correct for Python code to run correctly. Spacing, colons and equal signs should be the first things you check when you run your code. 
 
-## Embedded If Statements 
-In addition to if statements in code blocks, you can also embed if statements into your question blocks.We can see how to do this in lines 8 to 10 of `C2_01_immigration_alert.yml`. Embedding an if statement into your output is a very useful way of controlling what gets displayed. When you embed an if statement into a subquestion, you must do three things differently from a code if statement:
+## Embedded If Statements 1
+In addition to if statements in code blocks, you can also embed if statements into your question blocks. We can see how to do this in lines 8 to 10 of `C2_01_immigration_alert.yml`. Embedding an if statement into your output is a very useful way of controlling what gets displayed. When you embed an if statement into a subquestion, you must do three things differently from a code if statement:
 
 1. You must start the line with a %
 2. At the end of your if statement, you must add in an `%endif`
 3. You must not indent these if statements like you would in a code if statement. 
+
+:::tip SUGGESTION
+Include link to `C2_01_immigration_alert.yml` in this page.  Should we remove the `C2_01` part?  Not as relevant in this topic
+:::
 
 ## More complex if statements 
 Let's go back to our `and`, `or` and `not` statements. Remember that we can test for more than one thing at a time. We can demonstrate this by way of an example.
@@ -244,30 +267,34 @@ fields:
 ---
 ```
 
+:::tip SUGGESTION
+I think splitting the `MJFage` test across two lines might be confusing.  Also, wonder whether we should work into this in more detail?  For example, introduce an example `if ... and ...:` and then move to the `MJFage` example in isolation and then display this code.
+:::
+
 In the code block that begins on line 11, you can see that we are testing for the truth of two criteria.
 
-1. MJFage must be greater than or equal to 18
-2. MJFage must be less than 65
+1. `MJFage` must be greater than or equal to 18
+2. `MJFage` must be less than 65
 
 The entire test is enclosed in parentheses, as are each of the sub-tests. This isn't necessary, but it's good practice and it saves on confusion as your if statements will get complicated.
 
 ## Execution Order
 Now, how will Docassemble execute this program?
 
-1. It will find the `mandatory` block at line 3 and start processing that.
+1. It will find the <DisplayGlossaryItem item='mandatoryblock' /> at line 3 and start processing that.
 2. To display this mandatory block, it will need a value for `MJFage_ok` (which is displayed at line 6).
 3. It then searches for the code block which starts at line 11.
-4. It tries to execute that code block, buit finds it needs a value for `MJFage`
-5. It looks for a question block that sets `MJFage`, which it finds at line 18
+4. It tries to execute that code block, but finds it needs a value for `MJFage`.
+5. It looks for a question block that sets `MJFage`, which it finds at line 18.
 6. Docassemble first asks that question, and then executes the code block, using `MJFage` to evaluate the if statement. The output of MJFage_ok is then shown in the mandatory block.
 
 If you run through this code, and then click on the little `<\>` icon in the top left hand corner of the screen, you can see this execution order:
 
-<DisplayImage imageURL='/img/textbook/chapter_3/show_execution_order1.PNG' />
+<Components.DisplayImage imageURL='/img/textbook/chapter_3/show_execution_order1.PNG' />
 
-<DisplayImage imageURL='/img/textbook/chapter_3/show_execution_order2.PNG' />
+<Components.DisplayImage imageURL='/img/textbook/chapter_3/show_execution_order2.PNG' />
 
-## Embedded If Statements
+## Embedded If Statements 2
 Let's come back to embedded if statements by reference to another example:
 
 ```yaml title="C2_03_age_eligibility.yml" showLineNumbers
@@ -317,4 +344,3 @@ Let's finish this chapter by looking at operators:
 1. The `=` sign is an assignment operator. It's how you assign values to variables. make sure you do not confused `=` with `==`, which is used for equality.
 2. The `+` and `-` signs are pretty self explanatory, at least for numbers. However, `+` can also be used to join strings togegther.
 3. We use the `*` to multiply numbers and we use a `/` to divide numbers.
-:::
