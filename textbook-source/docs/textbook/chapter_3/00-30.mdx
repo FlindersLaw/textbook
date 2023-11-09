@@ -56,6 +56,14 @@ Using these requirements, we can see that the flowchart looks something like thi
 
 <Components.DisplayImage imageURL='/img/textbook/chapter_3/ABC_flowchart.png' />
 
+:::tip TODO
+This image is too big to display as a single flowchart.  Should we re-render
+it using [Mermaid](https://docusaurus.io/docs/markdown-features/diagrams)?
+
+Other option is to click on link and display larger image.  I don't know how to
+do that (yet).
+:::
+
 Each of the blue rectangles is a question screen where we ask something of the user or display something to the user. Therefore, we will implement these as separate ``question`` blocks in Docassemble. 
 
 The yellow speech bubbles display the text that we will show to the user. We will need to implement these in the ``subquestion`` section of each question block. 
@@ -266,4 +274,3 @@ That's a lot of code. What we are going to do is work out what this does, piece 
 So far, we have discussed how we need a mandatory block to drive the logic of our application. It is best coding practice to have only **one** mandatory ``code`` block for your application. 
 
 Let's start on Lines 3 and 4. The call to `MJFdisplay_welcome_screen` forces Docassemble to display the continue button field `MJFdisplay_welcome_screen`. 
-:::

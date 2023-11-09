@@ -3,6 +3,7 @@ title: Introducing GitHub
 ---
 import * as Constants from '@site/src/constants'
 import * as Components from '@site/src/components'
+import {teachingcodeurl} from '@site/src/components';
 
 :::caution 
 The rest of this textbook assumes that you have signed up for GitHub 
@@ -61,7 +62,7 @@ then click 'Packages'
 Click 'Pull'
 <Components.DisplayImage imageURL='/img/textbook/chapter_2/github5.png' />
 
-In the GitHub URL enter <Components.DisplayConstants data='teachingcodeurl' />
+In the GitHub URL enter <Components.DisplayConstants data={teachingcodeurl} />
 <Components.DisplayImage imageURL='/img/textbook/chapter_2/github6.png' />
 
 Click on <Components.DisplayDAButtons button={Constants.da_save_prop} button_text='Pull' />
