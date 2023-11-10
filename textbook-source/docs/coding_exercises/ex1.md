@@ -3,7 +3,7 @@ title: Ex1 Exercises
 sidebar_position: 2
 ---
 
-<table>
+<table id="codexTable">
     <thead>
         <tr>
             <th>Exercise</th><th>Watch</th><th>Do</th>
@@ -30,3 +30,7 @@ sidebar_position: 2
         </tr>
     </tbody>
 </table>
+
+Exercise|Watch|Do
+---|---|---
+testing|1|2,3

@@ -43,3 +43,10 @@
   /* Currently not doing anything here */
   content: "";
 }
+
+/* for displaying the coding exercises tables */
+#codexTable td {
+  text-align: left;
+  vertical-align: top;
+  border: 10px solid #6d2ad8;
+}
