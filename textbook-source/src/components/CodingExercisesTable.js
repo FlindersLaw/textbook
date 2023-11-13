@@ -1,32 +1,25 @@
 import React from 'react';
-import { Table } from '@docusaurus/react-table';
 
 export const CodingExercisesTable = ({ codingExercises }) => {
-  const columns = [
-    {
-      header: 'Title',
-      key: 'title',
-      align: 'left',
-    },
-    {
-      header: 'Video',
-      key: 'video',
-      align: 'center',
-    },
-    {
-      header: 'Instructions',
-      key: 'body',
-      align: 'left',
-    },
-  ];
 
-  const rows = codingExercises.map((codingExercise) => ({
-    title: codingExercise.title,
-    video: codingExercise.video,
-    body: codingExercise.body,
-  }));
+  const [data, setData] = React.useState(() => [...codingExercises]);
 
-  return (
-    <Table columns={columns} rows={rows} />
-  );
+  return(
+    <table id="codexTable">
+      <tr>
+        <th>ID</th>
+        <th>Watch</th>
+        <th>Exercise</th>
+      </tr>
+      {data.map((codingExercise) => (
+        <tr>
+          <td>{codingExercise.title}</td>
+          <td>{codingExercise.video}</td>
+          <td><Markdown>{codingExercise.body}</Markdown></td>
+        </tr>
+      ))}
+    </table>
+  )
 };
+
+export default CodingExercisesTable;

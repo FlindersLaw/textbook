@@ -45,8 +45,18 @@
 }
 
 /* for displaying the coding exercises tables */
+#codexTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
 #codexTable td {
   text-align: left;
   vertical-align: top;
-  border: 10px solid #6d2ad8;
+  border: 1px solid #6d2ad8;
+}
+#codexTable th {
+  text-align: left;
+  vertical-align: top;
+  border: 1px solid #6d2ad8;
 }

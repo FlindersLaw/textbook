@@ -1,3 +1,31 @@
+---
 title: test2
 ---
+import {CodingExercisesPage} from '@site/src/components';
 import {CodingExercisesTable} from '@site/src/components';
+import Ex1a, * as Ex1a_c from '@site/docs/coding_exercises/ex1a.mdx';
+import Ex1b, * as Ex1b_c from '@site/docs/coding_exercises/ex1b.mdx';
+import {MdTest, CreateTableRow, CreateCodingExerciseTable} from '@site/src/components/MdTest';
+
+export const Highlight = ({children}) => (
+  <span>
+    {children}
+  </span>
+);
+
+Hello
+
+<Highlight>{Ex1b_c.title}</Highlight>
+
+break
+
+<Highlight>{Ex1a_c.title}</Highlight>
+
+You're a bold one
+
+export const theExercises = [
+    <CreateTableRow title={Ex1a_c.title} video={Ex1a_c.video}><Ex1a /></CreateTableRow>,
+    <CreateTableRow title={Ex1b_c.title} video={Ex1b_c.video}><Ex1b /></CreateTableRow>,
+    ];
+
+<CreateCodingExerciseTable rows={theExercises} />
