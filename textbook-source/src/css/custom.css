@@ -60,3 +60,19 @@
   vertical-align: top;
   border: 1px solid #6d2ad8;
 }
+
+/* for displaying the coding exercises inline (DisplayInlineExercise) */
+/* Add this to your CSS */
+.codexInline-video-section {
+  display: inline-flex;
+  border: 1px solid #000; /* Set the border color and size */
+}
+
+.codexInline-bordered-label {
+  padding: 2px; /* Adjust the padding as needed */
+  margin: 2px; /* Adjust the margin as needed */
+}
+.codexInline-bordered-text {
+  padding: 2px; /* Adjust the padding as needed */
+  margin: 2px; /* Adjust the margin as needed */
+}

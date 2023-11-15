@@ -12,11 +12,15 @@ import Ex1h, * as Ex1h_c from '@site/docs/coding_exercises/_ex1h.mdx';
 // Ex2 exercises
 import Ex2a, * as Ex2a_c from '@site/docs/coding_exercises/_ex2a.mdx';
 
-import {CreateTableRow, CreateCodingExerciseTable} from '@site/src/components';
+import {CreateTableRow, CreateCodingExerciseTable, DisplayInlineExercise} from '@site/src/components';
 
 # Coding Exercises
 
 ## Ex1 Exercises 
+### Test h3
+<DisplayInlineExercise title={Ex1a_c.title} video={Ex1a_c.video}><Ex1a /></DisplayInlineExercise>
+<DisplayInlineExercise title={Ex1h_c.title} video={Ex1h_c.video}><Ex1h /></DisplayInlineExercise>
+
 <CreateCodingExerciseTable rows={[
     <CreateTableRow title={Ex1a_c.title} video={Ex1a_c.video}><Ex1a /></CreateTableRow>,
     <CreateTableRow title={Ex1b_c.title} video={Ex1b_c.video}><Ex1b /></CreateTableRow>,
