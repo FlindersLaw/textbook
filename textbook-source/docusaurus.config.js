@@ -78,15 +78,14 @@ const config = {
             label: 'Textbook',
           },
           {
-            type: 'docSidebar',
-            sidebarId: 'codingExercisesSidebar',
+            label: 'Coding Exercises',
+            href: '/coding_exercises',
             position: 'left',
-            label: 'Coding Exercises'
           },
           {
             type: 'docSidebar',
-            sidebarId: 'recipesSidebar',
             position: 'left',
+            sidebarId: 'recipesSidebar',
             label: 'Coding Recipes'
           },
           {to: '/blog', label: 'Blog', position: 'left'},
