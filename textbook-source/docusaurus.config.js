@@ -88,7 +88,6 @@ const config = {
             sidebarId: 'recipesSidebar',
             label: 'Coding Recipes'
           },
-          {to: '/blog', label: 'Blog', position: 'left'},
           {
             href: 'https://github.com/LLAW3301',
             label: 'Digital Age GitHub',
