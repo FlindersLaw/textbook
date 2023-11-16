@@ -3,29 +3,24 @@ import React from 'react';
 /**
  * This is used to display the coding exercises inline. It was written
  * to be used in /pages/coding_exercises.mdx.  It does the following
- * - Displays the title of each exercise as a h3 (###)
  * - Displays the video(s) to watch
  * - Renders the coding exercise
  * 
- * TODO: Style the returned code appropriately
+ * Note: Original version of this attempted to return an appropriately 
+ *       styled <h3> but this is not possible as Docusaurus will not add
+ *       non-markdown headings to the table of contents.  So, we must 
+ *       use markdown in coding_exercises.mdx directly.  
+ *  
+ *       The <h3> generating code has been removed but is available in a 
+ *       previous commit of this file.
  * 
- * @param {title} 'title' string from coding exercise
  * @param {video} 'video' string from coding exercise
  * @param {children} Default coding exercise component to render 
  * @returns  <div> containing the coding exercise appropriately styled
  */
-export function DisplayInlineExercise({title, video, children}) {
+export function DisplayInlineExercise({video, children}) {
     return(
         <div id="codexInline">
-            <h3 id={title} class="anchor">
-                Exercise {title}
-                <a
-                    class="hash-link"
-                    href={`#${title}`}
-                    aria-label={`Direct link to ${title}`}
-                    title={`Direct link to ${title}`}>
-                </a>
-            </h3>
             <div className='video-section'>
                 <div className='bordered-label'>
                     Videos:
@@ -34,34 +29,12 @@ export function DisplayInlineExercise({title, video, children}) {
                     {video}
                 </div>
             </div>
-
-            {children}
+            <div className='exercise'>
+                {children}
+            </div>
         </div>
     )
 }
-
-/**
- * Displays a <h2> tag appropriately styled for the coding exercises page
- * and with correct links etc
- * Coding Exercises styles are in the #codexInline CSS 
- * @param {children} content of <h2> tag 
- * @returns <h2> appropriately styled
- */
- export function DisplayInlineExerciseH2({title}) {
-    return(
-        <div id="codexInline">
-            <h2 id={title} class="anchor anchorWithStickyNavbar_node_modules-@docusaurus-theme-classic-lim-theme-Headaing-styles-module">
-                {title}
-                <a
-                    class="hash-link"
-                    href={`#${title}`}
-                    aria-label={`Direct link to ${title}`}
-                    title={`Direct link to ${title}`}>
-                </a>
-            </h2>
-        </div>
-    )
- }
 
 /**
  * Creates a table row to be passed into CodingExerciseTable 

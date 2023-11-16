@@ -67,10 +67,11 @@
   font-size: 100%;
 }
 #codexInline h2 {
-  background-color: yellow;
+  background-color: rgb(255,211,0); /* Flinders Yellow */
+  color: rgb(38,48,77); /* Flinders blue */
 }
 #codexInline h3 {
-  background-color: #21af90;
+  background-color: rgba(38,48,77,0.1);
 }
 #codexInline .video-section {
   display: inline-flex;
@@ -84,4 +85,9 @@
 #codexInline .bordered-text {
   padding: 2px; /* Adjust the padding as needed */
   margin: 2px; /* Adjust the margin as needed */
+}
+#codexInline .exercise {
+  margin-top: 20px;     /* to separate the exercise from the videos line */
+  margin-left: 40px;    /* indenting helps to differentiate the exercise from the other content */
+  margin-bottom: 50px;  /* helps to provide a separator between this exercise and the next */
 }

@@ -43,6 +43,14 @@ export function DisplayGlossaryItem(props) {
             text: 'curly brace',
             plural: 'curly braces' }
         ],
+        ['datablock', {
+            text: 'data block',
+            plural: 'data blocks' }
+        ],
+        ['dictionary', {
+            text: 'dictionary',
+            plural: 'dictionaries' }
+        ],
         ['field', {
             text: 'field',
             plural: 'fields'}
@@ -84,6 +92,18 @@ export function DisplayGlossaryItem(props) {
         ['string', {
             text: 'string',
             plural: 'strings' }
+        ],
+        ['subquestionblock', {
+            text: 'subquestion block',
+            plural: `subquestion blocks` }
+        ],
+        ['table', {
+            text: 'table',
+            plural: 'tables' }
+        ],
+        ['tableblock', {
+            text: 'table block',
+            plural: 'table blocks' }
         ],
         ['variable', {
             text: 'variable',

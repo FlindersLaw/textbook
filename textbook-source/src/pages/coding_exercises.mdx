@@ -11,38 +11,50 @@ import Ex1g, * as Ex1g_c from '@site/docs/coding_exercises/_ex1g.mdx';
 import Ex1h, * as Ex1h_c from '@site/docs/coding_exercises/_ex1h.mdx';
 // Ex2 exercises
 import Ex2a, * as Ex2a_c from '@site/docs/coding_exercises/_ex2a.mdx';
+import Ex2b, * as Ex2b_c from '@site/docs/coding_exercises/_ex2b.mdx';
+import Ex2c, * as Ex2c_c from '@site/docs/coding_exercises/_ex2c.mdx';
+import Ex2d, * as Ex2d_c from '@site/docs/coding_exercises/_ex2d.mdx';
+import Ex2e, * as Ex2e_c from '@site/docs/coding_exercises/_ex2e.mdx';
+import Ex2f, * as Ex2f_c from '@site/docs/coding_exercises/_ex2f.mdx';
 
 import {CreateTableRow, CreateCodingExerciseTable, DisplayInlineExercise, DisplayInlineExerciseH2} from '@site/src/components';
 
 # Coding Exercises
-
-<DisplayInlineExerciseH2 title='Ex1 Exercises' />
-{/* ## Ex1 Exercises  */}
-<DisplayInlineExercise title={Ex1a_c.title} video={Ex1a_c.video}><Ex1a /></DisplayInlineExercise>
-<DisplayInlineExercise title={Ex1b_c.title} video={Ex1b_c.video}><Ex1b /></DisplayInlineExercise>
-<DisplayInlineExercise title={Ex1c_c.title} video={Ex1c_c.video}><Ex1c /></DisplayInlineExercise>
-<DisplayInlineExercise title={Ex1d_c.title} video={Ex1d_c.video}><Ex1d /></DisplayInlineExercise>
-<DisplayInlineExercise title={Ex1e_c.title} video={Ex1e_c.video}><Ex1e /></DisplayInlineExercise>
-<DisplayInlineExercise title={Ex1f_c.title} video={Ex1f_c.video}><Ex1f /></DisplayInlineExercise>
-<DisplayInlineExercise title={Ex1f_c.title} video={Ex1g_c.video}><Ex1g /></DisplayInlineExercise>
-<DisplayInlineExercise title={Ex1h_c.title} video={Ex1h_c.video}><Ex1h /></DisplayInlineExercise>
-
-{/* <CreateCodingExerciseTable rows={[
-    <CreateTableRow title={Ex1a_c.title} video={Ex1a_c.video}><Ex1a /></CreateTableRow>,
-    <CreateTableRow title={Ex1b_c.title} video={Ex1b_c.video}><Ex1b /></CreateTableRow>,
-    <CreateTableRow title={Ex1c_c.title} video={Ex1c_c.video}><Ex1c /></CreateTableRow>,
-    <CreateTableRow title={Ex1d_c.title} video={Ex1d_c.video}><Ex1d /></CreateTableRow>,
-    <CreateTableRow title={Ex1e_c.title} video={Ex1e_c.video}><Ex1e /></CreateTableRow>,
-    <CreateTableRow title={Ex1f_c.title} video={Ex1f_c.video}><Ex1f /></CreateTableRow>,
-    <CreateTableRow title={Ex1g_c.title} video={Ex1g_c.video}><Ex1g /></CreateTableRow>,
-    <CreateTableRow title={Ex1h_c.title} video={Ex1h_c.video}><Ex1h /></CreateTableRow>,
-]} /> */}
+{/* All coding exercises must be enclosed within this <div> so they are
+properly styled. */}
+<div id="codexInline">
+## Ex1 Exercises
+### Ex1a
+<DisplayInlineExercise video={Ex1a_c.video}><Ex1a /></DisplayInlineExercise>
+### Ex1b
+<DisplayInlineExercise video={Ex1b_c.video}><Ex1b /></DisplayInlineExercise>
+### Ex1c
+<DisplayInlineExercise video={Ex1c_c.video}><Ex1c /></DisplayInlineExercise>
+### Ex1d
+<DisplayInlineExercise video={Ex1d_c.video}><Ex1d /></DisplayInlineExercise>
+### Ex1e
+<DisplayInlineExercise video={Ex1e_c.video}><Ex1e /></DisplayInlineExercise>
+### Ex1f
+<DisplayInlineExercise video={Ex1f_c.video}><Ex1f /></DisplayInlineExercise>
+### Ex1g
+<DisplayInlineExercise video={Ex1g_c.video}><Ex1g /></DisplayInlineExercise>
+### Ex1h
+<DisplayInlineExercise video={Ex1h_c.video}><Ex1h /></DisplayInlineExercise>
 
 ## Ex2 Exercises
-<DisplayInlineExercise title={Ex2a_c.title} video={Ex2a_c.video}><Ex2a /></DisplayInlineExercise>
-{/* <CreateCodingExerciseTable rows={[
-    <CreateTableRow title={Ex2a_c.title} video={Ex2a_c.video}><Ex2a /></CreateTableRow>,
-]} /> */}
+### Ex2a
+<DisplayInlineExercise video={Ex2a_c.video}><Ex2a /></DisplayInlineExercise>
+### Ex2b
+<DisplayInlineExercise video={Ex2b_c.video}><Ex2b /></DisplayInlineExercise>
+### Ex2c
+<DisplayInlineExercise video={Ex2c_c.video}><Ex2c /></DisplayInlineExercise>
+### Ex2d
+<DisplayInlineExercise video={Ex2d_c.video}><Ex2d /></DisplayInlineExercise>
+### Ex2e
+<DisplayInlineExercise video={Ex2e_c.video}><Ex2e /></DisplayInlineExercise>
+### Ex2f
+<DisplayInlineExercise video={Ex2f_c.video}><Ex2f /></DisplayInlineExercise>
 
 ## Ex3 Exercises
 ...and so on.
+</div>

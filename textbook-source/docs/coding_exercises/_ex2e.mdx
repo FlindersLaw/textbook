@@ -1,0 +1,55 @@
+import {DisplayGlossaryItem} from '@site/src/components';
+
+export const title = 'Ex2e';
+export const video = 'C5.02.01, C5.02.02, C5.02.03, C5.02.04, D1.02, D2.02';
+
+Implement these changes to **Ex2d**:
+
+* instead of displaying boolean values, use readable text to explain if the user is getting a booster
+* display the list of patients in a bullet list
+
+Refer to the flowchart below.
+
+:::tip hint
+Use a `% for` loop in the <DisplayGlossaryItem item='subquestion' /> block
+of your final screen to help you display the patient list.
+:::
+
+```mermaid
+flowchart TD;
+    id0[Start]
+    id0 --> id1(Welcome Screen)
+    id1 -- User elects to continue --> id2{{What is the<br>patient's age?}}
+    id2 -- under 60 --> id3{{Has the patient been consulted<br>on the risk of the AstraZeneca<br>vaccine?}}
+    id3 -- No --> id4(Exit)
+    id3 -- Yes --> id5(Ask for patient name)
+    id5 --> id6(Ask if patient consents<br>to AstraZeneca)
+    id2 -- over 60 --> id7(Ask for patient name)
+    id6 --> id8(Display final screen)
+    id7 --> id8
+    id8 --> id9[End]
+
+
+    %% Define the comments here and then assign them below
+    %% Assign comments to elements in the flowchart
+    co1(Explain what app does.<br><br>Give user option to exit<br>if they wish to do so.)
+    co2(Explain the app can<br>only be run if the patient is:<ul><li>either over 60; or</li><li>under 60 <strong>and</strong> has been<br>consulted about<br>AstraZeneca</li></ul>)
+    co3(If over 60:<ul><li>Patient will receive<br>an AstraZeneca booster</li></ul>If under 60:<ul><li>Display if patient has<br>consented to AstraZeneca; and</li><li>Patient will receive<br>AstraZeneca booster if<br>they have consented</li></ul>)
+
+    co1 -.- id1
+    co2 -.- id4
+    co3 -.- id8
+
+    %% Define styles for flowchart items.  We want to make comments yellow
+    %% and have a larger font size for regular items
+    classDef commentClass fill:#faffd6,text-align:left
+    classDef questionClass fill:#ffe6bc
+    classDef boundaryClass fill:#eeeeee,text-fill-color:#fff
+    classDef itemClass font-size:16pt
+    classDef leftListClass text-align:left
+
+    %% Then assign flowchart items to styles here
+    class co1,co2,co3 commentClass; 
+    class id2,id3 questionClass
+    class id0,id4,id9 boundaryClass
+```
