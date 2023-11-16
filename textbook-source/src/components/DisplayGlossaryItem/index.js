@@ -45,7 +45,8 @@ export function DisplayGlossaryItem(props) {
         ],
         ['datablock', {
             text: 'data block',
-            plural: 'data blocks' }
+            plural: 'data blocks',
+            description: 'Remember to include the term "variable name declaration" in this description' }
         ],
         ['dictionary', {
             text: 'dictionary',
@@ -64,6 +65,10 @@ export function DisplayGlossaryItem(props) {
             plural: 'functions' }
         ],
         ['jinja', { text: 'jinja' }],
+        [ 'list', {
+            text: 'list',
+            plural: 'lists' }
+        ],
         ['mako', { text: 'mako' }],
         ['mandatory', { text: 'mandatory' }],
         ['mandatoryblock', {
