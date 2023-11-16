@@ -68,10 +68,12 @@
 }
 #codexInline h2 {
   background-color: rgb(255,211,0); /* Flinders Yellow */
-  color: rgb(38,48,77); /* Flinders blue */
+  color: rgb(35,46,75); /* Flinders blue */
+  padding: 3px;
 }
 #codexInline h3 {
   background-color: rgba(38,48,77,0.1);
+  padding: 3px;
 }
 #codexInline .video-section {
   display: inline-flex;
