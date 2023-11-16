@@ -62,17 +62,26 @@
 }
 
 /* for displaying the coding exercises inline (DisplayInlineExercise) */
-/* Add this to your CSS */
-.codexInline-video-section {
+
+#codexInline {
+  font-size: 100%;
+}
+#codexInline h2 {
+  background-color: yellow;
+}
+#codexInline h3 {
+  background-color: #21af90;
+}
+#codexInline .video-section {
   display: inline-flex;
   border: 1px solid #000; /* Set the border color and size */
 }
-
-.codexInline-bordered-label {
+#codexInline .bordered-label {
   padding: 2px; /* Adjust the padding as needed */
   margin: 2px; /* Adjust the margin as needed */
+  font-weight: bold;
 }
-.codexInline-bordered-text {
+#codexInline .bordered-text {
   padding: 2px; /* Adjust the padding as needed */
   margin: 2px; /* Adjust the margin as needed */
 }

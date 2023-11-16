@@ -12,16 +12,22 @@ import Ex1h, * as Ex1h_c from '@site/docs/coding_exercises/_ex1h.mdx';
 // Ex2 exercises
 import Ex2a, * as Ex2a_c from '@site/docs/coding_exercises/_ex2a.mdx';
 
-import {CreateTableRow, CreateCodingExerciseTable, DisplayInlineExercise} from '@site/src/components';
+import {CreateTableRow, CreateCodingExerciseTable, DisplayInlineExercise, DisplayInlineExerciseH2} from '@site/src/components';
 
 # Coding Exercises
 
-## Ex1 Exercises 
-### Test h3
+<DisplayInlineExerciseH2 title='Ex1 Exercises' />
+{/* ## Ex1 Exercises  */}
 <DisplayInlineExercise title={Ex1a_c.title} video={Ex1a_c.video}><Ex1a /></DisplayInlineExercise>
+<DisplayInlineExercise title={Ex1b_c.title} video={Ex1b_c.video}><Ex1b /></DisplayInlineExercise>
+<DisplayInlineExercise title={Ex1c_c.title} video={Ex1c_c.video}><Ex1c /></DisplayInlineExercise>
+<DisplayInlineExercise title={Ex1d_c.title} video={Ex1d_c.video}><Ex1d /></DisplayInlineExercise>
+<DisplayInlineExercise title={Ex1e_c.title} video={Ex1e_c.video}><Ex1e /></DisplayInlineExercise>
+<DisplayInlineExercise title={Ex1f_c.title} video={Ex1f_c.video}><Ex1f /></DisplayInlineExercise>
+<DisplayInlineExercise title={Ex1f_c.title} video={Ex1g_c.video}><Ex1g /></DisplayInlineExercise>
 <DisplayInlineExercise title={Ex1h_c.title} video={Ex1h_c.video}><Ex1h /></DisplayInlineExercise>
 
-<CreateCodingExerciseTable rows={[
+{/* <CreateCodingExerciseTable rows={[
     <CreateTableRow title={Ex1a_c.title} video={Ex1a_c.video}><Ex1a /></CreateTableRow>,
     <CreateTableRow title={Ex1b_c.title} video={Ex1b_c.video}><Ex1b /></CreateTableRow>,
     <CreateTableRow title={Ex1c_c.title} video={Ex1c_c.video}><Ex1c /></CreateTableRow>,
@@ -30,12 +36,13 @@ import {CreateTableRow, CreateCodingExerciseTable, DisplayInlineExercise} from '
     <CreateTableRow title={Ex1f_c.title} video={Ex1f_c.video}><Ex1f /></CreateTableRow>,
     <CreateTableRow title={Ex1g_c.title} video={Ex1g_c.video}><Ex1g /></CreateTableRow>,
     <CreateTableRow title={Ex1h_c.title} video={Ex1h_c.video}><Ex1h /></CreateTableRow>,
-]} />
+]} /> */}
 
 ## Ex2 Exercises
-<CreateCodingExerciseTable rows={[
+<DisplayInlineExercise title={Ex2a_c.title} video={Ex2a_c.video}><Ex2a /></DisplayInlineExercise>
+{/* <CreateCodingExerciseTable rows={[
     <CreateTableRow title={Ex2a_c.title} video={Ex2a_c.video}><Ex2a /></CreateTableRow>,
-]} />
+]} /> */}
 
 ## Ex3 Exercises
 ...and so on.

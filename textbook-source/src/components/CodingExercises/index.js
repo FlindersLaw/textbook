@@ -12,11 +12,11 @@ import React from 'react';
  * @param {title} 'title' string from coding exercise
  * @param {video} 'video' string from coding exercise
  * @param {children} Default coding exercise component to render 
- * @returns  <tr> containing table row to display the coding exercise
+ * @returns  <div> containing the coding exercise appropriately styled
  */
 export function DisplayInlineExercise({title, video, children}) {
     return(
-        <div>
+        <div id="codexInline">
             <h3 id={title} class="anchor">
                 Exercise {title}
                 <a
@@ -26,11 +26,11 @@ export function DisplayInlineExercise({title, video, children}) {
                     title={`Direct link to ${title}`}>
                 </a>
             </h3>
-            <div className='codexInline-video-section'>
-                <div className='codexInline-bordered-label'>
-                    <strong>Videos:</strong>
+            <div className='video-section'>
+                <div className='bordered-label'>
+                    Videos:
                 </div>
-                <div className='codexInline-bordered-text'>
+                <div className='bordered-text'>
                     {video}
                 </div>
             </div>
@@ -39,6 +39,29 @@ export function DisplayInlineExercise({title, video, children}) {
         </div>
     )
 }
+
+/**
+ * Displays a <h2> tag appropriately styled for the coding exercises page
+ * and with correct links etc
+ * Coding Exercises styles are in the #codexInline CSS 
+ * @param {children} content of <h2> tag 
+ * @returns <h2> appropriately styled
+ */
+ export function DisplayInlineExerciseH2({title}) {
+    return(
+        <div id="codexInline">
+            <h2 id={title} class="anchor anchorWithStickyNavbar_node_modules-@docusaurus-theme-classic-lim-theme-Headaing-styles-module">
+                {title}
+                <a
+                    class="hash-link"
+                    href={`#${title}`}
+                    aria-label={`Direct link to ${title}`}
+                    title={`Direct link to ${title}`}>
+                </a>
+            </h2>
+        </div>
+    )
+ }
 
 /**
  * Creates a table row to be passed into CodingExerciseTable 
