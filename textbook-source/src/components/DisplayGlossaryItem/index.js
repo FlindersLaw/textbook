@@ -31,6 +31,10 @@ export function DisplayGlossaryItem(props) {
             text: 'bracket',
             plural: 'brackets' }
         ],
+        ['codeblock', {
+            text: 'code block',
+            plural: `code blocks` }
+        ],
         ['comment', {
             text: 'comment',
             plural: 'comments' }
@@ -38,6 +42,15 @@ export function DisplayGlossaryItem(props) {
         ['curlybrace', {
             text: 'curly brace',
             plural: 'curly braces' }
+        ],
+        ['datablock', {
+            text: 'data block',
+            plural: 'data blocks',
+            description: 'Remember to include the term "variable name declaration" in this description' }
+        ],
+        ['dictionary', {
+            text: 'dictionary',
+            plural: 'dictionaries' }
         ],
         ['field', {
             text: 'field',
@@ -52,6 +65,10 @@ export function DisplayGlossaryItem(props) {
             plural: 'functions' }
         ],
         ['jinja', { text: 'jinja' }],
+        [ 'list', {
+            text: 'list',
+            plural: 'lists' }
+        ],
         ['mako', { text: 'mako' }],
         ['mandatory', { text: 'mandatory' }],
         ['mandatoryblock', {
@@ -80,6 +97,18 @@ export function DisplayGlossaryItem(props) {
         ['string', {
             text: 'string',
             plural: 'strings' }
+        ],
+        ['subquestionblock', {
+            text: 'subquestion block',
+            plural: `subquestion blocks` }
+        ],
+        ['table', {
+            text: 'table',
+            plural: 'tables' }
+        ],
+        ['tableblock', {
+            text: 'table block',
+            plural: 'table blocks' }
         ],
         ['variable', {
             text: 'variable',

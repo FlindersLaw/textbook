@@ -1,8 +1,9 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-const lightCodeTheme = require('prism-react-renderer/themes/github');
-const darkCodeTheme = require('prism-react-renderer/themes/dracula');
+const {themes} = require('prism-react-renderer');
+const lightTheme = themes.github;
+const darkTheme = themes.dracula;
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -77,15 +78,14 @@ const config = {
             label: 'Textbook',
           },
           {
-            type: 'docSidebar',
-            sidebarId: 'codingExercisesSidebar',
+            label: 'Coding Exercises',
+            href: '/coding_exercises',
             position: 'left',
-            label: 'Coding Exercises'
           },
           {
             type: 'docSidebar',
-            sidebarId: 'recipesSidebar',
             position: 'left',
+            sidebarId: 'recipesSidebar',
             label: 'Coding Recipes'
           },
           {to: '/blog', label: 'Blog', position: 'left'},
@@ -145,10 +145,11 @@ const config = {
         ],
         copyright: `Copyright © ${new Date().getFullYear()} Flinders University. Built with Docusaurus.`,
       },
-      /*prism: {
-        theme: lightCodeTheme,
-        darkTheme: darkCodeTheme,
-      },*/
+      prism: {
+        theme: lightTheme,
+        darkTheme: darkTheme,
+        additionalLanguages: ['bash', 'diff', 'json'],
+      },
       colorMode: {
         defaultMode: 'light',
         disableSwitch: true,

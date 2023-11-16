@@ -1,8 +1,10 @@
 ---
 title: Introduction
 ---
-import {DisplayConstants} from '@site/src/components/DisplayConstants';
-import {DisplayChapter} from '@site/src/components/DisplayChapters';
+import * as Components from '@site/src/components';
+// Shortcuts as we use these components and constants frequently
+import {DisplayChapter, DisplayConstants} from '@site/src/components';
+import {dahref, daorghref, github, damanual, teachingcodeurl} from '@site/src/components';
 
 ## What are we doing?
 
@@ -32,13 +34,13 @@ Docassemble is suitable for this course for two reasons:
   * Because it's open source, the 'clients' we engage with can run the applications we write as they don't need to worry about licence fees.
 
 ## What will you learn in this book?
-
-* First of all, in <DisplayChapter chapter="1" /> we'll work through connecting you to our <DisplayConstants data="dahref" /> and setting you up with <DisplayConstants data='github' /> which is what we'll to share our code.
-* In <DisplayChapter chapter="2" /> you'll be introduced to Docassemble and learn how to write some basic apps.
-* In <DisplayChapter chapter="3" /> we'll start getting into how you write the logic you need to control your app.  For example we'll learn how to make decisions using 'if this then that' - or what's called 'branching' or 'if statements', and you'll also learn about processing lists of data - which is called 'iteration'.
-* In <DisplayChapter chapter="4" /> we'll learn about <DisplayConstants data='github' />. We'll use GitHub to collaborate on our projects in small groups.  GitHub allows a group to work on code at the same time.
-* In <DisplayChapter chapter="5" /> we'll look at how you can make your app look beautiful.  We'll cover things like adding your client's logo, using your client's colours and making your app look and feel nicer
-* In <DisplayChapter chapter="6" /> we'll cover more advanced coding concepts, such as complex data structures, grouping and sending emails.
+* First of all, in <DisplayChapter chapter="chapter_1" number /> we'll work through connecting you to our <DisplayConstants data={dahref} /> and
+setting you up with <DisplayConstants data={github} /> which is what we'll to share our code.
+* In <DisplayChapter chapter="chapter_2" number /> you'll be introduced to Docassemble and learn how to write some basic apps.
+* In <DisplayChapter chapter="chapter_3" number  /> we'll start getting into how you write the logic you need to control your app.  For example we'll learn how to make decisions using 'if this then that' - or what's called 'branching' or 'if statements', and you'll also learn about processing lists of data - which is called 'iteration'.
+* In <DisplayChapter chapter="chapter_4" number /> we'll learn about <DisplayConstants data={github} />. We'll use GitHub to collaborate on our projects in small groups.  GitHub allows a group to work on code at the same time.
+* In <DisplayChapter chapter="chapter_5" number /> we'll look at how you can make your app look beautiful.  We'll cover things like adding your client's logo, using your client's colours and making your app look and feel nicer
+* In <DisplayChapter chapter="chapter_6" number /> we'll cover more advanced coding concepts, such as complex data structures, grouping and sending emails.
 
 ## Learning to Code
 Before you work your way through this textbook, there are a few things to bear in mind. 

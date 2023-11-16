@@ -1,0 +1,54 @@
+export const title = 'Ex2d';
+export const video = 'C5.02.02, C5.02.03, C5.02.04';
+
+Implement the flowchart below:
+
+:::tip hint
+You will want to implement your radio button choices as code.  
+Refer to the Docassemble manual, starting 
+[here](https://docassemble.org/docs/fields.html#choices)
+:::
+
+:::tip TODO
+This flowchart and the one in Ex2e seem to imply a list output in the final
+screen comments yet the flowchart implies only one user's details are entered.
+:::
+
+```mermaid
+flowchart TD;
+    id0[Start]
+    id0 --> id1(Welcome Screen)
+    id1 -- User elects to continue --> id2{{What is the<br>patient's age?}}
+    id2 -- under 60 --> id3{{Has the patient consented<br>to you running this app?}}
+    id3 -- No --> id4(Exit)
+    id3 -- Yes --> id5(Ask for patient name)
+    id5 --> id6(Ask if patient consents<br>to AstraZeneca)
+    id2 -- over 60 --> id7(Ask for patient name)
+    id6 --> id8(Display final screen)
+    id7 --> id8
+    id8 --> id9[End]
+
+
+    %% Define the comments here and then assign them below
+    %% Assign comments to elements in the flowchart
+    co1(Explain what app does.<br><br>Give user option to exit<br>if they wish to do so.)
+    co2(Explain the app can<br>only be run if the patient is:<ul><li>either over 60; or</li><li>under 60 <strong>and</strong> has been<br>consulted about<br>AstraZeneca</li></ul>)
+    co3(If patient is under 60 display:<ul><li>Your name is <em>patient's full name</em> and</li><li>You <strong>have/have not</strong><br>consented to the AstraZeneca booster</li></ul>Otherwise<ul><li>Display patient's name and state<br>they will receive AZ booster</li></ul>Display the table of patients and vaccine choices<br>as a bullet list.  Each list item should look like this:<ul><li>Patient 1 <strong>has/has not</strong> consented to AstraZeneca</li><li>Patient 2 <strong>has/has not</strong> consented to AstraZeneca</li><li>...</li></ul>A patient's name should not be in this list if they are over 60.)
+
+    co1 -.- id1
+    co2 -.- id4
+    co3 -.- id8
+
+    %% Define styles for flowchart items.  We want to make comments yellow
+    %% and have a larger font size for regular items
+    classDef commentClass fill:#faffd6,text-align:left
+    classDef questionClass fill:#ffe6bc
+    classDef boundaryClass fill:#eeeeee,text-fill-color:#fff
+    classDef itemClass font-size:16pt
+    classDef leftListClass text-align:left
+
+    %% Then assign flowchart items to styles here
+    class co1,co2,co3 commentClass; 
+    class id2,id3 questionClass
+    class id0,id4,id9 boundaryClass
+```
