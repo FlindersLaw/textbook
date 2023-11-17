@@ -64,6 +64,10 @@ export function DisplayGlossaryItem(props) {
             text: 'function',
             plural: 'functions' }
         ],
+        [ 'ifstatement', {
+            text: 'if statement',
+            plural: 'if statements' }
+        ],
         ['jinja', { text: 'jinja' }],
         [ 'list', {
             text: 'list',

@@ -1,12 +1,8 @@
-# Things to do.
+---
+title: "Ch 3a: Variables, data types, testing"
+---
 
-- Need to remove references to Digital Age (or any topic for that matter) from the foreword
-- put some images - maybe screenshots? icons? images? to make the coding exercises more readable
-
-## Chapter 3
-Basing this off the scripts
-
-### Variables
+## Variables
 
 * Use bucket analogy.
   * Get Dall-E to generate pics
@@ -27,7 +23,7 @@ Basing this off the scripts
 - describe how we assign ie: we use `=` to assign a value to a variable - same as putting something in the bucket
 - an admonition to emphasise that `=` puts stuff in a variable. It won't check to see if something is equal to something else.  To test for equality we use `==`.  We'll talk more about testing below.
 
-### Simple and complex data
+## Simple and complex data
 - may want to introduce 'simple' and 'complex' types
   - simple types are like putting one thing in the bucket.  That might be
     a number, or a word etc.  Basically it's one 'thing'
@@ -43,7 +39,7 @@ are assigned
 Also, we can say that Python guesses the data type?  Maybe down below.  And give some examples
 :::
 
-### Then we get onto data types.
+### Data types.
 - we do the simple stuff first.  Introduce string (with note that we'll refer to text as strings from now on), ints, floats.  These should all be easy to grasp.  
 - Then introduce boolean and explain what it is.
   - boolean variables great way to store yes/no answers.  As we'll see in code testing for the truth of a boolean is easier than testing that two strings equal each other
@@ -66,33 +62,47 @@ Should we set these up as DA code or should we give code snippets that they can 
 
 Maybe we make code snippets that they can copy and paste into the Python shell but exercises remain on DA?
 
-```python title="Copy and paste into the Python Shell"
+```python showLineNumbers title="Copy and paste into the Python Shell"
 variable1 = 1   # This is an integer
 variable2 = '1' # This is a string as it's surrounded by quotes
 variable3 = 1   # This is also an integer.  It's the same as variable1
 variable1 == variable2 # This will display 'false' as the two aren't equal
 variable1 == variable3 # This will display 'true' as both variables contain integers
-# End
+
 ```
 :::
 
-#### Strings
+### Strings
 - they're always in quotes.
 - best to use single quotes.
+  - if they're not in quotes then python will think that you're writing a variable name.  Lots of syntax errors come about this way
+  :::note
+  show an example
+  :::
 - what happens if you need quotes in your string?
   - use double-quotes
   - or 'escape' the quote
+  - show examples
 - strings are text ie: words or letters.
 - But numbers can be represented as strings too eg: (`'10'`). 
   - this is not the same as the number 10 (`10`).
   - you can check this by inputing `'10' == 10` in the python shell. It will return `False`
 
-#### Touch on complex datatypes here as well.
+### Ints, floats and currencies
+- define an integer ie: a number with no decimal point ie: 1, 2, 3 (and also -1, -2, -3)
+- define a floating point number, or real number in mathematics ie: a number with a decimal point
+- note that currency isn't really a data type in python.  Currency is just a float but *formatted* as a currency
+:::note
+and maybe link to the DA manual as an example?
+:::
+
+### Touch on complex datatypes here as well.
 - Show what a list looks like in code.
 - Show what a dictionary (excel spreadsheet?) looks like
 - but emphasise we're just showing this for now.  We'll get back to complex data types later.
 
-### Testing variables
+## Testing variables
+### Equality
 - test for equality - emphasise `==` again
 - show what happens in an if statement if you use the wrong test
 ```python
@@ -108,12 +118,14 @@ if var1 = var2:
 ```
 Maybe show a screen dump from the python console?
 
+### Numerical (Mathematical) tests
 - After equality then we can show briefly the math symbols ie: `>`, `>=` etc.
 - also show `n <= m <= o`?  That is, m is between n and o
   - also, get rid of the equals signs so m can't be equal to n or o.
 
 - show not equals `!=`.  Compare against `==`
 
+### Logic tests
 - show ands and ors.  
   - show example of a test a == b and c == d.  
   - also show example of testing a against two values ie: a == b and a == d and emphasise (in admonition) that a == b and d is wrong.
@@ -127,9 +139,9 @@ English|Python
 ---|---
 The user's age is less than 66|`age < 66`
 The user's name is 'Mark' | `name == 'Mark'`
-The user's age is between 18 and 65 inclusive| `18 <= age <= 65` (check this!)
+The user's age is between 18 and 65 inclusive| `18 <= age <= 65`
 
-#### Testing for Yes and No
+### Testing for Yes and No
 - In many cases you will be asking a user a question and expecting a Yes/No answer.  Give an example.
 - show the different ways to collect a Yes/No answer (non-exhaustive)
   - with a `yesno` button
@@ -144,4 +156,26 @@ The user's age is between 18 and 65 inclusive| `18 <= age <= 65` (check this!)
   - so we try to use Booleans when we encounter these kinds of questions
   - recommend `yesno` and `yesnoradio` over radio buttons for yes and no questions
 
-### If statements
+:::tip 
+We should put little quizzes throughout the textbook as we go so students can test their knowledge.
+
+For example, the part on testing above, we could have three or four questions asking which of the tests are correct. And maybe even a quiz question where they have to input an answer.
+
+Then, we could maybe set up a gameboard?  Most questions answered correctly wins?
+:::
+
+## Code blocks
+Is this the best chapter for this?
+
+We won't use them here but introduce them, distinguish them from question blocks.
+Maybe show an example and say we'll be seeing a lot more of them as we progress.
+
+## Python console
+Do we want to introduce the Python console here too?  Not sure if it would
+be confusing for students to have two different tools?
+
+- emphasise the app runs in Docassemble
+- but some code can be tested in the Python console?
+
+Only problem is students wouldn't know enough to bring their scope into the
+python console

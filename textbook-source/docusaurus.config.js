@@ -2,8 +2,8 @@
 // Note: type annotations allow type checking and IDEs autocompletion
 
 const {themes} = require('prism-react-renderer');
-const lightTheme = themes.github;
-const darkTheme = themes.dracula;
+const lightTheme = themes.okaidia;
+const darkTheme = themes.github;
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -147,7 +147,7 @@ const config = {
       prism: {
         theme: lightTheme,
         darkTheme: darkTheme,
-        additionalLanguages: ['bash', 'diff', 'json'],
+        additionalLanguages: ['bash', 'diff', 'json', 'python'],
       },
       colorMode: {
         defaultMode: 'light',

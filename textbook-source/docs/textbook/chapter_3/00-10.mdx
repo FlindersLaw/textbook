@@ -139,7 +139,7 @@ How are we going to use all of this in practice? There are three ways:
 
 1. We can embed logic in our <DisplayGlossaryItem item='questionblock' plural /> using `%` tags. You might recall we did this in <DisplayChapter chapter='chapter_2' nourl />:
 
-```python
+```python showLineNumbers
   % if MJFisemployed == 'Yes':
   Your annual income    | ${ currency(MJFannualincome) }
   % endif 
@@ -155,13 +155,13 @@ As you can see from the example above, to implement our decision making we use i
 
 The structure of an if statement is pretty simple. If a test is true, then do something: 
 
-```
+```python showLineNumbers
 if condition == True:
     doSomething
 ```
 We can also have an if statement that does something if a test is not true by using `else` (and it's good practice to have an else statement). 
 
-```
+```python showLineNumbers
 if condition == True:
     doSomething
 else:
@@ -169,7 +169,7 @@ else:
 ```
 
 In addition, we can test for multiple conditions in Python using an `elif` statement. 
-```
+```python showLineNumbers
 if condition_one == True:
     do_thing_one
 elif condition_two == True:
@@ -241,7 +241,7 @@ Include link to `C2_01_immigration_alert.yml` in this page.  Should we remove th
 ## More complex if statements 
 Let's go back to our `and`, `or` and `not` statements. Remember that we can test for more than one thing at a time. We can demonstrate this by way of an example.
 
-```yaml title="C2_02_age_eligibility.yml" showLineNumbers
+```yaml showLineNumbers title="C2_02_age_eligibility.yml" showLineNumbers
 # Example code to demonstrate how if statements operate
 ---
 mandatory: True 
@@ -296,7 +296,7 @@ If you run through this code, and then click on the little `<\>` icon in the top
 ## Embedded If Statements 2
 Let's come back to embedded if statements by reference to another example:
 
-```yaml title="C2_03_age_eligibility.yml" showLineNumbers
+```yaml showLineNumbers title="C2_03_age_eligibility.yml" showLineNumbers
 # Example code to demonstrate the operation of if statements
 ---
 mandatory: True 
