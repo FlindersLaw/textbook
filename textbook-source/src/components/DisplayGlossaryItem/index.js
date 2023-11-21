@@ -43,6 +43,15 @@ export function DisplayGlossaryItem(props) {
             text: 'curly brace',
             plural: 'curly braces' }
         ],
+        ['datablock', {
+            text: 'data block',
+            plural: 'data blocks',
+            description: 'Remember to include the term "variable name declaration" in this description' }
+        ],
+        ['dictionary', {
+            text: 'dictionary',
+            plural: 'dictionaries' }
+        ],
         ['field', {
             text: 'field',
             plural: 'fields'}
@@ -55,7 +64,15 @@ export function DisplayGlossaryItem(props) {
             text: 'function',
             plural: 'functions' }
         ],
+        [ 'ifstatement', {
+            text: 'if statement',
+            plural: 'if statements' }
+        ],
         ['jinja', { text: 'jinja' }],
+        [ 'list', {
+            text: 'list',
+            plural: 'lists' }
+        ],
         ['mako', { text: 'mako' }],
         ['mandatory', { text: 'mandatory' }],
         ['mandatoryblock', {
@@ -84,6 +101,18 @@ export function DisplayGlossaryItem(props) {
         ['string', {
             text: 'string',
             plural: 'strings' }
+        ],
+        ['subquestionblock', {
+            text: 'subquestion block',
+            plural: `subquestion blocks` }
+        ],
+        ['table', {
+            text: 'table',
+            plural: 'tables' }
+        ],
+        ['tableblock', {
+            text: 'table block',
+            plural: 'table blocks' }
         ],
         ['variable', {
             text: 'variable',

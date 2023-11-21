@@ -43,3 +43,56 @@
   /* Currently not doing anything here */
   content: "";
 }
+
+/* for displaying the coding exercises tables */
+#codexTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#codexTable td {
+  text-align: left;
+  vertical-align: top;
+  border: 1px solid #6d2ad8;
+}
+#codexTable th {
+  text-align: left;
+  vertical-align: top;
+  border: 1px solid #6d2ad8;
+}
+
+/* for displaying the coding exercises inline (DisplayInlineExercise) */
+
+#codexInline {
+  font-size: 100%;
+}
+#codexInline h2 {
+  background-color: rgb(255,211,0); /* Flinders Yellow */
+  color: rgb(35,46,75); /* Flinders blue */
+  padding: 3px;
+}
+#codexInline h3 {
+  background-color: rgba(35,46,75,0.1);
+  padding: 3px;
+  border: 1px solid rgba(35,46,75,0.3); /* Set the border color and size */
+}
+#codexInline .video-section {
+  display: inline-flex;
+  border: 0px solid rgb(255,211,0); /* Set the border color and size */
+}
+#codexInline .bordered-label {
+  padding: 2px; /* Adjust the padding as needed */
+  margin: 2px; /* Adjust the margin as needed */
+  font-weight: bold;
+}
+#codexInline .bordered-text {
+  padding: 2px; /* Adjust the padding as needed */
+  margin: 2px; /* Adjust the margin as needed */
+}
+#codexInline .exercise {
+  border: 1px solid rgb(35,46,75,0.3);
+  margin-top: 20px;     /* to separate the exercise from the videos line */
+  margin-bottom: 50px;  /* helps to provide a separator between this exercise and the next */
+  padding-left: 5px;
+  padding-right: 10px;
+}

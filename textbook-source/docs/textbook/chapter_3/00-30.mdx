@@ -56,11 +56,73 @@ Using these requirements, we can see that the flowchart looks something like thi
 
 <Components.DisplayImage imageURL='/img/textbook/chapter_3/ABC_flowchart.png' />
 
-Each of the blue rectangles is a question screen where we ask something of the user or display something to the user. Therefore, we will implement these as separate ``question`` blocks in Docassemble. 
+:::tip TODO
+This image is too big to display as a single flowchart.  Should we re-render
+it using [Mermaid](https://docusaurus.io/docs/markdown-features/diagrams)?
+
+Other option is to click on link and display larger image.  I don't know how to
+do that (yet).
+
+UPDATE: I replicated the flowchart above using Mermaid.  I'm not sure dumping flowchart gifs is going to work as they're unreadable.
+Mind you, the Mermaid version isn't much better, and it's a lot messier!
+
+I think we might need to make our flowcharts simpler or break them down.
+:::
+
+```mermaid
+flowchart TD;
+  id0[Start]
+  id0 --> id1(Welcome Screen) --> id2(Disclaimer Screen) --> id3(Ask threshold questions)
+  id3 --> id4{{"Does the user meet<br>the threshold requirements?"}}
+  id4 -- No --> id5[User directed to ineligible endpoint]
+  id4 -- Yes --> id6{{Have you been diagnosed with ASD<br>by a medical professional?}}
+  id6 -- Yes --> id7(Who diagnosed you?)
+  id7 --> id8(What level of Autism?)
+  id8 --> id9("Ask disability questions (DQ1)")
+  id6 -- No -->id9
+  id9 --> id10{{Are any of the checkboxes in DQ1 selected?}}
+  id10 -- False --> id11[User directed to ineligible endpoint]
+  id10 -- True --> id12("Ask disability questions 2 (DQ2)")
+  id12 -- There is no treatement<br>to improve my impairment --> id13[User directed to eligible endpoint]
+  id12 -- My impairment may<br>improve over time --> id14[User directed to ineligible endpoint]
+  id12 -- I don't know --> id15[User directed to ineligible endpoint]
+
+
+  %% All comments go here.  Group by id box they connect to
+  co1(User can only press continue) -.- id1
+
+  co2("User can exit at this screen
+  and be taken to ABC's website") -.- id2
+  co3("User *has* option to accept disclaimer
+  and continue or to exit the app
+  and be taken to client's home page") -.- id2
+
+  co4("Threshold requirements are as follows:<ol><li>User must be between 7 and 65 years old</li><li>User must currently reside in Australia</li><li>User must be citizen or permanent resident etc</li></ul>") -.- id3
+  co5(Checkboxes:<ul><li>Multi-disciplinary team</li><li>Paediatrician</li><li>Psychiatrist</li></ul>) -.- id7
+  co6(Radio buttons:<ul><li>Level 1</li><li>Level 2</li><li>Level 3</li></ul>) -.- id8
+  co7(Question: Do you have trouble with any of<br>the following?<br>Checkboxes:<ul><li>I have difficulty participating in sports</li><li>I have difficult performing voluntary work</li><li>I have difficulty travelling</li><li>I have trouble engaging in social activities</li></ul>) -.- id9
+
+  co8(Question: How permanent is your disability?<br>Radio buttons:<ul><li>There is no treatment<br>to improve my impairment</li><li>My impairment may improve<br>over time</li><li>I don't know</li></ul><p>Must select one) -.- id12
+
+  co9("List out questions<br>asked and answers given.<p>
+  <b>TODO</b>: explain why eligible") -.- id13
+  co10(Explain that disability must<br>be permanent and not improve<br>in order to be eligible) -.- id14
+  co11(Direct user to contact<br>ABC for more assistance) -.- id15
+
+
+  classDef commentClass fill:#faffd6,text-align:left
+  classDef questionClass fill:#ffe6bc
+  classDef boundaryClass fill:#eeeeee,text-fill-color:#fff
+  class co1,co2,co3,co4,co5,co6,co7,co8,co8a,co9,co10,co11 commentClass; 
+  class id4,id6 questionClass
+  class id0,id5,id11,id13,id14,id15 boundaryClass
+```
+
+Each of the blue rectangles is a question screen where we ask something of the user or display something to the user. Therefore, we will implement these as separate <Components.DisplayGlossaryItem item='questionblock' plural /> in Docassemble. 
 
 The yellow speech bubbles display the text that we will show to the user. We will need to implement these in the ``subquestion`` section of each question block. 
 
-Finally, the yellow hexagons are points where our user will be directed to eligible or ineligible endpoints depending on their answers. We will need to implement these in ``code`` blocks using if statements.
+Finally, the yellow hexagons are points where our user will be directed to eligible or ineligible endpoints depending on their answers. We will need to implement these in <Components.DisplayGlossaryItem item='codeblock' plural /> using if statements.
 
 Although there are multiple ways you might structure this flowchart, the principles that we used here are useful for designing your own flowchart (and then designing your own application). Specifically, your flowchart should contain enough information to identify *each* question that you ask your user.
 
@@ -68,7 +130,7 @@ Although there are multiple ways you might structure this flowchart, the princip
 
 Now that we have designed our flowchart, let's see how we can implement this in Docassemble:
 
-```yaml title="C5_02_ABC.yml" showLineNumbers
+```yaml showLineNumbers title="C5_02_ABC.yml" showLineNumbers
 mandatory: True
 code: |
   MJFdisplay_welcome_screen
@@ -266,4 +328,3 @@ That's a lot of code. What we are going to do is work out what this does, piece 
 So far, we have discussed how we need a mandatory block to drive the logic of our application. It is best coding practice to have only **one** mandatory ``code`` block for your application. 
 
 Let's start on Lines 3 and 4. The call to `MJFdisplay_welcome_screen` forces Docassemble to display the continue button field `MJFdisplay_welcome_screen`. 
-:::

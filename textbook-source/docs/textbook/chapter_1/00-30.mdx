@@ -1,8 +1,9 @@
 ---
 title: Introducing Docassemble
 ---
-import * as Constants from '@site/src/constants'
-import * as Components from '@site/src/components'
+import * as Constants from '@site/src/constants';
+import * as Components from '@site/src/components';
+import {dahref} from '@site/src/components';
 
 :::caution
 
@@ -34,7 +35,7 @@ link to jinja in the textbook
 :::
 
 ## The Main Screen
-Let's log in to Docassemble again.  Go to the <Components.DisplayConstants data='dahref' />.  You should end up at this screen.
+Let's log in to Docassemble again.  Go to the <Components.DisplayConstants data={dahref} />.  You should end up at this screen.
 
 <Components.DisplayImage imageURL='/img/textbook/chapter_1/docassemble_after_signin_screen_annotated.png' />
 

@@ -1,3 +1,4 @@
+export * from './CodingExercises'
 export * from './DisplayChapter'
 export * from './DisplayConstants'
 export * from './DisplayDAButtons'

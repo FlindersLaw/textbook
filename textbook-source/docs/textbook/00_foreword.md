@@ -14,7 +14,7 @@ I would like to outline for you the rationale behind teaching what we teach in t
 Before I do that though, let me tell you a story.
 
 ### My Story
-Those of you that go to the effort to stalk me on [LinkedIn](https://linkedin.com/in/mark-ferraretto) or check out my [staff page](https://flinders.edu.au/people/mark.ferraretto) will see that, firstly, I have an extensive background in IT and, more importantly, I came to the law as a mature-age student.  
+Those of you that go to the effort to stalk me on [LinkedIn](https://linkedin.com/in/mark-ferraretto) or check out my [staff page](https://flinders.edu.au/people/mark.ferraretto) will see that, firstly, I have an extensive background in IT and, more importantly, I came to the law as a mature-age student.
 I was 46 years old when I started out as a clerk and then a junior solicitor at my first firm.  My junior peers were literally half my age (yes, a few were 23!) and, supposedly, members of the technological generation.
 
 At this first job I quickly came to realise that the technology being used by the firm was quite ill-suited to the firm's needs.  For example, many of the firm's senior lawyers travelled but the firm's systems did not allow them to access their files on their phones.

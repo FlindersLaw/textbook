@@ -1,24 +1,28 @@
 import React from "react";
 
+/**
+ * DisplayChapter component displays a link or text for a chapter.
+ * 
+ * By default will return a link with link text as eg: 'Chapter One' (ie:
+ * each word capitalised and numbers converted to words). Use 
+ * props upper, lower, number as described to modify display
+ * of output.
+ * TODO: Check if chapter exists and display an error otherwise.
+ * TODO: Allow for chapters to exist in paths other than chapterDocPath
+ *
+ * @param {Object} props - Component props.
+ * @param {string} props.chapter - Name of the chapter folder, e.g., 'chapter_1'.
+ * @param {boolean} [props.upper] - Optional. Displays the chapter name in UPPERCASE.
+ * @param {boolean} [props.lower] - Optional. Displays the chapter name in lowercase.
+ * @param {boolean} [props.number] - Displays the chapter text as a number like 'Chapter 1' (instead of 'Chapter One').
+ * @param {boolean} [props.nourl] - Displays the chapter text and not as a link. Can be used along with 'upper', 'lower', and 'number'.
+ *
+ * @returns {JSX.Element} - React component with appropriate CSS styling for displaying a link to a chapter or plain text.
+ */
 export function DisplayChapter(props) {
-    // Expect: props.chapter - name of chapter folder eg: 'chapter_1'
-    //         props.upper   - optional, displays the chapter name in UPPERCASE
-    //         props.lower   - optional, displays the chapter anme in lowercase
-    //         props.number  - Displays the chapter text as a number is 'Chater 1' (instead of 'Chapter One')
-    //         props.nourl   - Displays the chapter text and not as a link. Can use along with 'upper', 
-    //                         'lower' and 'number'
-    // Return: an <a> tag with appropriate CSS styling for displaying a
-    //         link to a chapter
-    // By default will return a link with link text as eg: 'Chapter One' (ie:
-    // each word capitalised and numbers converted to words). Use 
-    // props.upper, lower, number as described above to modify display
-    // of output
-    // TODO: Check if chapter exists and display an error otherwise.
-    // TODO: Allow for chapters to exist in paths other than chapterDocPath
 
     // We'll set up some constants in here
     const chapterDocPath = '/docs/textbook';
-    const chapterPrefix  = 'chapter_';
     const chapterTextPrefix  = 'chapter';
 
     // Need to map chapter identifiers to numbers and numbers
@@ -84,6 +88,12 @@ export function DisplayChapter(props) {
     }
 }
 
+/**
+ * Capitalizes the first letter of each word in a string.
+ *
+ * @param {string} inputString - The input string to capitalize.
+ * @returns {string} - The input string with the first letter of each word capitalized.
+ */
 function capitalizeWords(inputString) {
     // Split the input string into words based on spaces
     const words = inputString.split(' ');

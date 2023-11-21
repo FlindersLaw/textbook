@@ -27,21 +27,41 @@ export const da_declared_variable = '#0B5ED7';
 export const da_unused_variable = '#FFCA2C';
 
 // Docassemble save, save and run button colours
-export const da_save_prop = 'save';
+// These are for calling buttons
+export const da_continue_prop = 'continue';
 export const da_download_prop = 'download';
 export const da_delete_prop = 'delete';
+export const da_exit_prop = 'exit';
+export const da_restart_prop = 'restart';
+export const da_save_prop = 'save';
 export const da_save_and_run_prop = 'snr';
+// These are the colours
+const da_btn_primary_bg = '#0D6EFD';
+const da_btn_primary_fg = '#fff';
+const da_btn_warning_bg = '#FFCA2C';
+const da_btn_warning_fg = '#000';
+const da_btn_danger_bg  = '#BB2D3B';
+const da_btn_danger_fg  = '#fff';
 export const da_button_map = {
     [da_save_prop] : {
-        button_colour: '#0D6EFD',
-        text_colour  : '#fff',
+        button_colour: da_btn_primary_bg,
+        text_colour  : da_btn_primary_fg,
         button_text  : 'Save'
     },
+    [da_continue_prop] : {
+        button_colour: da_btn_primary_bg,
+        text_colour  : da_btn_primary_fg,
+        button_text  : 'Continue'
+    },
     [da_save_and_run_prop] : {
-        button_colour: '#FFCA2C',
-        text_colour  : '#000',
+        button_colour: da_btn_warning_bg,
+        text_colour  : da_btn_warning_fg,
         button_text  : 'Save and Run'
-
+    },
+    [da_restart_prop] : {
+        button_colour: da_btn_warning_bg,   // Same as Save and Run but store as separate record for clarity
+        text_colour  : da_btn_warning_fg,
+        button_text  : 'Restart'
     },
     [da_download_prop] : {
         button_colour: '#0DCAF0',
@@ -50,10 +70,14 @@ export const da_button_map = {
 
     },
     [da_delete_prop] : {
-        button_colour: '#BB2D3B',
-        text_colour  : '#fff',
+        button_colour: da_btn_danger_bg,
+        text_colour  : da_btn_danger_fg,
         button_text  : 'Delete'
-
+    },
+    [da_exit_prop] : {
+        button_colour: da_btn_danger_bg,
+        text_colour  : da_btn_danger_fg,
+        button_text  : 'Exit'
     }
 }
 
