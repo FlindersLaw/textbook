@@ -4,16 +4,17 @@ title: "Ch 3b: If statements"
 import {DisplayGlossaryItem} from '@site/src/components';
 
 ## An introduction to Logic
-- This is one of the main ways of controlling logic.
-- We need to make decisions in our app.  We need to decide if a user is eligible for a pension, or for a vaccine booster, or to be elected to parliament, or of they're allowed to destroy a tree.  These are decisions.
-- Every decision we make will usually have two or more potential answers (otherwise, it's not a decision).  
-- Simple decisions might be 'Yes/No' decisions.
+In this chapter, we will talk about logic and how to control the logic of our applications. We can use logic to make our app can do one thing or another depending on the input it receives. We can direct the flow of the program depending on how the user inputs certain information. We will do this using if statements.
+
+For example, you might want your app to perform a set of initial eligibility checks before proceeding with your main analysis. You might want to check for age or residency, because your app only applies to adults who are not pensioners or South Australian residents. These kinds of preliminary questions are good to resolve early in your processing flow. Otherwise, your user might have to run through the whole app to find out they should have never run it in the first place! Therefore, we can ask the user a few preliminary questions and, based on those questions, decide which path the application should take. 
+
+For a simple application, we can use logic and just one question to direct the flow of our application.
 ```mermaid
 flowchart LR;
     id1{{Are you over 18?}} -- Yes --> id2(You are an adult.)
     id1 -- No --> id3(You are a minor)
 ```
-- More complex decisions might have many different answers.  For example, when deciding on the closest court
+More complex decisions might have many different answers.  For example, when deciding on the closest court in the Adelaide region, we might want to ask our user a question with multiple options.
 ```mermaid
 flowchart LR;
     id1{{Where do you live?}}
@@ -23,6 +24,8 @@ flowchart LR;
     id1 -- Adelaide CBD --> id4
     id1 -- Southern Adelaide --> id5(Christies Beach Magistrates Court)
 ```
+
+Therefore, the questions that we ask will influence how we structure our decision making processes. 
 
 :::tip todo
 Style the flowcharts with the styles we already have in other flowcharts
@@ -36,10 +39,17 @@ flowchart the appropriate style automatically?
 :::
 
 ## Express logic in code - If statements
-- we need a way to express this decision-making process in code.  To do so we use  <DisplayGlossaryItem item='ifstatement' plural />.
-An if statement allows us to express 'if-this-then-that' decision-making that is central to application design.
+We need a way to express this decision-making process in code.  To do so we use  <DisplayGlossaryItem item='ifstatement' plural />.
 
-- express the two flowcharts above as if statements but don't go into them straight away.  Just draw the relationship between the two.
+An if statement tells a program to do something if a certain condition is met. This is the simplest type of if statement. We might express this the following way in pseudocode:
+
+**IF** *user is over 18* **THEN** *they are an adult*
+
+A more complex if statement might tell a program to do something if a condition is met, and something else if that condition is not met. This is known as an if-else statement.
+
+**IF** *user is over 18* **THEN** *they are an adult* **ELSE** *they are a child*
+
+There are also multiple ways that we could evaluate whether the user is over 18. 
 
 Then we go into if statements.  
 
