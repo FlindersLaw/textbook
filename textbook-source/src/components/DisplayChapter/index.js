@@ -11,7 +11,7 @@ import React from "react";
  * TODO: Allow for chapters to exist in paths other than chapterDocPath
  *
  * @param {Object} props - Component props.
- * @param {string} props.chapter - Name of the chapter folder, e.g., 'chapter_1'.
+ * @param {string} props.chapter - Name of the chapter folder, e.g., 'chapter_01'.
  * @param {boolean} [props.upper] - Optional. Displays the chapter name in UPPERCASE.
  * @param {boolean} [props.lower] - Optional. Displays the chapter name in lowercase.
  * @param {boolean} [props.number] - Displays the chapter text as a number like 'Chapter 1' (instead of 'Chapter One').
@@ -30,29 +30,29 @@ export function DisplayChapter(props) {
     // The key to the map should be the folder name as it exists
     // in chapterDocPath.
     // NOTE: All chapters must be in chapterDocPath for this to work
-    const chapter_map = {
+    const chapter_0map = {
         // The map key
-        'chapter_1' : {
+        'chapter_01' : {
             number: '1',
             word : "one",  // Always enter as lower case.  Will sort out formatting in the method
         },
-        'chapter_2' : {
+        'chapter_02' : {
             number: '2',
             word : "two",
         },
-        'chapter_3' : {
+        'chapter_03' : {
             number: '3',
             word : "three",
         },
-        'chapter_4' : {
+        'chapter_04' : {
             number: '4',
             word : "four",
         },
-        'chapter_5' : {
+        'chapter_05' : {
             number: '5',
             word : "five",
         },
-        'chapter_6' : {
+        'chapter_06' : {
             number: '6',
             word : "six",
         },
@@ -61,12 +61,12 @@ export function DisplayChapter(props) {
     // First check this chapter exists.  Otherwise return an error
     let chapterPath = chapterDocPath + '/' + props.chapter;
 
-    if ( ! chapter_map.hasOwnProperty(props.chapter) ) {
+    if ( ! chapter_0map.hasOwnProperty(props.chapter) ) {
         return <a href={chapterPath} className="TODOerror"> Error: path to {chapterPath} does not exist</a>
     }
 
     // First, get the record from the map
-    let chapterRecord = chapter_map[props.chapter];
+    let chapterRecord = chapter_0map[props.chapter];
     let linkText = `${chapterTextPrefix} ${chapterRecord['word']}`;
     if (props.upper) {
         linkText = linkText.toUpperCase();
