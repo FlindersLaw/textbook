@@ -142,7 +142,7 @@ formatting.  In fact, this textbook is written using Markdown.  Markdown allows 
 and subheadings (as we use in this book).  It can be used to display images
 and links to webpages.
 
-There are two great Markdown references.  The first is the [Quick Reference](../chapter_1/00-30#6-quick-reference) in your Playground.  There is also an
+There are two great Markdown references.  The first is the [Quick Reference](../chapter_01/00-30#6-quick-reference) in your Playground.  There is also an
 official [Markdown manual](https://docs.github.com/en/get-started/writing-on-github) which contains a more comprehensive explanation of 
 Markdown.
 
@@ -174,7 +174,7 @@ Docassemble know to execute the second block?
 
 Let's work through the execution step using this diagram.
 
-<Components.DisplayImage imageURL='/img/textbook/chapter_2/execution_order1.png' />
+<Components.DisplayImage imageURL='/img/textbook/chapter_02/execution_order1.png' />
 
 1. Docassemble scans the program code from the top of the file...
 2. ...until it finds a mandatory block.  It then executes the mandatory
@@ -187,14 +187,14 @@ block line by line.
 4. Docassemble scans our code file again, now looking for a block that sets
 a value for `MJFname`.  It finds our question block at line 10 and processes
 that block.  That causes this question to be asked:
-  <Components.DisplayImage imageURL='/img/textbook/chapter_2/execution_order2.png' />
+  <Components.DisplayImage imageURL='/img/textbook/chapter_02/execution_order2.png' />
 5. Now that it has the value of `MJFname`, Docassemble starts processing the
 mandatory question block again.
 6. Docassemble comes to this Mako again.  Now it *does* have a value for
 `MJFname`, so it can display it.
  Docassemble scans the rest of the question block.  Because there's no other
 Mako to process, Docassemble is ready to display this question block, which it does.
-  <Components.DisplayImage imageURL='/img/textbook/chapter_2/execution_order3.png' />
+  <Components.DisplayImage imageURL='/img/textbook/chapter_02/execution_order3.png' />
 7. The execution stops now.
 
 :::note
@@ -205,7 +205,7 @@ Docassemble would have continued scanning the rest of our file looking for
 another mandatory block to execute.  We don't have any other mandatory
 blocks.  Docassemble therefore would have scanned our code, not found any
 additional mandatory blocks and would then have generated this error.
-<Components.DisplayImage imageURL='/img/textbook/chapter_2/execution_order4.png' />
+<Components.DisplayImage imageURL='/img/textbook/chapter_02/execution_order4.png' />
 
 As we generate more sophisticated code you'll see that we try to keep the 
 number of mandatory blocks in our code to a minimum.  In fact, we should never

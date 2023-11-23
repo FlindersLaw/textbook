@@ -17,7 +17,7 @@ A summary of the changes I've made:
 The Components are documents (maybe a bit poorly) in `src/components/<ComponentName>/index.js`.  Feel free to build them out or to add more data (eg: glossary items) to them.
 :::
 
-In <DisplayChapter chapter='chapter_2' /> , we learned
+In <DisplayChapter chapter='chapter_02' /> , we learned
 that <DisplayGlossaryItem item='questionblock' plural /> have two
 main purposes. First, they collect input from a user by asking questions. Second, they can display those answers back to the user, either on the screen or by generating a document such as a PDF or Word file.
 
@@ -34,13 +34,13 @@ at <DisplayGlossaryItem item='variable' plural />.
 To acheive, this, we are going to
 use <DisplayGlossaryItem item='variable' plural />. We've
 been working with variables already
-in <DisplayChapter chapter='chapter_2' nourl />,
+in <DisplayChapter chapter='chapter_02' nourl />,
 without even knowing what to call them. A variable is where you store information. It's called a 'variable' because you can store different stuff in there each time the program runs. We have already seen how you can use different variables.
 
-<Components.DisplayImage imageURL='/img/textbook/chapter_3/variable_example1.PNG' />
+<Components.DisplayImage imageURL='/img/textbook/chapter_03/variable_example1.PNG' />
 
 For example,
-in <DisplayChapter chapter='chapter_2' nourl /> we
+in <DisplayChapter chapter='chapter_02' nourl /> we
 used the variable `MJFfirstname` as a place to store the first name. Each time we run the program, we can store a new value in this variable. 
 
 In Python, what we are doing is assigning a **value** to the variable. Values get assigned to variables. In addition to assigning variables via question blocks, we can also assign values to variables in code blocks. We can do that with a single equals sign (`=`). You can see how this is done below. 
@@ -137,7 +137,7 @@ We could represent a test for whether a candidate is eligible to stand using the
 ## Code Blocks
 How are we going to use all of this in practice? There are three ways:
 
-1. We can embed logic in our <DisplayGlossaryItem item='questionblock' plural /> using `%` tags. You might recall we did this in <DisplayChapter chapter='chapter_2' nourl />:
+1. We can embed logic in our <DisplayGlossaryItem item='questionblock' plural /> using `%` tags. You might recall we did this in <DisplayChapter chapter='chapter_02' nourl />:
 
 ```python showLineNumbers
   % if MJFisemployed == 'Yes':
@@ -146,7 +146,7 @@ How are we going to use all of this in practice? There are three ways:
 ```
 2. We can use code blocks. A code block is similar to a question block in that it must appear between three dashes. It's also a block that Docassemble checks when it tries to satisfy a variable. The difference between a code block and a question block is that a code block contains Python code, as shown below:
 
-<DisplayImage imageURL='/img/textbook/chapter_3/codeblock_example1.PNG' />
+<DisplayImage imageURL='/img/textbook/chapter_03/codeblock_example1.PNG' />
 
 3. We can embed code into <DisplayGlossaryItem item='mako' upper /> fields. Although you *can* do it, we do not cover it in too much detail in this textbook.
 
@@ -289,9 +289,9 @@ Now, how will Docassemble execute this program?
 
 If you run through this code, and then click on the little `<\>` icon in the top left hand corner of the screen, you can see this execution order:
 
-<Components.DisplayImage imageURL='/img/textbook/chapter_3/show_execution_order1.PNG' />
+<Components.DisplayImage imageURL='/img/textbook/chapter_03/show_execution_order1.PNG' />
 
-<Components.DisplayImage imageURL='/img/textbook/chapter_3/show_execution_order2.PNG' />
+<Components.DisplayImage imageURL='/img/textbook/chapter_03/show_execution_order2.PNG' />
 
 ## Embedded If Statements 2
 Let's come back to embedded if statements by reference to another example:
