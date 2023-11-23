@@ -43,13 +43,21 @@ We need a way to express this decision-making process in code.  To do so we use 
 
 An if statement tells a program to do something if a certain condition is met. This is the simplest type of if statement. We might express this the following way in pseudocode:
 
-**IF** *user is over 18* **THEN** *they are an adult*
+**IF** *user is 18 years or older* **THEN** *they are an adult*
 
 A more complex if statement might tell a program to do something if a condition is met, and something else if that condition is not met. This is known as an if-else statement.
 
-**IF** *user is over 18* **THEN** *they are an adult* **ELSE** *they are a child*
+**IF** *user is 18 years or older* **THEN** *they are an adult* **ELSE** *they are a child*
 
-There are also multiple ways that we could evaluate whether the user is over 18. 
+(Note - this notation is taken from [this](https://austlii.community/foswiki/pub/DataLex/WebHome/ys-manual.pdf?_t=1700718132) manual published by AustLII on page 64)
+
+There are also multiple ways that we could evaluate whether the user is over 18. For example, we might simply ask the user whether they were over 18 or not, which might be sufficient to satisfy some statutory tests. Otherwise, we could ask the user to provide their age, and then evaluate whether this age was over 18 mathematically. 
+
+**IF** *user's age is 18 or more* **THEN** *they are an adult* **ELSE** *they are a child*
+
+We can also test other values using questions. For example, let's say that we want to develop an app to advise someone on a penalty they may face. The penalty will be greater if this is their first offence. We could use the following notation.
+
+**IF** *this is user's first offence* **THEN** *they receive this penalty* **ELSE** *they receive this penalty*
 
 Then we go into if statements.  
 
@@ -64,6 +72,9 @@ Review C2.01.  From memory I think we had these shortcomings.
 - If we want to test something is false we need to
     1. either use the `else` part of the statement; or
     2. express our test so that it returns true.  For example if we want to test if someone is **not** over 18, then we re-express that test as someone being **under** 18 (`age < 18`)
+
+# If/Else If Statements
+Maybe we should separate this out conceptually
 
 ## Nested If statements
 If statements aren't usually used in isolation, much like decisions aren't made in isolation.
