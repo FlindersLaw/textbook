@@ -51,15 +51,46 @@ A more complex if statement might tell a program to do something if a condition 
 
 (Note - this notation is taken from [this](https://austlii.community/foswiki/pub/DataLex/WebHome/ys-manual.pdf?_t=1700718132) manual published by AustLII on page 64)
 
+We would then implement this if statement in Docassemble using the following code:
+
+```yaml showLineNumbers title="Ch3_Age_Eligibility.yml" showLineNumbers
+---
+question: |
+    Are you 18 years or older?
+yesno: user18OrOver
+---
+code: |
+    if user18OrOver:
+        userIsAdult = 'You are an adult!'
+    else:
+        userIsAdult = 'You are a child'
+---
+mandatory: True
+question: Here is your age status
+subquestion: |
+    Thank you for completing this survey.
+
+    ${userIsAdult}
+buttons:
+    - Exit: exit
+    - Restart: restart
+---
+```
+This application will first display a button which asks the user whether they are 18 or over. If they are, the final screen will display that they are an adult.
+
+**Put in a screencap from DA here**
+
+Otherwise, the application will display that they are a child.
+
+**Screencap here**
+
 There are also multiple ways that we could evaluate whether the user is over 18. For example, we might simply ask the user whether they were over 18 or not, which might be sufficient to satisfy some statutory tests. Otherwise, we could ask the user to provide their age, and then evaluate whether this age was over 18 mathematically. 
 
 **IF** *user's age is 18 or more* **THEN** *they are an adult* **ELSE** *they are a child*
 
-We can also test other values using questions. For example, let's say that we want to develop an app to advise someone on a penalty they may face. The penalty will be greater if this is their first offence. We could use the following notation.
+We would implement this test using the following code:
 
-**IF** *this is user's first offence* **THEN** *they receive this penalty* **ELSE** *they receive this penalty*
-
-Then we go into if statements.  
+We can also use other tests to assess the value from other questions.
 
 Review C2.01.  From memory I think we had these shortcomings.
 - we need to cover it a bit more slowly.  Introduce if, then if/else, then if/elif.  Maybe have mini-quizzes after each one?
@@ -73,25 +104,8 @@ Review C2.01.  From memory I think we had these shortcomings.
     1. either use the `else` part of the statement; or
     2. express our test so that it returns true.  For example if we want to test if someone is **not** over 18, then we re-express that test as someone being **under** 18 (`age < 18`)
 
-# If/Else If Statements
-Maybe we should separate this out conceptually
 
-## Nested If statements
-If statements aren't usually used in isolation, much like decisions aren't made in isolation.
-Usually we make a set of decisions to arrive at a conclusion.  For example,
 
-> Something like the dog legislation?  Or maybe there's something we can take from the C5 videos?
-
-- Discuss how we express this code by having an if statement inside another if statement (show an example, or an example of the above code would be great).
-- These are called **nested if statements** 
-:::note
-not a glossary term. Should it be?
-:::
-- In practice you will use many nested if statements precisely because you'll 
-need to make many decisions, one after the other.
-:::tip todo
-quizzes or exercises exploring nested if statements. Maybe match the if statement to a flowchart?
-:::
 
 ## Testing many things at once
 - sometimes may need to check more than one thing at a time before move on eg:
