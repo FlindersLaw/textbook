@@ -76,7 +76,7 @@ buttons:
     - Restart: restart
 ---
 ```
-This application will first display a button which asks the user whether they are 18 or over. If they are, the final screen will display that they are an adult.
+This application will first display a button which asks the user whether they are 18 or over. Lines 7 to 10 in our code block then direct the flow of control of the application. If they are, the final screen will display that they are an adult.
 
 **Put in a screencap from DA here**
 
@@ -85,6 +85,10 @@ Otherwise, the application will display that they are a child.
 **Screencap here**
 
 There are also multiple ways that we could evaluate whether the user is over 18. For example, we might simply ask the user whether they were over 18 or not, which might be sufficient to satisfy some statutory tests. Otherwise, we could ask the user to provide their age, and then evaluate whether this age was over 18 mathematically. 
+
+```yaml showLineNumbers title="Ch3_Age_Eligibility_Numbers.yml" showLineNumbers
+---
+```
 
 **IF** *user's age is 18 or more* **THEN** *they are an adult* **ELSE** *they are a child*
 
@@ -103,33 +107,3 @@ Review C2.01.  From memory I think we had these shortcomings.
 - If we want to test something is false we need to
     1. either use the `else` part of the statement; or
     2. express our test so that it returns true.  For example if we want to test if someone is **not** over 18, then we re-express that test as someone being **under** 18 (`age < 18`)
-
-
-
-
-## Testing many things at once
-- sometimes may need to check more than one thing at a time before move on eg:
-```mermaid
-flowchart LR;
-    id1{{are you 18 and female?}}
-    id1 -- Yes --> id2(...)
-    id1 -- No --> id3(...)
-```
-
-Explain thahis as an `if a == xx and b == yy`
-- expand into multiple ands?
-
-Explain that this way is better when you know the result of both (or all) the 
-testing variables at once.  If you don't know all the results, then use nested if statements.
-
-## More complex examples
-And maybe we transpose the C5 videos into here?
-
-## Mako if
-Probably need to introduce this earlier?
-
-- express if statements in subquestion blocks so can control display output
-    - show an example
-- emphasise the distinction between Mako and code block if statements
-- emphasise can't indent Mako ifs
-    - and need a `% endif`
