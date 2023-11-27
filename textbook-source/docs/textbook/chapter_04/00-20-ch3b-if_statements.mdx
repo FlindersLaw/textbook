@@ -3,7 +3,7 @@ title: "Ch 3b: If statements"
 ---
 import {DisplayGlossaryItem} from '@site/src/components';
 
-## An introduction to Logic
+## An Introduction to Logic
 In this chapter, we will talk about logic and how to control the logic of our applications. We can use logic to make our app can do one thing or another depending on the input it receives. We can direct the flow of the program depending on how the user inputs certain information. We will do this using if statements.
 
 For example, you might want your app to perform a set of initial eligibility checks before proceeding with your main analysis. You might want to check for age or residency, because your app only applies to adults who are not pensioners or South Australian residents. These kinds of preliminary questions are good to resolve early in your processing flow. Otherwise, your user might have to run through the whole app to find out they should have never run it in the first place! Therefore, we can ask the user a few preliminary questions and, based on those questions, decide which path the application should take. 
@@ -38,10 +38,10 @@ Is there a way to automatically assign, for example the `{{...}}` elements in th
 flowchart the appropriate style automatically?
 :::
 
-## Express logic in code - If statements
+## Express logic in code using If statements
 We need a way to express this decision-making process in code.  To do so we use  <DisplayGlossaryItem item='ifstatement' plural />.
 
-An if statement tells a program to do something if a certain condition is met. This is the simplest type of if statement. We might express this the following way in pseudocode:
+An if statement tells a program to do something if a certain condition is met. This is the simplest type of if statement. Let's take diagram 1 above. We might express this the following way in pseudocode:
 
 **IF** *user is 18 years or older* **THEN** *they are an adult*
 
@@ -56,27 +56,39 @@ We would then implement this if statement in Docassemble using the following cod
 ```yaml showLineNumbers title="Ch3_Age_Eligibility.yml" showLineNumbers
 ---
 question: |
-    Are you 18 years or older?
+  Are you 18 years or older?
 yesno: user18OrOver
 ---
 code: |
-    if user18OrOver:
-        userIsAdult = 'You are an adult!'
-    else:
-        userIsAdult = 'You are a child'
+  if user18OrOver:
+    userIsAdult = 'You are an adult!'
+  else:
+    userIsAdult = 'You are a child'
 ---
 mandatory: True
 question: Here is your age status
 subquestion: |
-    Thank you for completing this survey.
+  Thank you for completing this survey.
 
-    ${userIsAdult}
+  Here is your result: ${userIsAdult}
+
 buttons:
-    - Exit: exit
-    - Restart: restart
+  - Exit: exit
+  - Restart: restart
 ---
 ```
-This application will first display a button which asks the user whether they are 18 or over. Lines 7 to 10 in our code block then direct the flow of control of the application. If they are, the final screen will display that they are an adult.
+
+## Equality operators and if statements
+
+Note line 7 of ```Ch3_Age_Eligibility.yml```. You will see that we have included a reference to the variable ```user18orOver```, followed immediately by a semicolon. What does this mean?
+
+What we have used here is an equality operator. That allows us to test a particular value to drive our if statement.
+
+Let's consider how our application will execute. It will first display a button which asks the user whether they are 18 or over. If the user presses **Yes**, that variable will contain the value True. Otherwise, if the user presses **No**, it will contain the value False. 
+
+The line ```if user18OrOver:``` is effectively the same as writing ```if user18OrOver == True:```. 
+
+Lines 7 to 10 in our code block direct the flow of control of the application. If the user presses yes on the first screen (that is, ```user18OrOver``` is True), the final screen will display that they are an adult.
 
 **Put in a screencap from DA here**
 
@@ -84,17 +96,42 @@ Otherwise, the application will display that they are a child.
 
 **Screencap here**
 
-There are also multiple ways that we could evaluate whether the user is over 18. For example, we might simply ask the user whether they were over 18 or not, which might be sufficient to satisfy some statutory tests. Otherwise, we could ask the user to provide their age, and then evaluate whether this age was over 18 mathematically. 
+## Other equality operators and if statements
 
-```yaml showLineNumbers title="Ch3_Age_Eligibility_Numbers.yml" showLineNumbers
----
-```
+There are multiple ways that we could evaluate whether the user is over 18. For example, we might simply ask the user whether they were over 18 or not, which might be sufficient to satisfy some statutory tests. Otherwise, we could ask the user to provide their age, and then evaluate whether this age was over 18 mathematically. 
 
 **IF** *user's age is 18 or more* **THEN** *they are an adult* **ELSE** *they are a child*
 
 We would implement this test using the following code:
 
-We can also use other tests to assess the value from other questions.
+```yaml showLineNumbers title="Ch3_Age_Eligibility_Numbers.yml" showLineNumbers
+---
+question: |
+  What is your age?
+fields:
+  - no label: userAge
+    datatype: integer
+---
+code: |
+  if userAge >= 18:
+    userIsAdult = 'an adult'
+  else:
+    userIsAdult = 'just a child!'
+---
+mandatory: True
+question: Your age
+subquestion: |
+  Thank you for completing this quiz
+  
+  You said your age was ${userAge}. Therefore, you are ${userIsAdult}
+  
+buttons:
+  - Restart: restart
+  - Exit: exit
+---
+```
+
+
 
 Review C2.01.  From memory I think we had these shortcomings.
 - we need to cover it a bit more slowly.  Introduce if, then if/else, then if/elif.  Maybe have mini-quizzes after each one?
