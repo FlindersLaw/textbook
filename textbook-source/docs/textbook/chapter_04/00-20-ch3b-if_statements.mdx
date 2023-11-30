@@ -2,6 +2,7 @@
 title: "Ch 3b: If statements"
 ---
 import {DisplayGlossaryItem} from '@site/src/components';
+import * as Components from '@site/src/components'
 
 ## An Introduction to Logic
 In this chapter, we will talk about logic and how to control the logic of our applications. We can use logic to make our app can do one thing or another depending on the input it receives. We can direct the flow of the program depending on how the user inputs certain information. We will do this using if statements.
@@ -84,7 +85,11 @@ Note line 7 of ```Ch3_Age_Eligibility.yml```. You will see that we have included
 
 What we have used here is an equality operator. That allows us to test a particular value to drive our if statement.
 
-Let's consider how our application will execute. It will first display a button which asks the user whether they are 18 or over. If the user presses **Yes**, that variable will contain the value True. Otherwise, if the user presses **No**, it will contain the value False. 
+Let's consider how our application will execute. It will first display a button which asks the user whether they are 18 or over. 
+
+<Components.DisplayImage imageURL='/img/textbook/chapter_04/over_18_question_choice.png' altText='A Docassemble application with two options - yes or no' />
+
+If the user presses **Yes**, that variable will contain the value True. Otherwise, if the user presses **No**, it will contain the value False. 
 
 The line ```if user18OrOver:``` is effectively the same as writing ```if user18OrOver == True:```. 
 
