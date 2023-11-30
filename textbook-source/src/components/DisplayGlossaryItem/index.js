@@ -48,6 +48,10 @@ export function DisplayGlossaryItem(props) {
             plural: 'data blocks',
             description: 'Remember to include the term "variable name declaration" in this description' }
         ],
+        ['datatype', {
+            text: 'data type',
+            plural: 'data types',
+        }],
         ['dictionary', {
             text: 'dictionary',
             plural: 'dictionaries' }
@@ -118,6 +122,9 @@ export function DisplayGlossaryItem(props) {
             text: 'variable',
             plural: 'variables' }
         ],
+        ['yaml', {
+            text: 'YAML',
+        }],
     ]);
 
     let glossaryItem = glossaryItemMap.get(props.item);

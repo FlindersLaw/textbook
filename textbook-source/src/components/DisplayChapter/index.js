@@ -1,4 +1,7 @@
 import React from "react";
+import {Link} from 'react-router-dom';
+import chapter_list from './chapter_list.js';
+import {capitalizeWords} from './utilities.js';
 
 /**
  * DisplayChapter component displays a link or text for a chapter.
@@ -12,6 +15,11 @@ import React from "react";
  *
  * @param {Object} props - Component props.
  * @param {string} props.chapter - Name of the chapter folder, e.g., 'chapter_01'.
+ * @param {string} props.pinpoint - Identifier of pinpoint referents in that chapter.
+ *                                  This should be a path to a page (eg: '00-20') or a
+ *                                  path to a page and a target (eg: '00-20#line-6'). 
+ *                                  This is appended to the chapter path with a slash
+ *                                  (eg: .../chapter_03/00-20#line6)
  * @param {boolean} [props.upper] - Optional. Displays the chapter name in UPPERCASE.
  * @param {boolean} [props.lower] - Optional. Displays the chapter name in lowercase.
  * @param {boolean} [props.number] - Displays the chapter text as a number like 'Chapter 1' (instead of 'Chapter One').
@@ -25,48 +33,23 @@ export function DisplayChapter(props) {
     const chapterDocPath = '/docs/textbook';
     const chapterTextPrefix  = 'chapter';
 
-    // Need to map chapter identifiers to numbers and numbers
-    // as words
-    // The key to the map should be the folder name as it exists
-    // in chapterDocPath.
-    // NOTE: All chapters must be in chapterDocPath for this to work
-    const chapter_0map = {
-        // The map key
-        'chapter_01' : {
-            number: '1',
-            word : "one",  // Always enter as lower case.  Will sort out formatting in the method
-        },
-        'chapter_02' : {
-            number: '2',
-            word : "two",
-        },
-        'chapter_03' : {
-            number: '3',
-            word : "three",
-        },
-        'chapter_04' : {
-            number: '4',
-            word : "four",
-        },
-        'chapter_05' : {
-            number: '5',
-            word : "five",
-        },
-        'chapter_06' : {
-            number: '6',
-            word : "six",
-        },
-    }
-
     // First check this chapter exists.  Otherwise return an error
     let chapterPath = chapterDocPath + '/' + props.chapter;
 
-    if ( ! chapter_0map.hasOwnProperty(props.chapter) ) {
-        return <a href={chapterPath} className="TODOerror"> Error: path to {chapterPath} does not exist</a>
+    // Add the target if it exists
+    let chapterTarget = '/' + props.target || '';
+    chapterPath = chapterPath + chapterTarget
+
+    if ( ! chapter_list.hasOwnProperty(props.chapter) ) {
+        return(
+            <a href={chapterPath} className="TODOerror">
+             Error: path to {chapterPath} does not exist
+            </a>
+        );
     }
 
     // First, get the record from the map
-    let chapterRecord = chapter_0map[props.chapter];
+    let chapterRecord = chapter_list[props.chapter];
     let linkText = `${chapterTextPrefix} ${chapterRecord['word']}`;
     if (props.upper) {
         linkText = linkText.toUpperCase();
@@ -81,34 +64,10 @@ export function DisplayChapter(props) {
         linkText = capitalizeWords(linkText);
     }
 
+
     if ( props.nourl ) {
         return <span class="displayChapterSpan">{linkText}</span>
     } else {
-        return <a href={chapterPath} className="displayChapterSpan">{linkText}</a>
+        return <Link to={chapterPath} className="displayChapterSpan">{linkText}</Link>
     }
-}
-
-/**
- * Capitalizes the first letter of each word in a string.
- *
- * @param {string} inputString - The input string to capitalize.
- * @returns {string} - The input string with the first letter of each word capitalized.
- */
-function capitalizeWords(inputString) {
-    // Split the input string into words based on spaces
-    const words = inputString.split(' ');
-
-    // Capitalize the first letter of each word
-    const capitalizedWords = words.map(word => {
-        if (word.length > 0) {
-            return word.charAt(0).toUpperCase() + word.slice(1);
-        } else {
-            return word; // Preserve empty words (e.g., multiple spaces)
-        }
-    });
-
-    // Join the capitalized words back into a single string
-    const result = capitalizedWords.join(' ');
-
-    return result;
 }
