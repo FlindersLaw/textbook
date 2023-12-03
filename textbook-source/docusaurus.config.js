@@ -122,10 +122,6 @@ const config = {
                 label: 'Docassemble Slack',
                 href: 'https://docassemble.slack.com',
               },
-              {
-                label: 'Blog (TBC)',
-                to: '/blog',
-              },
             ],
           },
           {

@@ -2,6 +2,31 @@ import {Quiz} from '@site/src/components'
 import {Answer} from '@site/src/components/Quizlet/answer.js'
 import {Explanation} from '@site/src/components/Quizlet/explanation.js'
 
+<Quiz title="Example Quiz">
+    Let's say you want to test the value in `MJFage` to check that it equals 65.  which
+    test would you use?
+    <Answer>
+    `MJFage = 65`
+    </Answer>
+    <Answer>
+    `MJFage = '65'`
+    </Answer>
+    <Answer isCorrect>
+    `MJFAge == 65`
+    </Answer>
+    <Explanation correctAnswer>
+    Correct!  You've correctly identified that the test for equality is `==` and not `=`.
+    Also, because you're testing a numerical value you need to check that `MJFage` is equal to
+    the number `65` and not the text string `'65'`.
+    </Explanation>
+    <Explanation incorrectAnswer>
+    Try again.  Remember:
+
+    1. that you're testing the value of a number and not text; and
+    1. to use the correct test for equality
+    </Explanation>
+</Quiz>
+
 <Quiz>
     This is a **Quiz** component.  It's used to display quizlets in the textbook.  The 
     component consists of:
@@ -59,16 +84,6 @@ import {Explanation} from '@site/src/components/Quizlet/explanation.js'
     This answer will be highlighted in <span class="incorrectAnswer">red</span> when it
     is clicked.
     </Answer>
-    <Answer>
-    For short answers it's best not to list the entire component on one line ie:
-    `<Answer>Text of answer</Answer>`.  Doing otherwise inserts a line break at the
-    end of the answer.  See the two examples below.
-    </Answer>
-    <Answer>Entry on single line. Looks nicer.</Answer>
-    <Answer>
-    With line break as the entire text as the `</Answer>` tag appears
-    on a separate line.
-    </Answer>
     <Explanation correctAnswer>
     This is an explanation for the correct answer.  You set this by opening with `<Explanation correctAnswer>`.
 
@@ -100,10 +115,4 @@ import {Explanation} from '@site/src/components/Quizlet/explanation.js'
     correct answer or incorrect answer - it's up to you.  If you don't include an Explanation then
     nothing is displayed when an (in)correct answer is clicked.
     </Explanation>
-</Quiz>
-
-<Quiz title="Test Quiz">
-:::tip
-To test adminition styles
-:::
 </Quiz>
