@@ -1,0 +1,14 @@
+import {Answer} from '@site/src/components/Quizlet/answer.js';
+import Answer1 from './answer1.mdx';
+
+export const Response1 = () => (
+    <Answer isCorrect={true} correctAnswer='answer1' isAnswer>
+        <Answer1 />
+    </Answer>
+);
+
+export const Response2 = () => (
+    <Answer isCorrect={false} correctAnswer='answer2' isAnswer>
+        Just the text of the answer goes here
+    </Answer>
+);
