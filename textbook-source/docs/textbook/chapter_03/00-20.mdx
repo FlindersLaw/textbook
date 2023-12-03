@@ -1,0 +1,118 @@
+import {Quiz} from '@site/src/components'
+import {Answer} from '@site/src/components/Quizlet/answer.js'
+import {Explanation} from '@site/src/components/Quizlet/explanation.js'
+
+<Quiz title="Example Quiz">
+    Let's say you want to test the value in `MJFage` to check that it equals 65.  which
+    test would you use?
+    <Answer>
+    `MJFage = 65`
+    </Answer>
+    <Answer>
+    `MJFage = '65'`
+    </Answer>
+    <Answer isCorrect>
+    `MJFAge == 65`
+    </Answer>
+    <Explanation correctAnswer>
+    Correct!  You've correctly identified that the test for equality is `==` and not `=`.
+    Also, because you're testing a numerical value you need to check that `MJFage` is equal to
+    the number `65` and not the text string `'65'`.
+    </Explanation>
+    <Explanation incorrectAnswer>
+    Try again.  Remember:
+
+    1. that you're testing the value of a number and not text; and
+    1. to use the correct test for equality
+    </Explanation>
+</Quiz>
+
+<Quiz>
+    This is a **Quiz** component.  It's used to display quizlets in the textbook.  The 
+    component consists of:
+
+    1. a Quiz question
+    2. One or more answers; and
+    3. Explanations for the answers.
+
+    What you are reading now forms part of the quiz question.  It appears as the first content
+    after opening with the `<Quiz>`.
+
+    #### Title
+    You can give your quiz a title by using the `title` keyword ie: `<Quiz title='My Quiz Title'>`.
+
+    #### Quiz content
+    A question can contain Markdown and HTML, in fact pretty much anything you can put in a MDX file, 
+    including other components.
+
+    Here's an example of a code block.
+
+    ```python
+    if this_works:
+        status='happy'
+    else:
+        status='sad'
+    ```
+    #### Answers
+    Answers can also contain rich content. See below for example answers.  One or more answers 
+    can be marked as correct answers, although only one answer can ever be selected at a time.  The 
+    answers in this quiz below explain in more detail how the `<Answer>` component works.
+
+    #### Explanations
+    You can optionally provide detailed explanations to display when the user selects a correct or
+    incorrect answer.  By default, an Explanation will appear whenever an incorrect answer is 
+    displayed.  You need to set the `correctAnswer` flag in the `<Explanation>` to mark an explanation
+    to appear when a correct answer is clicked. Click on a correct and incorrect answer below and scroll
+    to the end of this Quiz block to see how explanations work.
+
+
+    <Answer isCorrect>
+    This is the correct answer.  That's because the `isCorrect` flag
+    has been set in the `<Answer>`.  Technically, there can be more
+    than one correct answer but only one answer at a time can ever
+    be selected.
+
+    When an answer is selected it is highlighted in 
+    <span class="correctAnswer">green</span>.
+
+    Click on this answer to see.
+    </Answer>
+    <Answer>
+    Any answer remains selected until another answer is clicked.  This answer is an
+    incorrect answer.  This is signified by omitting `isCorrect` in the component header.
+    
+    This answer will be highlighted in <span class="incorrectAnswer">red</span> when it
+    is clicked.
+    </Answer>
+    <Explanation correctAnswer>
+    This is an explanation for the correct answer.  You set this by opening with `<Explanation correctAnswer>`.
+
+    Like questions and answers, you can also include rich content in your explanations, even 
+    flowcharts!
+
+    ```mermaid
+    flowchart TD;
+        id0(start) --> id1{{Ask a question}}
+        id1 -- Yes --> id2(A happy ending)
+        id1 -- No --> id3(A sad ending)
+    ```
+
+    Click on an incorrect answer to see an example of another Explanation.
+    </Explanation>
+    <Explanation incorrectAnswer>
+    This explanation will appear when any incorrect answer is selected as the `incorrectAnswer`.
+
+    **Notes:**
+
+    1. In fact, you don't need to supply `incorrectAnswer` for an incorrect-answer explanation but it
+    is best practice to do so as some time in the future we may depend on that flag existing.  Currently,
+    the code only tests for the existence of `correctAnswer` and defaults to an incorrect-answer
+    explanation if `correctAnswer` doesn't exist.
+    1. Unfortunately, you can't include admonitions in an Explanation.
+
+    **Remember**
+    Explanations are optional.  You don't need to include them, or you can include only one for a
+    correct answer or incorrect answer - it's up to you.  If you don't include an Explanation then
+    nothing is displayed when an (in)correct answer is clicked.
+    </Explanation>
+</Quiz>

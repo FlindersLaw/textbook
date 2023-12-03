@@ -1,0 +1,105 @@
+---
+title: Variables
+---
+import {DisplayChapter} from '@site/src/components';
+import {DisplayGlossaryItem} from '@site/src/components';
+import {DisplayImage} from '@site/src/components';
+
+We covered variables briefly in <DisplayChapter chapter='chapter_02' target='00-20#line-6' /> but
+let's go over them again in a bit more detail.
+
+## What is a Variable?
+A <DisplayGlossaryItem item='variable' /> is a place where you store stuff. 
+It's called a 'variable' because you can store different stuff in ther each time.
+We've already seen that we can run the same program many times, each time with
+different values.
+
+## Variables are like buckets
+We've said this [before](../chapter_02/00-20#line-6) and we'll say it again.
+
+A variable is kind of like a bucket.  You can put stuff in a bucket and you can
+put stuff in a variable.
+
+Variable|Bucket
+---|---
+Used to store stuff|Used to store stuff
+Must have a name|Doesn't usually have a name
+Can store (<DisplayGlossaryItem item='assign' />) stuff in it|Can store stuff in it
+
+
+
+
+For example, we've been using `MJFfirstname` to store the first name in our
+code in <DisplayChapter chapter='chapter_02' target='00-42' />. Each time
+we run the program we're asked for our first name.  We can enter what we like
+and each time we run the program we can enter something different if we want.
+Each time we enter a first name into the app, what we enter is stored in `MJFfirstname`.
+
+In Python-speak, what we store in a variable is called its **value**.  The term
+'value' will be used a lot in this textbook.  
+
+Let's have a look at the second question block in [this code](../chapter_02/00-42#our-code). It
+looks like this:
+
+```yml 
+---
+# My first Docassemble program
+mandatory: True
+question: Hello World!
+...
+---
+question: Name
+fields:
+  - Salutation: MJFsalutation
+    choices:
+      - Dr
+      - Mr
+      - Mrs
+      - Ms
+  - First Name: MJFfirstname
+  - Last Name: MJFlastname
+---
+``` 
+
+You'll recall that this code displays this form:
+
+<DisplayImage imageURL='/img/textbook/chapter_03/variables1.png' />
+
+The second-last line of the code...
+```yml
+  # highlight-next-line
+  - First Name: MJFfirstname
+```
+...tells Docassemble to display the 'First Name' field in the form. The user will
+enter something into the 'First Name' text field.  When the user presses continue
+Docassemble will store, or <DisplayGlossaryItem item='assign' /> the value the
+user enters to the variable `MJFfirstname`.  Once that assignment is made, then
+we can access what was assigned by calling `MJFfirstname`, as we do in line
+24 of the same code:
+
+```yaml 
+---
+# My first Docassemble program
+mandatory: True
+question: Hello World!
+subquestion: |
+...
+  Column1|Column2
+  -------|-------
+  Salutation|${ MJFsalutation }
+  # highlight-next-line
+  First Name|${ MJFfirstname }
+  Last Name|${ MJFlastname }
+```
+
+:::tip
+We usually use <DisplayGlossaryItem item='questionblock' plural /> to display forms
+and collect data and <DisplayGlossaryItem item='assign' /> that data into variables.
+
+We will then access the data in variables to display information on a screen (by
+using a <DisplayGlossaryItem item='subquestion' />).  We will also usually use
+<DisplayGlossaryItem item='mako' upper /> in the subquestion tag to access those
+variables.
+:::
+
+## Variables are like buckets

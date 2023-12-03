@@ -2,7 +2,7 @@
 // Note: type annotations allow type checking and IDEs autocompletion
 
 const {themes} = require('prism-react-renderer');
-const lightTheme = themes.okaidia;
+const lightTheme = themes.github;
 const darkTheme = themes.github;
 
 /** @type {import('@docusaurus/types').Config} */
@@ -121,10 +121,6 @@ const config = {
               {
                 label: 'Docassemble Slack',
                 href: 'https://docassemble.slack.com',
-              },
-              {
-                label: 'Blog (TBC)',
-                to: '/blog',
               },
             ],
           },
