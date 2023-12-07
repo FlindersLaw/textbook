@@ -8,13 +8,16 @@
  */
 export const glossary = new Map([
     ['assign', {
-        text: 'assign'
+        text: 'assign',
+        plural: 'assigns',
     }],
     ['block', {
         text: 'block',
         plural: 'blocks' }
     ],
-    ['boolean', { text: 'boolean'} ],
+    ['boolean', {
+        text: 'boolean',
+        plural: 'booleans'} ],
     ['brace', {
         text: 'brace',
         plural: 'braces' }
@@ -64,6 +67,10 @@ export const glossary = new Map([
         text: 'if statement',
         plural: 'if statements' }
     ],
+    [ 'inputtype', {
+        text: 'input type',
+        plural: 'input type',
+    }],
     ['jinja', { text: 'jinja' }],
     [ 'list', {
         text: 'list',
@@ -118,6 +125,10 @@ export const glossary = new Map([
         text: 'variable',
         plural: 'variables' }
     ],
+    [ 'value', {
+        text: 'value',
+        plural: 'values',
+    }],
     ['yaml', {
         text: 'YAML',
     }],

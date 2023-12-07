@@ -74,7 +74,12 @@ export const Quizlet = ({ children, title }) => {
         {quizAnswers}
       </div>
       {selectedAnswer && (
-        <div>{selectedAnswer.isCorrect ? correctExplain : incorrectExplain}</div>
+        <div>
+          {selectedAnswer.isCorrect
+            ? (correctExplain.length > 0 ? correctExplain : 'Correct!')
+            : (incorrectExplain.length > 0 ? incorrectExplain : 'Incorrect. Try again.')
+          }
+        </div>
       )}
     </div>
   );

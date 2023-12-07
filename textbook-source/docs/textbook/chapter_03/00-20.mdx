@@ -1,0 +1,91 @@
+---
+title: Data Types
+---
+import {DisplayGlossaryItem} from '@site/src/components';
+import {DisplayImage} from '@site/src/components';
+
+## Introduction
+Much like we can put different stuff in a bucket, like water or sand or fish (yum!),
+we can also store different types of data in a variable.  Unlike a bucket, 
+we tend to be a bit more picky about knowing what type of data we've stored
+in our variables.  This is because we can do different things with different
+<DisplayGlossaryItem item='datatype' plural />.  For example, we can do 
+arithmetic on number data types but we can't on text (or 
+<DisplayGlossaryItem item='string' />) data types.  Likewise, we can join
+two strings together but doing that doesn't make too much sense with numbers.
+
+:::note
+Text is stored in what's called a <DisplayGlossaryItem item='string' /> data type.
+It's called a 'string' because text is essentially a string of characters all joined together.
+
+From now onwards we'll be referring to text only as **strings** and not as text.
+
+We'll cover this further [below](TODO) but in coding, text includes spaces
+(eg: 'Mark' is a string, as is 'Mark Ferraretto') and other special characters.
+Just keep that in mind for now.
+:::
+
+## Docassemble, Python and Data Types
+In Docassemble, data types are used for two purposes.  When we look at the data
+types of variables, we refer to *fundamental* data types.  These are types
+such as text (strings), numbers (integers and floats) and <DisplayGlossaryItem item='boolean' plural />.
+Fundamental data types are essential to Python, and so variables and code blocks.
+
+Docassemble's [manual](https://docassemble.org/docs/fields.html#data%20types)
+refers to 'Data types and input types'.  Unhelpfully, Docassemble mixes the
+two terms, but in Docassemble-speak most of its data types are actually 
+<DisplayGlossaryItem item='intputtype' plural />.  Also unhelpfuly, we will 
+also mix these terms!
+
+#### The difference between a data type and an input type
+A data type describes **the type of data**.  That is, the data may be a number,
+or a string, or a picture, and so-on.  
+
+An input type desribes **how the data is collected**. For example, Docassemble's
+`radio` input type displays a question to a user as a set of radio buttons.  
+However, what is stored in the variable is usually a string.
+
+<details>
+    <summary>
+        Example of input and data types
+    </summary>
+This code block collects the salutation for a person.
+
+```yml
+---
+mandatory: true
+question: Salutation
+subquestion: |
+    We're just collecting a salutation and nothing else, for 
+    demonstration purposes
+fields:
+    - Enter salutation: MJFsalutation
+      input type: radio
+      choices:
+        - Dr
+        - Mr
+        - Mrs
+        - Ms
+        - Mx
+---
+```
+Because the `input type` is `radio`, the choices are presented like this:
+
+<DisplayImage imageURL='/img/textbook/chapter_03/datatypes1.png' />
+
+You can see from the code block that the value will be stored in `MJFsalutation`.  However,
+the data type of what is stored is *not* a `radio` data type. It is stored as a 
+<DisplayGlossaryItem item='string' />.  This makes sense as what we're storing
+is just text.
+
+So, the *input type* is `radio` but the *data type* is string.
+</details>
+
+
+There are also *Docassemble data types*.  Docassemble data types are used by
+docassemble to format how data is collected.  For example, Docassemble has
+data types to display a question using [radio buttons](https://xx.xx)
+
+
+
+
