@@ -1,5 +1,5 @@
-import Quiz from './quiz';
+import Quizlet from './quizlet';
 import Answer from './answer';
 import Explanation from './explanation';
 
-export {Quiz, Answer, Explanation};
+export {Quizlet, Answer, Explanation};

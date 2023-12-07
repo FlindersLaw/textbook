@@ -1,9 +1,9 @@
-// Quiz.jsx
+// Quizlet.jsx
 import React, { useState, Children, cloneElement } from 'react';
 import Answer from './answer';
 import Explanation from './explanation';
 
-export const Quiz = ({ children, title }) => {
+export const Quizlet = ({ children, title }) => {
 
   // Use to track the state and correctness of selected answer
   const [selectedAnswer, setSelectedAnswer] = useState(null);
@@ -21,7 +21,7 @@ export const Quiz = ({ children, title }) => {
   let incorrectExplain = [] // Store incorrect explanation(s) here
 
   // Set a default title if one isn't passed in
-  let quizTitle = title || 'Quiz';
+  let quizTitle = title || 'Quizlet';
 
   // We'll push answerID into each answer so we can track selection state
   // Note: the ID is incremented for each iteration of the forEach() loop
@@ -62,7 +62,7 @@ export const Quiz = ({ children, title }) => {
   });
 
   return (
-    <div className='quiz'>
+    <div className='quizlet'>
       <div className='title'>
         <img src="/img/quiz-icon.svg" height='30px' />
         {quizTitle}
@@ -80,4 +80,4 @@ export const Quiz = ({ children, title }) => {
   );
 };
 
-export default Quiz;
+export default Quizlet;

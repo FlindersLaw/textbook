@@ -100,7 +100,7 @@
 /*
  * For displaying the Quizzes
  */
-.quiz {
+.quizlet {
   background-color: rgba(35,46,75, 0.1);
   min-height: 200px;
   height: min-content;
@@ -113,7 +113,7 @@
   margin-bottom: 20px;
 }
 
-.quiz .title {
+.quizlet .title {
   font: var(--ifm-heading-font-weight) var(--ifm-h5-font-size) / var(--ifm-heading-line-height) var(--ifm-heading-font-family);
   text-transform: uppercase;
   margin-bottom: 15px;
@@ -123,22 +123,22 @@
   justify-content: flex-start;
 }
 
-.quiz .title img {
+.quizlet .title img {
   margin-right: 10px;
 }
 
-.quiz .answers {
+.quizlet .answers {
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
-.quiz code {
+.quizlet code {
   color: #000;
 }
 
-.quiz .answerButton {
+.quizlet .answerButton {
   width: 100%;
   border-radius: 15px;
   padding: 5px;
@@ -151,24 +151,24 @@
   background-color: rgba(35,46,75, 0.05);
 }
 
-.quiz .answerButton:hover {
+.quizlet .answerButton:hover {
   background-color: rgba(35,46,75, 0.1);
 }
 
-.quiz .correctAnswer {
+.quizlet .correctAnswer {
   background-color: #2f922f;
   color: #ffffff;
   font-weight: bold;
 }
-.quiz .correctAnswer:hover {
+.quizlet .correctAnswer:hover {
   background-color: #2f922f71;
 }
 
-.quiz .incorrectAnswer {
+.quizlet .incorrectAnswer {
   background-color: #ff3333aa;
   color: #ffffff;
   font-weight: bold;
 }
-.quiz .incorrectAnswer:hover {
+.quizlet .incorrectAnswer:hover {
   background-color: #ff333333;
 }
