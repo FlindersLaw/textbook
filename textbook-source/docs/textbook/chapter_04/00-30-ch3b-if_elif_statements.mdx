@@ -137,3 +137,115 @@ Else (that is, if ```userAge``` is *not* less than 18), if ```userAge``` is more
 Else (that is, if neither of the two conditions above are met), then the event on Line 44, ```contactUs```, is triggered.
 
 <Quiz title="If-Elif Statement Quiz"></Quiz>
+
+## Another If-Elif Statement Example
+You might recall this flowchart from the section on if statements:
+
+```mermaid
+flowchart LR;
+    id1{{Where do you live?}}
+    id1 -- West Adelaide --> id2(Port Adelaide Magistrates Court)
+    id1 -- Northern Adelaide --> id3(Elizabeth Magistrates Court)
+    id1 -- North-East Adelaide --> id4(Adelaide Magistrates Court)
+    id1 -- Adelaide CBD --> id4
+    id1 -- Southern Adelaide --> id5(Christies Beach Magistrates Court)
+```
+
+From this flowchart, our Docassemble application will need three blocks:
+
+* A question block which asks the user where they live
+* A code block which determines which court the user will go to
+* An endpoint which displays this to the user
+
+Let's see how we can implement this code in Docassemble
+
+```yaml showLineNumbers title="Ch4_Magistrates_Court_Tool.yml" showLineNumbers
+---
+question: |
+  Where do you live?
+fields:
+  - no label: userLocation
+    datatype: radio
+    choices:
+      - Western Adelaide: west
+      - Northern Adelaide: north
+      - North-East Adelaide: northeast
+      - Adelaide CBD: cbd
+      - Southern Adelaide: south
+      - None of the above: none
+---
+mandatory: True 
+code: |
+  if userLocation == 'west':
+    userCourt = 'Port Adelaide Magistrates Court'
+    courtAddress = '260 St Vincent St, Port Adelaide SA 5015'
+    courtEndscreen
+  elif userLocation == 'north':
+    userCourt = 'Elizabeth Magistrates Court'
+    courtAddress = '15 Frobisher Road, Elizabeth SA 5112'
+    courtEndscreen
+  elif userLocation == 'northeast':
+    userCourt = 'Adelaide Magistrates Court'
+    courtAddress = '260 Victoria Square, Adelaide SA 5000'
+    courtEndscreen
+  elif userLocation == 'cbd':
+    userCourt = 'Adelaide Magistrates Court'
+    courtAddress = '260 Victoria Square, Adelaide SA 5000'
+    courtEndscreen
+  elif userLocation == 'south':
+    userCourt = 'Christies Beach Magistrates Court'
+    courtAddress = '96 Dyson Road, Christie Downs SA 5164'
+    courtEndscreen
+  else:
+    noCourtEndscreen
+---
+# This is the endpoint for if the user is in range of a Magistrates court
+event: courtEndscreen
+question: Your local Magistrates Court
+subquestion: |
+  Thank you for completing this survey.
+
+  Your nearest Magistrates Court is ${userCourt} at ${courtAddress}.
+
+  You can contact them at [this phone number](tel:08 8204 2444).
+
+buttons:
+  - Restart: restart
+  - Exit: exit
+---
+# This is the endpoint for if the user is not in range of a Magistrates court
+event: noCourtEndscreen
+question: There is no Magistrates Court near you
+subquestion: |
+  Thank you for completing this survey.
+
+  There is no suburban Magistrates Court near you.
+
+buttons:
+  - Restart: restart
+  - Exit: exit
+---
+```
+
+Now, let's consider how this code will run. 
+
+### Lines 15 to 38
+Docassemble will first execute the mandatory code block that starts on Line 15. To evaluate this code block, it needs a value for ```userLocation```.
+
+### Lines 1 to 14
+To obtain a value for ```userLocation```, Docassemble will then need to execute the question block starting on Line 2. This will display a radio options screen to the user.
+
+**Insert screenshot here**
+
+### Lines 54 to 65
+If the user selects **None of the above**, Docassemble will redirect the user to the ```noCourtEndscreen```. 
+
+**Insert screenshot here**
+
+### Lines 40 to 53
+Otherwise, Docassemble will redirect the user to the ```courtEndscreen```. The if-elif block on Lines 17 to 36 will set the value for ```userCourt``` and ```courtAddress```. For example, let's say our user selects **Western Adelaide**. The following screen will be displayed.
+
+**Insert screenshot here**
+
+## Improving our application
+You might have noticed that there is a bit of repetition in ```Ch4_Magistrates_Court_Tool.yml```. For example, we make multiple calls to ```courtEndscreen``` on Lines 20, 24, 28, 32 and 36. It would be easier if we just had one call to ```courtEndscreen``` if the user did not set ```userLocation``` to None of the above. To do this, we would need to use nested if statements, which we will cover in the next section.

@@ -2,7 +2,33 @@
 title: "Ch 3b: Mako if statements"
 ---
 
-## Mako if
+import {Quiz} from '@site/src/components';
+
+## A Recap On If Statements and Application Design
+In the [previous](/docs/textbook/chapter_04/00-30-ch3b-if_elif_statements.mdx) [sections](/docs/textbook/chapter_04/00-40-ch3b-if_elif_statements.mdx), we developed a series of applications that used if statements to direct the flow of control for our application. Depending on what the user entered as input, the if statement would trigger an event and Docassemble would display an end screen.
+
+That type of logic works well for multiple different endpoints. For example, each of our endpoints in this chapter so far contains a statement on whether a user is eligible for a particular form of welfare. What if a user is eligible for more than one form of welfare? For example, someone could be eligible for both a disability support pension and an aged care pension.
+
+To implement this, we could use Mako if statements.
+
+## Mako If Statements
+Rather than embedding our if statements in a code block, we can put Mako if statements into a question block. 
+
+There are multiple advantages to this. We can express more complicated logic in our end screens, and display certain text conditionally, as well as format text differently. We can also reduce how many times we need to duplicate code, particularly question blocks and end screens.
+
+### Rules for Mako If Statements
+The rules for using Mako if statements are different than for using if statements in a code block:
+
+* We can only use Mako if statements in a question block *after* a ```subquestion: |``` tag
+* The line on which the Mako if statement starts must be two spaces to the right of the ```subquestion: |``` tag
+* We start the if statement clause with a ```%``` symbol, which tells Markdown we're about to do something special. We end the if statement clause with a ```:```
+* We can either add Markdown text or other code (for example, a nested if statement) on the next line after the if statement clause
+* We end the entire if statement with an ```% endif``` clause, which must be aligned with any ```if```, ```elif``` or  ```else``` clause. 
+
+Note that you do not need to indent the text or code contained in your if statement. 
+
+## An Example Mako If Statement
+
 Probably need to introduce this earlier?
 
 - express if statements in subquestion blocks so can control display output

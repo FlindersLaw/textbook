@@ -176,9 +176,24 @@ buttons:
 ---
 ```
 
-### Lines 8 to 17
+### Lines 19 to 25
+As with ```Ch4_Welfare_Elif.yml```, Docassemble first starts by executing the ```mandatory``` code block. If the user enters a value for ```userAge``` between 18 and 65, the ```if``` statement nested in the ```else``` block on line 25 is executed.
 
-### Lines 25 to 33
+### Lines 26 to 33
+To evaluate the nested if statement, Docassemble needs a value for ```userStatus```. It finds that in the question block on line 18.
+
+### Lines 8 to 17
+The user must then select one of the values presented in this options list.
+
+**Insert screenshot here**
+
+Note that we have a None of the above option. Although we have not included this option in our if statement, it will be captured by the ```else``` clause on line 32. Depending 
+
+The value that is assigned to ```userStatus``` is then used to evaluate the nested if statement. 
+
+This will change what endscreen is displayed. For example, let's say the user selects that they have a disability. The disability endpoint screeen will be displayed:
+
+**Insert screenshot here**
 
 <Quiz title="Nested If Statement Quiz"></Quiz>
 
@@ -191,16 +206,3 @@ However, if we were to ask their age *and* whether they were disabled at the sam
 
 ## Improving Our Application
 Another example lies in the AusStudy branch of our application. An eagle eyed reader, upon examining the link for AusStudy, might note that this is available for students who are over 25. To help make a condition for this, we will need to use [and and or statements](/docs/textbook/chapter_04/00-60-ch3b_test_many_things_at_once.mdx).
-
-* In the previous section, we explained how to 
-
-- Discuss how we express this code by having an if statement inside another if statement (show an example, or an example of the above code would be great).
-- These are called **nested if statements** 
-:::note
-not a glossary term. Should it be?
-:::
-- In practice you will use many nested if statements precisely because you'll 
-need to make many decisions, one after the other.
-:::tip todo
-quizzes or exercises exploring nested if statements. Maybe match the if statement to a flowchart?
-:::
