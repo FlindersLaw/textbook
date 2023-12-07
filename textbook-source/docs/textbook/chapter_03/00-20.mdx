@@ -1,8 +1,6 @@
-import {Quiz} from '@site/src/components'
-import {Answer} from '@site/src/components/Quizlet/answer.js'
-import {Explanation} from '@site/src/components/Quizlet/explanation.js'
+import {Quizlet, Answer, Explanation} from '@site/src/components'
 
-<Quiz title="Example Quiz">
+<Quizlet title="Example Quiz">
     Let's say you want to test the value in `MJFage` to check that it equals 65.  which
     test would you use?
     <Answer>
@@ -25,10 +23,10 @@ import {Explanation} from '@site/src/components/Quizlet/explanation.js'
     1. that you're testing the value of a number and not text; and
     1. to use the correct test for equality
     </Explanation>
-</Quiz>
+</Quizlet>
 
-<Quiz>
-    This is a **Quiz** component.  It's used to display quizlets in the textbook.  The 
+<Quizlet>
+    This is a **Quizlet** component.  It's used to display quizlets in the textbook.  The 
     component consists of:
 
     1. a Quiz question
@@ -36,12 +34,12 @@ import {Explanation} from '@site/src/components/Quizlet/explanation.js'
     3. Explanations for the answers.
 
     What you are reading now forms part of the quiz question.  It appears as the first content
-    after opening with the `<Quiz>`.
+    after opening with the `<Quizlet>`.
 
     #### Title
-    You can give your quiz a title by using the `title` keyword ie: `<Quiz title='My Quiz Title'>`.
+    You can give your quiz a title by using the `title` keyword ie: `<Quizlet title='My Quiz Title'>`.
 
-    #### Quiz content
+    #### Quizlet content
     A question can contain Markdown and HTML, in fact pretty much anything you can put in a MDX file, 
     including other components.
 
@@ -115,4 +113,4 @@ import {Explanation} from '@site/src/components/Quizlet/explanation.js'
     correct answer or incorrect answer - it's up to you.  If you don't include an Explanation then
     nothing is displayed when an (in)correct answer is clicked.
     </Explanation>
-</Quiz>
+</Quizlet>
