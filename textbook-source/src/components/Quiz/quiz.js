@@ -62,7 +62,7 @@ export const Quiz = ({ children, title }) => {
   });
 
   return (
-    <div className='quizlet'>
+    <div className='quiz'>
       <div className='title'>
         <img src="/img/quiz-icon.svg" height='30px' />
         {quizTitle}
