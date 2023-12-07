@@ -3,6 +3,7 @@ title: "Ch 3b: If-Elif-Else Statements"
 ---
 
 import {Quizlet, Answer, Explanation} from '@site/src/components';
+import * as Components from '@site/src/components'
 
 ## Testing For More Than One Condition
 Our basic if-else block works well if we just have two options. What happens if we have more than one option? For example:
@@ -113,7 +114,9 @@ subquestion: |
   Please contact us using one of the following methods to understand more
 
   Phone Number: (08) XXXX XXXX
+
   Email Address: contact@adelaideclc.org.au
+
   Address: 1 Gouger Street Adelaide 5000
 
 buttons:
@@ -132,11 +135,19 @@ To assign a value for ```userAge```, Docassemble will then fire the question sta
 
 If ```userAge``` is less than 18, the event on Line 18, ```familyTaxAB```, is triggered.
 
+<Components.DisplayImage imageURL='/img/textbook/chapter_04/family_tax_ab_elif_statement.png' altText='The endpoint displayed if the user says they are under 18' />
+
 Else (that is, if ```userAge``` is *not* less than 18), if ```userAge``` is more than 65, the event on Line 31, ```agedPension```, is triggered. 
+
+<Components.DisplayImage imageURL='/img/textbook/chapter_04/aged_pension_elif_statement.png' altText='The endpoint displayed if the user says they are 65 or older' />
 
 Else (that is, if neither of the two conditions above are met), then the event on Line 44, ```contactUs```, is triggered.
 
-<Quizlet title="If-Elif Statement Quiz"></Quizlet>
+<Components.DisplayImage imageURL='/img/textbook/chapter_04/contact_us_elif_statement.png' altText='The endpoint displayed if the user says they are 65 or older' />
+
+<Quizlet title="If-Elif Statement Quiz">
+Which of the following is **not** true about `elif` clauses?
+</Quizlet>
 
 ## Another If-Elif Statement Example
 You might recall this flowchart from the section on if statements:
@@ -235,17 +246,17 @@ Docassemble will first execute the mandatory code block that starts on Line 15. 
 ### Lines 1 to 14
 To obtain a value for ```userLocation```, Docassemble will then need to execute the question block starting on Line 2. This will display a radio options screen to the user.
 
-**Insert screenshot here**
+<Components.DisplayImage imageURL='/img/textbook/chapter_04/magistrates_court_radio_options_elif_statement.png' altText='The radio options screen which allows to select where they live, so Docassemble can display which Magistrates Court in Adelaide they are closest to' />
 
 ### Lines 54 to 65
 If the user selects **None of the above**, Docassemble will redirect the user to the ```noCourtEndscreen```. 
 
-**Insert screenshot here**
+<Components.DisplayImage imageURL='/img/textbook/chapter_04/no_magistrates_court_endpoint_elif_statement.png' altText='The endpoint screen displayed to the user if they select "None of the above" from the previous screen' />
 
 ### Lines 40 to 53
 Otherwise, Docassemble will redirect the user to the ```courtEndscreen```. The if-elif block on Lines 17 to 36 will set the value for ```userCourt``` and ```courtAddress```. For example, let's say our user selects **Western Adelaide**. The following screen will be displayed.
 
-**Insert screenshot here**
+<Components.DisplayImage imageURL='/img/textbook/chapter_04/port_magistrates_court_endpoint_elif_statement.png' altText='The endpoint screen displayed to the user if they select "Western Adelaide" on the previous screen' />
 
 ## Improving our application
 You might have noticed that there is a bit of repetition in ```Ch4_Magistrates_Court_Tool.yml```. For example, we make multiple calls to ```courtEndscreen``` on Lines 20, 24, 28, 32 and 36. It would be easier if we just had one call to ```courtEndscreen``` if the user did not set ```userLocation``` to None of the above. To do this, we would need to use nested if statements, which we will cover in the next section.

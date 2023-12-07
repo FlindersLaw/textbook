@@ -104,11 +104,11 @@ The line ```if user18OrOver:``` is effectively the same as writing ```if user18O
 
 Lines 7 to 10 in our code block direct the flow of control of the application. If the user presses yes on the first screen (that is, ```user18OrOver``` is True), the final screen will display that they are an adult.
 
-**Put in a screencap from DA here**
+<Components.DisplayImage imageURL='/img/textbook/chapter_04/adult_endpoint_screen_if_statement.png' altText='The endpoint displayed if the user says they are over 18' />
 
 Otherwise, the application will display that they are a child.
 
-**Screencap here**
+<Components.DisplayImage imageURL='/img/textbook/chapter_04/child_endpoint_screen_if_statement.png' altText='The endpoint displayed if the user says they are under 18' />
 
 ### Flipping the Logic
 We can also flip the logic of our if statement around. In Ch4_Age_Eligibility, Line 7 tests whether the user is 18 years or older. We can reverse this logic with the following code:
@@ -139,7 +139,26 @@ buttons:
 ```
 Writing ```not user18OrOver``` on Line 7 is the same as writing ```userOver18OrOver < 18```.
 
-<Quizlet title="If Statement with Radio Buttons Quiz"></Quizlet>
+<Quizlet title="If Statement with Radio Buttons Quiz">
+    Let's say that we want to create an if statement clause to check whether the variable `userResponse` contains 'Yes'. What if statement clause should we use?
+    <Answer>
+    `if userResponse = 'Yes':`
+    </Answer>
+    <Answer>
+    `if userResponse:`
+    </Answer>
+    <Answer isCorrect>
+    `if userResponse == 'Yes':`
+    </Answer>
+    <Explanation correctAnswer>
+    That's right! Remember that we are evaluating a string variable to see whether it contains the string 'Yes'. Therefore, we need to evaluate that, and not a Boolean value. Also, you have correctly identified that the text for equality is `==` and not `=`.
+    </Explanation>
+    <Explanation incorrectAnswer>
+    That's not quite right. Remember when constructing an if statement:
+    * You need to test the value of the variable you are assessing using the correct datatype; and,
+    * You need to use the correct test for equality
+    </Explanation>
+</Quizlet>
 
 ## Other equality operators and if statements
 There are multiple ways that we could evaluate whether the user is over 18. For example, we might simply ask the user whether they were over 18 or not, which might be sufficient to satisfy some statutory tests. Otherwise, we could ask the user to provide their age, and then evaluate whether this age was over 18 mathematically. 
@@ -207,6 +226,27 @@ buttons:
 Now, our if statement on Line 7 is checking whether ```userAge``` is less than 18. If they are, it sets the value of ```userIsAdult``` to 'just a child'. 
 
 Both of these if statements work just as well as one another. 
+
+<Quizlet title="If Statement with Integers Quiz">
+    We want to build a Docassemble application which will check whether `userAge` contains a value of 65 or greater. What if statement clause should we use?
+    <Answer isCorrect>
+    `if userAge >= 65:`
+    </Answer>
+    <Answer>
+    `if userAge > 65:`
+    </Answer>
+    <Answer>
+    `if userAge > '65':`
+    </Answer>
+    <Explanation correctAnswer>
+    That's right! You have identified the correct test for whether a variable is equal to or greater a value. You have also recognised that you can only perform these operations on an integer, rather than a string.
+    </Explanation>
+    <Explanation incorrectAnswer>
+    That's not quite right. Remember:
+    * You have to make sure that you are testing for whether the variable contains a value *equal to or greater* than 65; and,
+    * You can only use mathematical equality operators such as `<` and `>` on integers and floats
+    </Explanation>
+</Quizlet>
 
 Review C2.01.  From memory I think we had these shortcomings.
 - we need to cover it a bit more slowly.  Introduce if, then if/else, then if/elif.  Maybe have mini-quizzes after each one?
