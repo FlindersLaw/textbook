@@ -89,6 +89,12 @@ const config = {
             label: 'Coding Recipes'
           },
           {
+            type: 'docSidebar',
+            position: 'left',
+            sidebarId: 'tbHelpSidebar',
+            label: 'Textbook Help',
+          },
+          {
             href: 'https://github.com/LLAW3301',
             label: 'Digital Age GitHub',
             position: 'right',
