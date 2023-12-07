@@ -3,7 +3,7 @@ title: "Ch 3b: If statements"
 ---
 import {DisplayGlossaryItem} from '@site/src/components';
 import * as Components from '@site/src/components'
-import {Quiz} from '@site/src/components';
+import {Quizlet, Answer, Explanation} from '@site/src/components';
 
 ## An Introduction to Logic
 In this chapter, we will talk about logic and how to control the logic of our applications. We can use logic to make our app can do one thing or another depending on the input it receives. We can direct the flow of the program depending on how the user inputs certain information. We will do this using if statements.
@@ -137,9 +137,9 @@ buttons:
   - Restart: restart
 ---
 ```
-Writing ```not user18OrOver``` on Line 7 is the same as 
+Writing ```not user18OrOver``` on Line 7 is the same as writing ```userOver18OrOver < 18```.
 
-<Quiz title="If Statement with Radio Buttons Quiz"></Quiz>
+<Quizlet title="If Statement with Radio Buttons Quiz"></Quizlet>
 
 ## Other equality operators and if statements
 There are multiple ways that we could evaluate whether the user is over 18. For example, we might simply ask the user whether they were over 18 or not, which might be sufficient to satisfy some statutory tests. Otherwise, we could ask the user to provide their age, and then evaluate whether this age was over 18 mathematically. 
