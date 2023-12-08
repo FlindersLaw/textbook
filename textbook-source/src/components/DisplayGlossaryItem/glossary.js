@@ -47,6 +47,9 @@ export const glossary = new Map([
         text: 'data type',
         plural: 'data types',
     }],
+    ['datavalidation', {
+        text: 'data validation',
+    }],
     ['dictionary', {
         text: 'dictionary',
         plural: 'dictionaries' }
@@ -59,6 +62,10 @@ export const glossary = new Map([
         text: 'field label',
         plural: 'field labels'}
     ],
+    ['float', {
+        text: 'float',
+        plural: 'floats'}
+    ],
     [ 'function', {
         text: 'function',
         plural: 'functions' }
@@ -70,6 +77,10 @@ export const glossary = new Map([
     [ 'inputtype', {
         text: 'input type',
         plural: 'input type',
+    }],
+    [ 'integer', {
+        text: 'integer',
+        plural: 'integers',
     }],
     ['jinja', { text: 'jinja' }],
     [ 'list', {
