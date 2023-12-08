@@ -1,5 +1,6 @@
 ---
 title: Data Types
+toc_max_heading_level: 5
 ---
 import {DisplayGlossaryItem} from '@site/src/components';
 import {DisplayImage} from '@site/src/components';
@@ -221,7 +222,7 @@ As can be seen above a string can contain any combination of text, numbers and s
 This makes it challenging for Docassemble to work out whether data input is a string
 or not.  How do we address this?  There are two ways:
 
-##### 1. Encapsulating the string in quotes
+##### Encapsulating the string in quotes
 If we want to make it clear to Docassemble that a string is a string and not, say, 
 part of the code or a number or something else, we encapsulate the string in quotes.
 We can use single or double quotes.  The convention is to use single quotes and only
@@ -238,7 +239,7 @@ express the five examples above as follows:
 When Docassemble sees text in quotes it knows not to process that text and to display
 it as a string.
 
-##### 2. String is the default data type
+##### String is the default data type
 The second way is that Docassemble has a presumption that *any* data it collects is 
 a string unless specified otherwise.  This is where those `datatype:` tags come into 
 play.  If the `datatype:` tag is omitted (as it usually is), Docassemble
@@ -280,6 +281,94 @@ very different to what you'll get if your data is a number type.  The same goes 
 testing strings to see if they equal one another.  See [Testing Variables](./00-30) for
 more about this.
 :::
+
+#### Manipulating Strings
+We've already seen that we can perform arithmetic operations on the number types and,
+with a bit more effort, on the date and datetime types.  Strings can also be 
+manipulated, but clearly arithmetic operations won't work on strings as they are not
+numbers.  That said, here are a few things you can do with strings.
+
+##### Joining strings together
+There are a number of ways to join strings together.  One way is by using the plus (`+`)
+operator.
+
+###### Using the `+` operator
+This method of joining strings together is usually used in
+<DisplayGlossaryItem item='codeblock' plural /> or inside 
+<DisplayGlossaryItem item='mako' upper /> expressions in a 
+<DisplayGlossaryItem item='subquestionblock' />.
+
+Let's look at this example.
+```python showLineNumbers
+a = 'First part'
+b = 'Second part'
+c = a + b
+```
+In the code above, the value of `c` would be `'First partSecond part'`.  
+
+Note the strings are joined directly together with no space.  If you want a space
+between strings then you need to add it yourself.  Luckily, you can use multiple joins
+(`+`) in the one statement.
+
+```python showLineNumbers
+a = 'First part'
+b = 'Second part'
+c = a + ' ' + b     # Add a space by encapsulating it in quotes
+```
+Now the value of c is `'First part Second part'`.
+
+Here is an example using `+` to join strings together inside a Mako expression:
+```yml showLineNumbers
+---
+mandatory: True
+question: String Concatenation
+subquestion: |
+    Hello,
+
+    Your full name is ${ MJFfirstname + ' ' + MJFlastname }
+---
+```
+
+##### Using `format()`
+An alternative to using `+` is to use the `format()` <DisplayGlossaryItem item='method' />.
+Like `+` this is also suitable for code blocks and Mako expressions.  With `format()`
+you lay out a template string as you would like it,
+with spaces and any other fixed characters or boilerplate text.
+You place `{}` as markers within your string to indicate where format should place
+variables.  See this example:
+
+
+```python showLineNumbers
+a = 'First part'
+b = 'Second part'
+c = '{} {}'.format(a, b)
+```
+In this example the value of c is `'First part Second part'` just as it was above.
+You can see we created a template string with `{}` markers for each variable and 
+inserted a space (` `) in between them.  We then use `format(a, b)` to substitute
+the value of `a` into the first `{}` and `b` into the second `{}`.
+
+You can see that using `format()` in this way we've ended up with a tidier expression.
+Also, someone reading our code would immediately know that we were planning to display
+two strings separated by a space.
+
+Here's what the example Docassemble code would look like if we used `format()`
+
+
+```yml showLineNumbers
+---
+mandatory: True
+question: String Concatenation
+subquestion: |
+    Hello,
+
+    Your full name is ${ '{} {}'.format(MJFfirstname, MJFlastname) }
+---
+```
+
+#### Strings in Markdown and Mako
+
+
 
 
 You may be wondering how can Docassemble distinguish whether something is a string
