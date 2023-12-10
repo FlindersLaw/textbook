@@ -34,6 +34,10 @@ export const glossary = new Map([
         text: 'comment',
         plural: 'comments' }
     ],
+    ['complexdatatype', {
+        text: 'complex data type',
+        plural: 'complex data types' }
+    ],
     ['curlybrace', {
         text: 'curly brace',
         plural: 'curly braces' }

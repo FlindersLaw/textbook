@@ -625,53 +625,19 @@ as a variable name.
 Mixing up cases can often lead to unintended conseuqneces, so be careful!
 :::
 
+## Simple and Complex Data Types
+Up until this point we have discussed 'simple' data types, that is data types that 
+represent one thing - an integer, a floating point number, a string and so-on.
+So far, we've only been storing one value in a variable.  However, like a bucket, it
+is possible to store *more* than one thing in a variable at a time. For this we use
+<DisplayGlossaryItem item='complexdatatype' plural />.
 
-#### Data types and input types in Docassemble
-A data type describes **the type of data**.  That is, the data may be a number,
-or a string, or a picture, and so-on.  
+The complex data types we'll refer to in this textbook will be
+<DisplayGlossaryItem item='list' plural /> and <DisplayGlossaryItem item='dictionary' plural />.
+A list allows us to store multiple data and to access them, well, as a list ie:
+from the first element to the last sequentially.  A dictionary allows us to refer
+to data by an identifier, or a 'key'.  Both these data types unlock the ability for
+us to store sophisticated data sets, even databases, in our Docassemble apps.
 
-An input type desribes **how the data is collected**. For example, Docassemble's
-`radio` input type displays a question to a user as a set of radio buttons.
-However, what is stored in the variable is usually a string.
-
-<details>
-    <summary>
-        Example of input and data types
-    </summary>
-This code block collects the salutation for a person.
-
-```yml
----
-mandatory: true
-question: Salutation
-subquestion: |
-    We're just collecting a salutation and nothing else, for 
-    demonstration purposes
-fields:
-    - Enter salutation: MJFsalutation
-      input type: radio
-      choices:
-        - Dr
-        - Mr
-        - Mrs
-        - Ms
-        - Mx
----
-```
-Because the `input type` is `radio`, the choices are presented like this:
-
-<DisplayImage imageURL='/img/textbook/chapter_03/datatypes1.png' />
-
-You can see from the code block that the value will be stored in `MJFsalutation`.  However,
-the data type of what is stored is *not* a `radio` data type. It is stored as a 
-<DisplayGlossaryItem item='string' />.  This makes sense as what we're storing
-is just text.
-
-So, the *input type* is `radio` but the *data type* is string.
-</details>
-
-Let's go through some of the fundamental datatypes and the Docassemble data types
-and then we can come back to input types later.
-
-Now that we've covered booleans we can discuss *how* we test for truth and falsity 
-in code.
+We will cover complex data types in <DisplayChapter chapter='TODO' />.  For now, it's
+worth being aware that complex data types exist.
