@@ -24,6 +24,7 @@ import {capitalizeWords} from './utilities.js';
  * @param {boolean} [props.lower] - Optional. Displays the chapter name in lowercase.
  * @param {boolean} [props.number] - Displays the chapter text as a number like 'Chapter 1' (instead of 'Chapter One').
  * @param {boolean} [props.nourl] - Displays the chapter text and not as a link. Can be used along with 'upper', 'lower', and 'number'.
+ * @param {string}  [props.text]  - If exist is the text displayed in the anchor, otherwise the chapter name is used
  *
  * @returns {JSX.Element} - React component with appropriate CSS styling for displaying a link to a chapter or plain text.
  */
@@ -50,12 +51,12 @@ export function DisplayChapter(props) {
 
     // First, get the record from the map
     let chapterRecord = chapter_list[props.chapter];
-    let linkText = `${chapterTextPrefix} ${chapterRecord['word']}`;
+    let linkText = props.text || `${chapterTextPrefix} ${chapterRecord['word']}`;
     if (props.upper) {
         linkText = linkText.toUpperCase();
     } else if ( props.lower ) {
         linkText = linkText.toLowerCase();
-    } else if ( props.number ) {
+    } else if ( props.number && !props.text ) {
         // Reconstruct the link text if it's a number
         linkText = `${chapterTextPrefix} ${chapterRecord['number']}`;
         linkText = capitalizeWords(linkText);
