@@ -1,9 +1,10 @@
 ---
 title: Data Types
-toc_max_heading_level: 5
 ---
 import {DisplayGlossaryItem} from '@site/src/components';
 import {DisplayImage} from '@site/src/components';
+import {DisplayChapter} from '@site/src/components';
+import {Quizlet,Answer,Explanation} from '@site/src/components'
 
 ## Introduction
 Much like we can put different stuff in a bucket, like water or sand or fish (yum!),
@@ -26,10 +27,9 @@ We'll cover this further [below](TODO) but in coding, text includes spaces
 Just keep that in mind for now.
 :::
 
-## Data Types
 Let's cover off a few data types that you'll be using in your code.
 
-### Integers
+## Integers
 Integers are whole numbers, that is numbers that are not fractions or numbers without a decimal point (eg: 1, 5, -33 etc).  They can be positive or negative.  They **must not**
 have decimals.
 
@@ -77,7 +77,7 @@ This is known as <DisplayGlossaryItem item='datavalidation' />.  Docassemble pro
 a comprehensive set of data validation tools to ensure that users do not inadvertently
 enter incorrect data.
 
-### Floating points
+## Floating points
 Floating point numbers, or <DisplayGlossaryItem item='float' plural /> are
 numbers that *do* contain decimals.  For example, the numbers
 0.5, 1.32, 6.333333333, -123483.3728322 are all floating point numbers.
@@ -122,7 +122,7 @@ accept the input.
 
 <DisplayImage imageURL='/img/textbook/chapter_03/datatypes3.png' />
 
-:::hint
+:::tip Hint
 Copy and paste the code into your playground and try it out!
 :::
 
@@ -132,8 +132,8 @@ slightly different ways.  In Python a data type is what we're describing here - 
 fundamental type of data that can be stored in a variable.
 Docassemble's `datatype` mixes storage of data with <DisplayGlossaryItem item='datavalidation' />.
 We've seen how these don't quite mesh as, fundamentally, a money amount is a
-<DisplayGlossaryItem item='float' />, just like any other floating point number.  
-Docassemble distinguishes between regular floats and currency, but it does this to
+<DisplayGlossaryItem item='float' /> as it is a number with decimal places.
+Docassemble distinguishes between regular floats and currency to
 simplify how currencies are displayed and captured.  This is because, as legal software,
 currencies are the most common type of floating point numbers that it works with.
 
@@ -147,10 +147,44 @@ fundamentally, all three 'data types' are actually
 For practical purposes, consider Docassemble's `datatype:` as a 
 <DisplayGlossaryItem item='datavalidation' /> tool and not as a fundamental 
 data type.  When we refer to data types in this textbook we'll be referring to the
-fundamental data types as they are defined in Python.
+fundamental data types as they are defined in Python and as we discus them in this
+part of the textbook.
 :::
 
-### Dates and times
+<Quizlet>
+    In this expression
+    ```python
+    a = 11.55
+    ```
+    the data type of `a` is:
+    <Answer>
+        Integer
+    </Answer>
+    <Answer isCorrect>
+        Floating point number
+    </Answer>
+    <Answer>
+        String
+    </Answer>
+</Quizlet>
+<Quizlet>
+    In this expression
+    ```python
+    b = 253265
+    ```
+    the data type of `b` is:
+    <Answer isCorrect>
+        Integer
+    </Answer>
+    <Answer>
+        Floating point number
+    </Answer>
+    <Answer>
+        String
+    </Answer>
+</Quizlet>
+
+## Dates and times
 Dates and times are another number-type data type.  In fact, they are represented
 internally to Python (and many other languages and systems) as integers.
 However, for practical
@@ -192,12 +226,12 @@ fields:
 Copy this code into your playground and try it out!
 :::
 
-### Strings
+## Strings
 Strings are by far the most common data type you will be dealing with.  Law is 
 clearly a very text-based profession and text is represented to technology as a
 string of characters joined together, or as a <DisplayGlossaryItem item='string' />.
 
-#### What is in a string?
+### What is in a string?
 Any text is clearly a string, so:
 > hello
 
@@ -217,12 +251,12 @@ The next three examples are also all strings:
 
 > This string 'has quotes' in it
 
-#### Representing strings
+### Representing strings
 As can be seen above a string can contain any combination of text, numbers and symbols.
 This makes it challenging for Docassemble to work out whether data input is a string
 or not.  How do we address this?  There are two ways:
 
-##### Encapsulating the string in quotes
+#### Encapsulating the string in quotes
 If we want to make it clear to Docassemble that a string is a string and not, say, 
 part of the code or a number or something else, we encapsulate the string in quotes.
 We can use single or double quotes.  The convention is to use single quotes and only
@@ -239,7 +273,7 @@ express the five examples above as follows:
 When Docassemble sees text in quotes it knows not to process that text and to display
 it as a string.
 
-##### String is the default data type
+#### String is the default data type
 The second way is that Docassemble has a presumption that *any* data it collects is 
 a string unless specified otherwise.  This is where those `datatype:` tags come into 
 play.  If the `datatype:` tag is omitted (as it usually is), Docassemble
@@ -282,17 +316,82 @@ testing strings to see if they equal one another.  See [Testing Variables](./00-
 more about this.
 :::
 
-#### Manipulating Strings
+<Quizlet>
+    Which of these variables have been assigned a value with a string data type?
+    ```python
+    a = 52.5
+    b = '52.5'
+    c = 525
+    ```
+    <Answer>
+        `a`
+    </Answer>
+    <Answer isCorrect>
+        `b`
+    </Answer>
+    <Answer>
+        `c`
+    </Answer>
+    <Explanation correctAnswer>
+    Correct!
+
+    Even though it appears a number is being assigned to `b` it is actually
+    a string as that number is surrounded by single quotes.
+    </Explanation>
+</Quizlet>
+<Quizlet>
+    Which of these variables has correctly been assigned a string value?
+    ```
+    a = The cat sat on the mat
+    b = 'It doesn't matter what I say'
+    c = "The rain in spain stays mainly on the plain"
+    ```
+    the data type of `b` is:
+    <Answer>
+        `a`
+    </Answer>
+    <Answer>
+        `b`
+    </Answer>
+    <Answer isCorrect>
+        `c`
+    </Answer>
+    <Explanation correctAnswer>
+    Correct!
+
+    The first line is incorrect as the phrase is not encapsulated in quotation marks.
+    If you wrote this line in code you would receive a rather cryptic syntax error.  
+
+    Here is the corect statement:
+    ```python
+    a = 'The cat sat on the mat'
+    ```
+
+    The second line is also incorrect as, although it is encapsulated in single quotes
+    the phrase itself also contains a single quote.  When you have a phrase that
+    contains quotation  marks you should encapsulate that phrase in  the other quotes.
+
+    Here is the correct statement:
+    ```python
+    b = "It doesn't matter what I say"
+    ```
+
+    The third line is correct as it the string is encapsualted in double-quotes.  You
+    can use single or double quotes to represent a string
+    </Explanation>
+</Quizlet>
+
+### Manipulating Strings
 We've already seen that we can perform arithmetic operations on the number types and,
 with a bit more effort, on the date and datetime types.  Strings can also be 
 manipulated, but clearly arithmetic operations won't work on strings as they are not
 numbers.  That said, here are a few things you can do with strings.
 
-##### Joining strings together
+#### Joining strings together
 There are a number of ways to join strings together.  One way is by using the plus (`+`)
 operator.
 
-###### Using the `+` operator
+##### Using the `+` operator
 This method of joining strings together is usually used in
 <DisplayGlossaryItem item='codeblock' plural /> or inside 
 <DisplayGlossaryItem item='mako' upper /> expressions in a 
@@ -328,7 +427,50 @@ subquestion: |
     Your full name is ${ MJFfirstname + ' ' + MJFlastname }
 ---
 ```
+<Quizlet>
+    In this statement, what value is assigned to `a`?
+    ```python
+    a = 1 + 1
+    ```
+    <Answer isCorrect>
+    `2`
+    </Answer>
+    <Answer>
+        `1`
+    </Answer>
+    <Answer>
+        `'11'`
+    </Answer>
+    <Explanation correctAnswer>
+    Correct!
 
+    Two integers are being added together, so the answer will be 2
+    </Explanation>
+</Quizlet>
+<Quizlet>
+    In this statement, what value is assigned to `a`?
+    ```python
+    a = '1' + '1'
+    ```
+    <Answer>
+    `2`
+    </Answer>
+    <Answer>
+        `11`
+    </Answer>
+    <Answer isCorrect>
+        `'11'`
+    </Answer>
+    <Explanation correctAnswer>
+    Correct!
+
+    The two number 1s on the right side are now encapsualted in quotes.  This makes
+    them strings (single-character strings!) and not integers any more.  Therefore,
+    when we use `+` we are now joining two strings together instead of performing
+    integer arithmetic.  Consequently the answer is the string `'11'` (as opposed to
+    the integer `11`).
+    </Explanation>
+</Quizlet>
 ##### Using `format()`
 An alternative to using `+` is to use the `format()` <DisplayGlossaryItem item='method' />.
 Like `+` this is also suitable for code blocks and Mako expressions.  With `format()`
@@ -366,43 +508,125 @@ subquestion: |
 ---
 ```
 
-#### Strings in Markdown and Mako
+
+### Strings and Markdown (and why we need Mako)
+As you know from <DisplayChapter chapter='chapter_02' target='00-20' />, we use
+<DisplayGlossaryItem item='markdown' /> to construct inteview screens in our apps.  
+You can see that Markdown is basically text, or strings!  Because of this Markdown
+does away with the requirement to encapsulate strings in quotes. Instead, Markdown 
+assumes *everything* is a string.  This is useful as most of the Markdown we type 
+will be boilerplate text.  
+
+However, there are times when we need to embed the value of a variable into our
+boilerplace text.  Markdown deals with this by using
+<DisplayGlossaryItem item='escapecharacter' plural />.
+These are special characters that Markdown knows trigger some special processing.  
+We have already seen this with <DisplayGlossaryItem item='mako' upper />. Mako 
+expressions are surrounded by a dollar sign and braces (ie: `${...}`).  Markdown
+knows that when it sees the `${` characters that what follows it is Mako.  Markdown
+processes everything it then sees as Python code until it finds the closing brace `}`.
+
+This allows us to make our example code even clearer, because we don't need to 
+concatentate strings or use `format()` in a Mako expression.  We can just display
+the two variables as Mako with a space between them.
+
+```yml showLineNumbers
+---
+mandatory: True
+question: String Concatenation
+subquestion: |
+    Hello,
+
+    Your full name is ${MJFfirstname} ${MJFlastname}
+---
+```
+
+The space between the two Mako expressions is a string and is therefore displayed.
+
+This last example is the clearest way of displaying two Mako variables.
+
+:::note What's inside Mako is Python
+We alluded to this just now.  'Mako' describes the means of providing escape characters
+to Markdown and then processing the expression inside its braces.  The code written
+inside the braces is Python code (or, more technically, a Python
+<DisplayGlossaryItem item='expression' />).  This is the same Python that you use
+in <DisplayGlossaryItem item='codeblock' /> and all througout Docassemle.
+:::
+
+## Booleans
+The **boolean** data type is takes its name from a [branch of mathematics](https://en.wikipedia.org/wiki/Boolean).
+We don't need to get into any of the mathematical details. All we need to know is that
+a boolean data type can have only two possible values - *true* or *false*.
+
+This appears inredibly simple but boolean logic (and consequently variables with a
+boolean data types) are absolutely central to our decision-making process and the logic
+of our applications.  In fact, booleans form the core of application logic in 
+*every* software system regardless of how simple or complex.
+Every decision that we make will ultimately be expressed as a true/false proposition.
+
+Let's look at some questions we might ask and how we would express these as true/false
+propositions.
+
+**Age**
+
+We may need to ask a user's age, for example to determine if they are an adult.  If so
+we may ask the question:
+> "Are you 18 or over?".
+
+This could be expressed as a true/false proposition, such as:
+> "Your age is greater than or equal to 18"
+
+Which would evaluate as true or false.
+
+**Gender**
+
+Likewise, we may need to know a user's gender so that we can direct them to an
+appropriate legal service.  Our initial thoughts may be to ask:
+> "What gender do you identify as?"
+
+That question is open-ended and could have any number of answers, some of
+which our code may not account for.  A better approach may be to ask:
+> "Do you identify as male, female or some other gender?"
+
+Now we have three possible answers. Consequently we'd need three true/false propositions
+to evaluate:
+> "You identify as male"  
+> "You identify as female"  
+> "You identify as some other gender"
+
+We would evaluate each of these in turn.  Only one statement would evaluate to true.
+
+#### Booleans in code
+Much like above, we express booleans in code as true/false propositions.  So, for example,
+the proposition "Your age is greater than or equal to 18" would be expressed as:
+```python
+MJFage >= 18
+```
+
+If we wanted to remember the outcome of the proposition we could store that in 
+another variable:
+```python
+MJFisadult = MJFage >= 18
+```
+The value of `MJFisadult` would be `True` or `False` depending on the user's age.
+
+:::note 
+Python uses two special words (or <DisplayGlossaryItem item='reservedword' plural />)
+- `True` and `False` to represent, well true and false!  Python knows to treat these
+words as the meaning of true and false respectively and not some other variable or 
+string.
+:::
+
+:::caution Python is case sensitive!
+Python is case sensitive.  That means that `True` and `true` are not the same!  Unlike
+`True`, `true` is not a <DisplayGlossaryItem item='reservedword' /> and will be treated
+as a variable name.
+
+Mixing up cases can often lead to unintended conseuqneces, so be careful!
+:::
 
 
-
-
-You may be wondering how can Docassemble distinguish whether something is a string
-or not.  A string
-
-
-Move the note into here.
-- joining strings together
-- strings are actually a list of characters strung together.
-
-### Booleans
-- introduce the concept
-- reducing iftt tests into true/false - fundamental
-- DA uses yesno and yesnobutton datatypes to return boolean results
-- if the answer is Yes or No then we express as a boolean.
-
-
-
-
-
-
-## Docassemble, Python and Data Types
-In Docassemble, data types are used for two purposes.  When we look at the data
-types of variables, we refer to *fundamental* data types.  These are types
-such as text (strings), numbers (integers and floats) and <DisplayGlossaryItem item='boolean' plural />.
-Fundamental data types are essential to Python, and so variables and code blocks.
-
-Docassemble's [manual](https://docassemble.org/docs/fields.html#data%20types)
-refers to 'Data types and input types'.  Unhelpfully, Docassemble mixes the
-two terms, but in Docassemble-speak most of its data types are actually 
-<DisplayGlossaryItem item='inputtype' plural />.  Also unhelpfuly, we will 
-also mix these terms!
-
-#### The difference between a data type and an input type
+#### Data types and input types in Docassemble
 A data type describes **the type of data**.  That is, the data may be a number,
 or a string, or a picture, and so-on.  
 
@@ -449,13 +673,5 @@ So, the *input type* is `radio` but the *data type* is string.
 Let's go through some of the fundamental datatypes and the Docassemble data types
 and then we can come back to input types later.
 
-## Fundamental Data Types
-
-
-There are also *Docassemble data types*.  Docassemble data types are used by
-docassemble to format how data is collected.  For example, Docassemble has
-data types to display a question using [radio buttons](https://xx.xx)
-
-
-
-
+Now that we've covered booleans we can discuss *how* we test for truth and falsity 
+in code.

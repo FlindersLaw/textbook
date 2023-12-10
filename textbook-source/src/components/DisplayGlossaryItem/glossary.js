@@ -52,8 +52,12 @@ export const glossary = new Map([
     }],
     ['dictionary', {
         text: 'dictionary',
-        plural: 'dictionaries' }
-    ],
+        plural: 'dictionaries'
+    }],
+    ['escapecharacter', {
+        text: 'escape character',
+        plural: 'escape characters'
+    }],
     ['field', {
         text: 'field',
         plural: 'fields'}
@@ -107,7 +111,10 @@ export const glossary = new Map([
         text: 'question block',
         plural: `question blocks` }
     ],
-    ['reservedword', { text: 'reserved word' }],
+    ['reservedword', { 
+        text: 'reserved word',
+        plural: 'reserved words'
+    }],
     ['squarebracket', {
         text: 'square bracket',
         plural: 'square backets' }

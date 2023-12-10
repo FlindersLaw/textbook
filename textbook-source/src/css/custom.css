@@ -155,8 +155,14 @@
   background-color: rgba(35,46,75, 0.1);
 }
 
+/* Don't want spacing after a <p> as single-line answers look ugly */
+.quizlet .answerButton p {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
 .quizlet .correctAnswer {
-  background-color: #2f922f;
+  background-color: #5f922f;
   color: #ffffff;
   font-weight: bold;
 }
