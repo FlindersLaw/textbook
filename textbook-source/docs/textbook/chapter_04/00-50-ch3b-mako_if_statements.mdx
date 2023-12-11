@@ -3,6 +3,7 @@ title: "Ch 3b: Mako if statements"
 ---
 
 import {Quizlet, Answer, Explanation} from '@site/src/components';
+import * as Components from '@site/src/components'
 
 ## A Recap On If Statements and Application Design
 In the [previous](/docs/textbook/chapter_04/00-30-ch3b-if_elif_statements.mdx) [sections](/docs/textbook/chapter_04/00-40-ch3b-if_elif_statements.mdx), we developed a series of applications that used if statements to direct the flow of control for our application. Depending on what the user entered as input, the if statement would trigger an event and Docassemble would display an end screen.
@@ -21,13 +22,167 @@ The rules for using Mako if statements are different than for using if statement
 
 * We can only use Mako if statements in a question block *after* a ```subquestion: |``` tag
 * The line on which the Mako if statement starts must be two spaces to the right of the ```subquestion: |``` tag
-* We start the if statement clause with a ```%``` symbol, which tells Markdown we're about to do something special. We end the if statement clause with a ```:```
+* We start the if statement clause with a ```%``` symbol, which tells Markdown we're about to do something special. **Note that there must be a space between the ```%``` symbol and the start of the if statement clause.** We end the if statement clause with a ```:```
 * We can either add Markdown text or other code (for example, a nested if statement) on the next line after the if statement clause
 * We end the entire if statement with an ```% endif``` clause, which must be aligned with any ```if```, ```elif``` or  ```else``` clause. 
 
 Note that you do not need to indent the text or code contained in your if statement. If you do, it could cause a syntax error.
 
-## An Example Mako If Statement
+## Another Example Mako If Statement
+The simplest use of Mako if statements is to condense down the number of screens required for a Docassemble application. Let's consider our court selector from the previous [section](/docs/textbook/chapter_04/00-40-ch3b-if_elif_statements.mdx). You might recall we used the following flowchart:
+
+```mermaid
+flowchart LR;
+    id1{{Where do you live?}}
+    id1 -- West Adelaide --> id2(Port Adelaide Magistrates Court)
+    id1 -- Northern Adelaide --> id3(Elizabeth Magistrates Court)
+    id1 -- North-East Adelaide --> id4(Adelaide Magistrates Court)
+    id1 -- Adelaide CBD --> id4
+    id1 -- Southern Adelaide --> id5(Christies Beach Magistrates Court)
+```
+
+Although this would imply that we need to have four endpoints for each court, we can easily combine them together into one using a Mako if statement:
+
+```yaml showLineNumbers title="Ch4_Magistrates_Court_Finder_Mako.yml" showLineNumbers
+---
+question: |
+  Where do you live?
+fields:
+  - no label: userLocation
+    datatype: radio
+    choices:
+      - Western Adelaide: west
+      - Northern Adelaide: north
+      - North-East Adelaide: northeast
+      - Adelaide CBD: cbd
+      - Southern Adelaide: south
+      - None of the above: none
+---
+# This is the one mandatory question block
+mandatory: True
+question: Your local Magistrates Court
+subquestion: |
+  Thank you for completing this survey.
+
+  % if userLocation == 'west':
+  Your nearest Magistrates Court is the Port Adelaide Magistrates Court at 260 St Vincent Street, Port Adelaide SA 5015.
+  % elif userLocation == 'north':
+  Your nearest Magistrates Court is the Elizabeth Magistrates Court at 15 Frobisher Road, Elizabeth SA 5112.
+  % elif userLocation == 'northeast':
+  Your nearest Magistrates Court is the Adelaide CBD Magistrates Court at 260 Victoria Square, Adelaide SA 5000.
+  % elif userLocation == 'cbd':
+  Your nearest Magistrates Court is the Adelaide CBD Magistrates Court at 260 Victoria Square, Adelaide SA 5000.
+  % elif userLocation == 'south':
+  Your nearest Magistrates Court is the Christies Beach Magistrates Court at 96 Dyson Road, Christie Downs SA 5164.
+  % else:
+  We are unable to identify a Magistrates Court near you.
+  % endif
+  
+  Please contact this [telephone number](tel:08 8204 2444) for further details.
+
+buttons:
+  - Restart: restart
+  - Exit: exit
+---
+```
+
+With our Mako if statement, we have shortened our code down from 65 lines to only 43. Let's look at how it works.
+
+### Line 16
+Unlike the previous application, where we had ```event``` tags, this application just has one mandatory if statement. Therefore, Docassemble will execute this code block first, and attempt to find a value of ```userLocation```.
+
+### Lines 1 to 14
+Lines 1 to 14 work exactly as they did in the previous application.
+
+### Lines 21 to 33
+The big difference between this code and the previous code is our Mako ```if-elif-else``` clause. If the user selects 'Western Adelaide' from the previous screen, they will see the following code:
+
+**screenshot here**
+
+If the user selects none, they will see the following screen:
+
+**screenshot here**
+
+Again, we see almost identical output from our previous code. However, our code is now shorter, and we do not need to reuse code. That means there are less bugs. 
+
+## Yet Another Example Mako If Statement
+As mentioned in previous sections, we can use Mako if statements to refactor our previously designed code. Let's start with our welfare eligibility application. You might recall the following flowchart.
+
+```mermaid
+flowchart LR;
+    id1{{How old are you?}}
+    id1 -- 18 or younger --> id2(Family Tax A or B)
+    id1 -- 65 or older --> id3(Aged Care Pension)
+    id1 -- Between 18 and 65  --> id4{{Do you meet any of the following?}}
+    id4 -- I have a disability --> id5(Disability Support Pension)
+    id4 -- I am currently studying --> id6(AusStudy)
+    id4 -- I am unemployed --> id7(JobSeeker)
+    id4 -- None of the above --> id8(Not eligible)
+```
+
+Previously, with ```elif``` and nested ```if``` statement clauses, we had an ```event:``` tag corresponding to each form of welfare. We are going to refactor our application so that someone can be eligible for multiple forms of welfare. We also want to add some new rules so that our application more accurately reflects the rules on welfare in Australia. Specifically:
+
+* Someone can only claim AusStudy if they are 25 or older and are studying full time
+* Someone can only claim JobSeeker if they are 22 or older and are studying full time
+
+Therefore, we need to redesign our flow chart as follows:
+
+```mermaid
+flowchart LR;
+    id1{{How old are you?}}
+    id1 -- Between 18 and 65 --> id4(Proceed to next set of questions)
+    id1 -- 65 or older --> id3(Aged Care Pension)
+    id1 -- 18 or younger --> id2(FamilyTax A or B)
+    id2 --> id5(Do you have a disability?)
+    id3 --> id5
+    id3 --> id6(Are you studying full time?)
+    id3 --> id7(Are you unemployed?)
+    id4 --> id5
+    id4 -- I am older than 25 --> id6
+    id4 -- I am older than 22 --> id7
+    id5 --> id8(Add service if yes)
+    id6 --> id8
+    id7 --> id8
+```
+
+So what are we doing in this flowchart is checking the user's answers to see whether they are eligible for different services or not. If they are, we will display them in one final endscreen. 
+
+Now, let's see how we can implement this in code.
+
+```yaml showLineNumbers title="Ch4_Welfare_Nested.yml" showLineNumbers
+---
+question: |
+  What is your age?
+fields:
+  - no label: userAge
+    datatype: integer
+---
+question: |
+  Do you suffer from a disability?
+yesno: userHasDisability
+---
+question: |
+  Are you studying full time?
+yesno: userIsStudying
+---
+question: |
+  Are you unemployed?
+yesno: userIsUnemployed
+---
+mandatory: True 
+question: Your eligibility for welfare services.
+subquestion: |
+  Thank you for completing this questionnaire.
+
+  % if userAge < 18:
+  Because you are under 18, your parents may be eligible for [Family Tax A and B](https://www.dss.gov.au/families-and-children/benefits-payments/family-tax-benefit)
+  % if userIsDisabled:
+  You may also be eligible for the [Disability Support Pension]
+  % elif userAge >= 65:
+  Because you are older than 65, you may be eligible for the [Aged Pension](https://www.servicesaustralia.gov.au/age-pension)
+  % endif
+---
+```
 
 Probably need to introduce this earlier?
 
