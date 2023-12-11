@@ -178,3 +178,24 @@
 .quizlet .incorrectAnswer:hover {
   background-color: #ff333333;
 }
+
+#mathCompTable {
+  width: 100%;
+}
+#mathCompTable td {
+  vertical-align: top;
+  text-align: left;
+}
+/* Make sure we don't wrap the operator and example test columns */
+#mathCompTableCol2 {
+  width: 140px;
+}
+
+#mathCompTableCol3 {
+  width: 185px;
+}
+
+/* we don't want to wrap this column as it displays code */
+#logicTableCol3 {
+  width: 330px;
+}
