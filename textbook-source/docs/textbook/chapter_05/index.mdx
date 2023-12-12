@@ -1,0 +1,50 @@
+---
+title: Chapter 5. Complex Data Types
+---
+import DocCardList from '@theme/DocCardList';
+import {DisplayChapter} from '@site/src/components';
+import {DisplayGlossaryItem} from '@site/src/components';
+
+In <DisplayChapter chapter='chapter_03' /> we discussed 'simple', or 'fundamental', 
+data types, such as integers, strings and booleans.  In this chapter we'll discuss
+more complex data types.  These data types allow you to collect simple data types
+together in a more complex, and more useful, data structure.
+
+For example, let's say we want to collect information about a community legal centre
+(**CLC**).  There's lots of information that pertains to a CLC, for example:
+
+- its name (a string);
+- its address (string);
+- contact email (string);
+- contact phone (string); and
+- the number of employees it has (integer).
+
+:::note Phone numbers are strings
+You might initially think it would be best to collect a phone number as an integer as,
+after all, a phone number (0401234567) is an integer.  However, it's better to collect
+phone numbers as strings.  This allows us to embed formatting using spaces
+(eg: 0401 234 567) and country codes (eg: +61 401 234 567) into the phone number.
+:::
+
+We can collect all that information with a set of string variable and an integer variable,
+but what we'd really like to do is represent that all these otherwise independent variables
+all relate to the same CLC.
+
+Let's also say that instead of collecting this information about just one CLC we want to
+collect this information about all the CLCs operating in South Australia.  We might do
+this for an app that directs a user to the appropriate CLC depending on their Location
+and other circumstances.
+
+:::info
+[Here is an example](https://dev.dll.org.au/da/interview?i=docassemble.CLCSA01ServiceDirectory:data/questions/main.yml#page1)
+of just such an app developed for Community Legal Centres SA (**CLCSA**) in 2020.
+:::
+
+This is where complex data types, such as <DisplayGlossaryItem item='dictionary' plural />,
+<DisplayGlossaryItem item='list' plural /> and <DisplayGlossaryItem item='object' plural />
+come into play.  We can use these datatypes to group related data together.  This makes
+our data much easier to manage and also more logical to deal with.
+
+Let's get going.
+
+<DocCardList />
