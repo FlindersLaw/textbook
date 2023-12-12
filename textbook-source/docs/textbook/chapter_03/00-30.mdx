@@ -400,7 +400,7 @@ That should do it!
 
 Here is example code that implements our modified app.  Feel free to copy it into your
 playground, run it and modify it.
-```yml
+```yml showLineNumbers
 ---
 mandatory: True
 question: Western Legal Triage
@@ -434,6 +434,27 @@ fields:
     datatype: currency
 ---
 ```
-:::tip TODO
-insert some quizzes
-:::
+<Quizlet>
+  Which of these correctly expresses the phrase 'the user lives in SA or NSW'?
+  <Answer>
+  `MJFstate == 'SA'`
+  </Answer>
+  <Answer>
+  `MJFstate = 'SA' or 'NSW'`
+  </Answer>
+  <Answer isCorrect>
+  `MJFstate == 'SA' or MJFstate == 'NSW'`
+  </Answer>
+  <Answer>
+  `MJFstate == 'SA' or 'NSW'`
+  </Answer>
+  <Explanation correctAnswer>
+  Correct!
+
+  First, you must use `==` and not `=` when testing for equality.  Second, because
+  we are testing for two conditions (whether the user lives in SA or whether the 
+  user lives in NSW) we must have two equality tests.  Syntax such as `MJFstate == 'SA' or 'NSW'`
+  would, at best, cause an error and at worst would cause your program to behave
+  unpredictably.
+  </Explanation>
+</Quizlet>

@@ -45,9 +45,6 @@ export const Quizlet = ({ children, title }) => {
         selected: isSelected })
       );
     } else if ( child.type == Explanation ) {
-      console.log("Explanation");
-      console.log(child)
-      console.log(child.props.correctAnswer);
       if ( child.props.correctAnswer) {
         correctExplain.push(child);
       } else {
