@@ -8,9 +8,9 @@ import * as Components from '@site/src/components'
 ## A Recap On If Statements and Application Design
 In the [previous](/docs/textbook/chapter_04/00-30-ch3b-if_elif_statements.mdx) [sections](/docs/textbook/chapter_04/00-40-ch3b-if_elif_statements.mdx), we developed a series of applications that used if statements to direct the flow of control for our application. Depending on what the user entered as input, the if statement would trigger an event and Docassemble would display an end screen.
 
-That type of logic works well for multiple different endpoints. For example, each of our endpoints in this chapter so far contains a statement on whether a user is eligible for a particular form of welfare. What if a user is eligible for more than one form of welfare? For example, someone could be eligible for both a disability support pension and an aged care pension.
+That type of logic works well for multiple different endpoints. For example, each of our endpoints in this chapter so far contains a statement on whether a user is eligible for a particular form of welfare. What if a user is eligible for more than one form of welfare? For example, someone could be eligible for both the Family Tax A and B pensions *and* a disability support pension.
 
-To implement this, we could use Mako if statements.
+To implement this, we will need to use use Mako if statements.
 
 ## Mako If Statements
 Rather than embedding our if statements in a code block, we can put Mako if statements into a question block. 
@@ -124,6 +124,8 @@ Previously, with ```elif``` and nested ```if``` statement clauses, we had an ```
 
 * Someone can only claim AusStudy if they are 25 or older and are studying full time
 * Someone can only claim JobSeeker if they are 22 or older and are studying full time
+* Someone cannot claim the Aged Pension or the Disability Support Pension simultaneusly 
+* Somone cannot claim AusStudy or JobSeeker simultaneously
 
 Therefore, we need to redesign our flow chart as follows:
 
@@ -134,13 +136,11 @@ flowchart LR;
     id1 -- 65 or older --> id3(Aged Care Pension)
     id1 -- 18 or younger --> id2(FamilyTax A or B)
     id2 --> id5(Do you have a disability?)
-    id3 --> id5
-    id3 --> id6(Are you studying full time?)
-    id3 --> id7(Are you unemployed?)
+    id3 --> id8
     id4 --> id5
-    id4 -- I am older than 25 --> id6
-    id4 -- I am older than 22 --> id7
-    id5 --> id8(Add service if yes)
+    id4 -- I am older than 25 --> id6(Are you studying full time?)
+    id4 -- I am older than 22 --> id7(Are you unemployed?)
+    id5 --> id8(Display welfare payment if yes)
     id6 --> id8
     id7 --> id8
 ```
@@ -149,7 +149,7 @@ So what are we doing in this flowchart is checking the user's answers to see whe
 
 Now, let's see how we can implement this in code.
 
-```yaml showLineNumbers title="Ch4_Welfare_Nested.yml" showLineNumbers
+```yaml showLineNumbers title="Ch4_Welfare_Mako.yml" showLineNumbers
 ---
 question: |
   What is your age?
@@ -176,18 +176,62 @@ subquestion: |
 
   % if userAge < 18:
   Because you are under 18, your parents may be eligible for [Family Tax A and B](https://www.dss.gov.au/families-and-children/benefits-payments/family-tax-benefit)
-  % if userIsDisabled:
-  You may also be eligible for the [Disability Support Pension]
+  % if userHasDisability:
+  You may also be eligible for the [Disability Support Pension](https://www.servicesaustralia.gov.au/disability-support-pension)
+  % endif
   % elif userAge >= 65:
   Because you are older than 65, you may be eligible for the [Aged Pension](https://www.servicesaustralia.gov.au/age-pension)
+  % else:
+  % if userHasDisability:
+  You may also be eligible for the [Disability Support Pension](https://www.servicesaustralia.gov.au/disability-support-pension)
+  % elif userIsStudying:
+  % if userAge >= 25:
+  You may also be eligible for [AusStudy](https://www.servicesaustralia.gov.au/austudy)
+  % else:
+  It does not appear that you are eligible for any welfare payments. 
   % endif
+  % elif userIsUnemployed:
+  % if userAge >= 22:
+  You may be eligible for [JobSeeker](https://www.servicesaustralia.gov.au/jobseeker-payment)
+  % else:
+  It does not appear that you are eligible for any welfare payments.
+  % endif
+  % else:
+  It does not appear that you are eligible for any welfare payments. 
+  % endif
+  % endif
+
+buttons:
+  - Restart: restart
+  - Exit: exit
 ---
 ```
 
-Probably need to introduce this earlier?
+Once again, let's go through how this application works. Immediately we can tell that our application is much shorter (55 lines) than it was previously. 
 
-- express if statements in subquestion blocks so can control display output
-    - show an example
-- emphasise the distinction between Mako and code block if statements
-- emphasise can't indent Mako ifs
-    - and need a `% endif`
+### Lines 20 to 26
+The first thing that Docassemble will do is execute the mandatory question block. To do so, it needs a value for ```userAge``` first, so that it can execute the first if statement.
+
+### Lines 1 to 7
+In order to assign a value to ```userAge```, Docassemble will execute the first question block on lines 1 to 7.
+
+**Screenshot here**
+
+### Lines 27 to 28
+Unlike our original ```Ch4_Welfare_Elif.yml``` application though, we have an extra nested if statement. This if statement needs a value for ```userHasDisability```. 
+
+### Lines 8 to 10
+In order to assign a value to ```userHasDisability```, Docassemble needs to execute the question block on Lines 8 to 10.
+
+**Screenshot here**
+
+If ```userHasDisability``` is set to True by the user (that is, they press yes), Docassemble will display the additional text from Line 28, along with the text from Line 26:
+
+**Screenshot here**
+
+Otherwise, if ```userHasDisability``` is set to False, Docassemble will just display the text from Line 26:
+
+**Screenshot here**
+
+### Lines 30 to 31
+What happens if the user indicates that they are 65 years or older?
