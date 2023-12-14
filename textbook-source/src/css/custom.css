@@ -199,3 +199,56 @@
 #logicTableCol3 {
   width: 330px;
 }
+
+#complexDataTable1 {
+  vertical-align: top;
+  text-align: left;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+table#complexDataTable1 tr,
+table#complexDataTable1 td,
+table#complexDataTable1 th {
+  border: none;
+}
+
+#complexDataTable1 tr {
+  background-color: #ffff
+}
+#complexDataTable1 th {
+  padding: 0px;
+  padding-right: 7px;
+}
+
+#complexDataTable1 td {
+  padding: 0px;
+  padding-left: 2px;
+  padding-right: 2px;
+  padding-bottom: 0px;
+}
+
+.complexDataTableExamples {
+  display: table;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.complexDataTableExamples th,
+.complexDataTableExamples td {
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+
+.complexDataTableExamples th {
+  background-color: var(--ifm-color-primary-darkest);
+  color: var(--ifm-color-secondary);
+  font-weight: bold;
+}
+.complexDataTableExamples caption {
+  caption-side: bottom;
+  font-weight: bold;
+  font-size: smaller;
+  margin-top: 5px;
+}
+

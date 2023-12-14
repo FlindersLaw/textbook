@@ -6,7 +6,9 @@ import {DisplayChapter} from '@site/src/components';
 import {DisplayGlossaryItem} from '@site/src/components';
 
 In <DisplayChapter chapter='chapter_03' /> we discussed 'simple', or 'fundamental', 
-data types, such as integers, strings and booleans.  In this chapter we'll discuss
+data types, such as <DisplayGlossaryItem item='integer' plural />,
+<DisplayGlossaryItem item='string' plural /> and 
+<DisplayGlossaryItem item='boolean' plural />.  In this chapter we'll discuss
 more complex data types.  These data types allow you to collect simple data types
 together in a more complex, and more useful, data structure.
 
@@ -26,7 +28,7 @@ phone numbers as strings.  This allows us to embed formatting using spaces
 (eg: 0401 234 567) and country codes (eg: +61 401 234 567) into the phone number.
 :::
 
-We can collect all that information with a set of string variable and an integer variable,
+We can collect all that information with a set of string variables and an integer variable,
 but what we'd really like to do is represent that all these otherwise independent variables
 all relate to the same CLC.
 
