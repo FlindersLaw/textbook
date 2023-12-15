@@ -35,7 +35,7 @@ What each example has in common is that each stores one piece of information ie:
 * one boolean.
 
 Sometimes, though, we might have data that looks like this:
-<table className="complexDataTableExamples">
+<table className="complexDataTableExamples cdtCentre">
     <caption>A list of names</caption>
     <tr><th>Name</th></tr>
     <tr><td>Ida Noe</td></tr>
@@ -51,7 +51,7 @@ Sometimes, though, we might have data that looks like this:
 
 or this:
 
-<table className="complexDataTableExamples">
+<table className="complexDataTableExamples cdtCentre">
     <tr><th>Name</th> <th>Number of Children</th> <th>Household Income</th> <th>Is a Citizen?</th></tr>
     <tr><td>Hugo First</td><td>4</td><td>$45,000</td><td>Yes</td></tr>
     <tr><td>Moda Lawn</td><td>4</td><td>$45,000</td><td>Yes</td></tr>
@@ -105,7 +105,15 @@ you really want is to carry one bucket around with 10 things inside.
 If only we had a way of displaying all the names using a single variable and
 just added and removed names from it as we needed to.
 
-If only we could be as happy as the happy bucket lady...
+If only we could be as happy as the Happy Bucket Lady...
 
 ## Introducing Complex Data Structures
-bla bla
+...and of course, we can!  Complex data types are the answer to our problem.  Complex
+data types, such as <DisplayGlossaryItem item='list' plural /> and
+<DisplayGlossaryItem item='dictionary' plural /> give us  Happy Bucket Lady
+vibes.  This is because complex data types allow us to store more than one value in 
+a variable.  Even more so, complex data types also allow us to structure how we will store
+the data.  For example, a list complex data type allows us to store data in sequential order,
+much like that 'List of names' table above.  Because complex data type allow us to do this,
+they are often also referred to as **complex data structures**.  We will use both terms 
+interchangeably in this textbook.

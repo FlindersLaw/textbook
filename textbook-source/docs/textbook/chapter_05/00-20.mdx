@@ -1,0 +1,104 @@
+---
+title: Lists
+---
+import {DisplayGlossaryItem} from '@site/src/components';
+import {DisplayImage} from '@site/src/components';
+import {DisplayChapter} from '@site/src/components';
+import {Quizlet,Answer,Explanation} from '@site/src/components'
+
+## Introducing Lists
+Let's define a **list** to mean this:
+
+1. The list must have a name
+2. The list must have items
+3. We can refer to an item by its position in the list (ie: first item, second item, last item)
+
+Let's re-visit that table of names we had before:
+<table className="complexDataTableExamples">
+    <tr><th>Name</th></tr>
+    <tr><td>Ida Noe</td></tr>
+    <tr><td>Hugo First</td></tr>
+    <tr><td>Moda Lawn</td></tr>
+    <tr><td>Kate Jupp</td></tr>
+    <tr><td>Ayfor Gott</td></tr>
+    <tr><td>Justin Thyme</td></tr>
+    <tr><td>Ray Member</td></tr>
+    <tr><td>Studie Harde</td></tr>
+    <tr><td>Slacke Harse</td></tr>
+</table>
+From this table we can see that:
+
+1. it has a name (which happens to be **Name**);
+2. it has items - nine items to be precise; and
+3. the only way to refer to items is by their order (eg: 'Ayfor Gott' is the fifth item in the list).
+
+That makes our table a **list**, as it has all three properties of a list.
+
+We can express our list in Python like so:
+```python
+Name = [
+    'Ida Noe',
+    'Hugo First',
+    'Moda Lawn',
+    'Kate Jupp',
+    'Ayfor Gott',
+    'Justin Thyme',
+    'Ray Member',
+    'Studie Harde',
+    'Slacke Hearse'
+]
+```
+A Python list consists of the following:
+1. a variable name, to which the list is assigned (the name of the list);
+1. items separated by commas (`,`);
+1. square brackets (`[` and `]`) which indicate the start and the end of the list respectively; and
+1 (as we shall see), each item is accessed by referring to its position in the list.
+
+:::info
+Each item in a list does not need to be on a separate line.  It's the commas (`,`) that separate
+one item from another.  We could have expressed our `Name` list as follows:
+```python
+Name = [ 'Ida Noe', 'Hugo First', 'Moda Lawn', 'Kate Jupp', 'Ayfor Gott', 'Justin Thyme', 'Ray Member', 'Studie Harde', 'Slacke Hearse' ]
+```
+This is also valid syntax but it's much harder to read (not to mention on small screens it
+requires a bit of scrolling).
+:::
+
+<Quizlet>
+    Which of the following is a Python list?
+    <Answer>
+    ```python
+    shopping_list = 'apples, pears and oranges'
+    ```
+    </Answer>
+    <Answer>
+    ```python
+    to_do_list [ 
+        'study hard'
+        'go on a holiday'
+        'study some more'
+        'graduate'
+    ]
+    ```
+    </Answer>
+    <Answer isCorrect>
+    ```python
+    family_I_like = [
+        'Mum',
+        'Dad',
+        'Uncle Kenny',
+        'Aunt Jemima'
+    ]
+    ```
+    </Answer>
+    <Explanation correctAnswer>
+    Correct!
+
+    All three answers have a variable name, but only this answer has:
+
+    * square brackets that open and close the list; and
+    * list items seprated by commas.
+    </Explanation>
+</Quizlet>
+
+## Accessing (or 'Referencing') Items in a List

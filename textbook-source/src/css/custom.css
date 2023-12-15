@@ -229,6 +229,10 @@ table#complexDataTable1 th {
 }
 
 .complexDataTableExamples {
+  display: block;
+}
+
+.cdtCentre {
   display: table;
   margin-left: auto;
   margin-right: auto;
