@@ -15,7 +15,7 @@ Let's define a **list** to mean this:
 
 Let's re-visit that table of names we had before:
 <table className="complexDataTableExamples">
-    <tr><th>Name</th></tr>
+    <tr><th>Student Names</th></tr>
     <tr><td>Ida Noe</td></tr>
     <tr><td>Hugo First</td></tr>
     <tr><td>Moda Lawn</td></tr>
@@ -36,7 +36,7 @@ That makes our table a **list**, as it has all three properties of a list.
 
 We can express our list in Python like so:
 ```python
-Name = [
+student_names = [
     'Ida Noe',
     'Hugo First',
     'Moda Lawn',
@@ -58,10 +58,20 @@ A Python list consists of the following:
 Each item in a list does not need to be on a separate line.  It's the commas (`,`) that separate
 one item from another.  We could have expressed our `Name` list as follows:
 ```python
-Name = [ 'Ida Noe', 'Hugo First', 'Moda Lawn', 'Kate Jupp', 'Ayfor Gott', 'Justin Thyme', 'Ray Member', 'Studie Harde', 'Slacke Hearse' ]
+student_names = [ 'Ida Noe', 'Hugo First', 'Moda Lawn', 'Kate Jupp', 'Ayfor Gott', 'Justin Thyme', 'Ray Member', 'Studie Harde', 'Slacke Hearse' ]
 ```
 This is also valid syntax but it's much harder to read (not to mention on small screens it
 requires a bit of scrolling).
+:::
+
+:::info
+Variables can't have spaces in their names.  Conseuently, we could not call our list variable
+`Student Names` to match the name on the table.  As a convention, we usually do two things:
+
+1. Express variable names in lower case (unless using an anagram or initials); and
+1. replace spaces with underscores (`_`).
+
+That results in 'Student Names' becoming `student_names` in Python.
 :::
 
 <Quizlet>
@@ -102,3 +112,212 @@ requires a bit of scrolling).
 </Quizlet>
 
 ## Accessing (or 'Referencing') Items in a List
+As we've already said, one of the properties of a list is that the items it contains are 
+referred to by their position in the list.  Ida is the first item, Ayfor is fifth and 
+Slacke is last.
+
+We could also say that Ida is at position number 1, Ayfor at position 5 and Slacke at 
+position 9.
+
+In Python we use a number to indicate position **with one important caveat**.  Python starts
+counting from zero.  Consequently, according to Python, Ida is at position 0, Ayfor at position 4
+and Slacke at position 8.
+
+<table className="complexDataTableExamples">
+    <tr>
+        <th>Student Names</th>
+        <td>What we say</td>
+        <td>What Python thinks</td>
+    </tr>
+    <tr>
+        <td>Ida Noe</td>
+        <td>First item</td>
+        <td>
+            <code>student_names[0]</code>
+        </td>
+    </tr>
+    <tr>
+        <td>Hugo First</td>
+        <td>Second item</td>
+        <td>
+            <code>student_names[1]</code>
+        </td>
+    </tr>
+    <tr>
+        <td>Moda Lawn</td>
+        <td>Third item</td>
+        <td>
+            <code>student_names[2]</code>
+        </td>
+    </tr>
+    <tr>
+        <td>Kate Jupp</td>
+        <td>Fourth item</td>
+        <td>
+            <code>student_names[3]</code>
+        </td>
+    </tr>
+    <tr>
+        <td>Ayfor Gott</td>
+        <td>Fifth item</td>
+        <td>
+            <code>student_names[4]</code>
+        </td>
+    </tr>
+    <tr>
+        <td>Justin Thyme</td>
+        <td>Sixth item</td>
+        <td>
+            <code>student_names[5]</code>
+        </td>
+    </tr>
+    <tr>
+        <td>Ray Member</td>
+        <td>Seventh item</td>
+        <td>
+            <code>student_names[6]</code>
+        </td>
+    </tr>
+    <tr>
+        <td>Studie Harde</td>
+        <td>Eigth item</td>
+        <td>
+            <code>student_names[7]</code>
+        </td>
+    </tr>
+    <tr>
+        <td>Slacke Harse</td>
+        <td>Ninth item</td>
+        <td>
+            <code>student_names[8]</code>
+        </td>
+    </tr>
+</table>
+
+You can see from the table above that they way we access an item in a list, or **reference**
+an item in a list, is by using the list's name with brackets and a position indicator, or **index**.
+```python
+student_names[1]
+```
+The above example accesses the second item in the list called `Name`.
+
+:::info
+Almost all programming languages count their list items starting from zero.
+:::
+<Quizlet>
+    Here is a list:
+    ```python
+    shopping = [ 'apples', 'pears', 'bananas', 'chips', 'oats']
+    ```
+    Which of the below is the correct way to reference `bananas` in this list?
+    <Answer>
+    `shopping[3]`
+    </Answer>
+    <Answer isCorrect>
+    `shopping[2]`
+    </Answer>
+    <Answer>
+    `shopping['bananas']`
+    </Answer>
+</Quizlet>
+<Quizlet>
+    Here is a list:
+    ```python
+    bread_types = [
+        'sourdough',
+        'croissant',
+        'tip top',
+        'artisan',
+        'chocolate'
+    ]
+    ```
+    What is the value of `bread_types[3]`?
+    <Answer isCorrect>
+    `'artisan'`
+    </Answer>
+    <Answer>
+    `'tip top'`
+    </Answer>
+    <Answer>
+    `'tip'`
+    </Answer>
+    <Answer>
+    `'top'`
+    </Answer>
+</Quizlet>
+
+## More List properties
+We hae already learnt that:
+1. Python lists have a name, which is the variable name the list is assigned to;
+1. lists have items, which are enclosed in square brackets (`[]`); and
+1. we reference an item by its position in the list, but starting from zero.
+
+Lists have a number of other properties as well.  We will cover some of them here.
+
+### List length
+You can use the `len()` Python function to query how long a list is.  You do this by 
+inserting the list name into `len()`.  For example, `len(student_names) gives us the length
+of `student_names`.  If we were interested in keeping the length, we'd assign it to a variable
+like so:
+```python
+list_length = len(student_names)
+```
+The value of `list_length` would be **9**.
+
+:::note
+You'll find that you'll use `len()` quite a bit, especially when iterating over a list.  We
+will cover <DisplayGlossaryItem item='iteration' /> in
+<DisplayChapter chapter='chapter_06'/>.
+:::
+
+### Adding and deleting items
+Just like a spreadsheet (or a bucket!), we can add items to a list and we can also delete items
+from a list.
+
+#### Adding
+To add an item to the list we use the `append()` <DisplayGlossaryItem item='method' />.  For
+example, let's add a new student, Stew Penous, to our `student_names` list:
+```python
+student_names.append('Stew Pendous')
+```
+After running this command, Stew is added to the end (or 'appended') to our list.  It now
+looks like this:
+```python
+student_names = [
+    'Ida Noe',
+    'Hugo First',
+    'Moda Lawn',
+    'Kate Jupp',
+    'Ayfor Gott',
+    'Justin Thyme',
+    'Ray Member',
+    'Studie Harde',
+    'Slacke Hearse',
+    'Stew Pendous'
+]
+```
+`len(student_names)` would now return **10**
+
+
+### Deleting
+The `del()` Python function deletes list items.  We delete an item by referencing it inside
+the `del()` function.  For example, if we wanted to delete Ray from the list we'd run this
+command: 
+```python
+del(student_names[6])  # Ray is the 7th item in the list
+```
+:::info
+In practice we append items to lists more often than we delete items.  In fact, a common
+way to define a list is to start out with an empty list eg:
+```python
+bread_types = []
+```
+and then append items to it one by one eg:
+```python
+bread_types.append('sourdough',)
+bread_types.append('croissant',)
+bread_types.append('tip top',)
+bread_types.append('artisan',)
+bread_types.append('chocolate')
+```
+:::
