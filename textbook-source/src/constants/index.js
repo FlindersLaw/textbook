@@ -89,10 +89,7 @@ export const DI_border_styles = {
     [DI_shadow_block]: {
         borderRadius: '5px',
         display: 'block',
-        margin: '20px auto',
         boxShadow: '0px 2px 5px rgba(0,0,0,0.25)',
-        float: 'right',
-        maxWidth: '25%',
         marginLeft: '20px'
     },
     [DI_inline_shadow] : {

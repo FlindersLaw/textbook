@@ -25,13 +25,15 @@ export function DisplayImage(props) {
 
   // Set the size and alignment
   css.maxWidth = size;
-  css.float = align;
+  css.float = align || 'center';
 
   // Set padding for the float if we're not centred
   if ( align === 'right' ) {
     css.marginLeft = '20px';
   } else if ( align === 'left' ) {
     css.marginRight = '20px';
+  } else if ( align == 'center' ) {
+    css.margin = '0 auto';
   }
 
  // Define returnValue so we can console.log() it for debugging

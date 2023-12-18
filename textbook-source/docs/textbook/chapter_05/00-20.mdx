@@ -1,5 +1,5 @@
 ---
-title: Lists
+title: Lists 1
 ---
 import {DisplayGlossaryItem} from '@site/src/components';
 import {DisplayImage} from '@site/src/components';
@@ -28,11 +28,13 @@ Let's re-visit that table of names we had before:
 </table>
 From this table we can see that:
 
-1. it has a name (which happens to be **Name**);
+1. it has a name (which happens to be **Student Names**);
 2. it has items - nine items to be precise; and
 3. the only way to refer to items is by their order (eg: 'Ayfor Gott' is the fifth item in the list).
 
 That makes our table a **list**, as it has all three properties of a list.
+
+## Python List Properties
 
 We can express our list in Python like so:
 ```python
@@ -111,7 +113,7 @@ That results in 'Student Names' becoming `student_names` in Python.
     </Explanation>
 </Quizlet>
 
-## Accessing (or 'Referencing') Items in a List
+## Accessing (or 'Referencing') Items in a List {#referencing}
 As we've already said, one of the properties of a list is that the items it contains are 
 referred to by their position in the list.  Ida is the first item, Ayfor is fifth and 
 Slacke is last.
@@ -255,14 +257,15 @@ We hae already learnt that:
 Lists have a number of other properties as well.  We will cover some of them here.
 
 ### List length
-You can use the `len()` Python function to query how long a list is.  You do this by 
-inserting the list name into `len()`.  For example, `len(student_names) gives us the length
-of `student_names`.  If we were interested in keeping the length, we'd assign it to a variable
-like so:
+You can use the `len()` Python <DisplayGlossaryItem item='function' />
+to query how long a list is.  You do this by 
+inserting the list name into `len()`.  For example, `len(student_names)` gives us the length
+of `student_names`.  If we were interested in keeping the length for future use,
+we'd assign it to a variable like so:
 ```python
 list_length = len(student_names)
 ```
-The value of `list_length` would be **9**.
+The value of `list_length`, given our list above, would be **9**.
 
 :::note
 You'll find that you'll use `len()` quite a bit, especially when iterating over a list.  We
@@ -298,14 +301,191 @@ student_names = [
 ```
 `len(student_names)` would now return **10**
 
+<details>
+<summary>
+Try this example code
+</summary>
+This code demonstrates adding an item to `student_names`.
+Copy and paste this code into your Docassemble playground and feel free to experiment with it.
+```yml showLineNumbers
+---
+# Opening screen. Displays our list 
+# as it currently exists.
+# Note: we use iteration (that's the % for loop)
+# in this code.  We cover iteration later in this chapter
+mandatory: True
+question: Current List
+subquestion: |
+  Here are the current items in the `student_names` list:
+  
+  %for list_item in student_names:
+  * ${list_item}
+  %endfor
+  
+  The length of `student_names` is: **${len(student_names)}**
+buttons:
+  - Continue: continue
+---
+# This code block drives our app.  It's good practice to 
+# have no more than two mandatory blocks in your app - a
+# mandatory question block to display the opening screen and
+# a mandatory code block to drive the logic in your app.
+mandatory: True
+code: |
+  # Append a new item to the list
+  student_names.append(new_item)
+  # And then display the screen with the new item.
+  finish_screen
+---
 
-### Deleting
+# This code block is where we declare our list.  Our first mandatory
+# question block (above) needs student_names in order to work. That
+# mandatory question block will call this code block
+code: |
+  student_names = [
+    'Ida Noe',
+    'Hugo First',
+    'Moda Lawn',
+    'Kate Jupp',
+    'Ayfor Gott',
+    'Justin Thyme',
+    'Ray Member',
+    'Studie Harde',
+    'Slacke Hearse'
+  ]
+---
+# This question block asks the user what they want to store in new_item
+question: Add another item
+subquestion: |
+  Enter a name to append to `student_names`
+fields:
+  - no label: new_item
+---
+# This displays another screen which prints out the list again, this time with the 
+# additional item appended.
+# Note: we use an if statement to highlight the last item in bold
+event: finish_screen
+question: Updated list
+subquestion: |
+  Here is `student_names` with `${new_item}` appended to it.
+  
+  %for list_item in student_names:
+  %if list_item == student_names[-1]:
+  * **${list_item}**
+  %else:
+  * ${list_item}
+  %endif
+  %endfor
+  
+  The length of `student_names` is: **${len(student_names)}**
+
+buttons:
+  - Exit: exit
+  - Restart: restart
+---
+```
+</details>
+
+#### Deleting
 The `del()` Python function deletes list items.  We delete an item by referencing it inside
 the `del()` function.  For example, if we wanted to delete Ray from the list we'd run this
 command: 
 ```python
 del(student_names[6])  # Ray is the 7th item in the list
 ```
+<details>
+<summary>
+Try this example code
+</summary>
+This code allows the user to select an  item from `student_names` to delete and deletes it.
+It then shows the truncated list to the user.
+
+Feel free to copy this code into your Playground and experiment with it.
+```yml showLineNumbers
+# This code displays the items in a list and allows the user to 
+# select an item to delete. It then deletes the item and re-displays
+# the list
+---
+mandatory: True
+question: Select item to delete
+subquestion: |
+  Select an item from `student_names` to delete.
+  
+  Currently, the number of items in `student_names` (or the *length* of `student_names`) is:
+  **${len(student_names)}**
+fields:
+  - no label: item_to_delete
+    input type: radio
+    choices:
+      code: |
+        first_screen_radio_choices
+---
+# Mandatory code block that drives our app
+mandatory: True
+code: |
+  # Here's a trap for new players. When a user selects an item to delete,
+  # the index (ie: the position in the list) is stored in our item_to_delete
+  # variable - **as a string**.  Consequently, we can't just call 
+  # del(student_names[item_to_delete]) to delete the array item. What we need
+  # to do is convert (or **cast**) item_to_delete from a string to an integer.
+  # Luckily there's a function for that - int().  So, what we'll do is wrap
+  # item_to_delete in int() and put that into our del() function.
+  del(student_names[int(item_to_delete)])
+  
+  # Whew! That was complicated!  Lucky this last line is easy peasy.  Just
+  # call the final screen.
+  final_screen
+---
+# We define student_names in this code block
+code: |
+  student_names = [
+    'Ida Noe',
+    'Hugo First',
+    'Moda Lawn',
+    'Kate Jupp',
+    'Ayfor Gott',
+    'Justin Thyme',
+    'Ray Member',
+    'Studie Harde',
+    'Slacke Hearse'
+  ]
+---
+# When the user selects an item in the radio buttons
+# to delete, we need to record the position of that item and
+# not the value of the item itself.  That's because, unlike 
+# append(), del() takes an reference to a list item's position
+# instead of a value. Eg: to delete the third item in student_names
+# we need to call del(student_names[2]) and not del(student_names['Moda Lawn'])
+# This code block is used by the first screen to match up each value (which the user sees)
+# with its index, which we will then pass to the del() command in the 
+# second mandatory block
+code: |
+  first_screen_radio_choices = []
+  # Once again, we use iteration to examine every list item in turn
+  # This 'for loop' starts by setting the value of i to 0 and increments
+  # it by 1 each time it runs until it gets to one less than
+  # the number of items in student_names.  That's useful for us because if
+  # student_names has 9 items in it, we want i to run from 0 to 8.
+  for i in range(0,len(student_names)):
+    first_screen_radio_choices.append({ i : student_names[i] })
+---
+# Displays our list with the item deleted
+event: final_screen
+question: Updated list
+subquestion: |
+  The length of `student_names` is now **${len(student_names)}**
+  
+  Here are the items:
+  
+  %for list_item in student_names:
+  * ${list_item}
+  %endfor
+buttons:
+  - Exit: exit
+  - Restart: restart
+---
+```
+</details>
 :::info
 In practice we append items to lists more often than we delete items.  In fact, a common
 way to define a list is to start out with an empty list eg:
@@ -320,4 +500,96 @@ bread_types.append('tip top',)
 bread_types.append('artisan',)
 bread_types.append('chocolate')
 ```
+or, as in the example code, use <DisplayGlossaryItem item='iteration' /> to do the
+same thing.
+:::
+<Quizlet>
+    Sticking with the bread theme, let's define this list:
+    ```python
+    bread_types = [
+        'sourdough',
+        'croissant',
+        'tip top',
+        'artisan',
+        'chocolate'
+    ]
+    ```
+    As lovers of raisin bread, we want to add 'raisin' to end of this list.  
+
+    What command do we use to do this?
+    <Answer isCorrect>
+    `bread_types.append('raisin')`
+    </Answer>
+    <Answer>
+    `append(bread_types, 'raisin')`
+    </Answer>
+    <Answer>
+    `bread_types + 'raisin'`
+    </Answer>
+    <Explanation correctAnswer>
+    Correct!
+
+    See ['Adding'](#adding) for more information.
+    </Explanation>
+    <Explanation>
+    Incorrect.
+
+    See ['Adding'](#adding) for more information.
+    </Explanation>
+</Quizlet>
+<Quizlet>
+    As bread lovers, looking at the `bread_types` list in the previous Quizlet, 
+    we are somewhat shocked (actually, very shocked!) to see `tip top` in that list.
+    What sacrilege!!  We must delete `tip top` post haste!  How do we do that?
+    <Answer>
+    `delete 'tip top'`
+    </Answer>
+    <Answer>
+    `del('tip top')`
+    </Answer>
+    <Answer>
+    `del(bread_types['tip top'])`
+    </Answer>
+    <Answer isCorrect>
+    `del(bread_types[2])`
+    </Answer>
+    <Answer>
+    `del(bread_types[3])`
+    </Answer>
+    <Explanation>
+    Incorrect.
+
+    Refer to '[Deleting](#deleting)' above for more information.  You may also want to
+    check out how to [reference](#referencing) items in a list.
+    </Explanation>
+    <Explanation correctAnswer>
+    Correct!
+
+    `del()` is the function you use to delete items from a list.  You need to specify the
+    name of the list and its index inside the `del()` function.  Counting for indices
+    starts at zero, not 1.  So, as `tip top` is the third item, its index is `2`.
+    </Explanation>
+</Quizlet>
+<Quizlet>
+    Which of the below is the correct way of declaring an empty list called `bread_types`?
+    <Answer isCorrect>
+    `bread_types = []`
+    </Answer>
+    <Answer>
+    `bread_types = None`
+    </Answer>
+    <Answer>
+    `new_list(bread_types)`
+    </Answer>
+    <Answer>
+    `bread_types = <Empty>`
+    </Answer>
+</Quizlet>
+
+## Next
+Now that you've been introduced to lists, its time to move on to the one of the most powerful
+things you can do with them - **iteration**.
+
+:::tip TODO
+Do we want to finish all pages like this?
 :::

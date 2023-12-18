@@ -74,6 +74,10 @@ export const glossary = new Map([
         text: 'float',
         plural: 'floats'}
     ],
+    ['forloop', {
+        text: "'for' loop",
+        plural: "'for' loops"}
+    ],
     [ 'function', {
         text: 'function',
         plural: 'functions' }
@@ -90,11 +94,19 @@ export const glossary = new Map([
         text: 'integer',
         plural: 'integers',
     }],
+    [ 'iteration', {
+        text: 'iteration',
+        plural: 'iterations',
+    }],
     ['jinja', { text: 'jinja' }],
     [ 'list', {
         text: 'list',
-        plural: 'lists' }
-    ],
+        plural: 'lists'
+    }],
+    [ 'loop', {
+        text: 'loop',
+        plural: 'loops'
+    }],
     ['mako', { text: 'mako' }],
     ['mandatory', { text: 'mandatory' }],
     ['mandatoryblock', {

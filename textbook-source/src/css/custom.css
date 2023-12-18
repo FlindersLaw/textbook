@@ -228,14 +228,22 @@ table#complexDataTable1 th {
   padding-bottom: 0px;
 }
 
-.complexDataTableExamples {
-  display: block;
+.complexDataTableExamples td {
+  vertical-align: top;
+  text-align: left;
 }
 
-.cdtCentre {
+.cdtTopTH {
+  vertical-align: top;
+}
+
+table .cdtCentre {
   display: table;
-  margin-left: auto;
   margin-right: auto;
+}
+
+table.cdtSingleColour tr {
+  background-color: #fff;
 }
 
 .complexDataTableExamples th,
