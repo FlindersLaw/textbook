@@ -233,8 +233,12 @@ table#complexDataTable1 th {
   text-align: left;
 }
 
-.cdtTopTH {
+.cdtTop th {
   vertical-align: top;
+}
+
+.cdtLeft th {
+  text-align: left;
 }
 
 table .cdtCentre {

@@ -586,6 +586,35 @@ same thing.
     </Answer>
 </Quizlet>
 
+## List membership
+Python allows you to test if an element can be found in a list.  For example,
+you may want to check to see if Ray exists in our `student_names` list.  To
+do so you use Python's `in` operator like so:
+```python
+'Ray Member' in student_names
+```
+This is usually used as part of an <DisplayGlossaryItem item='ifstatement' />,
+for example:
+```python
+if 'Ray Member' in student_names:
+  congratulate_ray
+else:
+  commiserate_with_ray
+```
+In our example congratulations will be offered to Ray on account of his
+inclusion in our `student_names` list.
+
+You can also use the `not in` operator, which tests to see if an item
+is *not* in the list ie:
+```python
+if 'Mark Joseph' not in student_names:
+  mark_is_jealous
+else:
+  mark_is_delirious
+```
+Mark, unfortunately, may need to seek help with his feelings of envy on
+account of his exclusion from `student_names`.
+
 ## Next
 Now that you've been introduced to lists, its time to move on to the one of the most powerful
 things you can do with them - **iteration**.
