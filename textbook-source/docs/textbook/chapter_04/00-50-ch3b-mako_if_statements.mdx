@@ -1,5 +1,5 @@
 ---
-title: "Ch 3b: Mako if statements"
+title: "Mako if statements"
 ---
 
 import {Quizlet, Answer, Explanation} from '@site/src/components';
@@ -95,13 +95,13 @@ Unlike the previous application, where we had ```event``` tags, this application
 Lines 1 to 14 work exactly as they did in the previous application.
 
 ### Lines 21 to 33
-The big difference between this code and the previous code is our Mako ```if-elif-else``` clause. If the user selects 'Western Adelaide' from the previous screen, they will see the following code:
+The big difference between this code and the previous code is our Mako ```if-elif-else``` statement clause. If the user selects 'Western Adelaide' from the previous screen, they will see the following code:
 
-**screenshot here**
+<Components.DisplayImage imageURL='/img/textbook/chapter_04/magistrates_court_mako_radio_west_adelaide.PNG' altText='The user selecting West Adelaide from the first question block as the area where they live closest to.' />
 
 If the user selects none, they will see the following screen:
 
-**screenshot here**
+<Components.DisplayImage imageURL='/img/textbook/chapter_04/magistrates_court_mako_question_west_adelaide.PNG' altText='The text displayed on the final end screen if the user selects West Adelaide as their location.' />
 
 Again, we see almost identical output from our previous code. However, our code is now shorter, and we do not need to reuse code. That means there are less bugs. 
 
@@ -175,9 +175,9 @@ subquestion: |
   Thank you for completing this questionnaire.
 
   % if userAge < 18:
-  Because you are under 18, your parents may be eligible for [Family Tax A and B](https://www.dss.gov.au/families-and-children/benefits-payments/family-tax-benefit)
+  Because you are under 18, your parents may be eligible for [Family Tax A and B](https://www.dss.gov.au/families-and-children/benefits-payments/family-tax-benefit).
   % if userHasDisability:
-  You may also be eligible for the [Disability Support Pension](https://www.servicesaustralia.gov.au/disability-support-pension)
+  You may also be eligible for the [Disability Support Pension](https://www.servicesaustralia.gov.au/disability-support-pension).
   % endif
   % elif userAge >= 65:
   Because you are older than 65, you may be eligible for the [Aged Pension](https://www.servicesaustralia.gov.au/age-pension)
@@ -207,15 +207,15 @@ buttons:
 ---
 ```
 
-Once again, let's go through how this application works. Immediately we can tell that our application is much shorter (55 lines) than it was previously. 
+Once again, let's go through how this application works. Immediately we can tell that our application is much shorter (55 lines) than it was previously. However, there are many different sections of this if statement that we will need to break down.
 
-### Lines 20 to 26
+### Lines 20 to 26 - the Mandatory Question Block
 The first thing that Docassemble will do is execute the mandatory question block. To do so, it needs a value for ```userAge``` first, so that it can execute the first if statement.
 
 ### Lines 1 to 7
 In order to assign a value to ```userAge```, Docassemble will execute the first question block on lines 1 to 7.
 
-**Screenshot here**
+<Components.DisplayImage imageURL='/img/textbook/chapter_04/nested_mako_if_mako_welfare_age_question.png' altText='The first question displayed to the user in the nested Mako if statement application, asking for their age.' />
 
 ### Lines 27 to 28
 Unlike our original ```Ch4_Welfare_Elif.yml``` application though, we have an extra nested if statement. This if statement needs a value for ```userHasDisability```. 
@@ -223,31 +223,90 @@ Unlike our original ```Ch4_Welfare_Elif.yml``` application though, we have an ex
 ### Lines 8 to 10
 In order to assign a value to ```userHasDisability```, Docassemble needs to execute the question block on Lines 8 to 10.
 
-**Screenshot here**
+<Components.DisplayImage imageURL='/img/textbook/chapter_04/nested_mako_if_welfare_disability_question.png' altText='The disability question - this question is executed if the user says they are under 18 or between 18 and 65.' />
 
 If ```userHasDisability``` is set to True by the user (that is, they press yes), Docassemble will display the additional text from Line 28, along with the text from Line 26:
 
-**Screenshot here**
+<Components.DisplayImage imageURL='/img/textbook/chapter_04/nested_mako_if_welfare_familytaxab_and_dsp_eligible.png' altText='This is the endpoint screen displayed if the user states they are under 18 and are disabled.' />
 
 Otherwise, if ```userHasDisability``` is set to False, Docassemble will just display the text from Line 26:
 
-**Screenshot here**
+<Components.DisplayImage imageURL='/img/textbook/chapter_04/nested_mako_if_welfare_familytaxab_eligible.png' altText='This is the endpoint screen displayed if the user states they are under 18 and are not disabled.' />
 
 ### Lines 30 to 31
 What happens if the user indicates that they are 65 years or older? 
 
-**Screenshot here**
+<Components.DisplayImage imageURL='/img/textbook/chapter_04/nested_mako_if_welfare_age_question_older_than_65.png' altText='A screenshot of the user entering in a value of 65 or greater for their age.' />
 
 The ```elif``` clause on Line 30 will be executed and the text (and only the text) on Line 31 will be displayed instead.
 
-**Screenshot here**
+<Components.DisplayImage imageURL='/img/textbook/chapter_04/nested_mako_if_welfare_age_endpoint_older_than_65.png' altText='This is the endpoint screen displayed if the user states they are 65 or older.' />
 
 Note that none of the other text is being displayed, and therefore none of the other questions are being asked.
 
-### Lines 36 to 50
-
+### Line 32
 What happens if our user indicates they are between 18 and 65?
 
-**Screenshot here**
+<Components.DisplayImage imageURL='/img/textbook/chapter_04/nested_mako_if_welfare_age_question_18_to_65.png' altText='A screenshot of the user entering in a value between 18 and 65 for their age.' />
 
-This is where Docassemble executes our nested if statement.
+This is where Docassemble executes the nested ```if-elif-else``` statement clause within our ```else``` clause.
+
+### Lines 33 to 34
+To evaluate the nested ```if-elif-else``` statement, Docassemble first needs a value for ```userHasDisability```. Therefore, Docassemble will execute the question block on Lines 8 to 10. If the user answers Yes to this question, they will only see the text stating that they are eligible for the Disability Support Pension.
+
+<Components.DisplayImage imageURL='/img/textbook/chapter_04/nested_mako_if_welfare_dsp_eligible.png' altText='This is the endpoint screen displayed if the user indicates they are between 18 and 65, and they suffer from a disability'/>
+
+### Lines 35 to 40
+The next five lines of our application evaluate whether the user might be eligible for AusStudy. Remember that unlike the DSP, there are two requirements for AusStudy:
+
+* The user must be studying full time; and,
+* The user must be 25 or older.
+
+Docassemble first evaluates the ```elif``` statement clause on Line 35. To do so, it needs a value for ```userIsStudying```.
+
+### Lines 11 to 15
+To assign a value for ```userIsStudying```, Docassemble needs to execute the question block on Lines 11 to 15.
+
+<Components.DisplayImage imageURL='/img/textbook/chapter_04/nested_mako_if_welfare_study_question.png' altText='The study question - this question is executed if the user says they are between 18 and 65 and are not disabled.'/>
+
+If the user answers Yes (and Docassemble assigns the value True to ```userIsStudying```), Docassemble then evaluates the if statement on Line 36, and checks whether the variable ```userAge``` contains a value equal to 25 or greater. If they are, they will receive the following text stating that they are eligible for AusStudy. 
+
+<Components.DisplayImage imageURL='/img/textbook/chapter_04/nested_mako_if_welfare_ausstudy_eligible.png' altText='This is the endpoint displayed to the user if they nominate their age as being between 25 and 65 and they say they are studying full time'/>
+
+Otherwise, if the value in ```userAge``` is not between 25 and 65, will be told they are not eligible for AusStudy.
+
+<Components.DisplayImage imageURL='/img/textbook/chapter_04/nested_mako_if_welfare_ausstudy_not_eligible.png' altText='This is the endpoint displayed to the user if they nominate their age as being between 18 and 25 but say they are studying'/>
+
+If the user answers No (and Docassemble assigns the value False to ```userIsStudying```), Docassemble will execute the next ```elif``` statement clause.
+
+### Lines 41 to 46
+If the user indicates that the are not studying, Docassemble then executes the next branch of the ```elif``` statement clause. This clause evaluates whether the user might be eligible for JobSeeker. Remember that there are two requirements for a user to be eligible for JobSeeker:
+
+* They must be unemployed; and,
+* They must be 22 or older
+
+To evaluate this ```elif``` statement, Docassemble needs a value for ```userIsUnemployed```.
+
+### Lines 16 to 19
+To assign a value to ```userIsUnemployed```, Docassemble needs to execute the question block on lines 16 to 19:
+
+<Components.DisplayImage imageURL='/img/textbook/chapter_04/nested_mako_if_welfare_unemployed_question.png' altText='The study question - this question is executed if the user says they are between 18 and 65, are not disabled and are not studying full time.'/>
+
+This value is then used to evaluate the ```elif``` clause on Line 41. If the user answers Yes (and Docassemble assigns the value True to ```userIsUnemployed```), Docassemble then evaluates the nested if statement on Line 42. It already has a value for ```userAge``` so Docassemble does not need to answer this question again. 
+
+If ```userAge``` is set to a value greater than or equal to 22, the text telling the user they are eligible for JobSeeker is displayed.
+
+<Components.DisplayImage imageURL='/img/textbook/chapter_04/nested_mako_if_welfare_jobseeker_eligible.png' altText='This is the endpoint displayed to the user if they nominate their age as being between 22 and 65 and they say they are unemployed'/>
+
+Otherwise, if the user is less than 22, the ```else``` statement clause on Line 44 will be executed and the following text will be displayed.
+
+<Components.DisplayImage imageURL='/img/textbook/chapter_04/nested_mako_if_welfare_jobseeker_ineligible.png' altText='This is the endpoint displayed to the user if they nominate their age as being between 22 and 65 and they say they are not unemployed, or they are unemployed but say they less than 22.'/>
+
+Note that if the user answers No to the question on whether they are unemployed (that is, ```userIsUnemployed``` is assigned the value False), the else clause on Line 47 matching the nested ```if-elif-else``` clause will be executed, and this text will also be displayed.
+
+:::tip
+Note that each nested ```if-else``` and ```if-elif-else``` statement in our mandatory question block contains an ending ```% endif``` statement. If you do not include these, Docassemble will not run.
+:::
+
+## Improving Our Application
+Although this is an improvement over our previous application, there are still things that we can improve. First, we have three layers of nested if statements. That can increase the risk of errors being introduced into our application. Second, some of these ```if``` statements duplicate the text that we might display to the user. There might be a more efficient way to combine these statements together using [logical operators](/docs/textbook/chapter_04/00-60-ch3b-test_many_things_at_once.mdx).
