@@ -2,6 +2,7 @@
 title: "Nested if statements"
 ---
 
+import routesChunkNames from '@generated/routesChunkNames';
 import {Quizlet, Answer, Explanation} from '@site/src/components';
 import * as Components from '@site/src/components'
 
@@ -196,7 +197,56 @@ This will change what endscreen is displayed. For example, let's say the user se
 
 <Components.DisplayImage imageURL='/img/textbook/chapter_04/welfare_nested_between_18_and_65.png' altText='The text displayed to the user if they say they suffer from a disability.' />
 
-<Quizlet title="Nested If Statement Quiz"></Quizlet>
+<Quizlet title="Nested If Statement Quiz">
+  Consider the following code fragment from Docassemble:
+
+  ```yaml
+  ---
+  question: | 
+    Do you live in Adelaide?
+  yesno: userIsFromAdelaide
+  ---
+  question: |
+    Where do you live?
+  fields:
+    - no label: userLocation
+      datatype: radio
+      choices:
+        - Western Adelaide: west
+        - Northern Adelaide: north
+        - North-East Adelaide: northeast
+        - Adelaide CBD: cbd
+        - Southern Adelaide: south
+  ---
+  mandatory: True
+  code: |
+    if userIsFromAdelaide:
+      if userLocation == 'west':
+        ## Do something in Docassemble
+        elif userLocation == 'north':
+        ## Do something in Docassemble
+        else:
+        ## Do something else in Docassemble
+  ---
+  ```
+
+  When we attempt to execute this application, Docassemble will generate a syntax error. Why?
+  <Answer>
+  There is not an `elif` clause for each option in our radio buttons question.
+  </Answer>
+  <Answer>
+  The tests for evaluating whether `userLocation` contains a value are incorrect.
+  </Answer>
+  <Answer isCorrect>
+  The `elif` and `else` statement clauses are incorrectly indented
+  </Answer>
+  <Explanation correctAnswer>
+  That's right. The `elif` statement clause and the `else` statement clause need to be aligned with the else statement. Otherwise Docassemble will generate a syntax error.
+  </Explanation>
+  <Explanation>
+  That's not quite right. Specifically, Docassemble will still execute a nested `if` statement even if all cases are not included. Likewise, if we want to check whether a particular variable (such as `userLocation`) contains a string we use the `==` symbol.
+  </Explanation>
+</Quizlet>
 
 ## When Should We Not Use Nested If Statements?
 Now that we've learned about how great nested if statements are, let's learn about when we should *not* use nested if statements.

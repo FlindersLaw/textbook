@@ -146,7 +146,22 @@ Else (that is, if neither of the two conditions above are met), then the event o
 <Components.DisplayImage imageURL='/img/textbook/chapter_04/contact_us_elif_statement.png' altText='The endpoint displayed if the user says they are 65 or older' />
 
 <Quizlet title="If-Elif Statement Quiz">
-Which of the following is **not** true about `elif` clauses?
+  Which of the following is **not** true about `elif` clauses?
+  <Answer>
+  An `elif` clause must follow an initial `if` statement clause
+  </Answer>
+  <Answer>
+  An `elif` statement must be concluded with an `:`
+  </Answer>
+  <Answer isCorrect>
+  An `elif` statement must be followed by an `else` statement.
+  </Answer>
+  <Explanation correctAnswer>
+  That's right. We can only use an `elif` statement clause once we have used an `if` statement clause. We also need to conclude the `elif` statement clause with a `:` once we have included the condition. We can also include as many `elif` clauses as we want after an `if` statement clause.
+  </Explanation>
+  <Explanation>
+  That's not quite right. Remember that we can use an `elif` statement clause in an `if` statement once we have defined the initial `if` statement clause. We must also terminate the `elif` statement clause with a `:`. Remember that we do not need to terminate an `if` statement clause with an `else` - we can define each case using an `elif` if we wish.
+  </Explanation>
 </Quizlet>
 
 ## Another If-Elif Statement Example
@@ -257,6 +272,49 @@ If the user selects **None of the above**, Docassemble will redirect the user to
 Otherwise, Docassemble will redirect the user to the ```courtEndscreen```. The if-elif block on Lines 17 to 36 will set the value for ```userCourt``` and ```courtAddress```. For example, let's say our user selects **Western Adelaide**. The following screen will be displayed.
 
 <Components.DisplayImage imageURL='/img/textbook/chapter_04/port_magistrates_court_endpoint_elif_statement.png' altText='The endpoint screen displayed to the user if they select "Western Adelaide" on the previous screen' />
+
+<Quizlet title="If-Elif Statement Quiz">
+  Consider the following `if-elif` statement:
+
+  ```yaml
+  ---
+  question: |
+    What is your age?
+  fields:
+    - no label: userAge
+      datatype: integer
+  ---
+  mandatory: True 
+  code: |
+    if userAge > 22:
+      jobSeeker
+    elif userAge > 25
+      ausStudy
+    else:
+      contactUs
+  ---
+  ```
+
+  Why won't our application execute in Docassemble?
+  <Answer>
+  The test we are using to assess `userAge` is incorrect.
+  </Answer>
+  <Answer isCorrect>
+  We are missing a `:` at the end of our `elif` statement clause.
+  </Answer>
+  <Answer>
+  There is no space between `elif` and `userAge`.
+  </Answer>
+  <Explanation correctAnswer>
+  That's right. Our `elif` statement is testing whether the user's age is greater than 25. We need to put a space between the `elif` and the condition (that is, the variable `userAge` we are assessing). We need to then termiante this with a `:`.
+  </Explanation>
+  <Explanation>
+  That's not right. Remember:
+  * We want to assess whether the user is greater than 25 (if they are not greater than 22);
+  * We need to put a space between this test and the `elif`; and,
+  * We need to terminate this `elif` clause with a `:`.
+  </Explanation>
+</Quizlet>
 
 ## Improving our application
 You might have noticed that there is a bit of repetition in ```Ch4_Magistrates_Court_Tool.yml```. For example, we make multiple calls to ```courtEndscreen``` on Lines 20, 24, 28, 32 and 36. It would be easier if we just had one call to ```courtEndscreen``` if the user did not set ```userLocation``` to None of the above. To do this, we would need to use nested if statements, which we will cover in the next section.
