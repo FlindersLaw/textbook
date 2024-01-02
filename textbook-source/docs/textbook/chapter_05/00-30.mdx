@@ -58,22 +58,23 @@ first line:
 ```
   * ${breadtypes[0]}
 ```
-and replacing the `0` with the index as we go.  This kind of copying and pasting
-is a sure-fire indicator of the need to use iteration.
+and replacing the `0` with the index as we go.  *This kind of copying and pasting
+is a sure-fire indicator of the need to use iteration*.
 
-Second, imagine if we had 1,000 bread types.  The inconvenience of copying the
-same line four times in a five-element list becomes a huge effort for a 1,000-element
+Second, imagine if we had 1,000 bread types.  Now our inconvenience 
+becomes a huge effort for a 1,000-element
 list.  Not to mention the possibility of introducing errors.
 
-Third, what happens if we decide to add a new item to the list?  Or what if we
-had to remove an item from the list?  Every change we made to the list data
-(in the code block) would have to be duplicated in the mandatory question block.
-Again, this is inefficient and it's very error prone.  The history of coding
+Third, what happens if we wanted to add a new item to the list?  Or
+remove an item from the list?  Each time we make an alteration we need
+to modify the code in *two* places - the list data (in the code block)
+and the list display commands in the mandatory question block.
+Again, this is inefficient and it's very error prone.
+
+The history of coding
 is littered with errors arising from unnecessary copying and pasting of code.
 
-What we really want to do is, instead telling Docassemble to *display the first item*,
-then *display the second item*, then *display the third item* and so-on, we
-want to tell Docassemble this:
+What we want is *not* to tell Docassemble to display each item indivdually.  Instead, we want to tell Docassemble this:
 > Display all the items in this list from top to bottom as a bullet list.
 
 That's a good summary.  Let's re-phrase it:
@@ -82,7 +83,7 @@ That's a good summary.  Let's re-phrase it:
 Make sense?  Let's re-phrase it again, this time using the 'I'-word:
 > *Iterate* over each item in the list displaying each item as a bullet list item.
 
-Still with us?  Let's re-phrase it in a more code-y way:
+Still with us?  Let's re-phrase it in a more code-like way:
 > *For each* item *in* the list, display it as a bullet list item.
 
 ## Iteration and loops
@@ -137,6 +138,12 @@ our `bread_types` list:
 for bread_type in bread_types:
     do_something
 ```
+or
+```python
+for a_bread_type in bread_types:
+  do_something
+```
+The special variable can be any name.  It's best to choose a name that is descriptive.
 
 The `do_something` part of the loop is the **body** of the loop.  It can contain
 more than one line but, in the Python format at least (more on this below), 
@@ -183,7 +190,7 @@ character tells Docassemble that what follows is a command and not just the
 word 'for'.
 
 The body of a loop can't be indented in Mako format.  That's because Markdown
-treats indetation of four spaces or more as a special command.
+treats indentation of four spaces or more as a special command.
 
 Because the loop body can't be indented, Mako format introduces a `%endfor` line
 to delimit the end of the loop.

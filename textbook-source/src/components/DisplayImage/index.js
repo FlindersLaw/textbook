@@ -33,7 +33,7 @@ export function DisplayImage(props) {
   } else if ( align === 'left' ) {
     css.marginRight = '20px';
   } else if ( align == 'center' ) {
-    css.margin = '0 auto';
+    css.margin = '20px auto';
   }
 
  // Define returnValue so we can console.log() it for debugging
