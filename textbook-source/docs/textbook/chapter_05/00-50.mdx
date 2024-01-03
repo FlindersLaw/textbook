@@ -10,6 +10,10 @@ import ExampleDictionary from './_example_dictionary.mdx';
 import ExampleTable from './_example_table.mdx';
 import ExampleComplexCode from './_example_complex_code.md';
 import StudentDetailsDataBlock from './_student_details_data_block.md';
+import ExampleIReferTable1 from './_example_irefer_table1.mdx';
+import ExampleIReferTable2 from './_example_irefer_table2.mdx';
+import ExampleIReferDB1 from './_example_irefer_table1_datablock_collapsed.mdx';
+import ExampleIReferDB2 from './_example_irefer_table2_datablock_collapsed.mdx';
 
 ## Lists Reprisal
 Let's get back into lists again.
@@ -270,14 +274,114 @@ Multidimensional data is when we nest complex data structures more than two leve
 example to illustrate this.
 
 In 2020 Flinders Law students developed an app called [iRefer](https://docassemble.flinders.edu.au/interview?i=docassemble.LLAW33012020S1P02:data/questions/main_code2.yml#page1)
-for the [Family Law Pathways Network](https://pathwaysnetworksa.com.au/).  iRefer automated what used to be a paper
-directory of services available to FLPN's clients.  By migrating the directory online into iRefer, the students 
-allowed FLPN to make the directory available 24 x 7 to its clients regardless of where they lived.  Previously,
-clients could only access the directory by physically attending at the Federal Court in Adelaide.
+for the [Family Law Pathways Network](https://pathwaysnetworksa.com.au/) (**FLPN**).  iRefer automated what used to be a paper
+directory of services available to FLPN's clients.  The directory was only accessible by attending FLPN's kiosk at the 
+Federal Court building in Adelaide.  By migrating the directory online the students 
+allowed FLPN to make the directory available 24x7 and also accessible by remote and regional clients.
 
-The app essentially asks the users certain questions and, depending on their answers, provides them with list
-of services relevant to them.
+The app asks its users certain questions, such as where they live, their gender, and what services they are looking for.
+The app then constructs a list of relevant services depending on those answers and presents that list to the user.
 
+The app is built around a list of agencies which is stored in a data block.  Each item in the list has keys for
+information such as the agency's name, its address and contact details.  So far, this describes a list of dictionaries,
+similar to the `student_details` we have discussed in this section, albeit with different data.
 
+<ExampleIReferTable1 />
 
+<ExampleIReferDB1 />
 
+However, in order to be useful, each agency in the database must also contain a list of locations that it services
+and a list of services that it provides.  As a table, this might look as follows:
+
+<ExampleIReferTable2 />
+
+<ExampleIReferDB2 />
+
+The data type of the data in the 'Location' and 'Caters For' columns is a complex data type, namely a list.  This
+extends our existing list of dictionaries to be a list of dictionaries, with some dictionary values being a list
+(of strings in this case).  That is, we have introduced a *third dimension* into our data structure.  We now have:
+
+1. a list;
+1. of dictionaries;
+1. with some dictionary values as lists.
+
+By doing this we make available to ourselves all the advantages of lists inside our database.
+For example, to see if a service provides, say, Child services, we could use the list `in`
+operator to test for [membership](./00-20#list-membership).  For example, we could check the
+first item in the database as follows:
+```python
+'Child services' in FLPN_services[0]['caters_for']
+```
+Note that:
+
+* `FLPN_services` is the name of our data block;
+* `FLPN_services[0]` is the first list item in our data block; and
+* `FLPN_services[0]['caters_for']` access the list in the `caters_for` key in our first list item.
+
+## Multidimensional data and filtering
+A Central part of the iRefer app was to filter out services based on a user's selection.  For 
+example, a user may select 'Behaviour management services' from the list of available services.
+The app would then want to display only those agencies that provide behaviour management services.
+In our example, we would want only 'Who's in Charge' and 'Circle of Security' to be returned.
+
+Once we have data stored in this structured way it becomes relatively simple to filter out 
+unwanted records.  We usually do this by iterating over the data block and copying the records
+we *do* want into a new list.  For example, here is a code block that will copy only the two agencies
+that provide behaviour management services into a new filtered list:
+```python showLineNumbers
+---
+code: |
+  filtered_list = []    # Start with an empty list
+  filter_category = 'Behaviour management services'  # We put our service category into a
+                                                     # variable.  It's good practice not to embed
+                                                     # strings in loops and if statements.
+                                                     # In the 'real' version of this app we would
+                                                     # have asked the user for the filter_category.
+
+  for list_item in FLPN_services:                    # Iterate over our data block
+    if filter_category in list_item['caters_for']:   # Does our list item contain our category?
+        filtered_list.append(list_item)              # if so, then add it to our filtered list
+---
+```
+
+We could then display our filtered list in a table in our final screen:
+```yml showLineNumbers
+---
+event: final_screen
+question: final_screen
+subquestion: |
+  Here is a list of service providers that match your criteria
+
+  Provider|Phone|Cost
+  ---|---|---
+  %for list_item in FLPN_services:
+  %if 'Behavioural management services' in list_item['caters_for']:
+  ${list_item['service']}|${list_item['phone']}|${list_item['cost']}
+  %endif
+  %endfor
+buttons:
+  - Exit: exit
+  - Restart: restart
+---
+```
+:::note
+Both of the example blocks above have the string 'Behaviour management services' embedded
+in their code.  This is obviously inefficient.  In the 'real world' we'd want to ask the user
+a which category of services they would like.  We'd use a question block like this:
+```yml
+---
+question: Select services
+fields:
+    - Select which service you would like: filter_category
+      datatype: radio
+      choices:
+        - Behaviour managemenet services
+        - Child services
+        - Courses
+        - Indigenous services
+        - Parental services
+        - Pre-separation material
+---
+```
+It is not good practice to embed string literals into code as we have done in the blocks above.
+:::
