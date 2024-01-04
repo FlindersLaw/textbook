@@ -45,9 +45,6 @@ export const Quizlet = ({ children, title }) => {
         selected: isSelected })
       );
     } else if ( child.type == Explanation ) {
-      console.log("Explanation");
-      console.log(child)
-      console.log(child.props.correctAnswer);
       if ( child.props.correctAnswer) {
         correctExplain.push(child);
       } else {
@@ -74,7 +71,12 @@ export const Quizlet = ({ children, title }) => {
         {quizAnswers}
       </div>
       {selectedAnswer && (
-        <div>{selectedAnswer.isCorrect ? correctExplain : incorrectExplain}</div>
+        <div>
+          {selectedAnswer.isCorrect
+            ? (correctExplain.length > 0 ? correctExplain : 'Correct!')
+            : (incorrectExplain.length > 0 ? incorrectExplain : 'Incorrect. Try again.')
+          }
+        </div>
       )}
     </div>
   );

@@ -8,13 +8,16 @@
  */
 export const glossary = new Map([
     ['assign', {
-        text: 'assign'
+        text: 'assign',
+        plural: 'assigns',
     }],
     ['block', {
         text: 'block',
         plural: 'blocks' }
     ],
-    ['boolean', { text: 'boolean'} ],
+    ['boolean', {
+        text: 'boolean',
+        plural: 'booleans'} ],
     ['brace', {
         text: 'brace',
         plural: 'braces' }
@@ -31,6 +34,10 @@ export const glossary = new Map([
         text: 'comment',
         plural: 'comments' }
     ],
+    ['complexdatatype', {
+        text: 'complex data type',
+        plural: 'complex data types' }
+    ],
     ['curlybrace', {
         text: 'curly brace',
         plural: 'curly braces' }
@@ -44,10 +51,17 @@ export const glossary = new Map([
         text: 'data type',
         plural: 'data types',
     }],
+    ['datavalidation', {
+        text: 'data validation',
+    }],
     ['dictionary', {
         text: 'dictionary',
-        plural: 'dictionaries' }
-    ],
+        plural: 'dictionaries'
+    }],
+    ['escapecharacter', {
+        text: 'escape character',
+        plural: 'escape characters'
+    }],
     ['field', {
         text: 'field',
         plural: 'fields'}
@@ -55,6 +69,14 @@ export const glossary = new Map([
     ['fieldlabel', {
         text: 'field label',
         plural: 'field labels'}
+    ],
+    ['float', {
+        text: 'float',
+        plural: 'floats'}
+    ],
+    ['forloop', {
+        text: "'for' loop",
+        plural: "'for' loops"}
     ],
     [ 'function', {
         text: 'function',
@@ -64,11 +86,27 @@ export const glossary = new Map([
         text: 'if statement',
         plural: 'if statements' }
     ],
+    [ 'inputtype', {
+        text: 'input type',
+        plural: 'input type',
+    }],
+    [ 'integer', {
+        text: 'integer',
+        plural: 'integers',
+    }],
+    [ 'iteration', {
+        text: 'iteration',
+        plural: 'iterations',
+    }],
     ['jinja', { text: 'jinja' }],
     [ 'list', {
         text: 'list',
-        plural: 'lists' }
-    ],
+        plural: 'lists'
+    }],
+    [ 'loop', {
+        text: 'loop',
+        plural: 'loops'
+    }],
     ['mako', { text: 'mako' }],
     ['mandatory', { text: 'mandatory' }],
     ['mandatoryblock', {
@@ -89,7 +127,10 @@ export const glossary = new Map([
         text: 'question block',
         plural: `question blocks` }
     ],
-    ['reservedword', { text: 'reserved word' }],
+    ['reservedword', { 
+        text: 'reserved word',
+        plural: 'reserved words'
+    }],
     ['squarebracket', {
         text: 'square bracket',
         plural: 'square backets' }
@@ -118,6 +159,10 @@ export const glossary = new Map([
         text: 'variable',
         plural: 'variables' }
     ],
+    [ 'value', {
+        text: 'value',
+        plural: 'values',
+    }],
     ['yaml', {
         text: 'YAML',
     }],

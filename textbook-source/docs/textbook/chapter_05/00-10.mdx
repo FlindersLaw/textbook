@@ -1,0 +1,119 @@
+---
+title: Complex Data Concepts
+---
+import {DisplayGlossaryItem} from '@site/src/components';
+import {DisplayImage} from '@site/src/components';
+import {DisplayChapter} from '@site/src/components';
+import {Quizlet,Answer,Explanation} from '@site/src/components'
+
+We already know that we can store stuff in variables.  For example, we can store:
+
+<table id="complexDataTable1">
+    <tr>
+        <th>Strings</th>
+        <td><code>MJFname = 'Mark Ferraretto'</code></td>
+    </tr>
+    <tr>
+        <th>Integers</th>
+        <td><code>MJFnumber_chn = 4</code></td>
+    </tr>
+    <tr>
+        <th>Floats</th>
+        <td><code>MJFhh_income = 45000.0</code></td>
+    </tr>
+    <tr>
+        <th>Booleans</th>
+        <td><code>MJFis_citizen = True</code></td>
+    </tr>
+</table>
+
+What each example has in common is that each stores one piece of information ie:
+ 
+* one string;
+* one integer;
+* one floating point number; and
+* one boolean.
+
+Sometimes, though, we might have data that looks like this:
+<table className="complexDataTableExamples cdtCentre">
+    <caption>A list of names</caption>
+    <tr><th>Name</th></tr>
+    <tr><td>Ida Noe</td></tr>
+    <tr><td>Hugo First</td></tr>
+    <tr><td>Moda Lawn</td></tr>
+    <tr><td>Kate Jupp</td></tr>
+    <tr><td>Ayfor Gott</td></tr>
+    <tr><td>Justin Thyme</td></tr>
+    <tr><td>Ray Member</td></tr>
+    <tr><td>Studie Harde</td></tr>
+    <tr><td>Slacke Hearse</td></tr>
+</table>
+
+or this:
+
+<table className="complexDataTableExamples cdtCentre">
+    <tr><th>Name</th> <th>Number of Children</th> <th>Household Income</th> <th>Is a Citizen?</th></tr>
+    <tr><td>Hugo First</td><td>4</td><td>$45,000</td><td>Yes</td></tr>
+    <tr><td>Moda Lawn</td><td>4</td><td>$45,000</td><td>Yes</td></tr>
+    <tr><td>Kate Jupp</td><td>4</td><td>$45,000</td><td>No</td></tr>
+    <tr><td>Ayfor Gott</td><td>4</td><td>$45,000</td><td>Yes</td></tr>
+    <tr><td>Justin Thyme</td><td>4</td><td>$45,000</td><td>Yes</td></tr>
+    <tr><td>Ray Member</td><td>4</td><td>$45,000</td><td>No</td></tr>
+    <tr><td>Studie Harde</td><td>4</td><td>$45,000</td><td>Yes</td></tr>
+    <tr><td>Slack Hearse</td><td>4</td><td>$45,000</td><td>Yes</td></tr>
+</table>
+
+How do we store this data?  For example, let's look at our list of names above.
+
+One way would be to store each name in a variable.  We know we can store strings in variables,
+so maybe we could set up variables as follows:
+```python 
+MJFname1 = 'Ida Noe'
+MJFname2 = 'Hugo First'
+MJFname3 = 'Moda Lawn'
+MJFname4 = 'Kate Jupp'
+MJFname5 = 'Ayfor Gott'
+MJFname6 = 'Justin Thyme'
+MJFname7 = 'Ray Member'
+MJFname8 = 'Studie Harde'
+MJFname9 = 'Slacke Hearse'
+```
+Technically this works, but it raises some issues:
+
+<DisplayImage imageURL='/img/textbook/chapter_05/womanwithbuckets.png'
+    align='left' size='20%' />
+
+First, it's not going to scale very well.  Imagine needing to manage a list of 100, or 1,000 names.
+We'd need 100 or 1,000 variables.  This is a lot of work and, specifically, a lot
+of *repetitive* work. It's inefficient, time-consuming and error-prone.
+
+ Wouldn't it be nice if we could store all these names in 
+a single variable regardless of how many we had...
+
+Also, how would we manage displaying all the names?  For example, how would we display the list
+above?  We'd have to list out each <code>MJFname<i>N</i></code>
+variable each time.  What happens when we add or 
+delete someone?  We need to create new variables and copy them throughout our code.  When we
+delete names we'd have gaps in our sequencing.  How would we know the gap is there on purpose
+and not an error? 
+
+<DisplayImage imageURL='/img/textbook/chapter_05/happywomanwithbucket.png'
+    align='right' size='15%' />
+This is unworkable, much like carrying 10 buckets around each with one thing inside, when what
+you really want is to carry one bucket around with 10 things inside.
+
+If only we had a way of displaying all the names using a single variable and
+just added and removed names from it as we needed to.
+
+If only we could be as happy as the Happy Bucket Lady...
+
+## Introducing Complex Data Structures
+Complex data types are the answer to our problem.  Complex
+data types, such as <DisplayGlossaryItem item='list' plural /> and
+<DisplayGlossaryItem item='dictionary' plural /> give us  Happy Bucket Lady
+vibes.  This is because complex data types allow us to store more than one value in 
+a variable.  Even more so, complex data types also allow us to structure how we will store
+the data.  For example, a list complex data type allows us to store data in sequential order,
+much like that 'List of names' table above.  Because complex data type allow us to do this,
+they are often also referred to as **complex data structures**.  We will use both terms 
+interchangeably in this textbook.

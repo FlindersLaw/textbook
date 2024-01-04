@@ -155,8 +155,14 @@
   background-color: rgba(35,46,75, 0.1);
 }
 
+/* Don't want spacing after a <p> as single-line answers look ugly */
+.quizlet .answerButton p {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
 .quizlet .correctAnswer {
-  background-color: #2f922f;
+  background-color: #5f922f;
   color: #ffffff;
   font-weight: bold;
 }
@@ -172,3 +178,93 @@
 .quizlet .incorrectAnswer:hover {
   background-color: #ff333333;
 }
+
+#mathCompTable {
+  width: 100%;
+}
+#mathCompTable td {
+  vertical-align: top;
+  text-align: left;
+}
+/* Make sure we don't wrap the operator and example test columns */
+#mathCompTableCol2 {
+  width: 140px;
+}
+
+#mathCompTableCol3 {
+  width: 185px;
+}
+
+/* we don't want to wrap this column as it displays code */
+#logicTableCol3 {
+  width: 330px;
+}
+
+#complexDataTable1 {
+  vertical-align: top;
+  text-align: left;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+table#complexDataTable1 tr,
+table#complexDataTable1 td,
+table#complexDataTable1 th {
+  border: none;
+}
+
+#complexDataTable1 tr {
+  background-color: #ffff
+}
+#complexDataTable1 th {
+  padding: 0px;
+  padding-right: 7px;
+}
+
+#complexDataTable1 td {
+  padding: 0px;
+  padding-left: 2px;
+  padding-right: 2px;
+  padding-bottom: 0px;
+}
+
+.complexDataTableExamples td {
+  vertical-align: top;
+  text-align: left;
+}
+
+.cdtTop th {
+  vertical-align: top;
+}
+
+.cdtLeft th {
+  text-align: left;
+}
+
+table .cdtCentre {
+  display: table;
+  margin-right: auto;
+}
+
+table.cdtSingleColour tr {
+  background-color: #fff;
+}
+
+.complexDataTableExamples th,
+.complexDataTableExamples td {
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+
+.complexDataTableExamples th {
+  background-color: var(--ifm-color-primary-darkest);
+  color: var(--ifm-color-secondary);
+  font-weight: bold;
+}
+.complexDataTableExamples caption {
+  caption-side: bottom;
+  font-weight: bold;
+  font-size: smaller;
+  margin-top: 5px;
+}
+

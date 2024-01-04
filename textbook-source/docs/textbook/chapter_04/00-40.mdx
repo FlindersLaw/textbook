@@ -6,7 +6,7 @@ import routesChunkNames from '@generated/routesChunkNames';
 import {Quizlet, Answer, Explanation} from '@site/src/components';
 import * as Components from '@site/src/components'
 
-In the previous [section](./00-30.mdx), we mentioned that there are two ways we can create an if block with multiple conditions:
+In the previous [section](./00-30), we mentioned that there are two ways we can create an if block with multiple conditions:
 
 * Using an if-elif clause; and,
 * Using nested if statements
@@ -19,7 +19,7 @@ If statements aren't usually used in isolation, much like decisions aren't made 
 The best way to do this is using a nested if statement. A nested if statement is an if statement encased inside another if statement.
 
 ### Nested If Statement Rules
-In addition to the [rules](./00-20.mdx) about if statements we discussed previously:
+In addition to the [rules](./00-20) about if statements we discussed previously:
 
 * All nested if statements need to start on an indented line below the original if statement; and,
 * All lines of the nested if statement need to be aligned with one another.
@@ -38,7 +38,7 @@ Let's consider the application that we developed in the previous section for the
 However, what if when our user answers that they are between 18 and 65, we want to ask a series of follow up questions? We could ask whether they have a disability, or whether they are currently studying. If they are, they might be eligible for other forms of welfare, such as the disability support pension, AusStudy or JobSeeker. 
 
 ### Flow of Control
-We could modify our flowchart from the previous [section](./00-30.mdx) to include the following questions:
+We could modify our flowchart from the previous [section](./00-30) to include the following questions:
 
 ```mermaid
 flowchart LR;
@@ -256,4 +256,4 @@ Nested if statements are great when we want to control the flow of our applicati
 However, if we were to ask their age *and* whether they were disabled at the same time, it would not make sense to use a nested if statement. 
 
 ## Improving Our Application
-Another example lies in the AusStudy branch of our application. An eagle eyed reader, upon examining the link for AusStudy, might note that this is available for students who are over 25. To help make a condition for this, we will need to use [and and or statements](./00-60.mdx).
+Another example lies in the AusStudy branch of our application. An eagle eyed reader, upon examining the link for AusStudy, might note that this is available for students who are over 25. To help make a condition for this, we will need to use [and and or statements](./00-60).
