@@ -6,7 +6,7 @@ import {Quizlet, Answer, Explanation} from '@site/src/components';
 import * as Components from '@site/src/components'
 
 ## A Recap On If Statements and Application Design
-In the [previous](./00-30) [sections](./00-40), we developed a series of applications that used if statements to direct the flow of control for our application. Depending on what the user entered as input, the if statement would trigger an event and Docassemble would display an end screen.
+In the [previous](./00-30.mdx) [sections](./00-40.mdx), we developed a series of applications that used if statements to direct the flow of control for our application. Depending on what the user entered as input, the if statement would trigger an event and Docassemble would display an end screen.
 
 That type of logic works well for multiple different endpoints. For example, each of our endpoints in this chapter so far contains a statement on whether a user is eligible for a particular form of welfare. What if a user is eligible for more than one form of welfare? For example, someone could be eligible for both the Family Tax A and B pensions *and* a disability support pension.
 
@@ -29,7 +29,7 @@ The rules for using Mako if statements are different than for using if statement
 Note that you do not need to indent the text or code contained in your if statement. If you do, it could cause a syntax error.
 
 ## Another Example Mako If Statement
-The simplest use of Mako if statements is to condense down the number of screens required for a Docassemble application. Let's consider our court selector from the previous [section](./00-40). You might recall we used the following flowchart:
+The simplest use of Mako if statements is to condense down the number of screens required for a Docassemble application. Let's consider our court selector from the previous [section](./00-40.mdx). You might recall we used the following flowchart:
 
 ```mermaid
 flowchart LR;
@@ -309,4 +309,4 @@ Note that each nested ```if-else``` and ```if-elif-else``` statement in our mand
 :::
 
 ## Improving Our Application
-Although this is an improvement over our previous application, there are still things that we can improve. First, we have three layers of nested if statements. That can increase the risk of errors being introduced into our application. Second, some of these ```if``` statements duplicate the text that we might display to the user. There might be a more efficient way to combine these statements together using [logical operators](./00-60).
+Although this is an improvement over our previous application, there are still things that we can improve. First, we have three layers of nested if statements. That can increase the risk of errors being introduced into our application. Second, some of these ```if``` statements duplicate the text that we might display to the user. There might be a more efficient way to combine these statements together using [logical operators](./00-60.mdx).
