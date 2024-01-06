@@ -4,6 +4,8 @@ title: Making the changes
 import {DisplayImage} from '@site/src/components';
 import {DisplayChapter} from '@site/src/components';
 import {DisplayGlossaryItem} from '@site/src/components';
+import {DisplayDAButtons} from '@site/src/components';
+import * as Constants from '@site/src/constants';
 import ListOfChanges from './_list_of_changes.mdx';
 
 In this part of the textbook we will start with basic code with no styling and step by step
@@ -258,7 +260,7 @@ what we want into it.  The 'Cascading' part of CSS will ensure that the default 
 and then our `navbar` class is read.  Our changes will overwrite the default class.  That's handy as, seeing
 as we only want to change the background colour, that's the only property we need to add to our `navbar` class.
 
-::note
+:::note
 CSS classes are declared with a leading full-stop (`.`) in a CSS file.  Therefore, to declare our custom
 `navbar` class, we actually need to declare a class called `.navbar`.
 :::
@@ -376,6 +378,7 @@ code higlighted in the Developer Tools.  We also see that the menu bar's class i
 <DisplayImage imageURL='/img/textbook/chapter_07/elementpicker3.png' 
     caption="Hard to see, but true!" />
 
+### Update the styles
 So, we need to create a new `nav-link` class. Because `nav-link` seems a rather generic term, we want our class
 only to be used when we're accessing a `nav-link` in the navbar.  Once again, the 'Cascading' part of CSS 
 comes into play.  We can limit our `nav-link` class to only `nav-link`s in the `navbar` by adding the following
@@ -472,10 +475,296 @@ a menu bar item we want that item to be 'highlighted' by, in this case, setting 
 a more opaque version of Flinders yellow.
 
 Your CSS file should now look like this:
-```css title="styles.css" showLineNumbers
+<details>
+<summary>
+Updated `styles.css`
+</summary>
+```css showLineNumbers
+:root {
+  --flinders-blue: rgb(34,45,75);
+  --flinders-yellow: rgb(252,212,6);
+  --flinders-yellow-30: rgba(252,212,6,0.3);
+  --flinders-yellow-50: rgba(252,212,6,0.5);
 
+}
+
+.navbar {
+  background-color: var(--flinders-blue) !important;
+}
+
+.navbar .nav-link {
+  color: var(--flinders-yellow);
+  font-weight: bolder;
+}
+
+.navbar .dropdown-menu{
+    background-color: var(--flinders-yellow-30);
+}
+.navbar .dropdown-item {
+    color: var(--flinders-blue);
+}
+.navbar .dropdown-item:hover{
+    background-color: var(--flinders-yellow-50);
+}
+```
+</details>
+
+The menu bar in your app should now be a lovely transparent Flinders yellow.
+
+<DisplayImage imageURL='/img/textbook/chapter_07/makingchanges4.png' />
 
 ## Add styled text
+We've seen how styles in a CSS style sheet can modify existing elements in a web app.  CSS can do much more than
+this.  Almost every every website on the intenet uses CSS to control its style, look and feel.  CSS can do everything
+from changing colours and fonts to creating 3D shadows, animations and floating content.  Exploring CSS in detail
+is way beyond the scope of this textbook, but there are [lots](https://www.w3schools.com/css/css_intro.asp) of 
+[useful](https://developer.mozilla.org/en-US/docs/Web/CSS) [resources](https://www.w3.org/Style/CSS/learning)
+[online](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/CSS_basics) should you want
+to explore CSS further.
+
+With that said, our next task is to this (rather ugly) text box to our app.  (Unfortunately, your authors
+are neither artists nor web designers)
+
+<DisplayImage imageURL='/img/textbook/chapter_07/makingchanges5.png' />
+
+If you look at the screenshot [at the beginning of this chapter](00-10) you will also see we've changed 
+the text in the app.  Let's do this part as it's easy.  Let's replace the text in our app so it reads as follows:
+
+```yml showLineNumbers
+---
+metadata:
+  title: |
+    Look and Feel Demonstrator
+  short title: |
+    Style Demonstrator
+  show login: True
+---
+objects:
+  - MJFlogo: DAStaticFile.using(filename='flinders_logo.png')
+---
+mandatory: True
+code: |
+  set_parts(logo='<img src="' + MJFlogo.url_for() + '" style="height: 50px;">')
+---
+features:
+  css: styles.css
+---
+mandatory: True
+question: Look and Feel Demonstrator
+subquestion: |
+  This question block demonstrates how to perform basic customisations to the look and feel
+  of your app.  Most of the customisation is done using **Cascading Stylesheets**, or [CSS](https://www.w3schools.com/Css/).
+  CSS is the standard way of customising the look and feel of webapps.  Have a look at
+  the CSS file in the `static` forlder for this app to see more information about how we've used
+  CSS to customise this app.
+
+  You can also use [HTML](https://www.w3schools.com/html/) together CSS to improve the display
+  of your app.  In many cases HTML can be
+  mixed with markdown.  You can use CSS to control how your raw HTML looks.  For example, the `div`
+  block below is linked to a CSS style called `MJFbox`.  If you find `MJFbox` in the CSS
+  file you will see the commands that set the border, text colour and font style.
+buttons: 
+  - Exit: exit
+  - Restart: restart
+  - Continue: continue
+---
+```
+
+Now we're ready to add our styled text.  Doing so requires us to do two things.  First, we need to create
+the text, and second, we need to create the styles used to display the text.
+
+### Adding the text
+We will do this in two parts.  First, we will add the text we want.  Second, we will modify the text so that
+it can be displayed as we wish.  As we'll see, by modifying the text, and specifically by placing it inside a
+`<div>`, we will lose the ability to use Markdown.  But let's start out with just our regular markdown text
+for now and we'll modify it as we go.
+
+Add these two paragraphs to the end of the <DisplayGlossaryItem item='subquestionblock' />:
+```
+  This text appears in a `div` block and is formatted according to
+  the `MJFbox` style.
+  
+  **Note:** It's not always possible to use Markdown in `div`
+  blocks.  In this block we've formatted our text using HTML.  Check out the source code to see
+  which HTML tags we have used.
+```
+
+If you save and run the app you should see this:
+
+<DisplayImage imageURL='/img/textbook/chapter_07/makingchanges6.png' />
+
+Nothing special so far.
+
+### Enclosing the text in a `<div>`
+We need a way to tell our web app that this text is to be displayed using a particular style.  That is, we need
+to separate out this text.  To paraphrase [Dionne Warwick](https://www.youtube.com/watch?v=HyTpu6BmE88), that's 
+what `div`s are for.
+
+Encapsulating our text in a `<div>` indicates to our browser that our text is separate from the rest of the text
+in our app.  We will then be able to attach a style to the `<div>` using a `class` specifier.
+
+So, let's wrap our text in a `<div>`:
+```yml {1,8}
+  <div>
+  This text appears in a `div` block and is formatted according to
+  the `MJFbox` style.
+  
+  **Note:** It's not always possible to use Markdown in `div`
+  blocks.  In this block we've formatted our text using HTML.  Check out the source code to see
+  which HTML tags we have used.
+  </div>
+```
+
+If we do a <DisplayDAButtons button={Constants.da_save_and_run_prop} /> we'll see our text formatting for
+those last two paragraphs has gone away.
+
+<DisplayImage imageURL='/img/textbook/chapter_07/makingchanges7.png' />
+
+That's because we can't use Markdown formatting inside a `<div>`.  Instead we need to use HTML formatting.
+HTML is a text markup language, like Markdown.  HTML and CSS are the two technologies that drive the 
+display of web pages.  In fact, Docassemble converts our Markdown to HTML so that it can be displayed on 
+our app.
+
+Again, a full explanation of HTML is way beyond the scope of this textbook but there are 
+[many](https://www.w3schools.com/html/) [resources](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/HTML_basics)
+[online](https://www.codecademy.com/learn/learn-html) should you wish to explore HTML further.
+
+For our purposes we just need to know this:
+
+* paragraphs in HTML must be enclosed inside `<p>` and `</p>` tags;
+* fixed-width text (eg: `this`) must be enclosed in `<code>` and `</code>` tags;
+* text can be enclosed in `<span></span>` tags if we want to make further adjustments to styles
+
+This said, let's adjust our text to add two paragraph markers and correctly format the fixed-width text:
+```html
+  <div class="MJFbox">
+  <p>This text appears in a <code>div</code> block and is formatted according to
+  the <code>MJFbox</code> style.</p>
+  
+  <p><span class="MJFbolder">Note:</span> It's not always possible to use Markdown in <code>div</code>
+  blocks.  In this block we've formatted our text using HTML.  Check out the source code to see
+  which HTML tags we have used.</p>
+  </div>
+```
+Our two paragraphs look better now: 
+
+<DisplayImage imageURL='/img/textbook/chapter_07/makingchanges8.png' />
+
+Now it's time to style it up
+
+### Updating the styles
+Our text and its `<div>` has nothing to do Bootstrap.  That means we don't need to go searching for component
+names.  Instead we'll define our own style name.  Those of you who have read the text more closely will have
+worked out that we're going to call that style `MJFbox`.
+
+Let's create the style and then we'll discuss its properties.  Add this to `styles.css`
+
+```css title="MJFbox style" showLineNumbers
+.MJFbox {
+  border: 2px solid var(--flinders-blue);
+  border-radius: 10px;
+  box-shadow: 0px 2px 5px rgba(0,0,0,0.25); 
+  margin: 10px;
+  padding: 8px;
+  color: rgb(255,0,0);
+  font-size: 1.2em;
+}
+```
+
+Line 2 tells our `<div>` that it is going to be enclosed by a border.  That border will be two pixels wide,
+will be a solid line and the colour of the border will be Flinders blue.
+
+Line 3 makes the corners of our border rounded.  Our 'radius' is 10 pixels.  The more pixels, the more rounded
+the corners will be.
+
+Line 4 defines a shadow.  Our shadow will be a transparent black (like a real shadow) and will be offset two
+pixels down and five pixels to the right of the border.
+
+Line 5 puts a bit of padding *outside* our `<div>`.  You can see that our `<div>` appears offset to the right
+of the text and also that there's a gap between the bottom border and the buttons below it.  This gap is what is
+set by the `margin` property.
+
+Line 6 puts padding *inside* our `<div>`.  Without it our text would but up against the box border and look 
+ugly (defeating the purpose of this chapter).
+
+:::info
+Both [the `margin` property](https://www.w3schools.com/Css/css_margin.asp)
+ and [the `padding` property](https://www.w3schools.com/csS/css_padding.asp) have more fine-grained versions
+ of themselves.  For example, to adjust just the left
+padding for the text we could have used `padding-left` instead of padding.
+:::
+
+Line 7 sets the colour of our text to a rather bright, garish red.
+
+Finally, line 8 increases the font size by 20% over the regular font size used in the app.
+
+Now, let's add the `MJFbolder` style.  Add this to thet end of `styles.css`:
+```css showLineNumbers
+.MJFbox .MJFbolder {
+    font-weight: bolder;
+}
+```
+We limit the use of MJFbolder only to insie MJFbox.  It's good practice to limit the operation of your styles
+as much as possible so as to prevent unpredictable outcomes.
+
+This is a simple style with only one property which sets the font to bolder.
+
+:::info
+For more information on making fonts bold see [this page](https://www.w3schools.com/cssref/pr_font_weight.php).
+:::
+
+Once we have saved `styles.css` we can re-run our app.  Our text should now appear in our box, in red and
+in a larger font:
+
+<DisplayImage imageURL='/img/textbook/chapter_07/makingchanges9.png' />
+
+All we have left to do now is to update our <DisplayDAButtons button={Constants.da_continue_prop} /> button.
 
 ## Change the Continue Button
+As per our original requriements we need to do two things: 1) Change the colour of the button to Flidners blue;
+and 2) Make the button light blue when we hover over it.
 
+### Define the colours.
+We have already defined our Flinders blue colour.  We need to define the hover colour.  Add this to the
+`:root` class:
+```css
+  --continue-button-hover: rgba(151,201,255,0.3);
+```
+
+### Identify the component
+Once again the use of Developer Tools is integral to the process.  Lauch the app and Developer Tools and use
+the element picker to hover over the <DisplayDAButtons button={Constants.da_continue_prop} /> button.  You
+will see that its component name is `btn-primary`.
+
+:::note
+This final time we leave the exercise of launching the app, launching Developer Tools and using the element
+picker to find the button's component name as an exercise for the reader.
+:::
+
+### Update the styles
+Now we know the component name we can create a style for it.  Add these two styles to `styles.css`:
+```css showLineNumbers
+.btn-primary{
+  color: white;
+  background-color: var(--flinders-blue);
+  border-color: black;
+}
+
+.btn-primary:hover{
+  color: black;
+  background-color: var(--continue-button-hover);
+  border-color: black;
+}
+```
+
+Line 2 of `btn-primary` sets the text of the button to be white and line 3 sets the background colour to our
+Flinders blue. Finally, line 4 puts a fine black border around the button.  As no border width is specified a
+width of 1 pixel is used.
+
+Line 2 of `btn-primary:hover` changes the text colour to black. This is necessary as the hover colour is a light
+colour and white text would not be readable.  Line 3 sents our background colour to black and we retain the fine
+black border in line 4.
+
+Save the file and re-run the app.  We now have all our styling components in place.
+
+<DisplayImage imageURL='/img/textbook/chapter_07/makingchangesa.png' />
