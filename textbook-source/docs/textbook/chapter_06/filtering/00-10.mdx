@@ -10,18 +10,15 @@ import ServiceTable from './_service_table.mdx';
 
 To summarise the key points, ABC require:
 
-* an application to display a list of emergency accommodation providers tailored
-to the circumstances of each user;
+* an application that displays a list of emergency accommodation providers tailored
+to the circumstances of the user;
 * ABC's existing emergency accommodation database has emergency accommodation
-providers organised agaisnt these categories.
+providers organised agaisnt these categories:
   * the minimum and maximum ages of clients each service will accept;
   * the genders each service will accept;
   * whether the servics accommodates families or individuals only; and
   * in which part of Adelaide the service is located. ABC's location data is
   broken down into north, south, east and west.
-  
-Other requirements are:
-
 * a user should be able to select multiple locations if they wish; and
 * ABC want to maintain the data themselves.
 
@@ -30,6 +27,45 @@ ABC have given us a spreadsheet containing a list of service providers, their
 details and the above criteria.
 
 <ServiceTable />
+
+## Designing the App
+Let's walk through designing the app.  We do this by starting out with our high level
+requirements.  We drill down into each requirement, breaking it down into more and
+more detail until we get to a point where we have enough detail to write code.
+
+We'll work through a series of flowcharts to illustrate this.
+
+At the highest level we have this:
+```mermaid
+flowchart TD
+    id1(Display a <b>list</b> of emergency<br>accommodation providers<br><b>tailored to</b> the <b>circumstances<br>of</b> each user)
+```
+We can draw some assumptions from this highest level:
+
+* **list** implies iteration;
+* **tailored to** implies a decision tree or some decision-making process; and
+* **circumstances of** implies asking the user questions which likely to feed the
+decision-making process
+
+Let's drill down a bit. We can add detail that shows each of these assumptions.
+```mermaid
+flowchart TD
+  id0(Ask the user some questions)
+  id0 --> id1(For each service in the list)
+  id1 --> id2{{Does the service meet the user's circumstances?}}
+  id2 -- Yes --> id3(Add the service to the display list)
+  id2 -- No --> id4(Do not add the<br>service to the<br>display list)
+
+  %% Define styles for flowchart items.  We want to make comments yellow
+  %% and have a larger font size for regular items
+  classDef commentClass fill:#faffd6,text-align:left
+  classDef questionClass fill:#ffe6bc
+  classDef boundaryClass fill:#eeeeee,text-fill-color:#fff
+  classDef itemClass font-size:16pt
+  classDef leftListClass text-align:left
+
+  class id2,id5 questionClass
+```
 
 ## Evaluating a Service
 Our app will display the relevant services to a user by asking the user questions
