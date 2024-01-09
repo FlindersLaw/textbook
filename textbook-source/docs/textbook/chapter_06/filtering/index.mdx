@@ -1,0 +1,52 @@
+---
+title: Case Study - Filtering, Advanced Iteration
+---
+import DocCardList from '@theme/DocCardList';
+import {DisplayGlossaryItem} from '@site/src/components';
+import {DisplayChapter} from '@site/src/components';
+
+In this case study we investigate using data in a <DisplayGlossaryItem item='datablock' /> and filtering the data
+for display to the user.
+
+This case study builds on the iteration and data storage concepts we introduced in <DisplayChapter chapter='chapter_05' />.
+
+## ABC Incorporated
+
+We have been engaged by ABC Incorporated, a not-for-profit association that works in the 
+Disability sector.
+
+A lot of ABC's clients are looking for emergency accommodation for various reasons.  It may be
+that they have been evicted for not paying rent, or they may be facing a domestic violence
+situation, or they simply may not have anywere to stay for a few nights.
+
+ABC have a list of emergency accommodation providers but different providers cater for different
+kinds of people.  For example, some only cater for families, some may only cater for people
+of a particular gender and so on.
+
+ABC have come to us and asked us to write an app that would present to a user
+a list of accommodation providers relevant just to them.  For example, a single
+male living at Gepps Cross would only be presented with a list of accommodation providers
+that cater for single males and located in the north of Adelaide.
+
+ABC can provide us with a list of providers.  ABC will need to maintain that list, so
+we need to make the maintenance process as simple as possible for them.
+
+To summarise the key points, ABC require:
+
+* an application to display a list of emergency accommodation providers tailored
+to the circumstances of each user;
+* ABC's existing emergency accommodation database has emergency accommodation
+providers organised agaisnt these categories.
+  * the user's age;
+  * the user's gender;
+  * whether the user is seeking accommodation for themselves or themselves and their
+  family; and
+  * in which part of Adelaide does the user require accommodation. ABC's data is
+  broken down into north, south, east and west.
+  
+Other requirements are:
+
+* a user shoudl be able to select multiple locations if they wish; and
+* ABC want to maintain the data themselves.
+
+<DocCardList />
