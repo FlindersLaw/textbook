@@ -1,0 +1,127 @@
+---
+title: Using Hints and Helpers in Docassemble
+---
+
+In the previous two sections, we covered how to design your application and improve your questions. This section, and the next section, will cover how to implement Docassemble functionality to improve your application.
+
+## `hint`
+The `hint` tag is something you put after a question field where the user can enter a value such as a string or an integer. You can also use a hint tag when your user needs to complete a multiple choice dropdown or a combobox input type. 
+
+```yaml showLineNumbers title="Ch10_Magistrates_Court_Finder_Combobox.yml" showLineNumbers
+---
+question: |
+  Where do you live?
+fields:
+  - no label: userLocation
+    input type: combobox
+    hint: Please select the of Adelaide where your suburb is located
+    choices:
+      - Western Adelaide: west
+      - Northern Adelaide: north
+      - North-East Adelaide: northeast
+      - Adelaide CBD: cbd
+      - Southern Adelaide: south
+      - None of the above: none
+---
+# This is the one mandatory question block
+mandatory: True
+question: Your local Magistrates Court
+subquestion: |
+  Thank you for completing this survey.
+
+  % if userLocation == 'west':
+  Your nearest Magistrates Court is the Port Adelaide Magistrates Court at 260 St Vincent Street, Port Adelaide SA 5015.
+  % elif userLocation == 'north':
+  Your nearest Magistrates Court is the Elizabeth Magistrates Court at 15 Frobisher Road, Elizabeth SA 5112.
+  % elif userLocation == 'northeast' or userLocation == 'cbd':
+  Your nearest Magistrates Court is the Adelaide CBD Magistrates Court at 260 Victoria Square, Adelaide SA 5000.
+  % elif userLocation == 'south':
+  Your nearest Magistrates Court is the Christies Beach Magistrates Court at 96 Dyson Road, Christie Downs SA 5164.
+  % else:
+  We are unable to identify a Magistrates Court near you.
+  % endif
+  
+  Please contact this [telephone number](tel:08 8204 2444) for further details.
+
+buttons:
+  - Restart: restart
+  - Exit: exit
+---
+```
+
+The `hint` text appears greyed out, in the following manner:
+
+**Screenshot here**
+
+## `help`
+The `help` tag allows you to put in additional text to provide the user with more information to help them make a decision. You can use a `help` tag with any question field.
+
+```yaml showLineNumbers title="Ch10_Magistrates_Court_Finder_Help.yml" showLineNumbers
+---
+question: |
+  Where do you live?
+fields:
+  - no label: userLocation
+    datatype: radio
+    choices:
+      - Western Adelaide: west
+        help: |
+          Includes suburbs in the the City of Charles Sturt, the City of West Torrens and the west half of the City of Port Adelaide Enfield
+      - Northern Adelaide: north
+        help: |
+          Includes suburbs in the City of Playford, the City of Salisbury, the City of Tea Tree Gully and the east half of the City of Port Adelaide Enfield
+      - North-East Adelaide: northeast
+        help: |
+          Includes suburbs in the City of Burnside, the City of Campbelltown, the City of Norwood Payneham and St Peters, the City of Prospect, the City of Unley and the Town of St Peters
+      - Adelaide CBD: cbd
+        help: |
+          Includes suburbs in the City of Adelaide
+      - Southern Adelaide: south
+        help: |
+          Includes suburbs in the City of Holdfast Bay, the City of Marion, the City of Mitcham and the City of Onkaparinga
+      - None of the above: none
+        help: |
+          Includes suburbs which are outside the Greater Adelaide Region
+---
+# This is the one mandatory question block
+mandatory: True
+question: Your local Magistrates Court
+subquestion: |
+  Thank you for completing this survey.
+
+  % if userLocation == 'west':
+  Your nearest Magistrates Court is the Port Adelaide Magistrates Court at 260 St Vincent Street, Port Adelaide SA 5015.
+  % elif userLocation == 'north':
+  Your nearest Magistrates Court is the Elizabeth Magistrates Court at 15 Frobisher Road, Elizabeth SA 5112.
+  % elif userLocation == 'northeast' or userLocation == 'cbd':
+  Your nearest Magistrates Court is the Adelaide CBD Magistrates Court at 260 Victoria Square, Adelaide SA 5000.
+  % elif userLocation == 'south':
+  Your nearest Magistrates Court is the Christies Beach Magistrates Court at 96 Dyson Road, Christie Downs SA 5164.
+  % else:
+  We are unable to identify a Magistrates Court near you.
+  % endif
+  
+  Please contact this [telephone number](tel:08 8204 2444) for further details.
+
+buttons:
+  - Restart: restart
+  - Exit: exit
+---
+```
+
+When you run this application, you should see a small question mark appear next to each option. 
+
+**Screenshots**
+
+Clicking on one of these icons will display the help text that we have entered.
+
+**Screenshot here**
+
+## `default` values
+You can insert default values particular field using a `default` tag. You can use this tag both with fields where the user selects a value from a set of options, or where they enter a value.
+
+Consider the following example. We have designed our application to help young people with disabilities who have turned 18.
+
+```yaml showLineNumbers title="Ch10_Disability_Eligibility_App.yml" showLineNumbers
+---
+---
