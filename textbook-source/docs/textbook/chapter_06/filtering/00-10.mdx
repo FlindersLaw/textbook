@@ -154,8 +154,9 @@ Let's break our flow diagram into two.  Here's the loop part
 flowchart TD;
     id0(For each service in the spreadsheet)
     id0 --> id0a("Put the (next) service into the<br><code>a_service</code> special variable")
-    id0a --> id1(Loop body)
-    id1 --> id4{{Are there more<br>services to process?}}
+    id0a --> idl0
+    idl0(Loop body goes here)
+    idl0 --> id4{{Are there more<br>services to process?}}
     id4 -- Yes --> id0a
     id4 -- No --> id5(Finished processing list of services)
     
@@ -167,19 +168,18 @@ flowchart TD;
     classDef itemClass font-size:16pt
     classDef leftListClass text-align:left
 
-    %% Custom class for this flowchart 
-    classDef loopBodyClass fill:#dbdf07,text-align:left
-
     class id0,id5 boundaryClass;
     class id4 questionClass;
-    class id1 loopBodyClass;
+    class idl0 commentClass;
 ```
 The loop body currently looks like this:
 ```mermaid
 flowchart TD;
+    subgraph "Loop body"
     id1{{Does the criteria for <code>a_service</code> pass this test?<br> <code>MJFage_ok</code> <b>and</b> <code>MJFgender_ok</code> <b>and</b><br> <code>MJFlocation_ok</code> <b>and</b> <code>MJFfamily_ok</code>}}
     id1 -- Yes --> id2(Add the service to the 'to-display' list)
     id1 -- No --> id3(Skip this service)
+    end
     
     %% Define styles for flowchart items.  We want to make comments yellow
     %% and have a larger font size for regular items
@@ -195,16 +195,37 @@ flowchart TD;
 We need to build this out and include the tests that determine the values of each
 of the `_ok` variables.  Our body might look something like this:
 ```mermaid
-flowchart TD;
+flowchart LR;
+    subgraph "Loop Body"
+    direction LR
     subgraph MJFage_ok
-    id0{{Does the user's age fit the age criteria for this service?}}
+    id0{{Does the user's age fit<br>the criteria for this service?}}
     id0 -- Yes --> id0a(<code>MJFage_ok = True</code>)
-    id0 --> No --> id0b(<code>MJFage_ok = False</code>)
-    id1{{Does the criteria for <code>a_service</code> pass this test?<br> <code>MJFage_ok</code> <b>and</b> <code>MJFgender_ok</code> <b>and</b><br> <code>MJFlocation_ok</code> <b>and</b> <code>MJFfamily_ok</code>}}
+    id0 -- No --> id0b(<code>MJFage_ok = False</code>)
+    end
+    subgraph MJFgender_ok
+    idg0{{Does the user's gender fit<br>the criteria for this service?}}
+    idg0 -- Yes --> idg0a(<code>MJFgender_ok = True</code>)
+    idg0 -- No --> idg0b(<code>MJFgender_ok = False</code>)
+    end
+    subgraph MJFlocation_ok
+    idl0{{Does the user's location fit<br>the criteria for this service?}}
+    idl0 -- Yes --> idl0a(<code>MJFlocation_ok = True</code>)
+    idl0 -- No --> idl0b(<code>MJFlocation_ok = False</code>)
+    end
+    subgraph MJFfamily_ok
+    idf0{{Does the user's family/single status fit<br>the criteria for this service?}}
+    idf0 -- Yes --> idf0a(<code>MJFfamily_ok = True</code>)
+    idf0 -- No --> idf0b(<code>MJFfamily_ok = False</code>)
+    end
+    MJFage_ok --> id1{{Does the criteria for <code>a_service</code> pass this test?<br> <code>MJFage_ok</code> <b>and</b> <code>MJFgender_ok</code> <b>and</b><br> <code>MJFlocation_ok</code> <b>and</b> <code>MJFfamily_ok</code>}}
+    MJFgender_ok --> id1
+    MJFlocation_ok --> id1
+    MJFfamily_ok --> id1
     id1 -- Yes --> id2(Add the service to the 'to-display' list)
     id1 -- No --> id3(Skip this service)
+    end
     
-    %% Define styles for flowchart items.  We want to make comments yellow
     %% and have a larger font size for regular items
     classDef commentClass fill:#faffd6,text-align:left
     classDef questionClass fill:#ffe6bc
