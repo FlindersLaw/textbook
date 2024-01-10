@@ -1,0 +1,248 @@
+Let's drill down a bit. We can add detail that shows each of these assumptions.
+```mermaid
+flowchart TD
+  id0(Ask the user some questions)
+  id0 --> id1(For each service in the list)
+  id1 --> id2{{Does the service meet the user's circumstances?}}
+  id2 -- Yes --> id3(Add the service to the display list)
+  id2 -- No --> id4(Do not add the<br>service to the<br>display list)
+
+  %% Define styles for flowchart items.  We want to make comments yellow
+  %% and have a larger font size for regular items
+  classDef commentClass fill:#faffd6,text-align:left
+  classDef questionClass fill:#ffe6bc
+  classDef boundaryClass fill:#eeeeee,text-fill-color:#fff
+  classDef itemClass font-size:16pt
+  classDef leftListClass text-align:left
+
+  class id2,id5 questionClass
+```
+
+## Evaluating a Service
+Our app will display the relevant services to a user by asking the user questions
+and then filtering out the irrelevant services depending on the user's answers.
+
+The program flow at a high level looks something like this:
+```mermaid
+flowchart TD;
+    id0(A service)
+    id0 --> id1{{Is the service relevant?}}
+    id1 -- Yes --> id2(Display service to user)
+    id1 -- No --> id3(Do not display service to user)
+    
+    %% Define styles for flowchart items.  We want to make comments yellow
+    %% and have a larger font size for regular items
+    classDef commentClass fill:#faffd6,text-align:left
+    classDef questionClass fill:#ffe6bc
+    classDef boundaryClass fill:#eeeeee,text-fill-color:#fff
+    classDef itemClass font-size:16pt
+    classDef leftListClass text-align:left
+
+    class id0 boundaryClass;
+    class id1 questionClass;
+```
+
+Let's build out that relevance question:
+```mermaid
+flowchart TD;
+    id0(A service)
+    id0 --> id1{{Does the service match these criteria?<ul><li>Age</li><li>Gender</li><li>Location</li><li>Family/single</li></ul>}}
+    id1 -- Yes --> id2(Display service to user)
+    id1 -- No --> id3(Do not display service to user)
+    
+    %% Define styles for flowchart items.  We want to make comments yellow
+    %% and have a larger font size for regular items
+    classDef commentClass fill:#faffd6,text-align:left
+    classDef questionClass fill:#ffe6bc
+    classDef boundaryClass fill:#eeeeee,text-fill-color:#fff
+    classDef itemClass font-size:16pt
+    classDef leftListClass text-align:left
+
+    class id0 boundaryClass;
+    class id1 leftListClass;
+    class id1 questionClass;
+```
+In other words, if our service matches the age, gender, location
+and family criteria entered we add that service to the list
+of services to display.  Otherwise, we skip that service.
+
+Let's make this more code-y:
+```mermaid
+flowchart TD;
+    id0(A service)
+    id0 --> id1{{<code>MJFage_ok</code> <b>and</b> <code>MJFgender_ok</code> <b>and</b><br> <code>MJFlocation_ok</code> <b>and</b> <code>MJFfamily_ok</code>}}
+    id1 -- Yes --> id2(Display service to user)
+    id1 -- No --> id3(Do not display service to user)
+    
+    %% Define styles for flowchart items.  We want to make comments yellow
+    %% and have a larger font size for regular items
+    classDef commentClass fill:#faffd6,text-align:left
+    classDef questionClass fill:#ffe6bc
+    classDef boundaryClass fill:#eeeeee,text-fill-color:#fff
+    classDef itemClass font-size:16pt
+    classDef leftListClass text-align:left
+
+    class id0 boundaryClass;
+    class id1 leftListClass;
+    class id1 questionClass;
+```
+First, we have replaced each of the critera with variable names, one each for
+the age, gender, location and family criteria.  These variables will be
+<DisplayGlossaryItem item='boolean' /> variables and will be used to store whether
+a particular service meets that particular criteria for the user.  For example, if
+a user is 16 years of age, then, when we process ABC Services (the first item in
+our data list), `MJFage_ok` will be `False` as the user doesn't meet the minimum
+age requirement.
+
+So, `MJFage_ok` will store the answer to the
+question 'does the user meet the age requirements'?  The same goes for each of the
+other `_ok` variables.
+
+Once we have answers to each of these criteria questions we can then test if a
+service meets the user's criteria using a series of logical 'and' tests as we discussed in <DisplayChapter chapter='chapter_03' /> ie:
+```python
+MJFage_ok and MJFgender_ok and MJFlocation_ok and MJFfamily_ok
+```
+
+## Evaluating Each Service
+We have a grasp on how to evaluate a single service.  Now we need to expand this
+and work out how we are going to evaluate *each* service in turn.  Our flow 
+diagram would look something like this:
+```mermaid
+flowchart TD;
+    id0(For each service in the spreadsheet)
+    id0 --> id0a("Put the (next) service into the<br><code>a_service</code> special variable")
+    id0a --> id1{{Does the criteria for <code>a_service</code> pass this test?<br> <code>MJFage_ok</code> <b>and</b> <code>MJFgender_ok</code> <b>and</b><br> <code>MJFlocation_ok</code> <b>and</b> <code>MJFfamily_ok</code>}}
+    id1 -- Yes --> id2(Add the service to the 'to-display' list)
+    id1 -- No --> id3(Skip this service)
+    id3 --> id4{{Are there more<br>services to process?}}
+    id2 --> id4
+    id4 -- Yes --> id0a
+    id4 -- No --> id5(Finished processing list of services)
+    
+    %% Define styles for flowchart items.  We want to make comments yellow
+    %% and have a larger font size for regular items
+    classDef commentClass fill:#faffd6,text-align:left
+    classDef questionClass fill:#ffe6bc
+    classDef boundaryClass fill:#eeeeee,text-fill-color:#fff
+    classDef itemClass font-size:16pt
+    classDef leftListClass text-align:left
+
+    class id0,id5 boundaryClass;
+    class id1,id4 questionClass;
+```
+
+This looks a bit more complex but fundamentally we have two parts to this flowchart.
+The first is the loop - the part that will iterate over each service.  The second
+is the body of the loop ie: the processing that is done for each service.
+
+Let's break our flow diagram into two.  Here's the loop part
+```mermaid
+flowchart TD;
+    id0(For each service in the spreadsheet)
+    id0 --> id0a("Put the (next) service into the<br><code>a_service</code> special variable")
+    id0a --> idl0
+    idl0(Loop body goes here)
+    idl0 --> id4{{Are there more<br>services to process?}}
+    id4 -- Yes --> id0a
+    id4 -- No --> id5(Finished processing list of services)
+    
+    %% Define styles for flowchart items.  We want to make comments yellow
+    %% and have a larger font size for regular items
+    classDef commentClass fill:#faffd6,text-align:left
+    classDef questionClass fill:#ffe6bc
+    classDef boundaryClass fill:#eeeeee,text-fill-color:#fff
+    classDef itemClass font-size:16pt
+    classDef leftListClass text-align:left
+
+    class id0,id5 boundaryClass;
+    class id4 questionClass;
+    class idl0 commentClass;
+```
+The loop body currently looks like this:
+```mermaid
+flowchart TD;
+    subgraph "Loop body"
+    id1{{Does the criteria for <code>a_service</code> pass this test?<br> <code>MJFage_ok</code> <b>and</b> <code>MJFgender_ok</code> <b>and</b><br> <code>MJFlocation_ok</code> <b>and</b> <code>MJFfamily_ok</code>}}
+    id1 -- Yes --> id2(Add the service to the 'to-display' list)
+    id1 -- No --> id3(Skip this service)
+    end
+    
+    %% Define styles for flowchart items.  We want to make comments yellow
+    %% and have a larger font size for regular items
+    classDef commentClass fill:#faffd6,text-align:left
+    classDef questionClass fill:#ffe6bc
+    classDef boundaryClass fill:#eeeeee,text-fill-color:#fff
+    classDef itemClass font-size:16pt
+    classDef leftListClass text-align:left
+
+    class id1 questionClass;
+```
+
+We need to build this out and include the tests that determine the values of each
+of the `_ok` variables.  Our body might look something like this:
+```mermaid
+flowchart LR;
+    subgraph "Loop Body"
+    direction LR
+    subgraph MJFage_ok
+    id0{{Does the user's age fit<br>the criteria for this service?}}
+    id0 -- Yes --> id0a(<code>MJFage_ok = True</code>)
+    id0 -- No --> id0b(<code>MJFage_ok = False</code>)
+    end
+    subgraph MJFgender_ok
+    idg0{{Does the user's gender fit<br>the criteria for this service?}}
+    idg0 -- Yes --> idg0a(<code>MJFgender_ok = True</code>)
+    idg0 -- No --> idg0b(<code>MJFgender_ok = False</code>)
+    end
+    subgraph MJFlocation_ok
+    idl0{{Does the user's location fit<br>the criteria for this service?}}
+    idl0 -- Yes --> idl0a(<code>MJFlocation_ok = True</code>)
+    idl0 -- No --> idl0b(<code>MJFlocation_ok = False</code>)
+    end
+    subgraph MJFfamily_ok
+    idf0{{Does the user's family/single status fit<br>the criteria for this service?}}
+    idf0 -- Yes --> idf0a(<code>MJFfamily_ok = True</code>)
+    idf0 -- No --> idf0b(<code>MJFfamily_ok = False</code>)
+    end
+    MJFage_ok --> id1{{Does the criteria for <code>a_service</code> pass this test?<br> <code>MJFage_ok</code> <b>and</b> <code>MJFgender_ok</code> <b>and</b><br> <code>MJFlocation_ok</code> <b>and</b> <code>MJFfamily_ok</code>}}
+    MJFgender_ok --> id1
+    MJFlocation_ok --> id1
+    MJFfamily_ok --> id1
+    id1 -- Yes --> id2(Add the service to the 'to-display' list)
+    id1 -- No --> id3(Skip this service)
+    end
+    
+    %% and have a larger font size for regular items
+    classDef commentClass fill:#faffd6,text-align:left
+    classDef questionClass fill:#ffe6bc
+    classDef boundaryClass fill:#eeeeee,text-fill-color:#fff
+    classDef itemClass font-size:16pt
+    classDef leftListClass text-align:left
+
+    class id1 questionClass;
+```
+
+
+
+In code, the loop might look something like this:
+```python
+# Assume our list of services is stored in MJFservices
+for a_service in MJFservices:
+  # The loop body goes here
+  # We need to insert code into here that will set 
+  # each of the _ok variables to true or false depending
+  # on whether the user's criteria match up with the current
+  # service in a_service
+  #
+  # Once we have all the tests we then need a final test to
+  # make sure all the tests match ie:
+  if MJFage_ok and MJFgender_ok and MJFlocation_ok and MJFfamily_ok:
+    # Here we will put code to add a_service to the list
+    # of services to display to the user
+  else:
+    # This is where we'd put code if skip the service.  
+    # We may not need to put anything here as, by simply not
+    # adding the service to our display list, the service
+    # is automatically skipped
+```
