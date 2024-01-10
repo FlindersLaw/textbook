@@ -2,6 +2,8 @@
 title: Writing Questions Which Are Easy to Understand
 ---
 
+import * as Components from '@site/src/components'
+
 Historically, law schools have taught law students to write in specific legal jargon. However, when writing legal apps, we want to take the opposite approach. We want our forms to be as easy to understand as possible. 
 
 We can do that by making sure our questions are as easy to understand as possible. Ideally, you want your application to be understood by someone who has completed Grade 8 schooling. Many different professions use this standard for measuring readability. For example, the National Health and Medical Research Council (NHMRC) in Australia recommends that researchers should write consent forms to enroll people in clinical trials at this level.
@@ -86,15 +88,15 @@ A Flesch reading ease score of 60 or higher indicates that the text would be rea
 
 There are two ways you can look up the readability score for your application. The first is using Docassemble. When you normally run your Docassemble application, you will see that there is a `</>` icon next to your application's title.
 
-**Screenshot here**
+<Components.DisplayImage imageURL='/img/textbook/chapter_10/ch10_docassemble_source_menu.PNG' altText='The source menu in Docassemble - you can use this to look up the execution order for your application, as well as find readability scores.'/>
 
 If you click on this menu and scroll down to the heading **Readability of question** you will see both the Flesch Reading Ease and Flesch-Kincaid Grade Level scores for your application, as well as the readability consensus.
 
-**Screenshot here**
+<Components.DisplayImage imageURL='/img/textbook/chapter_10/ch10_readability_scores_docassemble.PNG' altText='The readability scores for our application in Docassemble.'/>
 
 The second way is to use Microsoft Word. Copy your text into a Microsoft Word document, then go to the **Home** tab. Click on the **Editor** button, and then click on **Document Stats** on the popup window that appears. You will then see the document stats.
 
-**Screenshot here**
+<Components.DisplayImage imageURL='/img/textbook/chapter_10/ch10_readability_scores_ms_word.PNG' altText='The readability scores for our application in Word.'/>
 
 :::tip
 In these screenshots, you can see that there is a difference between the scores produced by Docassemble and Microsoft Word. Always double check both scores before you publish your application (or submit it for assessment).
