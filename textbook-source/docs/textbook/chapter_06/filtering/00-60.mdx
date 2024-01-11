@@ -40,4 +40,340 @@ objects:
   - ABClogo: DAStaticFile.using(filename='ABCInc_logo_white.png')
 ---
 ```
+We then need to add an extra mandatory block to set the logo:
+```yml
+---
+mandatory: True
+code: |
+  set_parts(logo='<img src="' + ABClogo.url_for() + '" style="height: 50px;">')
+---
+```
 
+We get something that looks like this:
+
+<DisplayImage imageURL="/img/textbook/chapter_06/filter/coding7.png" />
+
+That doesn't look that great.  We'll take up the styling and use of colours later in this part 
+of the chapter.  For now let's move to fonts.
+
+### Changing the fonts
+We'll be working with [CSS styles](/docs/textbook/chapter_07/00-20). 
+We will put our styles into `ABC_styles.css` in our 'Static Files' folder.  The first thing we need to do is let
+our app know about this. Let's add a `features` block to `main.yml` to let our app we're going to use our CSS file.
+```yml
+---
+features:
+  css: ABC_styles.css
+---
+```
+:::tip hint
+Add the `features` block just under the `include` block.
+
+Docassemble doesn't care where we put our block, but it's good practice to set out preliminary blocks,
+such as `include`, `objects` and `features` at the top of the code and have the 'working' blocks
+(ie: our question and code blocks) following our preliminary blocks.
+:::
+
+The Una and Poppins fonts requested by ABC are a set of fonts owned by Google and made
+available free of charge.  Google's [fonts](https://fonts.google.com/) are also known as
+'web fonts' as they are downloadable directly from the web for use into web apps, which
+is exactly what we are going to do.
+
+We need to tell our app to download these fonts and then apply these fonts to the various
+text parts of our app.
+
+First, the download bit.  We will use the [`default screen parts`](https://docassemble.org/docs/initial.html#default%20screen%20parts)
+block to download our fonts.  Again, we add this block to the top of `main.yml`.
+```yml
+---
+default screen parts:
+  post: |
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Unna&display=swap" rel="stylesheet">
+---
+```
+:::note
+To get the link for a font:
+
+1. Go to [Google Fonts](https://fonts.google.com)
+1. Search for the font you're after
+1. Click on the 'Show selected families' <DisplayImage imageURL='/img/textbook/chapter_06/filter/selectedfamily.png' inline /> icon
+1. In the 'Use on the web' part make sure the 'link' radio button is selected.
+1. From the code box copy only the line that ends in `..."stylesheet">`
+1. Paste that line into the `default screen parts` as per above.
+:::
+
+Now that we have our fonts we can use them in our stylesheet.
+
+We need to find a style element or style elements that are generic and used throughout the app.
+We can then define classes with the same name as those elements to set our fonts as we wish.
+
+:::info
+Refer to [here](/docs/chapter_07/00-20#identify-the-component) for details on how to identify
+styles using your browser's developer tools.
+:::
+
+It turns out that question titles are rendered in the `da-page-header` class, and
+the subquestion text is displayed in a `da-subquestion` class. Let's define classes to both by
+adding the below to our `ABC_styles.css`:
+```css
+.da-page-header {
+  font-family: 'Poppins', sans-serif;
+}
+
+.da-subquestion {
+  font-family: 'Unna', sans-serif;
+}
+```
+After making these changes our app looks like this:
+
+<DisplayImage imageURL="/img/textbook/chapter_06/filter/coding10.png" />
+
+The heading font looks OK but the size of the body text is a bit small.  We can increase
+it by adding a `font-size` to our `container` class:
+```css
+.da-subquestion {
+    font-family: 'Unna', sans-serif;
+    font-size: 18pt; 
+}
+```
+
+<DisplayImage imageURL="/img/textbook/chapter_06/filter/coding11.png" />
+
+That's a bit better.  However, as we work through our app we'll see there are other
+classes that we need to address.  For example, the Unna font isn't used for our 
+user questions:
+
+<DisplayImage imageURL="/img/textbook/chapter_06/filter/coding12.png" />
+
+or our radio buttons:
+
+<DisplayImage imageURL="/img/textbook/chapter_06/filter/coding13.png" />
+
+Again, we need to use our Developer Tools to identify the classes to modify.  Where possible,
+we should try to modify classes that start with `da-` as these are Docassemble classes.
+
+A bit of poking around with the Developer tools results in:
+
+* the text that appears before an input field is a `da-form-label`
+* the text that appears in the radio buttons and checkboxes is a `dalabelauty`
+
+We can add these styles to `ABC_styles.css`:
+```css
+.da-form-label {
+  font-family: 'Unna', sans-serif;
+  font-size: 1.2em;
+}
+
+.dalabelauty {
+  font-family: 'Unna', sans-serif;
+  font-size: 1.2em;
+}
+```
+The `font-size: 1.2em` increases the font size by 20% over the default (rather small) font size.
+
+Working through the rest of the screens it appears that there are no other styles for us to 
+take account of.
+
+### Working with colours
+#### The Navbar
+Let's return to our navbar.  The logo with the white background on a black navbar does not look
+pretty.  We'll have to change the background colour of the navbar from black
+to something else.  We have dealt with changing navbar colours [elsewhere](/docs/textbook/chapter_07/00-20#changing-the-navbar-color). 
+
+Let's try a white background.  Put this into `ABC_styles.css`
+```css
+.navbar{
+    background-color: white !important;
+}
+```
+Save and re-run the app.  This seems a bit stark.
+
+<DisplayImage imageURL="/img/textbook/chapter_06/filter/coding8.png" />
+
+Let's add a border to the bottom of the navbar.  The border can be wide and its colour
+should be the same as the dark colour in the 'A' and 'C' in the logo.
+
+We'll add a name for the colour to our `root:` class and then add a border to our `navbar` class.
+```css title="ABC_styles.css" showLineNumbers
+:root {
+    --ABC-darkest: rgb(10,62,92);
+}
+
+.navbar {
+    background-color: white !important;
+    border-bottom: 5px solid var(--ABC-darkest);
+}
+```
+
+Save and re-run the app. That's an improvement:
+
+<DisplayImage imageURL="/img/textbook/chapter_06/filter/coding9.png" />
+
+:::note
+#### Identifying RGB values
+As we have [discussed elsewhere](/docs/textbook/chapter_07/00-20#how-we-describe-colours-in-code) we
+need to determine RGB values for each colour we want to use. An easy way to do this
+on Windows systems is to use the 'Colour picker' tool in Microsoft Paint:
+
+<DisplayImage imageURL="/img/textbook/chapter_06/filter/paint1.png" />
+
+1. Open the ABC logo in Paint and select the Colour Picker tool.
+1. Click on the colour you are looking to determine the value of.
+1. Then click on 'Edit Colours'.  The dialog will show the RGB values for the colour you just picked.
+l. The RGB values will be displayed in edit colour dialog.
+
+<DisplayImage imageURL="/img/textbook/chapter_06/filter/paint2.png" />
+:::
+
+#### The Display Table
+The other area of our app that could do with some colour goodness is our 
+table on our final screen. We could use the logo colours to add a border 
+around the table and style the table cells.
+
+:::info
+We need to know a little about the structure of [HTML tables](https://www.w3schools.com/html/html_tables.asp).
+Specifically, we need to be aware that column headers are defined as `<th>` elements in HTML tables and
+regular table cells are `<td>`.  This is useful so we can give our column headers a specific style and
+our table cells another style.
+:::
+
+We'll need to define some more colours as well.  Using our colour picker we can pick another 
+three colours from the ABC logo and add them to our `:root` class.
+```css
+:root {
+  --ABC-darkest: rgb(10,62,92);
+  --ABC-darker: rgb(9,115,150);
+  --ABC-light: rgb(25,175,189);
+  --ABC-sun: rgb(205,146,79);
+  --ABC-sun-lighter: rgb(248,238,228);
+}
+```
+:::info
+`--ABC-sun-lighter` is a lighter version of `--ABC-sun`.  It was calculated by using the 
+slider on the colour picker in Microsoft Paint to slide up to a lighter shade of 
+`--ABC-sun-light`.
+:::
+
+What would be good would to have a dark border around the table.  The column headings
+should also be dark with white text.  The table rows should be banded using a light 
+colour.  Let's define styles for this:
+
+```css
+/* This style sets the border for the table */
+.table {
+    border: 5px solid var(--ABC-darkest);
+}
+
+/* This makes the column headings dark and the text white */
+.table th {
+  background-color: var(--ABC-darkest);
+  color: white;
+}
+
+/* We shrink the text a little in the table cells */
+.table td {
+  font-size: 0.8em;
+}
+
+/* Docassemble is highlighting every odd cell in grey.
+ * we are going to use a lighter version of the colour
+ * of the sun in the ABC logo */
+.table tr:nth-child(odd) {
+  background-color: var(--ABC-sun-lighter);
+}
+```
+## Descriptive text
+We will leave the adding of text to the welcome screen and the user questions to the reader.
+We will focus on the end screen as that is where the relevant information is presented.
+
+We have been using the screen for test output so far.  Now we need to prepare a screen
+that is appropriate for the display of the relevant information.  We would want our
+screen to contain:
+* some brief text describing the information provided;
+* we may want to include a table showing the user's answers to the questions;
+* we want to display the table of relevant services; and
+* we want display the PDF attachment (which we have not yet created).
+
+We will cover the PDF attachment below.  Let's deal with the other three.
+
+###  Brief text
+Again, this is not a technical task and is left to the reader.
+
+### A table with answers
+Given the data we want to display is not in any data structure it's best to use
+a Markdown table to display the user's input.  Something like this would work:
+```yml
+  You entered the following information
+
+  Age|Gender|Service Locations|Type of Accommodation
+  ---|---|---|---
+  ${MJFage}|${MJFgender}|${MJFlocation.true_values()}|${MJFfamily_display}
+
+```
+`${MJFfamily_display}` is new.  If we displayed `MJFfamily` in our table it would display
+the string `family` or `single`.  This is not particularly descriptive, so we'll use
+a code block to set `MJFfamily_display` to more descriptive text.  Add this code block
+to the end of `main.yml`:
+```yml
+---
+code: |
+  if MJFfamily == 'family':
+    MJFfamily_display = 'Accommodation for your family'
+  elif MJFfamily == 'single
+    MJFfamily_display = 'Accommodation for yourself'
+  else:
+    MJFfamily_display = 'Error invalid value for MJFfamily: {}'.format(MJFfamily)
+---
+```
+If `MJFfamily` is set to `family` then the string `Accommodation for your family` will be displayed.
+If `MJFfamily` is `single` then`Accommodation for yourself` will be displayed.  If `MJFfamily` 
+is any other value then an error will be displayed.
+
+:::note
+In theory we should never encounter the error message.  However it is good practice to
+account for every possible case when writing an if statement.  The `else:` catches
+any other value.
+
+This is good practice as, for example, if we added a new category to accommodation type
+and forgot to modify this part of the code at least we would receive the error message
+and be alerted to updating this if statement as well.
+:::
+
+### The relevant services table
+We are pretty close to what we want.  The only changes would be remove the Website column and
+make the service name a link to the service's website.  We will add a new table block to 
+display this modified table.  We will put the table block in `process_data.yml`:
+```yml
+---
+table: relevant_services_table
+rows: MJFrelevant_services
+columns:
+  - Name: |
+      "[{}]({})".format(row_item['name'], row_item['website'])
+  - Age Range: |
+      "{} to {}".format(row_item['min_age'], row_item['max_age'])
+  - Gender: row_item['gender']
+  - Locations: row_item['location']
+  - Family: row_item['family']
+---
+```
+We can remove our test tables from `final_screen` and replace them with `${relevant_services_table}`.
+
+Make these changes and run the app.  You should end up with something that looks like this:
+
+<DisplayImage imageURL='/img/textbook/chapter_06/filter/coding14.png' />
+
+The app is an improvement on the unstyled version and, frankly, reflects the limits of this
+author's artistic abilities!  Nonetheless, this does demonstrate how it is possible
+to significantly improve the look of an application.
+
+We have one more part left.  The PdF attachment.
+
+## PDF attachment.
+We have covered attachments [previously](/docs/textbook/chapter_02/00-30) and have dealt with
+them in more detail in <DisplayChapter chapter='chapter_08' />. For our app we want to use
+a Word document template to generate a PDF file which the user can download or email to 
+themselves
+
+For our app
