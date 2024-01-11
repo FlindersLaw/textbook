@@ -81,7 +81,7 @@ We can use iteration to solve the multiple location issue.  However, we also hav
 How do we manage a situation where one location matches but the second does not?  How can we
 ensure that `MJFlocation_ok` remains `True` in this context?
 
-We manage this `MJFlocation_ok` by setting it to `False` *before* we start the loop. As
+We manage this `MJFlocation_ok` issue by setting it to `False` *before* we start the loop. As
 we iterate over the locations, we change `MJFlocation_ok` to `True` if we find a  match
 but if a location doesn't match we do nothing. What we're doing is starting out with
 the assumption that we won't get any matches (ie: `MJFlocation_ok == False`) and,
@@ -89,4 +89,27 @@ if we find at least one match we set `MJFlocation_ok` to `True`.  It only
 takes one match to permanently set `MJFlocation_ok` to `True`.
 
 Let's see this in code:
+```python showLineNumbers
+MJFlocation_ok = False
+for a_location in MJFlocation.true_values():
+    if a_location in a_service['location']:
+        MJFlocation_ok = True
+```
+Line 1 sets `MJFlocation_ok` to `False` as we just discussed.  Line 2 is the loop that iterates over
+the user's selected locations.  Lines 3 and 4 are tbe body of this loop, that body being an if statement
+which sets `MJFlocation_ok` to `True` if a match is found but does nothing otherwise.
+
+### Adding code to the relevant services list
+In our design we discussed how to [test the four criteria together](00-10#the-decision) and we even have
+code ready to go.  What we don't have though is the code that does the adding to the relevant services
+list.  For that matter, we don't have code that defines a relevant services list at all!  Maybe we need 
+to start there.
+
+In order to add code to a relevant services list we need to define a list to begin with.  Let's call
+it `MJFrelevant_services`.  We're going to define our list as a [`DAList`](https://docassemble.org/docs/objects.html#DAList)
+so we can make use of some of the extra features a `DAList` provides, in particular,
+[groups](https://docassemble.org/docs/groups.html) and [gathering](https://docassemble.org/docs/groups.html#details).
+
+We use an [`objects`](https://docassemble.org/docs/initial.html#objects) block to declare our list.
+W
 
