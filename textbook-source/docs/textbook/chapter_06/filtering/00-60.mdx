@@ -6,3 +6,38 @@ import {DisplayChapter} from '@site/src/components';
 import {DisplayGlossaryItem} from '@site/src/components';
 import * as Flowcharts from './_flowcharts';
 import * as Tables from './_tables';
+
+There are two parts to this part of our app:
+1. style the app and make it look nicer than what it is; and
+2. prepare a PDF attachment for downloading and emailing.
+
+Let's deal with these in turn
+
+## Styling the app
+To summarise our styling requirements from the [design](00-10#display-the-list-of-relevant-services):
+* the [ABC logo](/img/textbook/chapter_06/filter/ABCInc_logo_white.png) needs to be added to the app;
+* we need to use the [Poppins](https://fonts.google.com/specimen/Poppins) font for headings;
+* we need to use the [Unna](https://fonts.google.com/specimen/Unna) font for body text;
+* ABC want us to make use of the colours in the logo throughout the app.
+
+Given we're in the design phase we shoudl also add to this list:
+* put descriptive text in the welcome and final screens; and
+* put descriptive text in the question blocks where necessary.
+
+Let's work through these top to bottom.
+
+### Adding a logo
+We've dealt with logos [before](/docs/textbook/chapter_07/00-20#inserting-the-logo).  We can follow the same 
+process here.
+
+First, upload the [logo](/img/textbook/chapter_06/filter/ABCInc_logo_white.png) to the 'Static Files' folder
+in your Playground.
+
+Then we need to add an `objects` block to `main.yml` declaring the logo to Docassemble:
+```yml
+---
+objects:
+  - ABClogo: DAStaticFile.using(filename='ABCInc_logo_white.png')
+---
+```
+
