@@ -1,5 +1,5 @@
 ---
-title: Coding the Design
+title: Coding - Introduction
 ---
 import {DisplayImage} from '@site/src/components';
 import {DisplayChapter} from '@site/src/components';
@@ -10,3 +10,80 @@ import * as Tables from './_tables';
 In this part of the Case Study we work through writing the code for the app we have
 designed.  Working code snippets will be included on this page.  You are encouraged
 to copy the code into your playground and 'code along' as the app is built out.
+
+This project will ultimately consist of many different files.  There will be a `main.yml`
+which will contain the code the drives the app overall. We will put the questions into a 
+separate file and we'll also put the database into a separate file.  We'll also have a
+CSS file for our styling, image files for our logo and maybe other image resources.  In
+addition we may decide to break the decision-making part of the app into at least one 
+but possibly more separate files.  The idea is to compartmentalise each part of the code
+to make it easier to read.
+
+We may end up having coding resources that look like this:
+```mermaid
+flowchart RL
+    id0(<code>main.yml</code><br>This file drives the entire app)
+    id1(<code>questions.yml</code><br>Put the user quesetions here)
+    id2(<code>services.yml</code><br>Put <code>MJFservices</code> here)
+    id3(<code>styles.css</code><br>Contains styling to make our app look beautiful)
+    id4(Image resources, such as our logo in the <code>Static Files</code> folder)
+    id5(Template files to assist in creating our PDF<br>in the <code>Templates</code> folder)
+    id6(<code>process_data.yml</code><br>The decision-making logic will sit here)
+    id7(We may separate the logic to set the<br><code>_ok</code> variables into a separate file)
+
+    id1 --> id0
+    id2 --> id0
+    id3 --> id0
+    id4 --> id0
+    id5 --> id0
+    id6 --> id0
+
+    id7 --> id6
+
+    %% Define styles for flowchart items.  We want to make comments yellow
+    %% and have a larger font size for regular items
+    classDef commentClass fill:#faffd6,text-align:left
+    classDef questionClass fill:#ffe6bc
+    classDef boundaryClass fill:#eeeeee,text-fill-color:#fff
+    classDef itemClass font-size:16pt
+    classDef leftListClass text-align:left
+```
+
+Each code snippet in this part will include the name of the file that contains the code.
+
+## Starting code
+Let's start with our usual setup, that is a welcome screen, a mandatory block that drives our app and
+a final screen to display the final output.  We can then build this out as we go.
+```yml title="main.yml" showLineNumbers
+---
+mandatory: True
+question: Welcome screen
+subquestion: |
+  Welcome screen text will go here eventually.
+buttons:
+  - Continue: continue
+  - Exit: exit
+  - Restart: restart
+---
+# This code block drives our app
+mandatory: True
+code: |
+  final_screen
+---
+# This is our final screen
+event: final_screen
+question: Final Scren
+subquestion: |
+  Eventually the list of services will be displayed here
+buttons:
+  - Exit: exit
+  - Restart: restart
+---
+```
+Copy and paste this code into your Playground, Save and Run, and you will be presented with the start and end
+screens.
+
+<DisplayImage imageURL='/img/textbook/chapter_06/filter/coding1.png' />
+<DisplayImage imageURL='/img/textbook/chapter_06/filter/coding2.png' />
+
+We can now work through generating the code in a similar order to which we conducted the design.
