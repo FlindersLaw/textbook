@@ -170,16 +170,20 @@ We can add these styles to `ABC_styles.css`:
   font-size: 1.2em;
 }
 ```
-The `font-size: 1.2em` increases the font size by 20% over the default (rather small) font size.
+The `font-size: 1.2em` increases the font size by 20% over the default (rather small) font size.  Now
+our screen looks like this:
+
+<DisplayImage imageURL="/img/textbook/chapter_06/filter/coding13a.png" />
 
 Working through the rest of the screens it appears that there are no other styles for us to 
-take account of.
+take account of.  Let's look at colours now.
 
 ### Working with colours
 #### The Navbar
-Let's return to our navbar.  The logo with the white background on a black navbar does not look
+The logo with the white background on a black navbar does not look
 pretty.  We'll have to change the background colour of the navbar from black
-to something else.  We have dealt with changing navbar colours [elsewhere](/docs/textbook/chapter_07/00-20#changing-the-navbar-color). 
+to something else.  We have dealt with changing navbar colours
+[elsewhere](/docs/textbook/chapter_07/00-20#changing-the-navbar-color). 
 
 Let's try a white background.  Put this into `ABC_styles.css`
 ```css
@@ -210,8 +214,11 @@ Save and re-run the app. That's an improvement:
 
 <DisplayImage imageURL="/img/textbook/chapter_06/filter/coding9.png" />
 
-:::note
+:::info
+<details>
+<summary>
 #### Identifying RGB values
+</summary>
 As we have [discussed elsewhere](/docs/textbook/chapter_07/00-20#how-we-describe-colours-in-code) we
 need to determine RGB values for each colour we want to use. An easy way to do this
 on Windows systems is to use the 'Colour picker' tool in Microsoft Paint:
@@ -224,18 +231,44 @@ on Windows systems is to use the 'Colour picker' tool in Microsoft Paint:
 l. The RGB values will be displayed in edit colour dialog.
 
 <DisplayImage imageURL="/img/textbook/chapter_06/filter/paint2.png" />
+</details>
 :::
 
 #### The Display Table
 The other area of our app that could do with some colour goodness is our 
-table on our final screen. We could use the logo colours to add a border 
-around the table and style the table cells.
+table on our final screen. It doesn't look that great:
+
+<DisplayImage imageURL="/img/textbook/chapter_06/filter/coding15.png" size="75%" />
+
+We could use the logo colours to add a border around the table and style the table cells.
 
 :::info
 We need to know a little about the structure of [HTML tables](https://www.w3schools.com/html/html_tables.asp).
-Specifically, we need to be aware that column headers are defined as `<th>` elements in HTML tables and
-regular table cells are `<td>`.  This is useful so we can give our column headers a specific style and
-our table cells another style.
+Specifically, we need to be aware that rows in tables are defined inside `<tr></tr>` tags,
+column headers are defined inside `<th></th>` elements and table cells in `<td></td>`.
+
+When we style a table we have a 'parent style' which controls the table over all and we also have 'child styles'
+which style the elements in the table. 
+
+It turns out that Docassemble styles table using the default `table` class.  This is the table's parent
+style and we'd define it in the usual way ie:
+```css
+.table {
+  /* style stuff goes here */
+}
+```
+For the child elements we define them as children of `table` in this way:
+```css
+.table tr {
+  /* styles for table rows */
+}
+.table th {
+  /* styles for table column headings */
+}
+.table td {
+  /* styles for table cells */
+} 
+```
 :::
 
 We'll need to define some more colours as well.  Using our colour picker we can pick another 
@@ -257,7 +290,8 @@ slider on the colour picker in Microsoft Paint to slide up to a lighter shade of
 
 What would be good would to have a dark border around the table.  The column headings
 should also be dark with white text.  The table rows should be banded using a light 
-colour.  Let's define styles for this:
+colour, and we'll make the font a little smaller in the table cells to distinguish them
+from the column headers. Let's define styles for this:
 
 ```css
 /* This style sets the border for the table */
@@ -283,6 +317,18 @@ colour.  Let's define styles for this:
   background-color: var(--ABC-sun-lighter);
 }
 ```
+Our table looks a bit nicer now.
+
+<DisplayImage imageURL="/img/textbook/chapter_06/filter/coding16.png" size="75%" />
+
+:::note
+#### A note on banding rows
+This is a relatively advanced concept for this textbook and won't be discussed in detail.
+If you would like to know more there are [resources online](https://www.w3schools.com/howto/howto_css_table_zebra.asp)
+that you may find useful.  It is also always useful to poke around any website with 
+banded table rows with your Developer Tools.
+:::
+
 ## Descriptive text
 We will leave the adding of text to the welcome screen and the user questions to the reader.
 We will focus on the end screen as that is where the relevant information is presented.
@@ -328,7 +374,7 @@ code: |
 ```
 If `MJFfamily` is set to `family` then the string `Accommodation for your family` will be displayed.
 If `MJFfamily` is `single` then`Accommodation for yourself` will be displayed.  If `MJFfamily` 
-is any other value then an error will be displayed.
+is any other value then an error message will be displayed.
 
 :::note
 In theory we should never encounter the error message.  However it is good practice to
@@ -341,10 +387,30 @@ and be alerted to updating this if statement as well.
 :::
 
 ### The relevant services table
-We are pretty close to what we want.  The only changes would be remove the Website column and
-make the service name a link to the service's website.  We will add a new table block to 
-display this modified table.  We will put the table block in `process_data.yml`:
-```yml
+Our [`relevant_services_test_table`](00-50#testing) is close to what we want.
+The only changes would be remove the Website column and
+make the service name a link to the service's website.  We can do this with a Python expression,
+much like how we used an expression to display the age range.  In this case we will use
+a Python expression to create the Markdown syntax for displaying a web link.
+
+:::info
+The best reference for setting up web links is in your Playground:
+<details>
+<summary>
+Playground screenshot
+</summary>
+<DisplayImage imageURL="/img/textbook/chapter_06/filter/coding17.png" />
+</details>
+
+However, there are [many](https://daringfireball.net/projects/markdown/syntax#link)
+[other](https://www.markdownguide.org/) [resources](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github)
+[available](https://www.howtogeek.com/448323/what-is-markdown-and-how-do-you-use-it/) online.
+:::
+
+  We will add a new table block to 
+display this modified table.  We will put the table block in `process_data.yml`.  Note the use
+of `format()` to create a hyperlink for the 'Name' column:
+```yml {6}
 ---
 table: relevant_services_table
 rows: MJFrelevant_services
@@ -358,7 +424,30 @@ columns:
   - Family: row_item['family']
 ---
 ```
-We can remove our test tables from `final_screen` and replace them with `${relevant_services_table}`.
+Now that we have a 'real' table to display we can remove our `services_test_table` and
+`relevant_services_test_table` and replace it with our `relevant_services_table`.  Our
+`final_screen` should now look something like this:
+```yml
+---
+event: final_screen
+question: Final Screen
+subquestion: |
+  Some introductory text will go here.
+
+  You entered the following information
+
+  Age|Gender|Service Locations|Type of Accommodation
+  ---|---|---|---
+  ${MJFage}|${MJFgender}|${MJFlocation.true_values()}|${MJFfamily_display}
+
+  Here are a list of services relevant to your circumstances.
+
+  ${relevant_services_table}
+buttons:
+  - Exit: exit
+  - Restart: restart
+---
+```
 
 Make these changes and run the app.  You should end up with something that looks like this:
 
@@ -368,12 +457,243 @@ The app is an improvement on the unstyled version and, frankly, reflects the lim
 author's artistic abilities!  Nonetheless, this does demonstrate how it is possible
 to significantly improve the look of an application.
 
-We have one more part left.  The PdF attachment.
+We have one more part left.  The PDF attachment.
 
 ## PDF attachment.
 We have covered attachments [previously](/docs/textbook/chapter_02/00-30) and have dealt with
 them in more detail in <DisplayChapter chapter='chapter_08' />. For our app we want to use
 a Word document template to generate a PDF file which the user can download or email to 
-themselves
+themselves.
 
-For our app
+As we know, we usually use Word documents to create the templates from which to generate
+PDFs (although there are [other options](https://docassemble.org/docs/documents.html)).
+
+We'll want our Word document to look more or less like our final screen.  Our document should 
+make use of the same logo colours.  However, we cannot use Google Fonts in Word documents, so
+we will stick to the default fonts.
+
+Generate a quick mockup that looks something like this in Word:
+
+<DisplayImage imageURL="/img/textbook/chapter_06/filter/pdf1.png" />
+
+It's a bit subtle but we've set the colour of 'Emergency Accommodation Service' to
+the same RGB values as `--ABC-darkest`.
+
+Let's also record a document generation date in the footer:
+
+<DisplayImage imageURL="/img/textbook/chapter_06/filter/pdf2.png" />
+
+We'll work through these from the simplest to the most complicated.
+
+### Document Generation date
+We can use Jinja code, [`format_date()`](https://docassemble.org/docs/functions.html#format_date),
+and [`today()`](https://docassemble.org/docs/functions.html#today) to generate today's date and
+format it in an AGLC-compliant way.  
+
+We can replace the highlighted text in the footer of our document with this Jinja code:
+```jinja
+{{ format_date(today(), 'd MMMM YYYY')}}
+```
+
+### Answers to user questions
+We want to set up a table similar to the user question table in our final screen.  We should
+style it in a similar way, that is with `--ABC-darkest` colour for the column header and border
+backgrounds.
+
+We should style our table as follows:
+* dark column headers as already discussed
+* a 3 pixel border around the table (not the cells) of the same colour
+* each column must be the same width (Select the table,
+Go to Layout (on the right of 'Table Design') -> Distribute Columns).
+
+:::note
+`---ABC-darkest` is defined in CSS.  Word does not understand CSS so we will need to define
+custom colours using the RGB values from CSS in each element
+:::
+
+We can use Jinja code to display our variable values in the cells.  Your table should look
+something like this:
+
+<DisplayImage imageURL="/img/textbook/chapter_06/filter/pdf3.png" />
+
+:::note
+We are using `MJFfamily_display` in this table for the same reason as we use it in `final_screen`.
+:::
+
+### The Relevant Services Table
+We want to use a similar layout to the `final_screen` here as well.  There are two
+issues we need to address:  firstly, we don't know how big our table will be - it will need
+to display only the number of rows it requires to display the services (ie: no blank 
+rows or missing rows); secondly, we want to display the service name as a hyperlink to 
+the service's website.
+
+Let's start with a skeleton table first:
+
+<DisplayImage imageURL="/img/textbook/chapter_06/filter/pdf4.png" />
+
+To this we can add the Jinja code that will generate the required  number of rows in the table.
+
+:::tip TODO
+Link to the appropriate part of ch 8 where this is covered.
+:::
+
+Merge the top and bottom rows in the table and insert the code as shown below:
+
+<DisplayImage imageURL="/img/textbook/chapter_06/filter/pdf5.png" />
+
+We now need to populate each of the cells.  Where a cell's value is a variable name,
+such as for Gender, Location and Family, we can enclose the variable name in Jinja
+braces ie:
+* `{{a_service['gender']}}` for Gender;
+* `{{a_service['location']}}` for Locations; and
+* `{{a_service['family']}}` for Accommodation Type;
+
+For the 'Age Range' column we don't need to use `format()`. Instead we can create the string
+directly, much like if this was Markdown and Mako ie:
+```
+{{a_service['min_age']}} to {{a_service['max_age']}}
+```
+
+So, for all but the 'Service' column, our table should look like this:
+
+<DisplayImage imageURL="/img/textbook/chapter_06/filter/pdf6.png" />
+
+:::note
+We will sort the column spacing later.
+:::
+
+### Making a Jinja hyperlink
+In order to make a hyperlink with Jinja we need to supply the markdown to Jinja and pass it through
+a markdown [filter](https://docassemble.org/docs/documents.html#markdown%20to%20docx).  In our
+database we have a `name` key and we have a `website` key but we don't have any key with a value
+that would be Markdown text for a hyperlink (ie: `[name](https://link.to.website)`).
+
+We could go back to `MJFservices` and manually add a new, say, `service_link` key for every entry
+and with the proper markdown link.  However, that shouldn't be mecessary, as we'd just be duplicating
+information we already have.
+
+Ideally, what we would like would be to create this `service_link` key/value pair dynamically as we
+need it, much like how we created `MJFfamily_display` just when we needed it.
+
+#### Using index variables
+Docassemble does allow us to do this.  Firstly, we [know how to add](/docs/textbook/chapter_05/00-40#adding-items)
+new items to a dictionary.  Secondly, we also know how to [reference data in a list](/docs/textbook/chapter_05/00-20#referencing).
+Docassemble provides us with [index variables](https://docassemble.org/docs/fields.html#index%20variables) that
+allow us to refer to items in a list in question and code block.  If we put all that together, we can construct
+a code block like this:
+```yml showLineNumbers
+---
+code: |
+  MJFservices[i]['service_link'] = "[{}]({})".format(
+    MJFservices[i]['name'],
+    MJFservices[i]['website']
+  )
+---
+```
+Let's work through this.  Overall, what this code block is doing is setting
+the value of `MJFservices[i]['service_link']`.  The value it is being set to
+is essentially just a `format()` command, but the command is spread over three
+lines as the two parameters to pass in are rather long.  We could have written
+the `format()` part like this:
+```python
+  "[{}]({})".format( MJFservices[i]['name'], MJFservices[i]['website'] )
+```
+The real fun is in this `[i]` business.  The `i` is an [index variable](https://docassemble.org/docs/fields.html#index%20variables).
+This is a special variable that is not set in a code, question or object block like the
+other variables we dealt with so far.  An index variable is used to refer to the position,
+or 'index' of a list item.  So, what our code block is doing is 
+setting the value of the i<sup>th</sup> list item of `MJFservices` to something.
+
+As we know, `MJFservices` is a list of dictionaries.  So, more specifically, our
+code block is setting the value of the `service_link` key for the i<sup>th</sup>
+list item in `MJFservices`.
+
+How does Docassemble know what the i<sup>th</sup> item is?  This is something that
+it works out internally. As Docassemble iterates over a list it keeps track of the 
+index of each list item.  We don't see this when we write:
+```python
+for a_service in MJFservices
+  # do something
+```
+But Python is aware of the index nonetheless.  What this means for us is that we can
+iterate over a list and use code with index variables for blocks to ask questions 
+for each item or, in our case, code blocks to automatically popluate new items.
+
+For example:
+```yml showLineNumbers
+---
+code: |
+  for a_service in MJFservices:
+    a_service['service_link']
+---
+code: |
+  MJFservices[i]['service_link'] = "[{}]({})".format(
+    MJFservices[i]['name'],
+    MJFservices[i]['website']
+  )
+---
+```
+The first code block iterates over `MJFservices`.  The body of the loop asks for 
+`a_service['service_link']` to be populated.  Docassemble, on seeing this code,
+will execute the second code block as it is looking to populate the `service_link`
+key for a particular element of `MJFservices`. The element is passed in to `i`
+so the correct list item is populated.
+
+This works in Jinja also.  The first row in our table has this:
+```
+{%tr for a_service in MJFrelevant_services %}
+```
+This is the beginning of a for loop.
+
+Each cell in the body row of our loop refers to `a_service`, much like we did
+in our decision processing block [earlier](00-50).  For the 'Service Name' column
+we can refer to `a_service['service_link']`.  Docassemble will see this and
+process our new code block.
+
+#### Applying a markdown filter.
+Now that we have a way of passing our Markdown hyperlink into Jinja we need to tell Jinja to apply 
+a Markdown filter, otherwise it will be processed as plain text.  This part is much simpler than 
+the index variable!  We apply a Markdown filter like so:
+```
+{{p a_service['service_index'] | markdown}}
+```
+<DisplayImage imageURL="/img/textbook/chapter_06/filter/pdf7.png" />
+
+### Adding the attachment
+Finally, we need to connect our template to our app and provide the email capability.
+Thankfully, Docassemble's [`attachment`](https://docassemble.org/docs/documents.html#attachment)
+specifier provides an emailing and Word-to-PDF capability that we can use. All we need to do
+is add this `attachment` to our `final_screen` above our `buttons`:
+```yml showLineNumbers
+attachment:
+  docx template file: ABCtemplate.docx
+  filename: "ABC Inc Emergency Accommodation Services"
+  valid formats:
+    - pdf
+```
+Line 2 tells Docassemble our attachment will be based on our Word template file we have just created.
+
+Line 3 will save (or email) the PDF we generate with this filename.
+
+Lines 4 and 5 tell Docassemble to only generate a [PDF](https://docassemble.org/docs/documents.html#valid%20formats).
+By default, both Word and PDF files would be generated.
+
+This attachment block appends this to the bottom of our final screen:
+
+<DisplayImage imageURL="/img/textbook/chapter_06/filter/pdf8.png" />
+
+Clicking on the PDF will display our PDF, and it can be saved with the filename
+we speicified:
+
+<DisplayImage imageURL="/img/textbook/chapter_06/filter/pdf9.png" />
+
+## The End!
+That concludes this case study.  Those of you wishing to take this study further could address
+some issues not covered in this case study:
+
+* What will happen if there are no relevant services for a user?  What is displayed in
+this situation?  What should be displayed in this situation?
+* The spinner that is displayed before the final screen is partially hidden under
+the navbar.  It should be moved downwards.
+
+And, of course, the app could always look better...
