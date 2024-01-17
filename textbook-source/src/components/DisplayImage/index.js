@@ -1,7 +1,7 @@
 // Display an image with a border and other decoration suitable
 // for this textbook
 import React from "react";
-import * as Constants from '@site/src/constants';
+import './styles.css';
 
 /**
  * Display an image with a border and other decoration sutiable for this textbook
@@ -10,6 +10,11 @@ import * as Constants from '@site/src/constants';
  * @param {string} size     - A size in CSS syntax eg: '50%' or '25px'.  Default is
  *                            '100%'
  * @param {string} align    - Alignment to pass to css.align.  Default is 'center' 
+ * @param {string} caption  - Optional caption to display below the image
+ * @param {string} inline   - optional string to indicate if image is to be displayed inline
+ * 
+ * align, caption and size are ignored if inline is set
+ * 
  * @returns <img /> component
  */
 export function DisplayImage(props) {
@@ -18,26 +23,44 @@ export function DisplayImage(props) {
   const align = props.align || "center";
   const altText = props.altText || 'image';
 
-  // We use this default style to display the image
-  // TODO: This style should be moved to custom.css.
-  const borderStyle = props.borderStyle || Constants.DI_shadow_block;
-  let css = { ...Constants.DI_border_styles[borderStyle] };
+  // Just return the image formatted for display inline
+  if (props.inline) {
+    return <img src={imageURL} alt={altText} className="inlineShadow" />
+  }
 
+  // Otherwise, we prepare for a block element
   // Set the size and alignment
-  css.maxWidth = size;
-  css.float = align || 'center';
+  let divCSS = {};      // CSS styles for the <div>
+  let imgCSS = {}       // CSS for the <img>
+
+  divCSS.maxWidth = size;
+  divCSS.float = align || 'center';
 
   // Set padding for the float if we're not centred
   if ( align === 'right' ) {
-    css.marginLeft = '20px';
+    divCSS.marginLeft = '20px';
   } else if ( align === 'left' ) {
-    css.marginRight = '20px';
+    divCSS.marginRight = '20px';
   } else if ( align == 'center' ) {
-    css.margin = '20px auto';
+    divCSS.margin = '20px auto';
+  }
+
+  // Create a div for the caption if we have one
+  let captionDiv = '';
+  if ( props.caption ) {
+    captionDiv = <div className="caption">
+      {props.caption}
+    </div>
   }
 
  // Define returnValue so we can console.log() it for debugging
  // if necessary
-  let returnValue = <img src={imageURL} alt={altText} style={css} />
+  let returnValue = <div style={divCSS}>
+      <img src={imageURL} alt={altText} style={imgCSS} />
+  </div>
+  returnValue = <div style={divCSS}>
+      <img src={imageURL} alt={altText} className="shadowBlock" />
+      {captionDiv}
+    </div>
   return returnValue;
 }

@@ -1,0 +1,46 @@
+---
+title: Chapter 7. Making Your App Beautiful
+---
+import {DisplayImage} from '@site/src/components';
+import * as Constants from '@site/src/constants';
+import {DisplayDAButtons} from '@site/src/components';
+
+While apps written in Docassemble look decent enough, it is usually better to 'dress them up'
+a little to make them look more beautiful.  We might want to use a nicer colour combination, 
+or add a client's logo, or make our app look like a client's website or have it conform to their
+corporate style guide.
+
+For example, instead of presenting an app that looks like this:
+
+<DisplayImage imageURL='/img/textbook/chapter_07/css1.png' size="70%" />
+
+We might want it to look like this:
+
+<DisplayImage imageURL='/img/textbook/chapter_07/css2.png' size="70%"/>
+
+We can make these stylistic changes using two technologies.  One is [**Bootstrap**](https://getbootstrap.com/)
+and the other is **Cascading Style Sheets**, more commonly known as [**CSS**](https://developer.mozilla.org/en-US/docs/Web/CSS).
+
+We won't go into either of these technologies in too much detail.  We'll go through just enough to tweak our
+apps to change colours, fonts and other elements, and maybe add an image or two.  What we do need to know 
+though is these two points.
+
+First, **Bootstrap** elements are used to build our app.  For example, every app we build has a black
+bar at the top (called a **Navbar**), a menu on the top right, and <DisplayDAButtons button={Constants.da_continue_prop} />,
+<DisplayDAButtons button={Constants.da_restart_prop} /> and
+<DisplayDAButtons button={Constants.da_exit_prop} /> buttons.  These are all elements provided to our app via Bootstrap
+**theme**.  Docassemble comes bundled with a default theme which we have been using all this time.  It's what 
+provides us with the black navbar, the colours for our buttons, the font we use and so-on.
+
+We don't need to know much more about Bootstrap except that it provides us with these elements. We need to 
+know this so we know how to refer to elements to change their styles.
+
+Second, **CSS** is what we use to modify the look of our apps.  Bootstrap actually uses CSS to make its navbar
+black, the Continue button blue and so-on.  We will also use CSS to change how our app looks.
+
+The **Cascading** in CSS means that when we change an element we don't need to re-write it from scrath.  For example,
+if we wanted to change the font in our Continue button, we only need to define a CSS style that defines the new font.
+All the other style aspects of the button, such as its colour, its round edges and so-one, will 'cascade' down from
+the default Bootstrap style and be applied together with our style.
+
+So, in summary, Bootstrap tells us what elements we have, and we use CSS to change how those elements look.

@@ -1,0 +1,770 @@
+---
+title: Making the changes
+---
+import {DisplayImage} from '@site/src/components';
+import {DisplayChapter} from '@site/src/components';
+import {DisplayGlossaryItem} from '@site/src/components';
+import {DisplayDAButtons} from '@site/src/components';
+import * as Constants from '@site/src/constants';
+import ListOfChanges from './_list_of_changes.mdx';
+
+In this part of the textbook we will start with basic code with no styling and step by step
+add the necessary styles and other resources to arrive at our final staged product.  All the code
+is provided in this part of the textbook.  You are welcome to copy the starting code into your
+Playground and make changes as we progress through our list.
+
+A complete set of code and resources is provided at the end of this section.
+
+:::tip
+Before you get started you might want to consider setting up a [project](../chapter_02/00-40#making-a-project)
+for your code.
+:::
+
+## Starting code
+Let's look at our code for the current program with no styles added.  Feel free to copy
+this into your Playground.
+
+```yml title="ch7_no_styles.yml" showLineNumbers
+---
+metadata:
+  title: |
+    Look and Feel Demonstrator
+  short title: |
+    Style Demonstrator
+  show login: True
+---
+mandatory: True
+question: Look and Feel Demonstrator
+subquestion: |
+  This version of our demonstrator has no styling.  It looks neat enough but it has all the
+  default style elements, such as the black navbar, no logo, standard colours for buttons
+  and so-on.
+
+  What we'd like to do is to 'theme' our app so that it looks a bit nicer or, more importantly
+  for clients, matches the look and feel of their website and their corporate style guide.
+
+  We will do this using HTML and CSS, as we shall see.
+buttons:
+  - Exit: exit
+  - Restart: restart
+  - Continue: continue
+---
+```
+
+## Our changes
+Let's recall the changes we want to make...
+
+<ListOfChanges />
+
+..and work through these one at a time.
+
+## Inserting the logo
+This is not actually a change that makes use of CSS but we'll start with this anyway as it's
+at the top of our list. To add the logo we need to do these things:
+
+1. add a logo image to our Playground;
+1. make the logo available to our app; and
+1. add some code to display the logo as we like it.
+
+Docassemble allows you to add [metadata to your app](https://docassemble.org/docs/initial.html#metadata),
+such as the app's title, authors and other data.  A logo can also be added as metadata.  However, if we use
+Docassemble's `metadata` key to add our logo, the logo will get shrunk to about 20 pixels which will make
+it hard to see.  We want the logo to be bigger.  Consequently we have to bypass `metadata` and use 
+Docassemble's [`set_parts()`](https://docassemble.org/docs/functions.html#set_parts) to set the logo
+to our larger logo.
+
+So, let's get to it.
+
+Step 1 is to get a logo image.  Unsurprisingly we have already found one for you.  Here it is:
+
+<DisplayImage imageURL='/img/textbook/chapter_07/flinders_logo.png' />
+
+Wait What?
+
+This looks like an error.  The swooshy part starts too far to the left of the shield and the writing 
+and there's just white where 'Flinders University' should be.  This is deliberate.  Remember, our logo is
+going to be displayed on a dark background.  Our textbook background is white which is why some parts of the 
+logo aren't displayed.  However, it is a good logo image.
+
+If you're coding along as we progress download this image (it's also available [here](/img/textbook/chapter_07/flinders_logo.png))
+and save it as a file called `flinders_logo.png` in the 'Static Files' folder in your Playground.
+
+Once you've copied the file across into 'Static Files' we need to tell our app where to find it.  To do so,
+we insert these lines.  Insert them just below the `metadata` block, after line 12:
+```yml
+---
+objects:
+    - MJFlogo: DAStaticFile.using(filename='flinders_logo.png')
+---
+```
+:::caution
+Remember to separate all your blocks with `---`
+:::
+
+Now that we have told our app, or 'declared', our logo we can now tell our App that we want to set
+the logo to be a bigger logo.  Our logo will be 50 pixels.
+
+Insert this block under the `objects:` block you just added:
+```yml
+---
+mandatory: True
+code: |
+  set_parts(logo='<img src="' + MJFlogo.url_for() + '" style="height: 50px;">')
+---
+```
+
+Your code file should now look like this (with the new lines highlighted):
+```yml showLineNumbers {9-14}
+---
+metadata:
+  title: |
+    Look and Feel Demonstrator
+  short title: |
+    Style Demonstrator
+  show login: True
+---
+objects:
+  - MJFlogo: DAStaticFile.using(filename='flinders_logo.png')
+---
+mandatory: True
+code: |
+  set_parts(logo='<img src="' + MJFlogo.url_for() + '" style="height: 50px;">')
+---
+mandatory: True
+question: Look and Feel Demonstrator
+subquestion: |
+  This version of our demonstrator has no styling.  It looks neat enough but it has all the
+  default style elements, such as the black navbar, no logo, standard colours for buttons
+  and so-on.
+
+  What we'd like to do is to 'theme' our app so that it looks a bit nicer or, more importantly
+  for clients, matches the look and feel of their website and their corporate style guide.
+
+  We will do this using HTML and CSS, as we shall see.
+buttons:
+  - Exit: exit
+  - Restart: restart
+  - Continue: continue
+---
+```
+
+Run your app.  It should look like this:
+
+<DisplayImage imageURL='/img/textbook/chapter_07/makingchanges1.png' />
+
+## Changing the Navbar colour
+Now we get into the CSS goodness.
+
+### Create a CSS file
+First we need to [add a new CSS file in 'Static Files'](#creating-custom-styles).  Let's call the file
+`styles.css`.  We can't create an empty file in Docassemble so just add this line to the file and then
+save it:
+```css showLineNumbers title="styles.css"
+/* Style file */
+```
+That single line is a <DisplayGlossaryItem item='comment' />.  CSS comments start with `/*` and end with `*/`.
+Docassemble will ignore anything that's between these `/*` and `*/` delimiters, so we can put informative
+comments in there as we go.  Or, in this case, a placeholder.
+
+:::info
+As we work through this exercise we won't be adding comments as we go.  However, the final version
+of `styles.css` as well as the app itself are heavily commented.  You are encouraged to read through
+those comments.
+:::
+
+### Point the app to the CSS file
+Even though we've created the CSS file our app doesn't yet know that it's there or that it should use it. 
+To rectify this we need to add CSS as a [feature](https://docassemble.org/docs/initial.html#javascript)
+to our app.  We do this by inserting the following block.  Insert this block after the two blocks we added
+for the logo.
+```yml
+---
+features:
+  css: styles.css
+---
+```
+
+### How we describe colours in code
+Before we move forwards it would be good to know how to describe colours in code.  We want to render two 
+particular colours, a deep shade of blue which is used in the Flinders Logo and also the yellow that is used
+in the Flinders logo.
+
+In CSS, and in almost all coding languages, colours are described using what's called an **RGB Value**.  'RGB'
+stands for Red, Green and Blue.  An RGB value tells the computer how much of red, green and blue should be mixed
+together to make any particular colour.  This is a similar principle to mixing colours in art but the results
+are a little different.  For example, mixing red and blue will yield purple but mixing red and green makes yellow!
+
+The intensity of each of red, green and blue is indicated by a number.  Zero (0) indicates none of that colour is
+to be used, while 255 indicates the highest intensity for that colour.
+
+When expressing a colour as RGB values we always quote all three values.  So, for example, the RGB value for 
+yellow is `rgb(255,255,0)`.  That is, we're using the maximum intensity for red and green and we are not using 
+any blue at all.  It follows then that `rgb(255,0,0)` is red, `rgb(0,255,0)` is green and `rgb(0,0,255)` is blue.
+When it comes to shades, `rgb(0,0,0)` is black (ie: the absence of any colour) and `rgb(255,255,255)` is white.
+There are also another 254 shades of grey ranging from `rgb(1,1,1)` to `rgb(254,254,254)`.
+
+You may not expect it to be so, but using RGB values allows us to express over 16 million colours.  Every computer
+and electronic device that you have likely ever used and are currently using displays colours as RGB values.
+
+### Defining Flinders Blue
+For the purposes of this textbook Flinders blue is the blue used in the Flinders logo.  Its RGB value is:
+```
+rgb(34,45,75)
+```
+You can see from the low numbers that it is a dark colour, and you can also see the bias towards blue as the 
+blue value is higher than the others.
+
+### Declaring the colour in CSS
+Now that we know the value for Flinders blue we can use it in our CSS file.  Because we will be using this
+colour in quite a few places it is best for us to declare it as a variable.  Doing so means that, should
+we ever need to change the colour in future we need only change the variable declaration and the rest of the
+CSS file will pick it up automatically.
+
+So, let's declare our Flinders blue colour by removing that placeolder line and replacing it with this:
+```css showLineNumbers
+:root {
+    --flinders-blue: rgb(34,45,75);
+}
+```
+The class `:root` is a special CSS class.  For our purposes all we need to know is that we declare all our
+variables in `:root`.  Note also that `:root` starts with a colon (`:`). This is also important.
+
+:::note A Note on CSS Syntax
+We won't go into CSS syntax in too much detail in this textbook.  We just want to get you to the point where
+you can make CSS changes to your app.  That said, there are a few things to bear in mind.
+
+First, every CSS **class** is declared in the format
+```css
+class_name {
+    stuff goes here
+}
+```
+That is, the class name and then what comprises the class is enclosed in braces.  Note this is different
+to Docassemble and Python where we use indentation.  In CSS indentation isn't important.  This line 
+could also be valid CSS:
+```css
+:root { --flinders-blue: rgb(34,45,75); }
+```
+Secondly, the body of a class is made of a specifier (or 'property') (`--flinders-blue` in our case) and its value.  The
+property must be followed immediately by a colon (`:`), and the value must be followed by a semicolon (`;`).  It
+is a common mistake for students to forget the colon and/or semicolon or to mix them up.  Be aware of this.
+:::
+
+### Changing the Navbar colour
+Now we are ready to change the colour of the Navbar.  As we saw [previously](00-10#finding-the-components),
+the Navbar is identified by the `navbar` CSS class.  Consequently, for us to change the colour of the 
+navbar we need to modify this class with our new colour, or specifically, our new background colour.
+
+Modifying a class in CSS is simple.  We simply declare a class with the same name (ie: `navbar`) and put
+what we want into it.  The 'Cascading' part of CSS will ensure that the default `navbar` class is read first
+and then our `navbar` class is read.  Our changes will overwrite the default class.  That's handy as, seeing
+as we only want to change the background colour, that's the only property we need to add to our `navbar` class.
+
+:::note
+CSS classes are declared with a leading full-stop (`.`) in a CSS file.  Therefore, to declare our custom
+`navbar` class, we actually need to declare a class called `.navbar`.
+:::
+
+So, below our `:root` class let's add this to define our `navbar` class:
+```css
+.navbar {
+    background-color: var(--flinders-blue) !important;
+}
+```
+We have defined our `navbar` class.  In it we include a single property, 
+[`background-color`](https://www.w3schools.com/cssref/pr_background-color.php). The value of `background-color`
+is to be set to the variable `--flinders-blue` which we declared in `:root` earlier.
+
+Finally, we've added an `!important` to our property. This [`!important`](https://www.w3schools.com/css/css_important.asp)
+specifier forces our app to read 
+our background colour over any others that may be set after our CSS file is read.  It is not usually good practice
+to use `!important` specifiers. For the purposes of this textbook we ask students to accept that `!important`
+must be used in our `navbar` class and it will not be used anywhere else.
+
+:::note
+We use the American spelling for 'color'!  This is part of the CSS specification.
+:::
+
+Our `styles.css` file should now look like this:
+```css showLineNumbers
+:root {
+  --fliders-blue: rgb(34,45,75);
+}
+
+.navbar {
+  background-color: var(--flinders-blue) !important;
+}
+```
+The code for our app should look like this:
+<details>
+<summary>
+Code for our app
+</summary>
+```yml showLineNumbers
+---
+metadata:
+  title: |
+    Look and Feel Demonstrator
+  short title: |
+    Style Demonstrator
+  show login: True
+---
+objects:
+  - MJFlogo: DAStaticFile.using(filename='flinders_logo.png')
+---
+mandatory: True
+code: |
+  set_parts(logo='<img src="' + MJFlogo.url_for() + '" style="height: 50px;">')
+---
+features:
+  css: styles.css
+---
+mandatory: True
+question: Look and Feel Demonstrator
+subquestion: |
+  This version of our demonstrator has no styling.  It looks neat enough but it has all the
+  default style elements, such as the black navbar, no logo, standard colours for buttons
+  and so-on.
+
+  What we'd like to do is to 'theme' our app so that it looks a bit nicer or, more importantly
+  for clients, matches the look and feel of their website and their corporate style guide.
+
+  We will do this using HTML and CSS, as we shall see.
+buttons:
+  - Exit: exit
+  - Restart: restart
+  - Continue: continue
+---
+```
+</details>
+
+Our app should now look like this.  Note the colour of the navbar.
+
+<DisplayImage imageURL='/img/textbook/chapter_07/makingchanges2.png' />
+
+## Change the colour of the right-side menu
+The contrast between our new background colour and our grey menu
+bar (that displays `mark.ferraretto@flinders.edu.au` in our image above) is not so great.  We want the menu
+bar to stand out and, in fact, we want to use the University's corporate colours, so Flinders yellow is a 
+good way to go.
+
+### Define the colour
+First, we need to define the colour.  Minutes of extensive research by your authors has yielded that the
+RGB value for Flinders yellow is `rgb(252,212,6)`.  Consequently, we need to declare this as a variable by
+adding a definition for `--flinders-yellow` to our `:root` class, like so:
+```css
+:root {
+    --flinders-blue: rgb(34,45,75);
+    --flinders-yellow: rgb(252,212,6);
+}
+```
+
+### Identify the component
+Next we need to identify the component.  We can do this by running our app in our browser and using the browser's
+Developer Tools.
+
+Once we have the developer tools running we use element picker to click on our menu.  The element picker is
+usually on the top left of the developer tools, like so in Firefox:
+
+<DisplayImage imageURL='/img/textbook/chapter_07/elementpicker1.png' />
+
+and like so in Chrome:
+
+<DisplayImage imageURL='/img/textbook/chapter_07/elementpicker2.png' />
+
+Click on the element picker and then hover the mouse over the menu.  When we do so, we see the corresponding
+code higlighted in the Developer Tools.  We also see that the menu bar's class is called `nav-link`
+
+<DisplayImage imageURL='/img/textbook/chapter_07/elementpicker3.png' 
+    caption="Hard to see, but true!" />
+
+### Update the styles
+So, we need to create a new `nav-link` class. Because `nav-link` seems a rather generic term, we want our class
+only to be used when we're accessing a `nav-link` in the navbar.  Once again, the 'Cascading' part of CSS 
+comes into play.  We can limit our `nav-link` class to only `nav-link`s in the `navbar` by adding the following
+to our `styles.css`:
+
+```css
+.navbar .nav-link {
+    color: var(--flinders-yellow);
+    font-weight: bolder;
+}
+```
+We have already learnt that the `background-color` set the background colour.  The `color` property sets 
+the foreground colour.  As we have a text menu, this means the text colour.  We are also going to make the
+font a little bolder to increase the contrast between our Flinders blue background and the yellow menu.
+
+We don't need to make any changes to our app's code as it's already configured to read in any changes we make
+to `styles.css`.  So, if we run the app we should now get something like this:
+
+<DisplayImage imageURL='/img/textbook/chapter_07/makingchanges3.png' />
+
+## Make the menu bar transparent
+If you run the app as it is now and click on the menu bar you'll the see menu bar itself still  appears black 
+with grey text.  We want the menu bar to appear in Flinders Yellow, like our `nav-link` that we set up before.
+However, want to do a few extra things:
+
+1. the menu bar should be transparent.  When a user clicks on it they should see a bit of the 
+underlying colours.
+1. when we hover over an item in the menu bar that item should be highlighted; and
+1. the colour of the text in the menu bar items should be readable. The existing grey may not work so well.
+
+### About transparency
+Transparency is called **alpha** in the coding world.  A colour can be assigned an 'alpha' value to indicate
+how transparent or opaque it should be.  An 'alphra' of 0 would make the colour invisible.  An alpha of 1 would
+make the colour entirely opaque (ie: not transparent at all).
+
+We can assign transparency to a colour using `rgba()`.  This works just like `rgb()` which we have used to
+describe colours but adds a fourth number, the alpha, for transparency.  So, for example, a flinders yellow
+that had a 30% alpha would be defined as so:
+```
+rgba(252,212,6,0.3)
+```
+From CSS' point of view, RGB and RGBA are just colours.  We can define them use them identically.
+
+### Defining the transparent colours
+It follows that all we need to do is to add yet another colour to our root and have that colour be our
+transparent yellow for the menu bar.  We actually need two colours - one for the menu bar and one for the 
+highlighted menu bar item.  We'll use Flinders yellow for both but we'll use a slightly more opaque yellow
+for the highlighted menu bar.  
+
+Add these two colours to the `:root` class:
+```css
+--flinders-yellow-30: rgba(252,212,6,0.3);
+--flinders-yellow-50: rgba(252,212,6,0.5); 
+```
+
+### Identify the components
+Developer Tools are our friend again.  Let's run the app and then start the Developer Tools.  
+
+Now click on the menu so the menu bar appears.  *Then* use the element picker to click on an item in the
+menu bar:
+
+<DisplayImage imageURL='/img/textbook/chapter_07/elementpicker4.png' />
+
+Once again, we can see that by hovering over a menu item, we've identified that its class is `dropdown-item`.
+In the developer tools we can see the list of menu items/`dropdown-item`s and, casting our eyes up a bit, 
+we can see that the class for the menu bar itself is called, rather logically, `dropdown-menu`.
+
+These are the two components we need to modify.
+
+### Update the styles
+Once again, we need to create two new classes, one each for `dropdown-item` and `dropdown-menu`.  Again, we will
+limit the scope of our new styles to children of the `navbar` class.  
+
+Add the following to `styles.css`:
+```css
+.navbar .dropdown-menu{
+    background-color: var(--flinders-yellow-30);
+}
+.navbar .dropdown-item {
+    color: var(--flinders-blue);
+}
+.navbar .dropdown-item:hover{
+    background-color: var(--flinders-yellow-50);
+}
+```
+Firstly we've set the background colour of `dropdown-menu` to be the more transparent Flinders yellow.
+
+Secondly, we have updated the text colour of the menu items to be Flinders blue.  This should make the text
+more readable than the default grey.
+
+Finally we've introduced a new style called `.dropdown-item:hover`.  Adding `:hover` to the name of any style
+means that style will be used when the mouse hovers over any element with that style.  Whenw we hover over
+a menu bar item we want that item to be 'highlighted' by, in this case, setting the background colour to
+a more opaque version of Flinders yellow.
+
+Your CSS file should now look like this:
+<details>
+<summary>
+Updated `styles.css`
+</summary>
+```css showLineNumbers
+:root {
+  --flinders-blue: rgb(34,45,75);
+  --flinders-yellow: rgb(252,212,6);
+  --flinders-yellow-30: rgba(252,212,6,0.3);
+  --flinders-yellow-50: rgba(252,212,6,0.5);
+
+}
+
+.navbar {
+  background-color: var(--flinders-blue) !important;
+}
+
+.navbar .nav-link {
+  color: var(--flinders-yellow);
+  font-weight: bolder;
+}
+
+.navbar .dropdown-menu{
+    background-color: var(--flinders-yellow-30);
+}
+.navbar .dropdown-item {
+    color: var(--flinders-blue);
+}
+.navbar .dropdown-item:hover{
+    background-color: var(--flinders-yellow-50);
+}
+```
+</details>
+
+The menu bar in your app should now be a lovely transparent Flinders yellow.
+
+<DisplayImage imageURL='/img/textbook/chapter_07/makingchanges4.png' />
+
+## Add styled text
+We've seen how styles in a CSS style sheet can modify existing elements in a web app.  CSS can do much more than
+this.  Almost every every website on the intenet uses CSS to control its style, look and feel.  CSS can do everything
+from changing colours and fonts to creating 3D shadows, animations and floating content.  Exploring CSS in detail
+is way beyond the scope of this textbook, but there are [lots](https://www.w3schools.com/css/css_intro.asp) of 
+[useful](https://developer.mozilla.org/en-US/docs/Web/CSS) [resources](https://www.w3.org/Style/CSS/learning)
+[online](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/CSS_basics) should you want
+to explore CSS further.
+
+With that said, our next task is to this (rather ugly) text box to our app.  (Unfortunately, your authors
+are neither artists nor web designers)
+
+<DisplayImage imageURL='/img/textbook/chapter_07/makingchanges5.png' />
+
+If you look at the screenshot [at the beginning of this chapter](00-10) you will also see we've changed 
+the text in the app.  Let's do this part as it's easy.  Let's replace the text in our app so it reads as follows:
+
+```yml showLineNumbers
+---
+metadata:
+  title: |
+    Look and Feel Demonstrator
+  short title: |
+    Style Demonstrator
+  show login: True
+---
+objects:
+  - MJFlogo: DAStaticFile.using(filename='flinders_logo.png')
+---
+mandatory: True
+code: |
+  set_parts(logo='<img src="' + MJFlogo.url_for() + '" style="height: 50px;">')
+---
+features:
+  css: styles.css
+---
+mandatory: True
+question: Look and Feel Demonstrator
+subquestion: |
+  This question block demonstrates how to perform basic customisations to the look and feel
+  of your app.  Most of the customisation is done using **Cascading Stylesheets**, or [CSS](https://www.w3schools.com/Css/).
+  CSS is the standard way of customising the look and feel of webapps.  Have a look at
+  the CSS file in the `static` forlder for this app to see more information about how we've used
+  CSS to customise this app.
+
+  You can also use [HTML](https://www.w3schools.com/html/) together CSS to improve the display
+  of your app.  In many cases HTML can be
+  mixed with markdown.  You can use CSS to control how your raw HTML looks.  For example, the `div`
+  block below is linked to a CSS style called `MJFbox`.  If you find `MJFbox` in the CSS
+  file you will see the commands that set the border, text colour and font style.
+buttons: 
+  - Exit: exit
+  - Restart: restart
+  - Continue: continue
+---
+```
+
+Now we're ready to add our styled text.  Doing so requires us to do two things.  First, we need to create
+the text, and second, we need to create the styles used to display the text.
+
+### Adding the text
+We will do this in two parts.  First, we will add the text we want.  Second, we will modify the text so that
+it can be displayed as we wish.  As we'll see, by modifying the text, and specifically by placing it inside a
+`<div>`, we will lose the ability to use Markdown.  But let's start out with just our regular markdown text
+for now and we'll modify it as we go.
+
+Add these two paragraphs to the end of the <DisplayGlossaryItem item='subquestionblock' />:
+```
+  This text appears in a `div` block and is formatted according to
+  the `MJFbox` style.
+  
+  **Note:** It's not always possible to use Markdown in `div`
+  blocks.  In this block we've formatted our text using HTML.  Check out the source code to see
+  which HTML tags we have used.
+```
+
+If you save and run the app you should see this:
+
+<DisplayImage imageURL='/img/textbook/chapter_07/makingchanges6.png' />
+
+Nothing special so far.
+
+### Enclosing the text in a `<div>`
+We need a way to tell our web app that this text is to be displayed using a particular style.  That is, we need
+to separate out this text.  To paraphrase [Dionne Warwick](https://www.youtube.com/watch?v=HyTpu6BmE88), that's 
+what `div`s are for.
+
+Encapsulating our text in a `<div>` indicates to our browser that our text is separate from the rest of the text
+in our app.  We will then be able to attach a style to the `<div>` using a `class` specifier.
+
+So, let's wrap our text in a `<div>`:
+```yml {1,8}
+  <div>
+  This text appears in a `div` block and is formatted according to
+  the `MJFbox` style.
+  
+  **Note:** It's not always possible to use Markdown in `div`
+  blocks.  In this block we've formatted our text using HTML.  Check out the source code to see
+  which HTML tags we have used.
+  </div>
+```
+
+If we do a <DisplayDAButtons button={Constants.da_save_and_run_prop} /> we'll see our text formatting for
+those last two paragraphs has gone away.
+
+<DisplayImage imageURL='/img/textbook/chapter_07/makingchanges7.png' />
+
+That's because we can't use Markdown formatting inside a `<div>`.  Instead we need to use HTML formatting.
+HTML is a text markup language, like Markdown.  HTML and CSS are the two technologies that drive the 
+display of web pages.  In fact, Docassemble converts our Markdown to HTML so that it can be displayed on 
+our app.
+
+Again, a full explanation of HTML is way beyond the scope of this textbook but there are 
+[many](https://www.w3schools.com/html/) [resources](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/HTML_basics)
+[online](https://www.codecademy.com/learn/learn-html) should you wish to explore HTML further.
+
+For our purposes we just need to know this:
+
+* paragraphs in HTML must be enclosed inside `<p>` and `</p>` tags;
+* fixed-width text (eg: `this`) must be enclosed in `<code>` and `</code>` tags;
+* text can be enclosed in `<span></span>` tags if we want to make further adjustments to styles
+
+This said, let's adjust our text to add two paragraph markers and correctly format the fixed-width text:
+```html
+  <div class="MJFbox">
+  <p>This text appears in a <code>div</code> block and is formatted according to
+  the <code>MJFbox</code> style.</p>
+  
+  <p><span class="MJFbolder">Note:</span> It's not always possible to use Markdown in <code>div</code>
+  blocks.  In this block we've formatted our text using HTML.  Check out the source code to see
+  which HTML tags we have used.</p>
+  </div>
+```
+Our two paragraphs look better now: 
+
+<DisplayImage imageURL='/img/textbook/chapter_07/makingchanges8.png' />
+
+Now it's time to style it up
+
+### Updating the styles
+Our text and its `<div>` has nothing to do Bootstrap.  That means we don't need to go searching for component
+names.  Instead we'll define our own style name.  Those of you who have read the text more closely will have
+worked out that we're going to call that style `MJFbox`.
+
+Let's create the style and then we'll discuss its properties.  Add this to `styles.css`
+
+```css title="MJFbox style" showLineNumbers
+.MJFbox {
+  border: 2px solid var(--flinders-blue);
+  border-radius: 10px;
+  box-shadow: 0px 2px 5px rgba(0,0,0,0.25); 
+  margin: 10px;
+  padding: 8px;
+  color: rgb(255,0,0);
+  font-size: 1.2em;
+}
+```
+
+Line 2 tells our `<div>` that it is going to be enclosed by a border.  That border will be two pixels wide,
+will be a solid line and the colour of the border will be Flinders blue.
+
+Line 3 makes the corners of our border rounded.  Our 'radius' is 10 pixels.  The more pixels, the more rounded
+the corners will be.
+
+Line 4 defines a shadow.  Our shadow will be a transparent black (like a real shadow) and will be offset two
+pixels down and five pixels to the right of the border.
+
+Line 5 puts a bit of padding *outside* our `<div>`.  You can see that our `<div>` appears offset to the right
+of the text and also that there's a gap between the bottom border and the buttons below it.  This gap is what is
+set by the `margin` property.
+
+Line 6 puts padding *inside* our `<div>`.  Without it our text would but up against the box border and look 
+ugly (defeating the purpose of this chapter).
+
+:::info
+Both [the `margin` property](https://www.w3schools.com/Css/css_margin.asp)
+ and [the `padding` property](https://www.w3schools.com/csS/css_padding.asp) have more fine-grained versions
+ of themselves.  For example, to adjust just the left
+padding for the text we could have used `padding-left` instead of padding.
+:::
+
+Line 7 sets the colour of our text to a rather bright, garish red.
+
+Finally, line 8 increases the font size by 20% over the regular font size used in the app.
+
+Now, let's add the `MJFbolder` style.  Add this to thet end of `styles.css`:
+```css showLineNumbers
+.MJFbox .MJFbolder {
+    font-weight: bolder;
+}
+```
+We limit the use of MJFbolder only to insie MJFbox.  It's good practice to limit the operation of your styles
+as much as possible so as to prevent unpredictable outcomes.
+
+This is a simple style with only one property which sets the font to bolder.
+
+:::info
+For more information on making fonts bold see [this page](https://www.w3schools.com/cssref/pr_font_weight.php).
+:::
+
+Once we have saved `styles.css` we can re-run our app.  Our text should now appear in our box, in red and
+in a larger font:
+
+<DisplayImage imageURL='/img/textbook/chapter_07/makingchanges9.png' />
+
+All we have left to do now is to update our <DisplayDAButtons button={Constants.da_continue_prop} /> button.
+
+## Change the Continue Button
+As per our original requriements we need to do two things: 1) Change the colour of the button to Flidners blue;
+and 2) Make the button light blue when we hover over it.
+
+### Define the colours.
+We have already defined our Flinders blue colour.  We need to define the hover colour.  Add this to the
+`:root` class:
+```css
+  --continue-button-hover: rgba(151,201,255,0.3);
+```
+
+### Identify the component
+Once again the use of Developer Tools is integral to the process.  Lauch the app and Developer Tools and use
+the element picker to hover over the <DisplayDAButtons button={Constants.da_continue_prop} /> button.  You
+will see that its component name is `btn-primary`.
+
+:::note
+This final time we leave the exercise of launching the app, launching Developer Tools and using the element
+picker to find the button's component name as an exercise for the reader.
+:::
+
+### Update the styles
+Now we know the component name we can create a style for it.  Add these two styles to `styles.css`:
+```css showLineNumbers
+.btn-primary{
+  color: white;
+  background-color: var(--flinders-blue);
+  border-color: black;
+}
+
+.btn-primary:hover{
+  color: black;
+  background-color: var(--continue-button-hover);
+  border-color: black;
+}
+```
+
+Line 2 of `btn-primary` sets the text of the button to be white and line 3 sets the background colour to our
+Flinders blue. Finally, line 4 puts a fine black border around the button.  As no border width is specified a
+width of 1 pixel is used.
+
+Line 2 of `btn-primary:hover` changes the text colour to black. This is necessary as the hover colour is a light
+colour and white text would not be readable.  Line 3 sents our background colour to black and we retain the fine
+black border in line 4.
+
+Save the file and re-run the app.  We now have all our styling components in place.
+
+<DisplayImage imageURL='/img/textbook/chapter_07/makingchangesa.png' />

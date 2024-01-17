@@ -1,0 +1,241 @@
+---
+title: Coding - Evaluate against criteria
+---
+import {DisplayImage} from '@site/src/components';
+import {DisplayChapter} from '@site/src/components';
+import {DisplayGlossaryItem} from '@site/src/components';
+import * as Flowcharts from './_flowcharts';
+import * as Tables from './_tables';
+
+This part of our app is the most logically complex part.  It's going to take us some
+time to wade through it.  So, grab a coffee, grab some food, grab your therapist
+and let's get going!
+
+## The parent loop
+As we said in our [Introduction](00-20) the plan is to store all our decision-making code
+in `process_data.yml`.  Also, in our [design](00-10#evaluate-against-service-criteria) we
+worked out pretty quickly that all our decision-making is going to be based around a 
+loop that iterates over `MJFservices`.  So, we may as well start with that:
+```yml title="process_data.yml" showLineNumbers
+---
+code: |
+  for a_service in MJFservices:
+    # Loop body
+    # Lots of work will get done here!
+---
+```
+
+## The evaluation criteria
+In our [design](00-10#loop-body) we also worked out that the loop body consisted of these components:
+1. determine if `MJFage` fits in the age criteria;
+1. determine if `MJFgender` fits in the gender criteria;
+1. determine if `MJFlocation` fits in the location criteria;
+1. determine if `MJFfamily` fits in the family criteria;
+1. use a logical 'and' to ensure all these criteria are met;
+1. add the service to a display list if the criteria are met.
+
+Let's build out our loop body a bit more:
+```yml title="process_data.yml" showLineNumbers
+---
+code: |
+  for a_service in MJFservices:
+
+    # Set MJFage_ok
+
+    # Set MJFgender_ok
+
+    # Set MJFlocation_ok
+
+    # Set MJFfamily_ok
+
+    # Test criteria and add to relevant services list
+---
+```
+### `MJFage_ok`
+We have [an idea](00-10#the-age-question) of how to code `MJFage_ok`.  We need to replace
+the numbers in our design with the actual `min_age` and `max_age` from the service in 
+`a_service`.  Our `MJFage_ok` test should look like this:
+```python
+MJFage_ok = a_service['min_age'] <= MJFage <= a_service['max_age']
+```
+
+### `MJFgender_ok` and `MJFfamily_ok`
+In our design we worked out that both the [gender](00-10#the-gender-question)
+and [family](00-10#the-family-question)  evalutaions were list membership tests.  The code
+for both is in our design and is:
+```python
+MJFgender_ok = MJFgender in a_service['gender']
+```
+and
+```python
+MJFfamily_ok = MJFfamily in a_service['family']
+```
+
+### `MJFlocation_ok`
+We concluded that [testing for locations](00-10#the-location-question) was a little more complex
+than the other questions, this being because a user can select more than one location.  It follows
+then that we must test each location the user selected against the location list in `a_service`
+and, if any location matches, then set `MJFlocation_ok` to true.
+
+We can use iteration to solve the multiple location issue.  However, we also have a second issue.
+How do we manage a situation where one location matches but the second does not?  How can we
+ensure that `MJFlocation_ok` remains `True` in this context?
+
+We manage this `MJFlocation_ok` issue by setting it to `False` *before* we start the loop. As
+we iterate over the locations, we change `MJFlocation_ok` to `True` if we find a  match
+but if a location doesn't match we do nothing. What we're doing is starting out with
+the assumption that we won't get any matches (ie: `MJFlocation_ok == False`) and,
+if we find at least one match we set `MJFlocation_ok` to `True`.  It only 
+takes one match to permanently set `MJFlocation_ok` to `True`.
+
+Let's see this in code:
+```python showLineNumbers
+MJFlocation_ok = False
+for a_location in MJFlocation.true_values():
+    if a_location in a_service['location']:
+        MJFlocation_ok = True
+```
+Line 1 sets `MJFlocation_ok` to `False` as we just discussed.  Line 2 is the loop that iterates over
+the user's selected locations.  Lines 3 and 4 are tbe body of this loop, that body being an if statement
+which sets `MJFlocation_ok` to `True` if a match is found but does nothing otherwise.
+
+### Adding code to the relevant services list
+In our design we discussed how to [test the four criteria together](00-10#the-decision) and we even have
+code ready to go.  What we don't have though is the code that does the adding to the relevant services
+list.  For that matter, we don't have code that defines a relevant services list at all!  Maybe we need 
+to start there.
+
+In order to add code to a relevant services list we need to define a list to begin with.  Let's call
+it `MJFrelevant_services`.  We're going to define our list as a [`DAList`](https://docassemble.org/docs/objects.html#DAList)
+so we can make use of some of the extra features a `DAList` provides, in particular,
+[groups](https://docassemble.org/docs/groups.html) and [gathering](https://docassemble.org/docs/groups.html#details).
+
+We use an [`objects`](https://docassemble.org/docs/initial.html#objects) block to declare our list.
+```yml
+---
+objects:
+  - MJFrelevant_services: DAList.using(auto_gather=False)
+---
+```
+We'll put this `objects` block at the top of our `process_data.yml`.  It's good practice to put blocks
+that declare stuff (like object blocks) before blocks that do stuff (like code blocks and question blocks).
+
+Now that we have a list we need to firstly initialise it:
+```python
+MJFrelevant_services.clear()
+```
+This code will have to go as the first line of our [code block](#the-parent-loop), before the parent loop.
+
+The adding part will be done by the `append()` method.
+
+:::info
+The Docassemble [manual entry for `DAList`](https://docassemble.org/docs/initial.html#DAList) discusses
+the `clear()` and `append()` methods in a bit more detail.
+:::
+
+Now we have enough to write the code for all our evaluation criteria.  Let's see what our `process_data.yml`
+should look like.
+
+## Brining it all together
+```yml title="process_data.yml" showLineNumbers
+---
+objects:
+  - MJFrelevant_services: DAList.using(auto_gather=False)
+---
+code: |
+  MJFrelevant_services.clear()
+  for a_service in MJFservices:
+
+    # Set MJFage_ok
+    MJFage_ok = a_service['min_age'] <= MJFage <= a_service['max_age']
+
+    # Set MJFgender_ok
+    MJFgender_ok = MJFgender in a_service['gender']
+
+    # Set MJFlocation_ok
+    MJFlocation_ok = False
+    for a_location in MJFlocation.true_values():
+      if a_location in a_service['location']:
+        MJFlocation_ok = True
+
+    # Set MJFfamily_ok
+    MJFfamily_ok = MJFfamily in a_service['family']
+
+    # Test criteria and add to relevant services list
+    if MJFage_ok and MJFgender_ok and MJFlocation_ok and MJFfamily_ok:
+      MJFrelevant_services.append(a_service)
+
+  # How we tell Docassemble we've finished gathering relevant services
+  # into MJFrelevant_services
+  MJFrelevant_services.gathered = True
+---
+```
+
+Before we move to testing let's discuss line 30 briefly.  As we already know, when
+Docassemble encounters a variable to display in question block it looks for the block
+to set a value for that variable.  A similar thing happens with `DAList`s but it is in
+two phases.  When Docassemble encounters a `DAList` that needs to be displayed it does
+two things:
+1. it looks to define that list; and then
+1. it tries to 'gather' the list.
+
+The first step is addressed by our `objects` block.  It tells Docassemble that our
+`MJFrelevant_services` list is a DAList.  Docassemble tries to satisfy the 'gathering'
+part by looking for a `.gathered` property of our list.  We have set `.gathered` to
+`True` as the last line of our code block.  That means that Docassemble will execute
+our entire code block, thus populating `MJFrelevant_services`, and then set 
+`MJFrelevant_services.gathered` to true, telling Docassemble that `MJFrelevant_services`
+has been gathered.
+
+## Testing
+We can use a table block to test `MJFrelevant_services` just like we tested `MJFservices`
+[previously](00-40#testing).  Let's add this table block to `tests.yml`:
+```
+---
+table: relevant_services_test_table
+rows: MJFrelevant_services
+columns:
+  - Name: row_item['name']
+  - Website: row_item['website']
+  - Age Range: |
+      "{} to {}".format(row_item['min_age'], row_item['max_age'])
+  - Gender: row_item['gender']
+  - Locations: row_item['location']
+  - Family: row_item['family']
+---
+```
+And add this line to the end of `final_screen` in `main.yml`:
+```yml
+${ relevant_services_test_table}
+```
+:::tip
+Remember to leave a blank line between `${services_test_table}` and `${relevant_services_test_table}`.
+:::
+
+:::tip
+Don't forget to add `process_data.yml` to the `include` block in `main.yml`!
+:::
+
+Run the program.  We should see, first, the answers to our questions, then the table of 
+`MJFservices` and finally a second table showing only the relevant services filtered
+according to the answers to our questions:
+
+<DisplayImage imageURL="/img/textbook/chapter_06/filter/coding5.png" />
+
+Our decision-making logic is now complete. It looks ugly but it's complete.
+We now need to prepare the PDF and style our app to make it look a bit more pleasing to the eye.
+
+:::note
+#### On the Importance of Design
+Before we move on, the authors would like to draw your attention to the relative brevity of this
+part of the case study.  There was some reasonably somphisticated coding invovled yet it was 
+dealt with relatively briefly without sacrificing clarity (in our opinion!).  The reason for this
+was because of the effort we put into the design *before* we started any coding.  Most of the
+brains work was done at the design stage and not during coding.  This is evidenced by the constant
+references back to the design throughout this part of the chater.
+
+Pelase keep this in mind.  It is often tempting  to skip past code design, much like it is
+tempting to skip past essay planning, and just 'smash it out'.  However, coding does not lend
+itself to smashing things out at all.  The time and effort you spend in designing your app will
+be more than paid back to you at coding time.
+:::

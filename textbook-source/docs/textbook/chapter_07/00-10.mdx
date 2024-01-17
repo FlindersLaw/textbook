@@ -1,0 +1,98 @@
+---
+title: Walk through an example app
+---
+import {DisplayImage} from '@site/src/components';
+import {DisplayChapter} from '@site/src/components';
+import {DisplayGlossaryItem} from '@site/src/components';
+import ListOfChanges from './_list_of_changes.mdx';
+
+Let's start start with an app that looks like this:
+
+<DisplayImage imageURL='/img/textbook/chapter_07/lnfdemo1.png' size="70%" />
+
+and let's turn it into this:
+
+<DisplayImage imageURL='/img/textbook/chapter_07/lnfdemo2.png' size="70%" />
+
+Specifically, what we want to do is the following:
+
+<ListOfChanges />
+
+## Finding the components
+
+Before we get into modifying styles we need to identify the styles to modify.  One way to do so
+would be to identify the various styles as per the [Bootstrap documentation](https://getbootstrap.com/docs).
+This documentation is a little heavy for our purposes though as it's directed at professional developers.
+Nonetheless you are welcome to make your way through it if you wish.
+
+In our experience we find it more useful to inspect a website directly using the 'Developer Tools'k
+that are in most web browsers. Developer Tools allow you to 'inspect' a web page and view its components.
+Most developer tools allow you click on a place in the web page and will then bring up the underlying code
+for that web page in a special pane.  The underlying code usually looks something like this: 
+
+<DisplayImage imageURL='/img/textbook/chapter_07/developertools1.png'
+    caption="Developer Tools Pane with code for navbar highlighted" />
+
+You will notice a large number of `<div>` tags, starting with the `dabody` `<div>` on the second line.  
+`<div>` tags, or 'Divs' are the way a web page it laid out in its logical components.  With Docassemble
+all the content of the webpage is located inside the `dabody` div, with child divs laying out the rest of
+the content.
+
+On the fourth line you can see the div for `navbar`.  This is the code for the Bootstrap Navbar.  We 
+recognise this as the `navbar` div as `navbar` is the first word to appear in the `class=...` part of the
+`<div>` tag.  The `class` specifier lists out all the CSS styles to be applied to a particular div.  The 
+styles are ordered from most generic to most specific.  The most generic style usually the name of the
+Bootstrap component, as it is here. 
+
+The fifth line contains a div with `class=container danavcontainer...`  The first style is the most generic
+Bootstrap component.  The second style starts with `da` and that tells us that this style is a style used
+explicitly by Docassemble to modify the Bootstrap theme.  This is important to us as, when customising styles,
+we should always aim to customise a `da` style instead of a parent Bootstrap style.
+
+## Accessing Developer Tools
+Each web browser has its own Developer Tools.  In Chrome the Developer Tools are accessible from the 'three dots'
+menu -> More Tools -> Developer Tools.  Developer tools are also available in the same place on Microsoft Edge. 
+In Firefox the Developer Tools are accessed via the 'Hamburger' menu -> More Tools -> Developer Tools.
+
+<details>
+<summary>
+Where to find Developer Tools in your browser
+</summary>
+<DisplayImage imageURL='/img/textbook/chapter_07/developertools_firefox.png'
+    caption="Firefox Developer Tools" />
+<DisplayImage imageURL='/img/textbook/chapter_07/developertools_chrome.png'
+    caption="Chrome Developer Tools" />
+<DisplayImage imageURL='/img/textbook/chapter_07/developertools_edge.png'
+    caption="Edge Developer Tools" />
+</details>
+
+Developer Tools usually launch on the right side of your browser.  If they don't, look for a menu with a 'Dock to Right' option,
+such as this in Firefox:
+
+<DisplayImage imageURL='/img/textbook/chapter_07/developertools2.png' />
+
+:::note
+You will find that most browser screenshots for this textbook come from the Firefox browser.
+The authors of this textbook prefer Firefox for practical reasons, such as its speed, low memory footprint
+and the ability to view variable output from Docassemble in an easy to read way (see <DisplayChapter chapter='chapter_09' />).
+We also prefer it because, unlike Chrome, Edge and Safari, Firefox has very strong privacy protections and
+does not collect user data as browsers such as Chrome, Safari and Edge do.
+
+Nonetheless, what we demonstrate in this texbook, and run on Docassemble, will run equally as well in
+any modern browser.  The authors have run Docassemble on Firefox, Edge and Chrome.  We are also aware that 
+Docassemble, and this textbook, work fine on Safari.
+:::
+
+## Creating custom styles
+In order to modify the look of our app we will be creating custom CSS styles.  These styles need to be saved 
+somewhere.  That 'somewhere' is the 'Static Files' folder in your Playground:
+
+<DisplayImage imageURL='/img/textbook/chapter_07/staticfilesmenu.png' />
+
+We can add a new CSS file by clicking on 'Add', choosing a name that ends in `.css`:
+
+<DisplayImage imageURL='/img/textbook/chapter_07/addcssfile.png' />
+
+The name of the file doesn't matter. We will tell our Docassemble program the name of the file we're using later.
+
+Once we have a file saved we are ready to go.

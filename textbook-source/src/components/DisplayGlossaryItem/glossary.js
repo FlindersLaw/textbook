@@ -30,6 +30,9 @@ export const glossary = new Map([
         text: 'code block',
         plural: `code blocks` }
     ],
+    ['css', {
+        text: 'CSS',
+    }],
     ['comment', {
         text: 'comment',
         plural: 'comments' }

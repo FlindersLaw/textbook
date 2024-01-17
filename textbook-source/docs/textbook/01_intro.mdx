@@ -3,30 +3,20 @@ title: Introduction
 ---
 import * as Components from '@site/src/components';
 // Shortcuts as we use these components and constants frequently
-import {DisplayChapter, DisplayConstants} from '@site/src/components';
+import {DisplayChapter, DisplayConstants, DisplayGlossaryItem, DisplayImage} from '@site/src/components';
+import {Quizlet, Answer, Explanation} from '@site/src/components';
 import {dahref, daorghref, github, damanual, teachingcodeurl} from '@site/src/components';
 
-## What are we doing?
-
-Now it is my turn to introduce you to the topic!
-As you first enrol in this topic and look at the assessments, you are probably asking yourself why we teach you how to code. You might be left thinking that this topic is about teaching you how to become software developers. However, what this topic is really about is getting you to think about **access to justice** differently. 
-
-What do we mean by access to justice? In the Australian legal system, everyone has the right to access justice. In other topics in your law degree, you will learn about how to construct an argument for your client before a court. However, just because everyone has the right to access justice does not mean that this right is easy to exercise in practice. In 2018, the Law Council of Australia conducted a [review](https://www.lawcouncil.asn.au/justice-project/final-report) of the social and economic barriers limiting access to justice. The Law Council's report notes that disadvantage can be a trigger for legal problems, with people experiencing multiple layers of disavantage more likely to experience complex legal problems. In addition, financial disadvantage and poverty can be a significant barrier to accessing a lawyer. In Australia, legal aid grants are available to people who cannot otherwise afford lawyers. However, only eight perecent of the Australian population can access legal aid, despite the fact that forteen percent of Australians live below the poverty line. Likewise, government funded community legal centres play a key role in helping provide free legal advice to the community. Unfortunately because these community legal centres have limited resources, it is estimated that at least [170,000 Australians](http://classic.austlii.edu.au/au/journals/PrecedentAULA/2019/53.html#fn2) are turned away from free legal services every year. 
-
-To help overcome these barriers, the Law Council's report [recommended](https://lawcouncil.au/files/web-pdf/Justice%20Project/Final%20Report/03%20-%202018%2009%20-%20Recommendations%20and%20Group%20Priorities.pdf) exploring the potential benefits that technology can bring. It is important to recognise that technology is not going to immediately solve the access to justice gap in Australia. The Law Council's report warns that certain disadvantaged groups who are digitally excluded and could be left behind without due care. However, the Law Council's report also highlights how online self-help tools can provide individuals with sufficient capacity to resolve their own issues. Many of the applications that our students have developed for this course can make a difference right away in helping people solve their legal problems. Legal technology can also help refer people to the most appropriate service to help solve their problems, as well as help people fill out forms. All of these applications can make a real difference to help people access justice, 24/7. Also, by completing this topic you get an insight into real socio-legal issues that few other law topics give you.
-
-## Why do we teach you coding?
-
-We do not expect you to leave this topic as a software engineer (unless you want to retrain as a software engineer). However, if you understand the basic coding concepts you learn during this topic you'll be able to apply them to almost any technology. My introduction to legal informatics involved learning to code precedents, or automated documents, using a practice management platform at a law firm. For example, you might use a precedent to automatically generate a contract for the sale of a client's business. 
-
-Unfortunately, very few lawyers or paralegals have the time to learn how to code and then actually code these precedents. However, the code that we teach you in this topic is very similar to the code that you might use for a precedent. Therefore, by completing this topic you will have an immediate advantage relative to your peers. In addition, we teach you how to use word processing software and productivity suites, such as Microsoft Office 365. Although you might be very familiar with these tools from your other topics, they have some powerful features which can help you when preparing legal documents.
-
 ## What will we learn?
+This textbook takes you through the skills you need to write a basic legal software application.
+You will be writing on a platform called [Docassemble](https://docassemble.org).
+Docassemble is an open-source platform that was written by a US public defender called
+[Jonathan Pyle](https://www.linkedin.com/in/jonathan-pyle-6800a75/)
+to assist not-for-profit organisations with legal technology issues.  Docassemble allows us to write simple apps quickly.  It allows us to build apps pretty easily as it provides quick ways for us to construct:
+* screens where we can ask users for information, or display information to them
+* logic to help us make decisions
+* document templates which we can customise for each user
 
-In this topic, you will learn how to write a basic legal software application. We'll be using a platform called [Docassemble](https://docassemble.org). Docassemble is an open-source platform that was written by a US public defender called [Jonathan Pyle](https://www.linkedin.com/in/jonathan-pyle-6800a75?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3B7%2FdkCCVJQIaHtoVPV7v9og%3D%3D) to assist not-for-profits with legal tech issues.  Docassemble allows us to write simple apps quickly.  It allows us to build apps pretty easily as it provides quick ways for us to construct:
-  * screens where we can ask users for information, or display information to them
-  * logic to help us make decisions
-  * document templates which we can customise for each user
 It also provides other nice things, like allowing us to send emails and to make our apps look beautiful.
 
 Docassemble is suitable for this course for two reasons:
@@ -35,18 +25,150 @@ Docassemble is suitable for this course for two reasons:
 
 ## What will you learn in this book?
 * First of all, in <DisplayChapter chapter="chapter_01" number /> we'll work through connecting you to our <DisplayConstants data={dahref} /> and
-setting you up with <DisplayConstants data={github} /> which is what we'll to share our code.
-* In <DisplayChapter chapter="chapter_02" number /> you'll be introduced to Docassemble and learn how to write some basic apps.
-* In <DisplayChapter chapter="chapter_03" number  /> we'll start getting into how you write the logic you need to control your app.  For example we'll learn how to make decisions using 'if this then that' - or what's called 'branching' or 'if statements', and you'll also learn about processing lists of data - which is called 'iteration'.
-* In <DisplayChapter chapter="chapter_04" number /> we'll learn about <DisplayConstants data={github} />. We'll use GitHub to collaborate on our projects in small groups.  GitHub allows a group to work on code at the same time.
-* In <DisplayChapter chapter="chapter_05" number /> we'll look at how you can make your app look beautiful.  We'll cover things like adding your client's logo, using your client's colours and making your app look and feel nicer
-* In <DisplayChapter chapter="chapter_06" number /> we'll cover more advanced coding concepts, such as complex data structures, grouping and sending emails.
+setting you up with <DisplayConstants data={github} /> which is what you will use to backup and share your code.
+* In <DisplayChapter chapter="chapter_02" number /> you'll be introduced to Docassemble, learn how to write some basic apps, and be exposed to some of the fundamental concepts.
+* In <DisplayChapter chapter="chapter_03" number  /> we learn about how to store data (in variales) and
+about different types of data, such as text (or <DisplayGlossaryItem item='string' plural />), numbers
+and <DisplayGlossaryItem item='boolean' plural />.
+* In <DisplayChapter chapter='chapter_04' number /> we'll start getting into how you write the logic you need to control your app.  For example we'll learn how to make decisions using 'if this then that' - or what's called 'branching' or <DisplayGlossaryItem item='ifstatement' plural />, 
+* In <DisplayChapter chapter='chapter_05' number /> we revisit data storage.  We learn how to store more complex 
+data structures, such as lists and tables, and we're introduced to the concept of <DisplayGlossaryItem item='iteration' />
+* <DisplayChapter chapter='chapter_06' number /> contains a number of case studies which explain advanced
+coding concepts. These case studies are based on code written by students and are a great reference for
+more advanced coding.
+* In <DisplayChapter chapter="chapter_07" number /> we look at how you can make your app look beautiful.  We'll cover things like adding your client's logo, using your client's colours and making your app look and feel nicer
+* <DisplayChapter chapter="chapter_08" number /> covers creating document templates
+* In <DisplayChapter chapter="chapter_09" number /> we discuss debugging your app, what error messages you're
+* In <DisplayChapter chapter="chapter_10" number /> we discuss some of the principles to keep in mind when 
+designing legal applications
+* In <DisplayChapter chapter="chapter_11" number /> we discuss how you can collaborate with others
+using <DisplayConstants data={github} />
 
-## Learning to Code
-Before you work your way through this textbook, there are a few things to bear in mind. 
+## Conventions
+### Literal text
+In this textbook we will display some text in 
+`fixed pitch font with this background`.  This kind of text is text that is 
+either meant to be entered into your computer by you or is an extract of code
+or data.
 
-Learning how to code has a steep learning curve. Therefore, we spend the first six weeks working with you intensively on how to code. We do this via a series of hybrid coding workshops. We will work through an exercise with you step by step, where we will code a bit and then you will follow what we have done. Then you will need to extend out the code you have written for your individual assessment.
+### Code snippets
+We use code snippets extensively throughout this textbook to display code to you.  They usually
+look like this:
+```python
+var1 = 'This is a short code snippet'
+var2 = 'with only two lines of python code'
+```
 
-This dovetails into the next point, which is that we strongly recommend that you work your way through all of the coding exercises. We do not recommend that you just limit yourself to your individual assessments. There are a few reasons for that. First, you will get better at coding the more you code! Second, these exercises will directly help you learn how to complete the individual assessment. Second, most of your assessment for this topic depends on the application you write for your client. However, there is nothing to stop you reusing code from this textbook in your application. 
+Larger snippests may include a file name and/or line numbers:
+```yml title='Example code snippet' showLineNumbers
+---
+# Our first program!
+mandatory: True
+question: Hello World!
+subquestion: |
+  Hello,
 
-Finally, we prefer to teach you how to code using a code-based platform rather than a no-code platform. Although no-code platforms are easier to work with, you do not learn as much about how the application works. Therefore, learning some basic coding helps build your understanding of technology!
+  Welcome to Docassemble!
+---
+```
+These snippets are used to display code to you that we will usually discuss in some detail in the textbook.
+
+Code snippets with file names are line numbers are usually designed to be copied as a file into your Playground.
+
+Usefully, the code snippets have a copy button built in.  Hover over the snippet with your mouse and you will
+see a <DisplayImage imageURL='/img/textbook/copy_button.png' inline /> button.  Click on this to copy the code 
+in the snippet.
+
+#### Syntax highlighting
+Many code snippets use different colours to higlight syntax.  When you copy these snippets into your
+<DisplayGlossaryItem item='playground' upper /> you might find the colours change.  This is not an issue.
+Docasemble and this textbook use slightly different colouring schemes, and the colours themselves are not
+part of the coding lanuage.
+
+The colours are (meant to be) there to help you get syntax correct and nothing more.
+
+### Coding exercises
+There is a [Coding Exercises](/coding_exercises) tab at the top of this textbook.  This tab contains,
+unsurprisingly, a set of coding exercises.  These exercises are designed to build you coding skills and
+form a good way of tackling this textbook generally.  Start with the first exercise, read the recommended
+parts of the textbook then do the exercise.  Then move on to the next exercise and so-on.
+
+Coding exercises are separated into groups, called 'Ex1', 'Ex2' and so-on.  The exercises in each group start
+out at a basic level and each subsequent exercise builds on the previou one, teaching you ever more 
+advanced skills.
+
+We cannot emphasise how useful it is to use the Coding exercises to work your way through this textbook.
+Start with the first exercise, read the recommended
+parts of the textbook then do the exercise.  Then move on to the next exercise and so-on.
+
+:::note
+Depending on the topic(s) in which this textbook is used, some coding exercises may form part of 
+students' assessments.
+:::
+
+### Quizlets
+Interspersed throughout this textbook are short quizzes designed as a quick touchpoint for readers.  These
+are called 'Quizlets'.  Quizlets present a question with multiple choice answers. When you click on an
+answer some text will be displayed at the bottom of the Quizlet.  Try the example quizlet below.
+
+<Quizlet>
+  <DisplayConstants data={dahref} text="Docassemble" /> is an open-source system
+  written by a US public defender called Jonathan Pyle to assist not-for-profit
+  organisations with legal technology issues.
+  <Answer isCorrect>
+  True
+  </Answer>
+  <Answer>
+  False
+  </Answer>
+</Quizlet>
+  
+## Learning resources
+There are a number of learning resources available to you in addition to this textbook.
+We will refer to some throughout the textbook but you should be aware of the usefulness
+of others also.
+
+### Docassemble manual
+This is the official [manual](https://docassemble.org/docs) for Docassemble and is a must-have
+reource.  The manual is written for readers with limited coding skills.  At the same time
+it is a comprehensive explanation of Docassemble's capabilities.  It covers a lot more
+than what is covered in this textbook and it explains in more detail what is covered
+in this textbook.
+
+As much as possible this textbook tries not to duplicate what is in the Docassemble manual.
+That is, if we are discussing a concept that is documented in the manual we will just refer
+you directly to the manual instead of repeating the explanation here.
+
+### Docassemble Slack
+[Slack](https://slack.com) is a collaboration tool, much like Microsoft Teams or Discord.  The
+Docassemble community has established its own Slack community at
+https://docassemble.slack.com.
+
+Students are strongly encouraged to join this Slack community.  There is a special
+`#student-questions` channel which, unfortunately, is woefully under-utilised.  The community is
+small but very responsive and very helpful.
+
+Students are encouraged to register with their Flinders email addresses so they are more easily
+identified as students on the community.
+
+:::note
+You need to be invited to join the Slack community.  An invite link will be published in Canvas as one 
+of your topic resources.
+:::
+
+### Generative AI
+At the time of writing (early 2024) the authors found that AI tools, such as [ChatGPT](https://chat.openai.com)
+and [Google Bard](https://bard.google.com) are not particuarly good at generating Docassemble code.  In fact
+they are pretty atrocious!  The is probably due to the small amount of Docassemble code publicly available
+to be scraped off the internet.
+
+AI systems, however, are very useful for generating <DisplayGlossaryItem item='css' /> and
+<DisplayGlossaryItem item='python' upper /> code.
+
+:::caution
+AI systems should only be used if your topic allows it and such usage should always be clearly 
+documented.
+
+Students using AI systems are encouraged to keep a log of prompts and output supplied to and
+received from AI systems.
+:::

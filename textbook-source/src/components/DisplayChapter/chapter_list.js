@@ -37,6 +37,26 @@ export const chapter_list = {
             number: '6',
             word : "six",
         },
+        'chapter_07' : {
+            number: '7',
+            word : "seven",
+        },
+        'chapter_08' : {
+            number: '8',
+            word : "eight",
+        },
+        'chapter_09' : {
+            number: '9',
+            word : "nine",
+        },
+        'chapter_10' : {
+            number: '10',
+            word : "ten",
+        },
+        'chapter_11' : {
+            number: '11',
+            word : "eleven",
+        },
     }
 
 export default chapter_list;
