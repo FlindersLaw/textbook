@@ -38,6 +38,16 @@ you can make a difference in your form.
 
 Doing so makes you more valuable as a graduate.  It sets you apart from other graduates in the market and makes you more employable.
 
+## James's Story
+I have a different story to Mark, but I came to a similar understanding of the benefits of technology in legal practice. I studied law after completing college in Tasmania, but I also worked part time at two law firms. 
+
+These firms used a platform for storing their matters. The platform also allowed users to create scripts that could be attached to a template document. A lawyer or a paralegal could then run this script and automatically fill in the client's details. You can see how this might save the firm a significant amount of time.
+
+However, both lawyers and paralegals were very busy at the firm, and therefore did not have the time to learn how to write the scripts. That is where I came in! To create these precedents, I would sit down with the paralegals and lawyers at the firm and then ask how they would normally fill out each document. I would then translate this into a script to attach to each precedent.
+
+Although I eventually became an academic, the experience taught me how valuable even a rudimentary knowledge of coding and automation can be in a firm. 
+
+
 ## Exposure to Technology
 *Or, 'Why do I have to learn how to code? I'm not going to be a programmer!'*
 
