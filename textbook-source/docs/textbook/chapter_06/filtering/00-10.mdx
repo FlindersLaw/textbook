@@ -1,0 +1,276 @@
+---
+title: Design
+---
+import {DisplayImage} from '@site/src/components';
+import {DisplayChapter} from '@site/src/components';
+import {DisplayGlossaryItem} from '@site/src/components';
+import * as Flowcharts from './_flowcharts';
+import * as Tables from './_tables';
+
+## ABC's Requirements 
+
+To summarise the key points, ABC require:
+
+* an application that displays a list of emergency accommodation providers tailored
+to the circumstances of the user;
+* ABC's existing emergency accommodation database has emergency accommodation
+providers organised agaisnt these categories:
+  * the minimum and maximum ages of clients each service will accept;
+  * the genders each service will accept;
+  * whether the servics accommodates families or individuals only; and
+  * in which part of Adelaide the service is located. ABC's location data is
+  broken down into north, south, east and west.
+* a user should be able to select multiple locations if they wish; and
+* ABC want to maintain the data themselves.
+
+## Example Data
+ABC have given us a spreadsheet containing a list of service providers, their 
+details and the above criteria.
+
+<Tables.ServiceTable />
+
+## Designing the App
+Let's walk through designing the app.  We do this by starting out with our high level
+requirements.  We drill down into each requirement, breaking it down into more and
+more detail until we get to a point where we have enough detail to write code.
+
+We'll work through a series of flowcharts to illustrate this.
+
+At the highest level we have this:
+<Flowcharts.F01 />
+
+We can draw some assumptions from this highest level:
+
+* **list** implies iteration;
+* **tailored to** implies a decision tree or some decision-making process; and
+* **circumstances of** implies asking the user questions which likely to feed the
+decision-making process.
+
+We can also get an idea of how the app will run ie:
+1. ask the user about their circumstances;
+1. evaluate the user's circumstances against the list of services and make a
+decision on which services are relevant and should be displayed
+1. Display the list of relevant services to the user
+
+<Flowcharts.F02 />
+
+Let's deal with each of these in turn
+
+## Ask the user about their circumstances
+We need to ask users questions so we can provide them with a relevant list
+of services.  The questions we need to ask must relate to the criteria 
+against which the services are organised ie: age, gender, location and family,
+as ultimately we will filter out irrelevant based on these criteria.
+
+<Flowcharts.F03 />
+
+We probably know enough now to make some notes as to how we are going to code
+these questions.  For example we can choose variable names and data types.
+
+<Flowcharts.F03a />
+
+We've managed to get to a level of detail sufficient for us to write code to
+implement this user circumstances part of our app.  We can leave things here
+for now and drill down into the other parts.
+
+## Evaluate circumstances against list of services
+We can break this part down into two sub-parts:
+
+<Flowcharts.F04 />
+
+Let's deal with each of these in turn
+
+### Define a list of Services
+If you refer back to <DisplayChapter chapter='chapter_05' /> you will see some
+similarity between ABC's data and
+the [multidimensional data structures](/docs/textbook/chapter_05/00-50#multidimensional-data) we discussed in
+that chapter.  It follows, therefore, that we should use a <DisplayGlossaryItem item='datablock' />
+to store our customer data.
+
+In addition we will store our data block in a separate file.  This will make it (slightly) easier
+for ABC staff to find and modify their list of services.
+
+The columns in our [data table](#example-data) will map to keys in our data structure. Some keys will be
+used to store simple data structures, such as strings and integers, and others will store complex data
+structures.  Here are some thoughts on how we can map ABC's data table into a data block:
+
+<Tables.MappingTable />
+
+Let's call our data block `MJFservices`.  The first entry in our data block would look something like this:
+```yml
+variable name: MJFservices
+use objects: True
+data:
+  - name: ABC Services
+    website: https://abcsvc.org.au
+    min_age: 18
+    max_age: 65
+    gender:
+      - Male
+      - Female
+    location:
+      - North
+      - East
+    family:
+      - Family
+      - Single
+```
+
+Like our [user circumstances](#evaluate-circumstances-against-list-of-services) we are now at a level of
+detail where we can start writing code.  So, let's leave the data structure for now and let's look
+at how our data will be processed.
+
+### Evaluate against service criteria
+This aspect forms the heart of our app. This is where we make the decisions about what our user
+should be presented with.  It's where we determine which services are relevant and which are not.
+
+Let's map out what this would look like:
+
+<Flowcharts.F05 />
+
+Once again it looks like we can break this out into two parts: a loop and a loop body
+(ie: the logic to be performed inside the loop)
+
+<Flowcharts.F05a />
+
+We have already encountered ['for loop' syntax](/docs/textbook/chapter_05/00-30#for-loop-syntax) and we can see that
+we can express the loop part of our flow diagram as a `for loop'.
+
+<Flowcharts.F05b />
+
+That syntax states we will place each service into the `a_service` special variable as we iterate over the
+`MJFservices` list.
+
+That's our for loop ready to code!  Now let's look at the loop body
+
+#### Loop Body
+Let's isolate the loop body:
+
+<Flowcharts.F06 />
+
+The first part we need to deal with is the question 'Does the service meet the user's circumstances?'.
+Let's break that down further.  What are these 'circumstances'?  As discussed previously, these are:
+* the user's age;
+* the user's gender;
+* the desired locations of the services; and
+* whether the user is looking for family or single accommodation.
+
+It follows then that our 'circumstances' question is actually four questions.  Let's
+revisit our loop body.  Because this is the loop body, each service we deal with will 
+be placed in `a_service` as we iterate over `MJFservices`.
+
+Also, as you recall from [above](#ask-the-user-about-their-circumstances), the user's information
+is stored in `MJFage`, `MJFgender`, `MJFlocation` and `MJFfamily`.
+
+<Flowcharts.F06a />
+
+We are asking a set of 'yes/no' questions.  As soon as you see 'yes/no' you should be thinking
+<DisplayGlossaryItem item='boolean' plurals />.  'Yes' is `True` and 'No' is `False` in our context.
+
+We need to ask each of the four questions first and then check their answers to determine if 
+this particular service meets our criteria.  Let's do that as follows:
+
+<Flowcharts.F06b />
+
+Now we need to work out how to ask each question.
+
+#### The age question
+This one is pretty simple.  We need to check is `MJFage` falls between `min_age` and `max_age`.
+We should include each of `min_age` and `max_age` in our limits.  For example, a user should
+qualify for ABC Services if they are 18, not 19.
+
+We also need to deal with the 'or over' that appears in our data table.  We'll choose the least
+sophisticated way to do this and where an agency has an 'or over' in its age limit we'll set
+`max_age` to 999.  Even biblical figures never lived that long!
+
+We're then left with a rather simple [mathematical test](/docs/textbook/chapter_03/00-30#mathematical-tests) to apply.
+We want to apply one of the 'In between' tests we covered in <DisplayChapter chapter='chapter_03' /> ie:
+```python
+MJFage_ok = 18 <= MJFage <= 65
+```
+This statement evaluates whether MJFage is between 18 and 65 inclusive and stores the result (`True` or `False`)
+in `MJFage_ok`.
+
+#### The gender question
+This question is only slightly more complicated.  The user is asked to choose one gender and
+their response is stored in `MJFgender`.  Each service in `MJFservices` stores applicable genders as
+a list in each record's `gender` key.  Consequently, we need to test for [list membership](/docs/textbook/chapter_05/00-20#list-membership)
+as we discussed in <DisplayChapter chatper='chapter_05' />.  We could do something like this:
+```python
+MJFgender_ok = MJFgender in a_service['gender']
+```
+This statement tests to see if `MJFgender` is a member of the list in `a_service['gender']` and stores the
+result in `MJFgender_ok`.
+
+:::note
+Remember that we refer to values of dictionary keys using the [key name](/docs/textbook/chapter_05/00-40#referencing)
+:::
+
+#### The location question
+This question is a bit more complex than the others.  This is because ABC wants users to look
+for services in more than one location.  We have already [decided](#ask-the-user-about-their-circumstances)
+to use the [`checkboxes`](https://docassemble.org/docs/fields.html#fields%20checkboxes)
+data type to collect location data.  This means we'll be presented with a dictionary of locations, each with
+a `True` or `False` assigned indicating wether that location was selected.
+
+We need to check each location the user has selected and check if that location is in the `location` list
+for each `a_service`.  The test is similar to the gender test above but we need to run that test for 
+each location the user has selected:
+
+<Flowcharts.F07 />
+
+#### The family question
+This logic is very simliar to the gender question as, like the gender question, `MJFfamily` contains only one
+value which must be matched against items `a_service['family']`.  The code will end up looking something
+like this:
+```python
+MJFfamily_ok = MJFfamily in a_service['family']
+```
+
+#### The decision
+We will use an <DisplayGlossaryItem item='ifstatement' /> to code our decision.  The if statement will
+test that each of `MJFage_ok`, `MJFgender_ok`, `MJFlocation_ok` and `MJFfamily_ok` are `True`.  To do this
+we use a series of `and` [logic tests](/docs/textbook/chapter_03/00-30#logic-tests) chained together.  If
+the test passes then we'll add `a_service` to the list of services to display.  If the test fails we won't
+do anything and just allow the loop to skip to the next `a_service` to process.  Our code will look 
+something like this:
+```python
+if MJFage_ok and MJFgender_ok and MJFlocation_ok and MJFfamily_ok:
+    # This is where we will put the code to add a_service to 
+    # the list of services to display
+```
+This concludes determining the 'Evaluate circumstances' part of our app.  As we stated before,
+this part is the most complex part of our app as this is where all the decision-making takes 
+place.  We've had to drill down quite a few levels to get to a level of detail that we can code,
+which is a reflection of the complexity.  Nonetheless, we will reap the rewards for going into
+this level of detail when we code.  We've done all our thinking work already.  At coding time
+we'll just need to concentrate on translating our flowcharts into code.
+
+Before we do that, let's look at the final component of our app - displaying the list of relevant services.
+
+## Display the list of relevant services
+ABC would like us to display the services in a way that shows the service's name as well as
+the criteria for acceptance.  The user should be able to click on the name and be taken to the
+service's website.
+
+ABC have also stated that they would like the display page to look nice.  They have told us that
+their website uses the [Poppins](https://fonts.google.com/specimen/Poppins) for headings and 
+[Unna](https://fonts.google.com/specimen/Unna) for body text.  ABC have also supplied us with
+their logo:
+
+<DisplayImage imageURL='/img/textbook/chapter_06/filter/ABCInc_logo_white.png' size="50%" />
+
+Our final page should make use of the colours in the logo, although not all the colours are
+required to be used.  That is up to us.
+
+ABC have also said they would like the list to be displayed in a PDF which the user can either
+print out or email to themselves.
+
+:::tip TODO
+code this out and then put a final version into here.  Also may need to cover logic and how
+to use attachments here as well.
+:::
+
+We have now completed the design of our app.  It's time to start coding it.
+
+

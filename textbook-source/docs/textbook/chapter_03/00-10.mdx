@@ -1,0 +1,337 @@
+---
+title: Variables
+---
+import {da_continue_prop} from '@site/src/constants';
+import {DisplayChapter} from '@site/src/components';
+import {DisplayGlossaryItem} from '@site/src/components';
+import {DisplayImage} from '@site/src/components';
+import {DisplayDAButtons} from '@site/src/components';
+import {Quizlet, Answer, Explanation} from '@site/src/components';
+
+We covered variables briefly in <DisplayChapter chapter='chapter_02' target='00-20#line-6' /> but
+let's go over them again in a bit more detail.
+
+## What is a Variable?
+A <DisplayGlossaryItem item='variable' /> is a place where you store stuff. 
+It's called a 'variable' because you can store different stuff in ther each time.
+We've already seen that we can run the same program many times, each time with
+different values.
+
+## Variables are like buckets
+We've said this [before](../chapter_02/00-20#line-6) and we'll say it again.
+
+A variable is kind of like a bucket.  You can put stuff in a bucket and you can
+put stuff in a variable.
+
+Variable|Bucket
+---|---
+Used to store stuff|Used to store stuff
+Must have a name|Doesn't usually have a name
+Can store (<DisplayGlossaryItem item='assign' />) stuff in it|Can store stuff in it
+
+:::tip TODO
+Nice to have a table with a picture of a variable and a picture of a bucket,
+preferrably with the name of the variable written in the bucket and a 
+'value' (eg:an image of the number 1) sticking out of it.
+
+I've tried creating images in Dall-E but haven't gotten very far.
+:::
+
+For example, we've been using `MJFfirstname` to store the first name in our
+code in <DisplayChapter chapter='chapter_02' target='00-42' />. Each time
+we run the program we're asked for our first name.  We can enter what we like
+and each time we run the program we can enter something different if we want.
+Each time we enter a first name into the app, what we enter is stored in `MJFfirstname`.
+
+In Python-speak, what we store in a variable is called its **value**.  The term
+'value' will be used a lot in this textbook.  
+
+Let's have a look at the second question block in [this code](../chapter_02/00-42#our-code). It
+looks like this:
+
+```yml 
+---
+# My first Docassemble program
+mandatory: True
+question: Hello World!
+...
+---
+question: Name
+fields:
+  - Salutation: MJFsalutation
+    choices:
+      - Dr
+      - Mr
+      - Mrs
+      - Ms
+  - First Name: MJFfirstname
+  - Last Name: MJFlastname
+---
+``` 
+
+You'll recall that this code displays this form:
+
+<DisplayImage imageURL='/img/textbook/chapter_03/variables1.png' />
+
+The second-last line of the code...
+```yml
+  # highlight-next-line
+  - First Name: MJFfirstname
+```
+...tells Docassemble to display the 'First Name' field in the form. The user will
+enter something into the 'First Name' text field.  When the user presses continue
+Docassemble will store, or <DisplayGlossaryItem item='assign' /> the value the
+user enters to the variable `MJFfirstname`.  Once that assignment is made, then
+we can access what was assigned by calling `MJFfirstname`, as we do in line
+24 of the same code:
+
+```yaml 
+---
+# My first Docassemble program
+mandatory: True
+question: Hello World!
+subquestion: |
+...
+  Column1|Column2
+  -------|-------
+  Salutation|${ MJFsalutation }
+  # highlight-next-line
+  First Name|${ MJFfirstname }
+  Last Name|${ MJFlastname }
+```
+
+:::tip
+We usually use <DisplayGlossaryItem item='questionblock' plural /> to display forms
+and collect data and <DisplayGlossaryItem item='assign' /> that data into variables.
+
+We will then access the data in variables to display information on a screen (by
+using a <DisplayGlossaryItem item='subquestion' />).  We will also usually use
+<DisplayGlossaryItem item='mako' upper /> in the subquestion tag to access those
+variables.
+:::
+
+## Terminology Recap
+We've introduced lots of new concepts, so it's worth revisiting these.
+
+### Variable
+A variable is what we use to store data.  Much like how we put stuff in
+a bucket, we can put stuff in a variable.
+
+### Value
+<DisplayGlossaryItem item='value' upper /> is another way of saying 'stuff', or data.  Data stored in a variable
+is referred to as that variable's <DisplayGlossaryItem item='value' />.
+
+#### Accessing a variable's value
+To access a variable's value we
+simply specify the variable's name.  For example, we're displaying the
+value stored in each of `MJFsalutation`, `MJFfirstname` and `MJFlastname`
+in this code from the subquestion block above:
+
+```yml
+  Column1|Column2
+  -------|-------
+  Salutation|${ MJFsalutation }
+  First Name|${ MJFfirstname }
+  Last Name|${ MJFlastname }
+```
+
+### Assignment
+The process of putting a value into a variable is called **assignment**.  We
+<DisplayGlossaryItem item='assign' /> a value to a variable.  We can
+assign a value to a variable in two ways.
+
+#### Asking the user a question
+When we set up fields in a question block, the user is asked to input 
+what values they think should go into one or more variables.  For example,
+we use this question block to ask the user how they should be addressed, 
+their first and their last name.
+
+```yml
+---
+question: Name
+fields:
+    # highlight-next-line
+  - Salutation: MJFsalutation
+    choices:
+      - Dr
+      - Mr
+      - Mrs
+      - Ms
+  // highlight-next-line
+  - First Name: MJFfirstname
+  // highlight-next-line
+  - Last Name: MJFlastname
+---
+```
+
+Docassemble displays this form:
+
+
+<DisplayImage imageURL='/img/textbook/chapter_03/variables1.png' />
+
+When the user presses <DisplayDAButtons button={da_continue_prop} /> 
+Docassemble <DisplayGlossaryItem item='assign' plural /> the 
+<DisplayGlossaryItem item='value' plural /> entered by the user into 
+`MJFsalutation`, `MJFfirstname` and `MJFlastname` respectively.
+
+#### Assignment in code blocks
+As will be seen in <DisplayChapter chapter='TODO' /> it is also possible
+to assign values to variables in <DisplayGlossaryItem item='codeblock' plural />.
+
+For now, it's just worth being aware that you can also assign variables in 
+<DisplayGlossaryItem item='python' /> code.  We use the equals sign (`=`) to
+show that a value is being assigned to a variable.  For example:
+
+```python
+code: |
+  MJFname = 'Mark Ferraretto'
+```
+
+:::note
+Because `=` is used as an *assignment* variable we can't use it to test 
+for equality.  That is, the above code block sets the value of `MJFname` to
+be `Mark Ferraretto`.  It *is not* a test to see if the value in `MJFname`
+*is equal to* `Mark Ferraretto`.  
+To test that something equals something else we need to use the 'double-equals'
+operator (`==`). 
+
+Compare these examples:
+```python
+# Assigns 'Mark Ferraretto' to MJFname
+code: |
+  MJFname = 'Mark Ferraretto'
+```
+```python
+# Tests to see if the value of MJFname is equal to Mark Ferraretto
+code: |
+  MJFname == 'Mark Ferraretto'
+```
+
+Be mindful of this as confusing `=` and `==` is a common mistake!
+
+
+We will cover testing [further down in this chapter](./00-30).
+:::
+
+## Practice Quizlets
+<Quizlet title="What is in a Variable?">
+  What a variable contains is called...
+  <Answer>
+    stuff
+  </Answer>
+  <Answer>
+    data
+  </Answer>
+  <Answer isCorrect>
+    value
+  </Answer>
+  <Answer isCorrect>
+    All of the above
+  </Answer>
+  <Explanation correctAnswer>
+  **Correct!**
+
+  'Stuff' isn't really a technical way of describing what a variable contains
+  (better to describe what's in a bucket!) although we're using it here.
+  You can use 'data' as well but the term we're looking for is 
+  <DisplayGlossaryItem item='value' />.
+  
+  Although we've used 'stuff' in this chapter we won't be using that term
+  in the rest of the textbook.
+  </Explanation>
+  <Explanation>
+  **Try again.**
+
+  There's a more precise term the describes what a variable contains.
+  </Explanation>
+</Quizlet>
+
+<Quizlet title="Storing Values">
+  The process of storing a value in a variable is called...
+  <Answer>
+  Putting
+  </Answer>
+  <Answer>
+  Placement
+  </Answer>
+  <Answer isCorrect>
+  Assignment
+  </Answer>
+</Quizlet>
+
+<Quizlet title="Accessing and Setting Variables 1">
+  Does this code assign a value to a variable or does this code display
+  the value of a variable?
+
+  ```yml
+  ---
+  mandatory: True
+  question: Name
+  fields:
+    - Name: MJFname
+  ---
+  ```
+  <Answer isCorrect>
+  This code assigns a value to `MJFname`
+  </Answer>
+  <Answer>
+  This code displays the value already assigned to `MJFname`
+  </Answer>
+  <Explanation correctAnswer>
+  **Correct!**
+
+  If you run this code Docassemble will ask you for your name.
+
+  <DisplayImage imageURL='/img/textbook/chapter_03/variables2.png' />
+  </Explanation>
+  <Explanation>
+  **Incorrect**
+
+  **Hint**:
+  Copy this code into Docassemble and run it.
+  </Explanation>
+</Quizlet>
+
+<Quizlet title="Accessing and Setting Variables 2">
+  Does this code assign a value to a variable or does this code display
+  the value of a variable?
+
+  ```yml
+  ---
+  mandatory: True
+  question: Name
+  subquestion: |
+    Your name is ${ MJFname }
+  ---
+  ```
+  <Answer>
+  This code assigns a value to `MJFname`
+  </Answer>
+  <Answer isCorrect>
+  This code displays the value already assigned to `MJFname`
+  </Answer>
+  <Explanation correctAnswer>
+  **Correct!**
+
+  This code is using a <DisplayGlossaryItem item='subquestionblock' /> to
+  display the value of `MJFname`.  
+
+  The code snippet above won't run as there's no code to set `MJFname`.
+  Try copying and pasting the complete code below into Docassemble to see
+  how it works
+
+  ```yml
+  ---
+  mandatory: True
+  question: Name
+  subquestion: |
+    Your name is ${ MJFname }
+  ---
+  question: Name
+  fields:
+    - Name: MJFname
+  ---
+  ```
+  </Explanation>
+</Quizlet>
+

@@ -1,0 +1,171 @@
+---
+title: Introducing Docassemble
+---
+import * as Constants from '@site/src/constants';
+import * as Components from '@site/src/components';
+import {dahref} from '@site/src/components';
+
+:::caution
+
+This text assumes that you have [access to Docassemble](./00-10) and
+[have connected to GitHub](./00-20).  Please complete these activities before
+continuing.
+
+:::
+
+## What is Docassemble?
+:::tip TODO
+Need to build this out.  Give an introduction to:
+
+* That DA allows us to write web apps
+* It's open source, so we dont' need to pay licensing fees and, more importantly, our clients don't need to
+pay licensing fees to use our apps
+* The web apps we write are 'resonsive'.  That is, they will run just as well on a mobile phone 
+or a table as on a desktop computer
+* DA allows us to create document templates easily using Word documents and Jinja code.
+* Despite any hesitations you might have, DA is not that difficult to learn or, more importantly, it allows
+you to write useful apps after learning a few basic conccepts.
+* Docassemble generates some reasonably good looking apps.  Insert examples- iRefer, Hutt Street Centre. 
+Also include clerq and Mass Access apps.
+:::
+
+
+:::tip TODO
+link to jinja in the textbook
+:::
+
+## The Main Screen
+Let's log in to Docassemble again.  Go to the <Components.DisplayConstants data={dahref} />.  You should end up at this screen.
+
+<Components.DisplayImage imageURL='/img/textbook/chapter_01/docassemble_after_signin_screen_annotated.png' />
+
+Let's discuss this screen:
+
+1. The black bar across the top is called the **Navbar**.
+It exists at the top of every screen and contains menu bars and other information.
+1. This is the **Interview Title** or **App Title**.
+When you write your app you'll put its name, and maybe your client's logo in this space.
+1. In this book we'll be calling this the **Drop-down menu**, or just the **menu**.
+We use this menu to navigate around Docassemble.
+We've [already used this once](./00-20#set-up-github-integration) and we'll be using it a lot more!
+1. Without wishing to state the obvious, this is the main body of the app.
+When you're writing this area will display the [Playground](#the-playground), which we will now discuss.
+
+:::tip TODO
+The terms we've just defined here should probably be put into some kind of
+data structure and/or component so they can be extracted into index entries
+:::
+
+## The Playground
+Docassemble's 'Playground' is where we'll spend most of this topic.  The Playground is where you will edit,
+test, debug and run your code.  Let's explore it.
+
+Select *Playground* from the down menu.  You'll be taken to a screen that looks like this:
+
+<Components.DisplayImage imageURL='/img/textbook/chapter_01/docassemble_main_screen1.png' />
+
+Let's break this screen into its parts:
+
+1. This is the **Navbar**.  Its claim to fame is the *Playground* menu in the top left
+which we can use to create 'Projects'.
+2. This is where you manage your files and folders and where you can search for text in a file.
+We won't be using the *Wizard* or *Upload* buttons in this topic.
+3. This is the text editor. It's where you'll be writing your code.
+4. These buttons allow you save and run your code.
+5. This panel contains the variable you use in your code.  We will discuss variables
+in detail later in this book.
+6. The lower part of the Playground contains a Docassemble quick reference.
+
+Let's work through these in a bit more detail.
+
+### 1. Navbar and *Playground* Menu
+The Playground is where we will develop our apps.  Everything we need for our app, such as
+code files, Word templates, images and so-on are kept in our Playground.  In short, an
+app consists of many different files.
+
+As you work on more and more projects you'll find that the Plaground can become quite cluttered
+and looking for files becomes difficult.  Thankfully, Docassemble allows us to create different
+'Projects' in our Playground to help keep us organised.  This is done through the *Playground*
+menu on the top-left.  Click on that menu to create multiple projects.
+
+:::tip
+Check out [Switching Projects](https://docassemble.org/docs/playground.html#projects) in the 
+Docassemble manual for more information on creating projects in the Playground
+:::
+
+### 2. Manging Files and folders
+This area allows us to create, manage and organise our files.  The Search bar allows us to search for text
+in the current file.
+
+#### Adding a file
+1. Click on *Add*
+2. Enter the name of your file.
+:::note
+Your file name should not contain any spaces and it should always end with a `.yml`.
+(eg: use `Assessment_C4.yml` instead of `Assessment C4.yml` or `Assessment C4`)
+:::
+3. Enter something in the main text window
+4. Press <Components.DisplayDAButtons button={Constants.da_save_prop} />
+
+#### Folders
+We only have five folders.  We cannot, and do not need to, create any more.
+
+<Components.DisplayImage imageURL='/img/textbook/chapter_01/docassemble_main_screen2.png' />
+
+Each folder serves a special purpose:
+* **Packages** - contains information about the software you create.  It allows you to bundle
+all the different files that make up your app into a single package for distribution.
+* **Templates** - is where we will store Word files that we can use to generate forms and
+document templates.
+* **Static files** - is where we will store images, like company logos, that we want to make 
+a part of our app.
+* **Sources** - is where we can store other files relevant to our app.  We won't be using this
+folder in this textbook.
+* **Modules** - is where we can store custom Python programs, or 'modules' to use in our app.
+We won't be using this folder in this textbook.
+
+:::tip
+The Docassemble manual has more detailed explanations about the [Packages](https://docassemble.org/docs/playground.html#packages),
+[Templates](https://docassemble.org/docs/playground.html#templates) and the
+[Static files](https://docassemble.org/docs/playground.html#static) folders.
+:::
+
+### 3. Text Editor
+The text editor is where you will write your code.  The numbers down the side are line numbers.  Line numbers
+are very useful when trying to pinpoint code that isn't working properly.
+
+You can see that the code you write changes colour as you write it.  This is called *syntax highlighting*. 
+Syntax highlighting is useful because it visually distinguishes different parts of code by applying colors
+to different elements of your code. This helps coders to quickly identify errors,
+and understand the structure of their code, leading to faster and more accurate coding.
+
+### 4. Buttons
+The <Components.DisplayDAButtons button={Constants.da_save_prop} />
+and <Components.DisplayDAButtons button={Constants.da_save_and_run_prop} /> buttons
+do what you would expect, as do
+the <Components.DisplayDAButtons button={Constants.da_download_prop} />
+ and <Components.DisplayDAButtons button={Constants.da_delete_prop} /> buttons.
+
+The *Share* button will give you a link to a running version of the current file in the Playground.  This is 
+a useful way to share an application you're working on with a client or your team.
+
+### 5. Variables
+Variables are a way of storing data in your program.  We will discuss this later in the textbook.
+:::tip TODO
+Insert link to wherever we will discuss variables
+:::
+
+This panel contains a list of the variables used in your program.  It is a useful debugging tool because:
+
+* variables properly defined appear in <Components.Highlight color={Constants.da_declared_variable}>blue</Components.Highlight>
+* variables that are not used appear in <Components.Highlight color={Constants.da_unused_variable}>orange</Components.Highlight>;
+* variables that Docassemble expects to find but can't (ie: 'undefined variables') appear in <Components.Highlight color={Constants.da_undeclared_variable}>dark red</Components.Highlight>.
+
+If you see a sea of blue in this panel it's a good sign that your program will run.
+
+### 6. Quick Reference
+The bottom half of the screen contains a quick reference to Docassemble.  The reference is quite extensive
+and, usefully, contains example code and a preview of what the code looks like when run.  The screen below
+shows the different way to use Markdown to format text and images in your code.
+
+<Components.DisplayImage imageURL='/img/textbook/chapter_01/docassemble_main_screen3.png' />

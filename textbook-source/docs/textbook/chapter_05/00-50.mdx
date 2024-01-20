@@ -1,0 +1,387 @@
+---
+title: Complex Data and Data Storage
+---
+import {DisplayGlossaryItem} from '@site/src/components';
+import {DisplayImage} from '@site/src/components';
+import {DisplayChapter} from '@site/src/components';
+import {Quizlet,Answer,Explanation} from '@site/src/components'
+import ExampleList from './_example_list.mdx';
+import ExampleDictionary from './_example_dictionary.mdx';
+import ExampleTable from './_example_table.mdx';
+import ExampleComplexCode from './_example_complex_code.md';
+import StudentDetailsDataBlock from './_student_details_data_block.md';
+import ExampleIReferTable1 from './_example_irefer_table1.mdx';
+import ExampleIReferTable2 from './_example_irefer_table2.mdx';
+import ExampleIReferDB1 from './_example_irefer_table1_datablock_collapsed.mdx';
+import ExampleIReferDB2 from './_example_irefer_table2_datablock_collapsed.mdx';
+
+## Lists Reprisal
+Let's get back into lists again.
+
+So far, we've been working with lists with <DisplayGlossaryItem item='string' /> elements, like our `bread_types` list:
+```python
+bread_types = [
+    'sourdough',
+    'croissant',
+    'tip top',
+    'artisan',
+    'chocolate'
+]
+```
+We've been using strings because that's what you'll encounter the most in a legal technology context.  However,
+lists aren't limited to storing only strings.  We can store numbers:
+```python
+bread_types_sold = [523, 100, 382, 33, 56]
+```
+and we can even mix and match data types
+```python
+mixed_list = [
+    1,
+    'a string',
+    335.53,
+    7392,
+    True,
+    'another string'
+]
+```
+Not sure why we'd want to do that but it is possible.  The point is, we can store any data type as a list item.
+And by 'any type', we also mean complex data types.  That is, a list item could be another list, or a dictionary,
+or any combination of both:
+```python
+complex_confusing_list = [
+    ['this', 'is', 'a', 'list'],
+    ['this', 'is', 'another', 'list'],
+    'add a string as the third item, just for fun',
+    {'key1' : 'this is a dictionary', 'key2' : 'with two keys'}
+]
+```
+This is getting messy but it's getting messy to draw out these three points:
+1. you can have any data type as a list item;
+1. list items can be lists (also called **nested lists**);
+1. list items can be dictionaries (also called **lists of dictionaries** or **tables**)
+
+We're going to cover lists of dictionaries as they're a very useful way to store and access data.
+
+## Lists of Dictionaries
+Why are lists of dictionaries useful?  Because they're a great way to represent spreadsheet data, or tables,
+as code.  Let's look at an example.  Let's go back to our list of students:
+
+<ExampleList />
+
+Let's also say that, for each of the students, we want to display information about them, much like the table we 
+looked at when we looked at [Dictionaries](00-40) earlier in this chapter:
+
+<ExampleDictionary />
+
+It would make sense for us to lay this out in a table, much like below:
+
+<ExampleTable />
+
+You can see we still have a list.  Whereas before we had a list of student names, now we have a list of
+more detailed student information.
+
+<DisplayImage imageURL='/img/textbook/chapter_05/listofdict2.png' />
+
+You can see also how the 'Information' categories across the top of the table correlate to the dictionary keys
+we looked at [previously](00-40).
+
+It follows then that we could implement this as  a list of dictionaries.  The list would have nine items in it,
+one for each row in our table.  Each item would a dictionary that set out the keys (ie: the column headings) and the
+values associated with each key.
+
+In Python our list of dictionaries would look something like this:
+
+<ExampleComplexCode />
+
+<details>
+<summary>
+    A note about readability
+</summary>
+:::note
+A couple of things to note with the code code above.
+
+First, we have displayed each dictionary on a single line.  We could have displayed the data like this:
+```python
+student_details [
+    {
+        'First Name' : 'Ida',
+        'Last Name' : 'Noe',
+        'Email' : 'ida.noe@findme.com',
+        'Phone' : '08 2839 2823'
+    },
+    {
+        'First Name' : 'Hugo',
+        'Last Name' : 'First',
+        'Email' : 'hugo.first@noway.com',
+        'Phone' : '08 3829 2822'
+    },
+    ...
+]
+```
+but you can see that our code block gets very big very fast, so much so that it becomes difficult to read.
+Having a dictionary on a single line when its a list item can make the code easier to read and understand.
+
+Secondly, you'll notice that we padded out each dictionary element with spaces so that all the '`Last Name`' keys
+appeared one underneath the other. This was done to make the code more readable and easier to understand.
+:::
+</details>
+
+## Databases
+What we can see from this chapter so far is that we can use complex data types to store complex information.
+We're not limited to a single-dimensional list of names or a single dictionary setting out keys and values.  We 
+can combine complex data structures to form a way of storing more complex information in a structured way.
+
+According to [Wikipedia](https://en.wikipedia.org/wiki/Database) a database is 'an organised collection of data'.  
+That's what we have.  A set of data organised, or structured, in a specific way.  At a very basic level we are
+interacting with a database.
+
+Our interactivity is at a very basic level.  Our ['database management system'](https://en.wikipedia.org/wiki/Database)
+is nothing more than our list of dictionaries or, as we shall see below, a
+Docassemble <DisplayGlossaryItem item='datablock' />.  Nonetheless, we are interacting with structured data 
+and so we will use the term 'database' extensively throughout this textbook when referring to such structured data
+and particularly to data in a dat block.
+
+## Data blocks
+Up to now we have been displaying our data structures as Python code in a <DisplayGlossaryItem item='codeblock' />.
+
+<ExampleComplexCode /> 
+
+Docassemble provides another means for us to store this data in Docassemble code, called
+[data blocks](https://docassemble.org/docs/initial.html#data).
+
+Data blocks do more or less the same thing as our list of dictionaries, but it's displayed natively in Docassemble.
+Data blocks become very useful when we start dealing with even more complex data structures (which we will discuss
+below).
+
+Let's have a look at an example data block.  This example is a simplified version of `student_details`
+```yml showLineNumbers
+---
+variable name: student_details_simplified
+use objects: True
+data:
+  - First Name: Ida
+    Last Name: Noe
+  - First Name: Hugo
+    Last Name: First
+  - First Name: Moda
+    Last Name: Lawn
+---
+```
+**Line 2**, as the line itself indicates, gives our data block a variable name.  In our example we've 
+decided to use the variable name `student_details_simplified`.  
+
+**Line 3** tells Docassemble to use [Docassemble's enhanced lists and dictionaries](https://docassemble.org/docs/initial.html#use%20objects).
+We won't go into much details about these enhancements now but it's a good idea to always include this `use objects:` 
+line in any data blocks we use.
+
+**Line 4** tells Docassemble that what follows until the end of the block are the data rows for this data block, and
+**lines 5 to 10** contain our data.
+
+Remember that our data is a list of dictionaries.  Docassemble represents the start of each list with an indented
+dash (`-`) character.  Each time the dash appears Docassemble knows that a new list item is commenced.  So, you
+can see that our list items start on lines 5, 7 and 9 in our example.
+
+You can also see the two dictionary keys in each list item - `First Name` and `Last Name`.  Docassemble knows that
+these are dictionary keys as, like in our Python code, there is a colon (`:`) after the key name.
+
+Therefore, we can see that our data block consists of three list items, each of which has two dictionary keys -
+`First Name` and `Last Name`.
+
+:::info
+For completeness here is the entire `student_details` complex data structure rendered as a data block:
+<details>
+<summary>
+`student_details` data block
+</summary>
+<StudentDetailsDataBlock />
+</details>
+:::
+
+Let's draw attention to some of the syntax of data blocks:
+
+- as we've already discussed, list elements are denoted by dash (`-`) characters;
+- also as discussed, dictionary keys are simply the key name followed by a colon (`:`);
+- as always in Docassemble indentation is important.  Note that the dashes are all two spaces in and the keys 
+start another two spaces in.  Each set of two spaces is a 'level'.  The list is at the top level of our data
+structure and the dictionaries are the next level down (so four spaces in).  If we had more levels we'd keep 
+on indenting by two spaces (this is covered below);
+- unlike Python code, we don't need to enclose our key names or our values in quotes.  Docassemble knows enough
+to detect the data type of the keys and the values we enter;
+- The lack of quotes makes the data a bit more readable.  Having said that, we have just converted 14 lines of
+Python code to 42 lines of data block code!  However, this format really comes  into its own when we start looking
+at multidimensional data structures below.
+
+:::note
+While we don't use quotes generally in a data block we will use them if the data itself contains a quote.  For
+example, if we had an entry for Fred D'Angelo, we' have to wrap "D'Angelo" in double quotes.  For example:
+```yml 
+---
+variable name: just_freddy
+use objects: True
+data:
+  - First Name: Fred
+    Last Name: "D'Angelo"
+...
+---
+```
+:::
+
+:::info
+Some of you may have realised that the data block syntax is very similar to Docassemble syntax generally.  For
+example, when we specify buttons at the end of a question block:
+```yml showLineNumbers
+event: final_screen
+question: Final Screen
+subquestion: |
+  ...
+buttons:
+  - Exit: exit
+  - Restart: restart
+---
+```
+we are supplying a list of buttons, each with a single key/value pair.  In fact, if you look at this example code
+you'll see that it itself is a complex data structure.  At the top level are a set of keys (`event`, `question`,
+`subquestion` and `buttons`), each assigned a value.  Some values are simple data types, such as `final_screen`
+which is the value for `event`, 
+and some are complex data types, such as the list that is the value for the `buttons` key.
+
+:::note
+The `subquestion` key is a little different as it is proceeded by a `: |`.  The colon indicates that `subquestion` 
+is a key and what follows on the other side is its value.  The vertical bar (`|`) tells Docassemble that the value
+for this particular key will span more than one line.
+:::
+:::
+
+## Multidimensional Data
+We've already dealt with one-dimensional data and two dimensional data so let's start there.
+
+A list is an example of one-dimensional data.  It has only one 'dimension' ie: its length:
+
+<ExampleList />
+
+Spredsheets and/or tables are two-dimensional.  They have a length, like a list, but also have a width, being
+the number of columns (or dictionary keys):
+
+<ExampleTable />
+
+Most of us have encountered two-dimensional data as that's how spreadsheets work.
+
+You can also see that the dimensions of a data structure reflect the nesting of complex data structures inside it.
+So, our one-dimensional list is a simple list (ie: each list element is a simple data type).  Our two-dimensional
+table is a list with dictionaries as list elements.
+
+Multidimensional data is when we nest complex data structures more than two levels deep.  Let's use a real-world
+example to illustrate this.
+
+In 2020 Flinders Law students developed an app called [iRefer](https://docassemble.flinders.edu.au/interview?i=docassemble.LLAW33012020S1P02:data/questions/main_code2.yml#page1)
+for the [Family Law Pathways Network](https://pathwaysnetworksa.com.au/) (**FLPN**).  iRefer automated what used to be a paper
+directory of services available to FLPN's clients.  The directory was only accessible by attending FLPN's kiosk at the 
+Federal Court building in Adelaide.  By migrating the directory online the students 
+allowed FLPN to make the directory available 24x7 and also accessible by remote and regional clients.
+
+The app asks its users certain questions, such as where they live, their gender, and what services they are looking for.
+The app then constructs a list of relevant services depending on those answers and presents that list to the user.
+
+The app is built around a list of agencies which is stored in a data block.  Each item in the list has keys for
+information such as the agency's name, its address and contact details.  So far, this describes a list of dictionaries,
+similar to the `student_details` we have discussed in this section, albeit with different data.
+
+<ExampleIReferTable1 />
+
+<ExampleIReferDB1 />
+
+However, in order to be useful, each agency in the database must also contain a list of locations that it services
+and a list of services that it provides.  As a table, this might look as follows:
+
+<ExampleIReferTable2 />
+
+<ExampleIReferDB2 />
+
+The data type of the data in the 'Location' and 'Caters For' columns is a complex data type, namely a list.  This
+extends our existing list of dictionaries to be a list of dictionaries, with some dictionary values being a list
+(of strings in this case).  That is, we have introduced a *third dimension* into our data structure.  We now have:
+
+1. a list;
+1. of dictionaries;
+1. with some dictionary values as lists.
+
+By doing this we make available to ourselves all the advantages of lists inside our database.
+For example, to see if a service provides, say, Child services, we could use the list `in`
+operator to test for [membership](./00-20#list-membership).  For example, we could check the
+first item in the database as follows:
+```python
+'Child services' in FLPN_services[0]['caters_for']
+```
+Note that:
+
+* `FLPN_services` is the name of our data block;
+* `FLPN_services[0]` is the first list item in our data block; and
+* `FLPN_services[0]['caters_for']` access the list in the `caters_for` key in our first list item.
+
+## Multidimensional data and filtering
+A Central part of the iRefer app was to filter out services based on a user's selection.  For 
+example, a user may select 'Behaviour management services' from the list of available services.
+The app would then want to display only those agencies that provide behaviour management services.
+In our example, we would want only 'Who's in Charge' and 'Circle of Security' to be returned.
+
+Once we have data stored in this structured way it becomes relatively simple to filter out 
+unwanted records.  We usually do this by iterating over the data block and copying the records
+we *do* want into a new list.  For example, here is a code block that will copy only the two agencies
+that provide behaviour management services into a new filtered list:
+```python showLineNumbers
+---
+code: |
+  filtered_list = []    # Start with an empty list
+  filter_category = 'Behaviour management services'  # We put our service category into a
+                                                     # variable.  It's good practice not to embed
+                                                     # strings in loops and if statements.
+                                                     # In the 'real' version of this app we would
+                                                     # have asked the user for the filter_category.
+
+  for list_item in FLPN_services:                    # Iterate over our data block
+    if filter_category in list_item['caters_for']:   # Does our list item contain our category?
+        filtered_list.append(list_item)              # if so, then add it to our filtered list
+---
+```
+
+We could then display our filtered list in a table in our final screen:
+```yml showLineNumbers
+---
+event: final_screen
+question: final_screen
+subquestion: |
+  Here is a list of service providers that match your criteria
+
+  Provider|Phone|Cost
+  ---|---|---
+  %for list_item in FLPN_services:
+  %if 'Behavioural management services' in list_item['caters_for']:
+  ${list_item['service']}|${list_item['phone']}|${list_item['cost']}
+  %endif
+  %endfor
+buttons:
+  - Exit: exit
+  - Restart: restart
+---
+```
+:::note
+Both of the example blocks above have the string 'Behaviour management services' embedded
+in their code.  This is obviously inefficient.  In the 'real world' we'd want to ask the user
+a which category of services they would like.  We'd use a question block like this:
+```yml
+---
+question: Select services
+fields:
+    - Select which service you would like: filter_category
+      datatype: radio
+      choices:
+        - Behaviour managemenet services
+        - Child services
+        - Courses
+        - Indigenous services
+        - Parental services
+        - Pre-separation material
+---
+```
+It is not good practice to embed string literals into code as we have done in the blocks above.
+:::

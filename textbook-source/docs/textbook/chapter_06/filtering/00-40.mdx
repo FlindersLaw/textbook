@@ -1,0 +1,193 @@
+---
+title: Coding - List of Services
+---
+import {DisplayImage} from '@site/src/components';
+import {DisplayChapter} from '@site/src/components';
+import {DisplayGlossaryItem} from '@site/src/components';
+import * as Flowcharts from './_flowcharts';
+import * as Tables from './_tables';
+
+The next part of our [design](00-10) is to set up the data and evaluate it.  This is a rather
+hefty part of our app and we will break this up into mulitple parts, as we did in the design.
+
+In this part we will set out the `MJFservices` database.
+
+## The database
+In our design we made decisions on our [database structure](00-10#define-a-list-of-services) and even
+started writing code for `MJFservices`.  Let's fill out `MJFservices` with all the data in our table.
+
+Let's keep our table handy for reference:
+<Tables.ServiceTable />
+
+Now, let's build out our code.  As per our [introduction](00-20) we are going to store our database in
+`services.yml`
+
+```yml title="services.yml" showLineNumbers
+---
+variable name: MJFservices
+use objects: True
+data:
+  - name: ABC Services
+    website: https://abcsvc.org.au
+    min_age: 18
+    max_age: 65
+    gender:
+      - Male
+      - Female
+    location:
+      - North
+      - East
+    family:
+      - family
+      - single
+  - name: WH Youth
+    website: https://whyouth.org.au
+    min_age: 12
+    max_age: 17
+    gender:
+      - Male
+      - Female
+      - Other
+    location:
+      - South
+    family:
+      - single
+  - name: "St Mary's Shelter"
+    website: https://stmarys.org.au
+    min_age: 12
+    max_age: 999
+    gender:
+      - Female
+      - Other
+    location:
+      - North
+    family:
+      - single
+  - name: "MHI Men's Health"
+    website: https://mhimh.org.au
+    min_age: 18
+    max_age: 999
+    gender:
+      - Male
+    location:
+      - North
+      - West
+    family:
+      - single
+  - name: DE Family Shelter
+    website: https://defsupport.org.au
+    min_age: 18
+    max_age: 65
+    gender:
+      - Male
+      - Female
+    location:
+      - North
+      - East
+      - West
+      - South
+    family:
+      - family
+---
+```
+
+## Testing
+As we did with our question variables we'd like to display our services data in our `final_screen`
+to make sure we have set our database out correctly.  We'll display the services in a table format
+as doing so makes it easier to check against the table ABC gave us.
+
+We have discussed [Markdown tables](/docs/textbook/chapter_02/00-42#displaying-output-in-a-table) previously.
+Markdown tables are useful for displaying table output but, as we have our data in a
+<DisplayGlossaryItem item='datablock' /> we can make use of a [`table` block](https://docassemble.org/docs/initial.html#table)
+which is simpler to create and less cluttered than a Markdown table.
+
+To summarise the Docassemble manual, a `table` block allows us to set out the columns we'd like in our
+table and the table's data source, and the table block will render the table for us.
+
+So let's set up our table block first:
+```yml title="tests.yml" showLineNumbers
+---
+table: services_test_table
+rows: MJFservices
+columns:
+  - Name: row_item['name']
+  - Website: row_item['website']
+  - Age Range: |
+      "{} to {}".format(row_item['min_age'], row_item['max_age'])
+  - Gender: row_item['gender']
+  - Locations: row_item['location']
+  - Family: row_item['family']
+---
+```
+And then we can call our `services_test_table` from our `final_screen`
+```yml showLineNumbers {15}
+---
+# This is our final screen
+event: final_screen
+question: Final Screen
+subquestion: |
+  Eventually the list of services will be displayed here
+
+  Our variables:
+
+  * ${MJFage}
+  * ${MJFgender}
+  * ${MJFlocation}
+  * ${MJFfamily}
+
+  ${services_test_table}
+buttons:
+  - Exit: exit
+  - Restart: restart
+---
+```
+We will also need to include `services.yml` and `tests.yml` in our `include` block in `main.yml`:
+```yml
+---
+include:
+  - questions.yml
+  - services.yml
+  - tests.yml
+---
+```
+Make these changes and run the app.  If you didn't delete the questions from `final_screen` the app will
+ask you the four user questions again.  It should then display the question values and the table:
+
+<DisplayImage imageURL='/img/textbook/chapter_06/filter/coding4.png' />
+
+The table doesn't look pretty (we'll sort that later) but it does the job.
+
+## About Table Blocks
+We want to draw out a few properties of table blocks.  These are discussed in the [manual](https://docassemble.org/docs/initial.html#table)
+but it's worth discussing them in the context of our app.
+
+### `row_item`
+This is a special variable Docassemble creates with the table block.  Each row is placed into `row_item`
+as the table is rendered.  For our purposes all we need to know is that if we want to access data in
+a table row we can use `row_item`.
+
+Note also that each table row (ie: list item) is a dictionary, we can refer to the contents of each
+row using dictionary keys, which is what we're doing here.
+
+### The Age Range row
+In all the other rows we simply tell Docassemble to display the value of each key.  In the Age range we 
+want to display a string that says '*min_age* to *max_age*'.  We use a python string and
+[`format()`](/docs/textbook/chapter_03/00-20#using-format) to join the two age values and display 
+them in our string.
+
+### The list data (Gender, Location and Family)
+If you have run the app already you'll notice that the list data, such as gender, is displayed
+so that it reads as a sentence, with each item separated by commas and the last item separated
+by an 'and' eg: 'Male, Female and Other'.  This is one of the benefits of the `use objects: True`
+line we included in our <DisplayGlossaryItem item='datablock' />.  Setting `use objects` to
+`True` means that our lists are stored as [`DAList`s](https://docassemble.org/docs/objects.html#DAList)
+and our dictionaries as [`DADict`s](https://docassemble.org/docs/objects.html#DADict).  `DAList` and
+`DADict` are Docassemble's enhanced versions of Python lists and dictionaries respectively.  They
+come with extra functionality, one of these being to display output in a comma-separated sentence as
+we have seen.
+
+:::info
+One of the benefits of using `DADict` is that we get to display selected locations using
+the `true_values()` method.  Had we been using a 'vanilla' Python dictionary we would
+have had to write the equivalent code ourselves.
+:::

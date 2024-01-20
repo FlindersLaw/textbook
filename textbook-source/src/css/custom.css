@@ -96,3 +96,217 @@
   padding-left: 5px;
   padding-right: 10px;
 }
+
+/*
+ * For displaying the Quizzes
+ */
+.quizlet {
+  background-color: rgba(35,46,75, 0.1);
+  min-height: 200px;
+  height: min-content;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.75);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  margin-bottom: 20px;
+}
+
+.quizlet .title {
+  font: var(--ifm-heading-font-weight) var(--ifm-h5-font-size) / var(--ifm-heading-line-height) var(--ifm-heading-font-family);
+  text-transform: uppercase;
+  margin-bottom: 15px;
+  margin-right: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.quizlet .title img {
+  margin-right: 10px;
+}
+
+.quizlet .answers {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.quizlet code {
+  color: #000;
+}
+
+.quizlet .answerButton {
+  width: 100%;
+  border-radius: 15px;
+  padding: 5px;
+  padding-left: 20px;
+  align-items: center;
+  border: 1px solid #234668;
+  cursor: pointer;
+  margin: 2px;
+  margin-bottom: 15px;
+  background-color: rgba(35,46,75, 0.05);
+}
+
+.quizlet .answerButton:hover {
+  background-color: rgba(35,46,75, 0.1);
+}
+
+/* Don't want spacing after a <p> as single-line answers look ugly */
+.quizlet .answerButton p {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.quizlet .correctAnswer {
+  background-color: #5f922f;
+  color: #ffffff;
+  font-weight: bold;
+}
+.quizlet .correctAnswer:hover {
+  background-color: #2f922f71;
+}
+
+.quizlet .incorrectAnswer {
+  background-color: #ff3333aa;
+  color: #ffffff;
+  font-weight: bold;
+}
+.quizlet .incorrectAnswer:hover {
+  background-color: #ff333333;
+}
+
+#mathCompTable {
+  width: 100%;
+}
+#mathCompTable td {
+  vertical-align: top;
+  text-align: left;
+}
+/* Make sure we don't wrap the operator and example test columns */
+#mathCompTableCol2 {
+  width: 140px;
+}
+
+#mathCompTableCol3 {
+  width: 185px;
+}
+
+/* we don't want to wrap this column as it displays code */
+#logicTableCol3 {
+  width: 330px;
+}
+
+#complexDataTable1 {
+  vertical-align: top;
+  text-align: left;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+table#complexDataTable1 tr,
+table#complexDataTable1 td,
+table#complexDataTable1 th {
+  border: none;
+}
+
+#complexDataTable1 tr {
+  background-color: #ffff
+}
+#complexDataTable1 th {
+  padding: 0px;
+  padding-right: 7px;
+}
+
+#complexDataTable1 td {
+  padding: 0px;
+  padding-left: 2px;
+  padding-right: 2px;
+  padding-bottom: 0px;
+}
+
+.complexDataTableExamples td {
+  vertical-align: top;
+  text-align: left;
+}
+
+.cdtTop th {
+  vertical-align: top;
+}
+
+.cdtLeft th {
+  text-align: left;
+}
+
+table .cdtCentre {
+  display: table;
+  margin-right: auto;
+}
+
+table.cdtSingleColour tr {
+  background-color: #fff;
+}
+
+.complexDataTableExamples th,
+.complexDataTableExamples td {
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+
+.complexDataTableExamples th {
+  background-color: var(--ifm-color-primary-darkest);
+  color: var(--ifm-color-secondary);
+  font-weight: bold;
+}
+.complexDataTableExamples caption {
+  caption-side: bottom;
+  font-weight: bold;
+  font-size: smaller;
+  margin-top: 5px;
+}
+
+/* Used to display captions in images */
+.caption {
+  font-size: smaller;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.displayImageShadowBlock {
+  border-radius: 5px;
+  display: block;
+  box-shadow: 0px 2px 5px rgba(0,0,0,0.25);
+  margin-left: 20px;
+}
+
+.displayImageInlineShadow {
+  border-radius: 5px;
+  box-shadow: 0px 2px 5px rgba(0,0,0,0.25);
+}
+
+/* Classes for the mermaid flowcharts */
+.mComment {
+  fill: #faffd6;
+  text-align: left;
+}
+
+.mQuestion > rect { 
+  fill: #ffe6bc;
+}
+
+.mBoundary {
+  fill: #eeeeee;
+  text-fill-color: #fff;
+}
+
+.mItem {
+  font-size: 16pt;
+}
+
+.mLeftList {
+  text-align: left;
+}

@@ -1,0 +1,41 @@
+---
+title: Complex Data Recap
+---
+import {DisplayGlossaryItem} from '@site/src/components';
+
+This chapter has introduced you to one of the more complex, but very powerful, areas of coding.
+
+We started out with the notion of storing more than one piece of data in a variable and then
+expanded this to <DisplayGlossaryItem item='list' plural /> and <DisplayGlossaryItem item='dictionary' plural />.
+
+From there we introduced and explored the concept of <DisplayGlossaryItem item='iteration' />.  
+Iteration is one of the most powerful coding concepts we explore in this book and has the 
+potential to significantly reduce the amount of code you write.
+
+We discussed how iteration and lists go hand-in-hand, so much so that we will often go out of our
+way to structure data in list form so that we can iterate over it.
+
+We then discussed how complex data structures can be nested into each other.  More specifically,
+we discussed how list items can contain complex data structures and how a list of dictionaries
+is a very useful and often-used way of storing table-like, or two-dimensional, data.
+
+We also discussed <DisplayGlossaryItem item='datablock' plural /> and how they can be used to store
+data as a basic database in Docassemble.
+
+We then expanded this discussion to include multidimensional data, that is mutliple levels of
+nested complex data structures.  We used the [iRefer](https://docassemble.flinders.edu.au/interview?i=docassemble.LLAW33012020S1P02:data/questions/main_code2.yml#page1)
+app as an example and did a deep dive into a subset of its data.  We used the example to show 
+a data block which contained a complex data structure containing a list of dictionaries, with some
+dictionary elements themselves containing lists.  We explored the benefits of multi-dimensional
+data structures and their ability to store information in a more easily accessible way than, say
+a two-dimensional table.
+
+Finally, we looked at an example of filtering out unwanted records.  We used our iRefer example
+and wrote code to display only agencies that catered for 'Behaviour management services'.
+
+Manipluating data is one of the most complex yet most powerful aspects of coding generally.  
+This chapter provides an introduction to working with data.  Docassemble has other powerful
+data manipulation tools such as [objects](https://docassemble.org/docs/objects.html),
+[groups](https://docassemble.org/docs/groups.html), and
+[table blocks](https://docassemble.org/docs/initial.html#table).  You are encouraged to read
+the Docassemble manual to find out more information about these concepts.

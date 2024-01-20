@@ -1,0 +1,332 @@
+---
+title: Source Code Library
+---
+import {DisplayImage} from '@site/src/components';
+import {DisplayChapter} from '@site/src/components';
+import {DisplayGlossaryItem} from '@site/src/components';
+import * as Flowcharts from './_flowcharts';
+import * as Tables from './_tables';
+
+## `main.yml`
+```yml showLineNumbers
+---
+include:
+  - questions.yml
+  - services.yml
+  - tests.yml
+  - process_data.yml
+---
+features:
+  css: ABC_styles.css
+---
+objects:
+  - ABClogo: DAStaticFile.using(filename='ABCInc_logo_white.png')
+---
+default screen parts:
+  post: |
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Unna&display=swap" rel="stylesheet">
+---
+mandatory: True
+code: |
+  set_parts(logo='<img src="' + ABClogo.url_for() + '" style="height: 50px;">')
+---
+mandatory: True
+question: Welcome screen
+subquestion: |
+  Welcome screen text will go here eventually.
+buttons:
+  - Continue: continue
+  - Exit: exit
+  - Restart: restart
+---
+# This code block drives our app
+mandatory: True
+code: |
+  final_screen
+---
+# This is our final screen
+event: final_screen
+question: Final Screen
+subquestion: |
+  Some introductory text will go here.
+
+  You entered the following information
+
+  Age|Gender|Service Locations|Type of Accommodation
+  ---|---|---|---
+  ${MJFage}|${MJFgender}|${MJFlocation.true_values()}|${MJFfamily_display}
+
+  Here are a list of services relevant to your circumstances.
+
+  ${relevant_services_table}
+attachment:
+  docx template file: ABCtemplate.docx
+  filename: "ABC Inc Emergency Accommodation Services"
+  valid formats:
+    - pdf
+buttons:
+  - Exit: exit
+  - Restart: restart
+---
+code: |
+  if MJFfamily == 'family':
+    MJFfamily_display = 'Accommodation for your family'
+  elif MJFfamily == 'single':
+    MJFfamily_display = 'Accommodation for yourself'
+  else:
+    MJFfamily_display = 'Error invalid value for MJFfamily: {}'.format(MJFfamily)
+---
+```
+## `questions.yml`
+```yml showLineNumbers
+---
+question: Age
+fields:
+ - Enter your age: MJFage
+   datatype: integer
+   min: 0
+---
+question: Gender
+fields:
+  - Select your gender: MJFgender
+    datatype: radio
+    choices:
+      - Female
+      - Male
+      - Other
+---
+question: Location
+subquestion: |
+  Select the location or locations where you are looking for services.
+
+  You may select as many locations as you like
+fields:
+  - no label: MJFlocation
+    datatype: checkboxes
+    choices:
+      - North
+      - South
+      - East
+      - West
+---
+question: Accommodation type
+subquestion: |
+  Are you looking or accommodation just for yourself or
+  for yourself and your family?
+fields:
+  - no label: MJFfamily
+    datatype: radio
+    choices:
+      - I am looking for accommodation for myself: single
+      - I am looking for accommodation for my family: family
+---
+```
+## `services.yml`
+```yml showLineNumbers
+---
+variable name: MJFservices
+use objects: True
+data:
+  - name: ABC Services
+    website: https://abcsvc.org.au
+    min_age: 18
+    max_age: 65
+    gender:
+      - Male
+      - Female
+    location:
+      - North
+      - East
+    family:
+      - family
+      - single
+  - name: WH Youth
+    website: https://whyouth.org.au
+    min_age: 12
+    max_age: 17
+    gender:
+      - Male
+      - Female
+      - Other
+    location:
+      - South
+    family:
+      - single
+  - name: "St Mary's Shelter"
+    website: https://stmarys.org.au
+    min_age: 12
+    max_age: 999
+    gender:
+      - Female
+      - Other
+    location:
+      - North
+    family:
+      - single
+  - name: "MHI Men's Health"
+    website: https://mhimh.org.au
+    min_age: 18
+    max_age: 999
+    gender:
+      - Male
+    location:
+      - North
+      - West
+    family:
+      - single
+  - name: DE Family Shelter
+    website: https://defsupport.org.au
+    min_age: 18
+    max_age: 65
+    gender:
+      - Male
+      - Female
+    location:
+      - North
+      - East
+      - West
+      - South
+    family:
+      - family
+---
+```
+## `process_data.yml`
+```yml showLineNumbers
+---
+objects:
+  - MJFrelevant_services: DAList.using(auto_gather=False)
+---
+code: |
+  MJFrelevant_services.clear()
+  for a_service in MJFservices:
+
+    # Set MJFage_ok
+    MJFage_ok = a_service['min_age'] <= MJFage <= a_service['max_age']
+
+    # Set MJFgender_ok
+    MJFgender_ok = MJFgender in a_service['gender']
+
+    # Set MJFlocation_ok
+    MJFlocation_ok = False
+    for a_location in MJFlocation.true_values():
+      if a_location in a_service['location']:
+        MJFlocation_ok = True
+
+    # Set MJFfamily_ok
+    MJFfamily_ok = MJFfamily in a_service['family']
+
+    # Test criteria and add to relevant services list
+    if MJFage_ok and MJFgender_ok and MJFlocation_ok and MJFfamily_ok:
+      MJFrelevant_services.append(a_service)
+
+  # How we tell Docassemble we've finished gathering relevant services
+  # into MJFrelevant_services
+  MJFrelevant_services.gathered = True
+---
+table: relevant_services_table
+rows: MJFrelevant_services
+columns:
+  - Name: |
+      "[{}]({})".format(row_item['name'], row_item['website'])
+  - Age Range: |
+      "{} to {}".format(row_item['min_age'], row_item['max_age'])
+  - Gender: row_item['gender']
+  - Locations: row_item['location']
+  - Family: row_item['family']
+---
+code: |
+  MJFservices[i]['service_link'] = "[{}]({})".format(
+    MJFservices[i]['name'],
+    MJFservices[i]['website']
+  )
+---
+```
+## `tests.yml`
+This is not necessary for the final working version of the app but is included for
+completeness
+```yml showLineNumbers
+---
+table: services_test_table
+rows: MJFservices
+columns:
+  - Name: row_item['name']
+  - Website: row_item['website']
+  - Age Range: |
+      "{} to {}".format(row_item['min_age'], row_item['max_age'])
+  - Gender: row_item['gender']
+  - Locations: row_item['location']
+  - Family: row_item['family']
+---
+table: relevant_services_test_table
+rows: MJFrelevant_services
+columns:
+  - Name: row_item['name']
+  - Website: row_item['website']
+  - Age Range: |
+      "{} to {}".format(row_item['min_age'], row_item['max_age'])
+  - Gender: row_item['gender']
+  - Locations: row_item['location']
+  - Family: row_item['family']
+---
+```
+## `ABC_styles.css`
+```css showLineNumbers
+:root {
+  --ABC-darkest: rgb(10,62,92);
+  --ABC-darker: rgb(9,115,150);
+  --ABC-light: rgb(25,175,189);
+  --ABC-sun: rgb(205,146,79);
+  --ABC-sun-lighter: rgb(248,238,228);
+}
+
+.navbar{
+  background-color: white !important;
+  border-bottom: 5px solid var(--ABC-darkest);
+}
+
+.da-page-header {
+  font-family: 'Poppins', sans-serif;
+}
+
+.da-subquestion {
+    font-family: 'Unna', sans-serif;
+    font-size: 18pt; 
+}
+
+.da-form-label {
+  font-family: 'Unna', sans-serif;
+  font-size: 1.2em;
+}
+
+.dalabelauty {
+  font-family: 'Unna', sans-serif;
+  font-size: 1.2em;
+}
+
+.table {
+    border: 5px solid var(--ABC-darkest);
+}
+
+/* This makes the column headings dark and the text white */
+.table th {
+  background-color: var(--ABC-darkest);
+  color: white;
+}
+
+/* We shrink the text a little in the table cells */
+.table td {
+  font-size: 0.8em;
+}
+
+/* Docassemble is highlighting every odd cell in grey.
+ * we are going to use a lighter version of the colour
+ * of the sun in the ABC logo */
+.table tr:nth-child(odd) {
+  background-color: var(--ABC-sun-lighter);
+}
+```
+## Other resources
+The [ABC logo](/img/textbook/chapter_06/filter/ABCInc_logo_white.png)
+
+The [Word Template](/templates/ABCtemplate.docx)

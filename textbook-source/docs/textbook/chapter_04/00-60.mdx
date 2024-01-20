@@ -1,0 +1,187 @@
+---
+title: "If Statements and Logical Operators"
+---
+
+import {Quizlet, Answer, Explanation} from '@site/src/components';
+import * as Components from '@site/src/components'
+
+## Testing many things at once
+As we have seen in the previous section, a particular endpoint screen might only be displayed when more than one condition is met. For example: 
+
+```mermaid
+flowchart LR;
+    id1{{Are you 25 or older and studying full time?}}
+    id1 -- Yes --> id2(You are eligible for AusStudy)
+    id1 -- No --> id3(You are not eligible for AusStudy)
+```
+
+One way to evaluate for multiple conditions is using nested ```if``` statements. However, that can be somewhat cumbersome, and it can be easy to introduce errors. 
+
+Another, simpler way is to use *logical operators*. There are two main logical operators in Docassemble - ```and``` and ```or```. 
+
+## The ```and``` Operator
+When we use the ```and``` operator in an if statement, we are testing to see whether two or more things are true at the same time. If both these conditions are met (that is, if both conditions are equal to ```True```), then Docassemble executes the code inside our if statement.
+
+If we are using an ```and``` operator, we need to make sure that we put a space before *as well as* after the ```and```.
+
+If we are including more than two conditions in an if statement, we need to put an ```and``` operator between each condition.
+
+## Using ```and``` Operators
+
+Let's see how we might implement this using the code we previously designed for welfare eligibility.
+
+```yaml showLineNumbers title="Ch4_Welfare_And_If_Statements.yml" showLineNumbers
+---
+question: |
+  What is your age?
+fields:
+  - no label: userAge
+    datatype: integer
+---
+question: |
+  Do you suffer from a disability?
+yesno: userHasDisability
+---
+question: |
+  Are you studying full time?
+yesno: userIsStudying
+---
+question: |
+  Are you unemployed?
+yesno: userIsUnemployed
+---
+mandatory: True 
+question: Your eligibility for welfare services.
+subquestion: |
+  Thank you for completing this questionnaire.
+
+  % if userAge < 18:
+  Because you are under 18, your parents may be eligible for [Family Tax A and B](https://www.dss.gov.au/families-and-children/benefits-payments/family-tax-benefit).
+  % if userHasDisability:
+  You may also be eligible for the [Disability Support Pension](https://www.servicesaustralia.gov.au/disability-support-pension).
+  % endif
+  % elif userAge >= 65:
+  Because you are older than 65, you may be eligible for the [Aged Pension](https://www.servicesaustralia.gov.au/age-pension)
+  % else:
+  % if userHasDisability:
+  You may be eligible for the [Disability Support Pension](https://www.servicesaustralia.gov.au/disability-support-pension).
+  % elif userIsStudying and userAge >= 25:
+  You may be eligible for [AusStudy](https://www.servicesaustralia.gov.au/austudy).
+  % elif userIsUnemployed and userAge >= 22:
+  You may be eligible for [JobSeeker](https://www.servicesaustralia.gov.au/jobseeker-payment).
+  % else:
+  It does not appear that you are eligible for any welfare payments. 
+  % endif
+  % endif
+
+buttons:
+  - Restart: restart
+  - Exit: exit
+---
+```
+
+Using ```and``` statements, we have shortened this code down from 55 lines to only 47 lines. We have removed one layer of our nested if statements. However, this code will execute exactly like the previous code that we have designed using [Mako if statements](./00-50). 
+
+:::tip
+When designing your application, think about ways that you can reuse code, such as for question screens when you are displaying the same information to the user.
+:::
+
+## The ```or``` Operator
+When we use the ```or``` operator in an if statement, we are testing to see whether one of multiple conditions is True at the same time. If at least one of these conditions is met (that is, if one of the conditions is equal to ```True```), the code inside the if statement is executed.
+
+As for an if statement using an ```and``` operator, there must be a space between the condition being evaluated and the ```or``` operator. If there are more than two conditions being evaluated, there must be an ```or``` between each condition.
+
+## Using ```or``` Operators
+Let's return to our Magistrates court selector, and see how we can use ```or``` statements. 
+
+```yaml showLineNumbers title="Ch4_Magistrates_Court_Finder_Or_Statements.yml" showLineNumbers
+---
+question: |
+  Where do you live?
+fields:
+  - no label: userLocation
+    datatype: radio
+    choices:
+      - Western Adelaide: west
+      - Northern Adelaide: north
+      - North-East Adelaide: northeast
+      - Adelaide CBD: cbd
+      - Southern Adelaide: south
+      - None of the above: none
+---
+# This is the one mandatory question block
+mandatory: True
+question: Your local Magistrates Court
+subquestion: |
+  Thank you for completing this survey.
+
+  % if userLocation == 'west':
+  Your nearest Magistrates Court is the Port Adelaide Magistrates Court at 260 St Vincent Street, Port Adelaide SA 5015.
+  % elif userLocation == 'north':
+  Your nearest Magistrates Court is the Elizabeth Magistrates Court at 15 Frobisher Road, Elizabeth SA 5112.
+  % elif userLocation == 'northeast' or userLocation == 'cbd':
+  Your nearest Magistrates Court is the Adelaide CBD Magistrates Court at 260 Victoria Square, Adelaide SA 5000.
+  % elif userLocation == 'south':
+  Your nearest Magistrates Court is the Christies Beach Magistrates Court at 96 Dyson Road, Christie Downs SA 5164.
+  % else:
+  We are unable to identify a Magistrates Court near you.
+  % endif
+  
+  Please contact this [telephone number](tel:08 8204 2444) for further details.
+
+buttons:
+  - Restart: restart
+  - Exit: exit
+---
+```
+
+This application works identically to the previous court selector we developed. However, by using an ```or``` operator, we have condensed an additional line of code.
+
+:::info
+Note that we can put ```and``` and ```or``` statements in both a python if statement and a Mako if statement.
+:::
+
+<Quizlet title="Logical Operators Quiz">
+  Consider the following fragment of Docassemble code:
+
+  ```yaml
+  ---
+  question: |
+    Are you an Australian citizen?
+  yesno: australianCitizen
+  ---
+  question: |
+    Are you registered as an elector?
+  yesno: australianElector
+  ---
+  question: |
+    What is your age?
+  fields:
+    - no label: userAge
+      datatype: integer
+  ---
+  code: |
+    if userAge > 18 and australianElector australianCitizen:
+      ##do something in Docassemble
+    else:
+      ##do something else
+  ---
+  ```
+
+  This application will generate a syntax error in Docassemble. Why?
+  <Answer>
+    The `if` statement clause is not indented correctly
+  </Answer>
+  <Answer>
+    The test evaluating `userAge` is incorrect
+  </Answer>
+  <Answer isCorrect>
+    There is no `and` operator between `australianCitizen` and `australianElector`
+  </Answer>
+  <Explanation correctAnswer>
+  That's right. Remember that we need to put an `and` operator between each logical test in our if CSSLayerStatementRule.
+  </Explanation>
+  <Explanation>
+  That's not quite right. Our indenting looks correct, and the test for evaluating `userAge` is correct. 
+  </Explanation>
+</Quizlet>

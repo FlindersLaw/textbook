@@ -1,0 +1,81 @@
+---
+title: Introducing GitHub
+---
+import * as Constants from '@site/src/constants'
+import * as Components from '@site/src/components'
+import {teachingcodeurl} from '@site/src/components';
+
+:::caution 
+The rest of this textbook assumes that you have signed up for GitHub 
+and connected your GitHub account to Docassemble.
+
+Make sure you have signed up for GitHub and connected your GitHub account
+to Docassemble as per [Chapter 1](../chapter_01/00-20).
+:::
+
+:::note
+Don't remember what GitHub is?  Check [here](../chapter_01/00-20#what-is-github)!
+:::
+
+As we move on in this book our code will become more and more complex.
+Instead of typing your exercises in by hand (or copying them from this book),
+all the code used in this textbook is available on GitHub.
+
+As per [Chapter 1](../chapter_01/00-20#what-is-github), GitHub is an online
+tool that coders use to work together on code.  Coding projects are stored
+in *repositories*.  Coders can *pull* down a local copy of a repository 
+(or *repo*) which they can work on and modify.  Changes that a user makes
+are not synchronised back up to the cloud until a user *commits* and *pushes*
+their changes back up to the cloud.
+
+You will be using GitHub to collaborate with your project team members.
+
+But for now, you can use GitHub to pull down a copy of the example code 
+used in this textbook into your Playground.
+
+:::tip
+You might want to pull the teaching code down into a new [Project](https://docassemble.org/docs/playground.html#projects) so your
+Default Playground doesn't get cluttered.
+:::
+
+## Pulling Down the Teaching Code
+### Making a Project
+Let's create a new project and call it 'TeachingCode' (spaces aren't allowed
+in project names)
+
+Click on 'Playground' and select 'Manage Projects'
+<Components.DisplayImage imageURL='/img/textbook/chapter_02/github1.png' />
+
+Click on 'Add a New Project'
+<Components.DisplayImage imageURL='/img/textbook/chapter_02/github2.png' />
+
+Create a new project called `TeachingCode` and press <Components.DisplayDAButtons button={Constants.da_save_prop} />
+<Components.DisplayImage imageURL='/img/textbook/chapter_02/github3.png' />
+
+You should now be in your new Playground.  In the top-left of the black
+navbar you will see 'Playground / TeachingCode'.
+
+Now let's pull the code down from GitHub.  Click on the 'Folders' menu,
+then click 'Packages'
+<Components.DisplayImage imageURL='/img/textbook/chapter_02/github4.png' />
+
+Click 'Pull'
+<Components.DisplayImage imageURL='/img/textbook/chapter_02/github5.png' />
+
+In the GitHub URL enter <Components.DisplayConstants data={teachingcodeurl} />
+<Components.DisplayImage imageURL='/img/textbook/chapter_02/github6.png' />
+
+Click on <Components.DisplayDAButtons button={Constants.da_save_prop} button_text='Pull' />
+
+You will be returned to the Package screen.  A banner will appear across the top
+of your screen telling you the repository (or 'package') has been uploaded
+and you will also notice the Package name has changed and information about
+the package has been populated.
+<Components.DisplayImage imageURL='/img/textbook/chapter_02/github7.png' />
+
+Click on `<Back` to go to your playground.  Click on the Folders menu and 
+you will see a list of files from the package.
+<Components.DisplayImage imageURL='/img/textbook/chapter_02/github7.png' />
+
+You now have a copy of all the code used in this textbook in your local
+Playground.  That should save you a bit of typing as we move on.

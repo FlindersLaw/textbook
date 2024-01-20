@@ -1,0 +1,736 @@
+---
+title: Data Types
+---
+import {DisplayGlossaryItem} from '@site/src/components';
+import {DisplayImage} from '@site/src/components';
+import {DisplayChapter} from '@site/src/components';
+import {Quizlet,Answer,Explanation} from '@site/src/components'
+
+## Introduction
+Much like we can put different stuff in a bucket, like water or sand or fish (yum!),
+we can also store different types of data in a variable.  Unlike a bucket, 
+we tend to be a bit more picky about knowing what type of data we've stored
+in our variables.  This is because we can do different things with different
+<DisplayGlossaryItem item='datatype' plural />.  For example, we can do 
+arithmetic on number data types but we can't on text (or 
+<DisplayGlossaryItem item='string' />) data types.  Likewise, we can join
+two strings together but doing that doesn't make too much sense with numbers.
+
+:::note
+Text is stored in what's called a <DisplayGlossaryItem item='string' /> data type.
+It's called a 'string' because text is essentially a string of characters all joined together.
+
+From now onwards we'll be referring to text only as **strings** and not as text.
+
+We'll cover this further [below](#strings) but in coding, text includes spaces
+(eg: 'Mark' is a string, as is 'Mark Ferraretto') and other special characters.
+Just keep that in mind for now.
+:::
+
+Let's cover off a few data types that you'll be using in your code.
+
+## Integers
+Integers are whole numbers, that is numbers that are not fractions or numbers without a decimal point (eg: 1, 5, -33 etc).  They can be positive or negative.  They **must not**
+have decimals.
+
+We use integers to store information such as a person's age, or the year they were born,
+or the number of days since they received a subpoena.
+
+We can do arithmetic on integers.  For example, we can add two numbers together.  The value of the variable `c` in the example below would be 3.  The value of `d` would be 9.
+```python showLineNumbers
+a = 1
+b = 2
+c = a + b
+d = (a + b) * 3
+```
+:::note
+In python we use these arithmetic operators:
+
+This|Means this
+---|---
+`+`| Addition (der!)
+`-` | Subtraction eg: `3 - 2 == 1`
+`*` | Multiplication eg: `3 * 2 == 6`
+`/` | Division eg: `1 / 2 == 0.5`
+:::
+
+If we want to collect integer data from a user we can tell Docassemble to ensure that 
+only integers are collected.  We can set a `datatype` in Docassemble code and this 
+prevents incorrect data (eg: a string) being entered into the text field.  Here's an example
+
+```yml showLineNumbers title="Only collect age as an integer"
+---
+mandatory: True
+question: Integer datatype
+fields:
+  - Enter your age: MJFage
+    # highlight-next-line
+    datatype: integer
+---
+```
+By setting `datatype: integer` Docassemble prevents the user from entering non-integer
+data into the field.
+
+<DisplayImage imageURL='/img/textbook/chapter_03/datatypes2.png' />
+
+This is known as <DisplayGlossaryItem item='datavalidation' />.  Docassemble provides
+a comprehensive set of data validation tools to ensure that users do not inadvertently
+enter incorrect data.
+
+## Floating points
+Floating point numbers, or <DisplayGlossaryItem item='float' plural /> are
+numbers that *do* contain decimals.  For example, the numbers
+0.5, 1.32, 6.333333333, -123483.3728322 are all floating point numbers.
+
+The most common use for floating points in a legal context is to work with money amounts,
+as money, being a number to two decimal points, is best represented as a floating point number.
+
+We can do arithmetic with floats much like we do with integers.  We can mix integers
+and floats in our arithmetic, but if we do the result is always a float.  See these
+examples:
+```python showLineNumbers
+a = 1.5
+b = 3.5
+c = a * 3  # c is 4.5
+d = b * 2  # d is 7.0 (not 7)
+e = d + 1  # e is 8.0 (not 9)
+```
+Docassemble's <DisplayGlossaryItem item='datavalidation' /> system contains a few
+tools to help us ensure we collect floating point numbers properly.  
+`datatype: number` that allows us to ensure that whatever we collect must be a number
+(in this case meaning a float or an integer).  Docassemble also provides a 
+`datatype: currency` which forces the user to enter number as a currency (ie: either 
+a whole number or a number with only two digits after the decimal point).
+
+```yml showLineNumbers title="Using number and currency datatypes"
+---
+mandatory: True
+question: Floating point data types
+fields:
+  - Can only enter a currency value here: MJFcurrency
+    # highlight-next-line
+    datatype: currency
+  - Can enter any number here: MJFnumber
+    # highlight-next-line
+    datatype: number
+---
+```
+In the screenshot below you can see the user has entered text into the second field
+and so the entry is invalid.  In the first field the user has entered `123.456` which is
+not a valid currency.  In this case Docassemble will round up the value to `123.46` and
+accept the input.
+
+<DisplayImage imageURL='/img/textbook/chapter_03/datatypes3.png' />
+
+:::tip Hint
+Copy and paste the code into your playground and try it out!
+:::
+
+<span id="data-validation">
+:::caution A word on data types and Docassemble's `datatype:` data validation
+Docassemble and <DisplayGlossaryItem item='python' upper /> define data type in 
+slightly different ways.  In Python a data type is what we're describing here - the 
+fundamental type of data that can be stored in a variable.
+Docassemble's `datatype` mixes storage of data with <DisplayGlossaryItem item='datavalidation' />.
+We've seen how these don't quite mesh as, fundamentally, a money amount is a
+<DisplayGlossaryItem item='float' /> as it is a number with decimal places.
+Docassemble distinguishes between regular floats and currency to
+simplify how currencies are displayed and captured.  This is because, as legal software,
+currencies are the most common type of floating point numbers that it works with.
+
+We'll see there are other differences as well.  For example, Docassemble has different
+data types for [Email addresses](https://docassemble.org/docs/fields.html#email),
+[passwords](https://docassemble.org/docs/fields.html#password) and 
+[plain text](https://docassemble.org/docs/fields.html#plaintext), even though 
+fundamentally, all three 'data types' are actually
+<DisplayGlossaryItem item='string' plural />.
+
+For practical purposes, consider Docassemble's `datatype:` as a 
+<DisplayGlossaryItem item='datavalidation' /> tool and not as a fundamental 
+data type.  When we refer to data types in this textbook we'll be referring to the
+fundamental data types as they are defined in Python and as we discus them in this
+part of the textbook.
+:::
+</span>
+
+<Quizlet>
+    In this expression
+    ```python
+    a = 11.55
+    ```
+    the data type of `a` is:
+    <Answer>
+        Integer
+    </Answer>
+    <Answer isCorrect>
+        Floating point number
+    </Answer>
+    <Answer>
+        String
+    </Answer>
+</Quizlet>
+<Quizlet>
+    In this expression
+    ```python
+    b = 253265
+    ```
+    the data type of `b` is:
+    <Answer isCorrect>
+        Integer
+    </Answer>
+    <Answer>
+        Floating point number
+    </Answer>
+    <Answer>
+        String
+    </Answer>
+</Quizlet>
+
+## Dates and times
+Dates and times are another number-type data type.  In fact, they are represented
+internally to Python (and many other languages and systems) as integers.
+However, for practical
+purposes we deal with dates and times as a separate data type.
+
+Like other number-type data, we can do arithmetic with dates and times. This can be
+useful if, for example, you need to work out the deadline for submitting a defence to,
+a statement of claim, or to see if a claim is statute-barred.
+
+Date and time arithmetic is more complex than arithmetic with other number-like data.
+We can't just add a number to a date as Docassemble doesn't know whether we want 
+to add that number to the day, month or year component of the date.
+
+Date and time arithmetic will be covered elsewhere in this textbook but here is 
+some example code that collects dates and datetimes and performs some basic arithmetic.
+
+:::tip TODO
+add link to 'elsewhere in this textbook'
+:::
+
+```yml showLineNumbers title="Basic Date and Time arithmetic"
+---
+mandatory: True
+question: Date and time output
+subquestion: |
+  Data|Value 
+  ---|---
+  The first date you entered (formatted to be AGLC-compliant)|${format_date(MJFdate1, "d MMMM YYYY")}
+  The date and time you entered (not AGLC-compliant.  Note that by default the time isn't displayed!)|${MJFdt1}
+  The date and time, this time AGLC-compliant and with the time|${format_datetime(MJFdt1, "d MMMM YYYY h:mm a")}
+  28 days after the first date|${MJFdate1.plus(days=28)} 
+  
+---
+question: Enter data below
+fields:
+  - Choose a date: MJFdate1
+    datatype: date
+  - Choose another date and time: MJFdt1
+    datatype: datetime
+---
+```
+:::tip
+Copy this code into your playground and try it out!
+:::
+
+## Strings
+Strings are by far the most common data type you will be dealing with.  Law is 
+clearly a very text-based profession and text is represented to technology as a
+string of characters joined together, or as a <DisplayGlossaryItem item='string' />.
+
+### What is in a string?
+Any text is clearly a string, so:
+> hello
+
+is a string. However, a string is more than just words.  A string can contain numbers,
+symbols and spaces.  In short, if you can type it on your keyboard then it can be 
+represented as a string.  That means:
+
+> Strings can contain spaces between words, and punctuation.
+
+> Strings can contain numbers, such as this one: 123!
+
+The next three examples are also all strings:
+
+> *#(%#()#_@(@&#))
+
+> 2839683732
+
+> This string 'has quotes' in it
+
+### Representing strings
+As can be seen above a string can contain any combination of text, numbers and symbols.
+This makes it challenging for Docassemble to work out whether data input is a string
+or not.  How do we address this?  There are two ways:
+
+#### Encapsulating the string in quotes
+If we want to make it clear to Docassemble that a string is a string and not, say, 
+part of the code or a number or something else, we encapsulate the string in quotes.
+We can use single or double quotes.  The convention is to use single quotes and only
+use double-quotes if your string contains single quotes as part of it.  So, we would
+express the five examples above as follows:
+
+```
+'Strings can contain spaces between words, and punctuation.'
+'Strings can contain numbers, such as this one: 123!'
+'*#(%#()#_@(@&#))'
+'2839683732'
+"This string 'has quotes' in it"
+```
+When Docassemble sees text in quotes it knows not to process that text and to display
+it as a string.
+
+#### String is the default data type
+The second way is that Docassemble has a presumption that *any* data it collects is 
+a string unless specified otherwise.  This is where those `datatype:` tags come into 
+play.  If the `datatype:` tag is omitted (as it usually is), Docassemble
+[assumes](https://docassemble.org/docs/fields.html#plaintext) the
+data type will be a string (or `text`) as it calls it.
+
+Unless we specify otherwise, Docassemble collects data as a string and wraps the 
+quotes around it.
+
+:::caution Numbers as strings
+It is evident from the above example that a string could contain a number. This can 
+be a cause of confusion as Docassemble will usually display numbers as number data types and numbers as strings exactly the same way.
+
+Copy this code into your playground as an example
+```yml showLineNumbers
+---
+mandatory: True
+question: Numbers as strings
+subquestion: |
+
+  Comment|Data
+  ---|---
+  Here is the first number you entered. This was collected as a string.|${MJFnum1}
+  Here is the second number you entered.  This was collected as an integer.|${MJFnum2}
+  
+---
+question: Enter data
+fields:
+  - Enter a number. This will be stored as a string: MJFnum1
+  - Enter a number. This will be stored as an integer: MJFnum2
+    datatype: integer
+---
+```
+**Be careful!**
+
+Docassemble treats strings and numbers in similar ways.  For example, while you can
+'add' two strings together (using the `+` sign) what you get from a string will be
+very different to what you'll get if your data is a number type.  The same goes for
+testing strings to see if they equal one another.  See [Testing Variables](./00-30) for
+more about this.
+:::
+
+<Quizlet>
+    Which of these variables have been assigned a value with a string data type?
+    ```python
+    a = 52.5
+    b = '52.5'
+    c = 525
+    ```
+    <Answer>
+        `a`
+    </Answer>
+    <Answer isCorrect>
+        `b`
+    </Answer>
+    <Answer>
+        `c`
+    </Answer>
+    <Explanation correctAnswer>
+    Correct!
+
+    Even though it appears a number is being assigned to `b` it is actually
+    a string as that number is surrounded by single quotes.
+    </Explanation>
+</Quizlet>
+<Quizlet>
+    Which of these variables has correctly been assigned a string value?
+    ```
+    a = The cat sat on the mat
+    b = 'It doesn't matter what I say'
+    c = "The rain in spain stays mainly on the plain"
+    ```
+    the data type of `b` is:
+    <Answer>
+        `a`
+    </Answer>
+    <Answer>
+        `b`
+    </Answer>
+    <Answer isCorrect>
+        `c`
+    </Answer>
+    <Explanation correctAnswer>
+    Correct!
+
+    The first line is incorrect as the phrase is not encapsulated in quotation marks.
+    If you wrote this line in code you would receive a rather cryptic syntax error.  
+
+    Here is the corect statement:
+    ```python
+    a = 'The cat sat on the mat'
+    ```
+
+    The second line is also incorrect as, although it is encapsulated in single quotes
+    the phrase itself also contains a single quote.  When you have a phrase that
+    contains quotation  marks you should encapsulate that phrase in  the other quotes.
+
+    Here is the correct statement:
+    ```python
+    b = "It doesn't matter what I say"
+    ```
+
+    The third line is correct as it the string is encapsualted in double-quotes.  You
+    can use single or double quotes to represent a string
+    </Explanation>
+</Quizlet>
+
+### Manipulating Strings
+We've already seen that we can perform arithmetic operations on the number types and,
+with a bit more effort, on the date and datetime types.  Strings can also be 
+manipulated, but clearly arithmetic operations won't work on strings as they are not
+numbers.  That said, here are a few things you can do with strings.
+
+#### Joining strings together
+There are a number of ways to join strings together.  One way is by using the plus (`+`)
+operator.
+
+##### Using the `+` operator
+This method of joining strings together is usually used in
+<DisplayGlossaryItem item='codeblock' plural /> or inside 
+<DisplayGlossaryItem item='mako' upper /> expressions in a 
+<DisplayGlossaryItem item='subquestionblock' />.
+
+Let's look at this example.
+```python showLineNumbers
+a = 'First part'
+b = 'Second part'
+c = a + b
+```
+In the code above, the value of `c` would be `'First partSecond part'`.  
+
+Note the strings are joined directly together with no space.  If you want a space
+between strings then you need to add it yourself.  Luckily, you can use multiple joins
+(`+`) in the one statement.
+
+```python showLineNumbers
+a = 'First part'
+b = 'Second part'
+c = a + ' ' + b     # Add a space by encapsulating it in quotes
+```
+Now the value of c is `'First part Second part'`.
+
+Here is an example using `+` to join strings together inside a Mako expression:
+```yml showLineNumbers
+---
+mandatory: True
+question: String Concatenation
+subquestion: |
+    Hello,
+
+    Your full name is ${ MJFfirstname + ' ' + MJFlastname }
+---
+```
+<Quizlet>
+    In this statement, what value is assigned to `a`?
+    ```python
+    a = 1 + 1
+    ```
+    <Answer isCorrect>
+    `2`
+    </Answer>
+    <Answer>
+        `1`
+    </Answer>
+    <Answer>
+        `'11'`
+    </Answer>
+    <Explanation correctAnswer>
+    Correct!
+
+    Two integers are being added together, so the answer will be 2
+    </Explanation>
+</Quizlet>
+<Quizlet>
+    In this statement, what value is assigned to `a`?
+    ```python
+    a = '1' + '1'
+    ```
+    <Answer>
+    `2`
+    </Answer>
+    <Answer>
+        `11`
+    </Answer>
+    <Answer isCorrect>
+        `'11'`
+    </Answer>
+    <Explanation correctAnswer>
+    Correct!
+
+    The two number 1s on the right side are now encapsualted in quotes.  This makes
+    them strings (single-character strings!) and not integers any more.  Therefore,
+    when we use `+` we are now joining two strings together instead of performing
+    integer arithmetic.  Consequently the answer is the string `'11'` (as opposed to
+    the integer `11`).
+    </Explanation>
+</Quizlet>
+##### Using `format()`
+An alternative to using `+` is to use the `format()` <DisplayGlossaryItem item='method' />.
+Like `+` this is also suitable for code blocks and Mako expressions.  With `format()`
+you lay out a template string as you would like it,
+with spaces and any other fixed characters or boilerplate text.
+You place `{}` as markers within your string to indicate where format should place
+variables.  See this example:
+
+
+```python showLineNumbers
+a = 'First part'
+b = 'Second part'
+c = '{} {}'.format(a, b)
+```
+In this example the value of c is `'First part Second part'` just as it was above.
+You can see we created a template string with `{}` markers for each variable and 
+inserted a space (` `) in between them.  We then use `format(a, b)` to substitute
+the value of `a` into the first `{}` and `b` into the second `{}`.
+
+You can see that using `format()` in this way we've ended up with a tidier expression.
+Also, someone reading our code would immediately know that we were planning to display
+two strings separated by a space.
+
+Here's what the example Docassemble code would look like if we used `format()`
+
+
+```yml showLineNumbers
+---
+mandatory: True
+question: String Concatenation
+subquestion: |
+    Hello,
+
+    Your full name is ${ '{} {}'.format(MJFfirstname, MJFlastname) }
+---
+```
+
+
+### Strings and Markdown (and why we need Mako)
+As you know from <DisplayChapter chapter='chapter_02' target='00-20' />, we use
+<DisplayGlossaryItem item='markdown' /> to construct inteview screens in our apps.  
+You can see that Markdown is basically text, or strings!  Because of this Markdown
+does away with the requirement to encapsulate strings in quotes. Instead, Markdown 
+assumes *everything* is a string.  This is useful as most of the Markdown we type 
+will be boilerplate text.  
+
+However, there are times when we need to embed the value of a variable into our
+boilerplace text.  Markdown deals with this by using
+<DisplayGlossaryItem item='escapecharacter' plural />.
+These are special characters that Markdown knows trigger some special processing.  
+We have already seen this with <DisplayGlossaryItem item='mako' upper />. Mako 
+expressions are surrounded by a dollar sign and braces (ie: `${...}`).  Markdown
+knows that when it sees the `${` characters that what follows it is Mako.  Markdown
+processes everything it then sees as Python code until it finds the closing brace `}`.
+
+This allows us to make our example code even clearer, because we don't need to 
+concatentate strings or use `format()` in a Mako expression.  We can just display
+the two variables as Mako with a space between them.
+
+```yml showLineNumbers
+---
+mandatory: True
+question: String Concatenation
+subquestion: |
+    Hello,
+
+    Your full name is ${MJFfirstname} ${MJFlastname}
+---
+```
+
+The space between the two Mako expressions is a string and is therefore displayed.
+
+This last example is the clearest way of displaying two Mako variables.
+
+:::note What's inside Mako is Python
+We alluded to this just now.  'Mako' describes the means of providing escape characters
+to Markdown and then processing the expression inside its braces.  The code written
+inside the braces is Python code (or, more technically, a Python
+<DisplayGlossaryItem item='expression' />).  This is the same Python that you use
+in <DisplayGlossaryItem item='codeblock' /> and all througout Docassemle.
+:::
+
+## Booleans
+The **boolean** data type is takes its name from a [branch of mathematics](https://en.wikipedia.org/wiki/Boolean).
+We don't need to get into any of the mathematical details. All we need to know is that
+a boolean data type can have only two possible values - *True* or *False*.
+
+This appears inredibly simple but boolean logic (and consequently variables with a
+boolean data types) are absolutely central to our decision-making process and the logic
+of our applications.  In fact, booleans form the core of application logic in 
+*every* software system regardless of how simple or complex.
+Every decision that we make will ultimately be expressed as a true/false proposition.
+
+Let's look at some questions we might ask and how we would express these as true/false
+propositions.
+
+**Age**
+
+We may need to ask a user's age, for example to determine if they are an adult.  If so
+we may ask the question:
+> "Are you 18 or over?".
+
+This could be expressed as a true/false proposition, such as:
+> "Your age is greater than or equal to 18"
+
+Which would evaluate as true or false.
+
+**Gender**
+
+Likewise, we may need to know a user's gender so that we can direct them to an
+appropriate legal service.  Our initial thoughts may be to ask:
+> "What gender do you identify as?"
+
+That question is open-ended and could have any number of answers, some of
+which our code may not account for.  A better approach may be to ask:
+> "Do you identify as male, female or some other gender?"
+
+Now we have three possible answers. Consequently we'd need three true/false propositions
+to evaluate:
+> "You identify as male"  
+> "You identify as female"  
+> "You identify as some other gender"
+
+We would evaluate each of these in turn.  Only one statement would evaluate to true.
+
+### Booleans in code
+Much like above, we express booleans in code as true/false propositions.  So, for example,
+the proposition "Your age is greater than or equal to 18" would be expressed as:
+```python
+MJFage >= 18
+```
+
+If we wanted to remember the outcome of the proposition we could store that in 
+another variable:
+```python
+MJFisadult = MJFage >= 18
+```
+The value of `MJFisadult` would be `True` or `False` depending on the user's age.
+
+:::note 
+Python uses two special words (or <DisplayGlossaryItem item='reservedword' plural />)
+- `True` and `False` to represent, well true and false!  Python knows to treat these
+words as the meaning of true and false respectively and not some other variable or 
+string.
+:::
+
+### Testing for 'Yes' and 'No'
+In many cases you will ask a user a question that requires a Yes/No answer.
+Using booleans is a great way to store the responses. This is because testing
+for true/false is easier and logically clearer than testing for the strings
+'Yes' and 'No'. This is because:
+
+1. We can only collect two possible answers. The boolean data type allows for the storage of only two possible answers. This place is an inherent limit on us being able to accidentally collect 1/3 type of answer.
+1. Using booleans means that we don't need to worry about the different 
+possible permutations of answer that we may get with text. For example,
+collecting our responses as a string would mean that we may need to test
+for each of 'Yes', 'yes', 'YES', 'No', 'no', 'NO' and any other combination
+of upper and lower case letters.
+
+In short, using booleans to collect responses to Yes/No questions is a good
+solution and is in fact best practice in coding.
+
+:::caution Python is case sensitive!
+Python is case sensitive.  That means that `True` and `true` are not the same!  Unlike
+`True`, `true` is not a <DisplayGlossaryItem item='reservedword' /> and will be treated
+as a variable name.
+
+Mixing up cases can often lead to unintended conseuqneces, so be careful!
+:::
+
+Helpfully, Docassemble provides certain data types to help us in collecting
+Yes/No responses and storing them as booleans.
+
+:::note
+Remember that what Docassemble calls 'data types'
+[does not always marry up](#data-validation)
+with how this textbook defines data types.
+:::
+
+Docassemble provides [regular buttons](https://docassemble.org/docs/fields.html#yesornoquestions):
+
+<DisplayImage imageURL='/img/textbook/chapter_03/datatypes4.png' />
+
+Docassemble provides a number of ways to collect Yes/No information using
+[checkboxes](https://docassemble.org/docs/fields.html#fields%20yesno) and
+radio buttons.
+
+<DisplayImage imageURL='/img/textbook/chapter_03/datatypes5.png' />
+
+:::info
+### How Python represents booleans internally
+
+It's normally way beyond the scope of this textbook to examine the internal working of
+programming languages but when it comes to booleans we need to make an exception.
+
+Internally, Python does not use special `True` and `False` data to record boolean values.  Instead, it does this:
+
+1. Python determines something is `False` if its value is zero; and
+1. Python determines something is `True` if its value is non-zero.
+
+Consequently, these two statements are the same
+```python
+x = 0
+y = False
+```
+Here is output from a [python console](https://www.python.org/) that demonstrates this
+```
+>>> x = 0
+>>> y = False
+>>> x == y
+True
+>>>
+```
+Even though `x` and `y` appear to have different values, internally they both contain
+`0`.
+
+Similarly, the value `1` is equivalent to `True`.  Let's see these examples in a python console
+```
+>>> x = 1
+>>> y = True
+>>> x == y
+True
+```
+This internal representation becomes important when testing boolenans in
+<DisplayGlossaryItem item='ifstatement' plural /> as any if statement will assume
+any non-zero result is true.  For example, this if statement:
+```python showLineNumbers
+if 'West':
+    True
+else:
+    False
+```
+will always return `True` as the string 'West' is not empty.  This is worth
+keeping in mind when [testing variables](./00-30) and in particular when connecting
+[logic tests](./00-30#logic-tests) together.
+:::
+
+## Simple and Complex Data Types
+Finally, before we finish our discussion on data types, let's consider simple
+and complex data types.
+
+Up until this point we have discussed 'simple' data types, that is data types that 
+represent one thing - an integer, a floating point number, a string and so-on.
+So far, we've only been storing one value in a variable.  However, like a bucket, it
+is possible to store *more* than one thing in a variable at a time. For this we use
+<DisplayGlossaryItem item='complexdatatype' plural />.
+
+The complex data types we'll refer to in this textbook will be
+<DisplayGlossaryItem item='list' plural /> and <DisplayGlossaryItem item='dictionary' plural />.
+A list allows us to store multiple data and to access them, well, as a list ie:
+from the first element to the last sequentially.  A dictionary allows us to refer
+to data by an identifier, or a 'key'.  Both these data types unlock the ability for
+us to store sophisticated data sets, even databases, in our Docassemble apps.
+
+We will cover complex data types in <DisplayChapter chapter='chapter_06' />.
+For now, just be aware that complex data types, and the additional capabilities they
+provide, exist.

@@ -1,0 +1,169 @@
+---
+title: Hello World!
+---
+import * as Constants from '@site/src/constants'
+import * as Components from '@site/src/components'
+
+It is a tradition in coding, long before this author was a boy, that the first program a programmer should write is
+one that simply announces its presence to the world by way of simply displaying the text 'Hello World!'.
+Who are we to shirk tradition?
+
+## Your first program
+As tradition dictates, let's make a 'Hello World' program:
+
+1. Go to your [Playground](/docs/textbook/chapter_01/00-30#the-playground)
+1. Click on the 'Add' button
+1. Call your program `hello_world.yml`
+<Components.DisplayImage imageURL='/img/textbook/chapter_02/hello_world1.png' />
+1. Enter the code displayed in the code snippet below into the [text editor](/docs/textbook/chapter_01/00-30#3-text-editor)
+1. Press <Components.DisplayDAButtons button={Constants.da_save_prop} />
+
+```yaml title="hello_world.yml" showLineNumbers
+---
+# Our first program!
+mandatory: True
+question: Hello World!
+subquestion: |
+  Hello,
+
+  Welcome to Docassemble!
+---
+```
+<details>
+    <summary>
+    About code snippets
+    </summary>
+We use code snippets extensively in this textbook to display code.  A code snippet 
+comes with some useful features:
+
+1. There are line numbers down the left side.  We will use these line numbers to explain where we are in the code.  Line numbers are also useful as a check to ensure you've typed code
+into the text editor correctly.  Just check the line numbers match up.
+1. If you hover your mouse over the top right of the code block a 'Copy' button will appear.  Use this to copy code in the code block into the text editor (or anywhere else for that matter)
+
+<Components.DisplayImage imageURL='/img/textbook/chapter_02/code_block1.png' />
+</details>
+
+Your text editor should look like this:
+
+<Components.DisplayImage imageURL='/img/textbook/chapter_02/hello_world2.png' altText='Code in text editor' />
+
+:::note
+The line numbers in the text editor match up with the line numers in the
+code snippet
+:::
+<p></p>
+Let's work through that code line by line.
+
+### Lines 1 and 9
+These are **block delimiters**.
+
+In Docassemble, we write our code in <Components.DisplayGlossaryItem item='block' />s.  We might use blocks to ask questions, display screens,
+run code to make decisions and so-on. Every block of code we write must start and end with three dash characters (`---`).
+If we have multiple blocks together then we separate each block with `---`, for example:
+```yaml
+---
+question: This is a question block
+subquestion: |
+  With a short description in here
+---
+question: This is another question block
+subquestion: |
+  Another short description in here.
+  Note how each block is separated by `---` characters.
+---
+```
+
+### Line 2
+This is a <Components.DisplayGlossaryItem item='comment' /> line.  Comment lines start with a `#` character.  When Docassemble
+sees the `#` it skips over the line and doesn't process it.  We use comment lines to describe
+what code does.  It makes our code easier to read.
+
+### Line 3
+This is a <Components.DisplayGlossaryItem item='mandatory' /> tag. Adding a mandatory tag and setting it to `True` tells Docassemble that it
+must execute this block.  Docassemble does not always execute each block.  We'll to more about block execution
+later in this textbook.  For now, just remember that to force a block to run you must set it as
+`mandatory: True`.
+
+:::info
+We usually refer to a block with `mandatory: True` in it as a <Components.DisplayGlossaryItem item='mandatoryblock' />
+:::
+
+### Lines 4 and 5
+Line 4 contains a **question** tag, and line 5 contains a **subquestion** tag.
+
+We use `question` and `subquestion` tags for two purposes:
+1. asking questions; and
+1. displaying information.
+
+In that sense, calling the tag 'question' is a little misleading as `question` tags
+are not limited only to asking questions.
+
+Usually we'll use the `question` tag for the title or heading of the question.  We'll then
+put a more detailed explanation in the `subquestion`.  See  lines 6 to 8 for an example.
+
+:::note A note about `question` and `subquestion` tags.
+We usually use `question` to display the title or heading of a question.  Therefore, we usually
+format the tag as `question: Title goes here`.
+
+For a `subquestion` we will usually need to display content across many lines (such as lines 6 - 8) of
+our `hello_world.yml`).  To display multi-line content we need to put a `: |` (ie: a colon, a space and then
+a vertical bar) after the tag.  We can then display our content across multiple lines.
+
+We can use `: |` in any tag (we'll get to other tags later) whenever we want to display
+the content of that tag across many lines
+:::
+
+:::info 
+When we have a block with a `question` tag in it we call that block a **question block**.  If
+our block is a question block with `mandatory: True` set, then we call that block a 
+**mandatory question block**.
+:::
+
+### Lines 6 to 8
+These lines are the content of the `subquestion` tag.  Note how the content is indented
+two spaces in from the tag itself.  Docassemble will assume that any indented text forms
+part of the text to be displayed. 
+
+## Indents, spacing and dashes, Oh my!
+:::caution
+Docassemble's syntax is heavily dependent on *where* code appears in a file. So...
+
+* All tags and block separators must start at the left margin.
+* All content following a `: |` *must* be indented by **two spaces**.  Docassemble
+will not accept, one or three or five.  It must be two spaces.
+* All tags are case sensitive.  `Question:` is not the same as `question:`.  If you input
+`Question:` Docassemble will generate a syntax error.  Case is important in Docassemble.
+* There *must* be a space between a `:` and a `|`.  That is, `subquestion: |` is fine.  But
+`subquestion:|` (no space), `subquestion:  |` (two spaces) and `Subquestion: |`
+(two spaces but a capital 'S') will all generate syntax errors.
+
+Docasemble is very fussy with syntax.  If you get errors when writing your code, you 
+should check syntax first.  Make sure your spaces, cases, braces, brackets,
+colons, vertical bars, dashes are all correct.
+:::
+
+:::tip
+Pressing the Tab key in the text editor automatically indents your text for you
+by two spaces.
+:::
+
+:::tip TODO
+We should link all the different tags to the Docassemble manual.
+
+We also might need to link the bold terms into a glossary.
+
+UPDATE: I have a `DisplayGlossaryItem` component.  Glossary items need to
+be stored either in there or in chapter 6 (as originally planned)
+:::
+## Run the program
+
+Press <Components.DisplayDAButtons button={Constants.da_save_and_run_prop} />. Your program
+will run and should display this output:
+
+<Components.DisplayImage altText='Hello World output' imageURL='/img/textbook/chapter_02/hello_world3.png' />
+
+Congratulations! You have run your first Docassemble program!
+
+:::tip TODO
+Ex1a should get inserted here.
+:::

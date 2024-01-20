@@ -3,7 +3,7 @@
 
 const {themes} = require('prism-react-renderer');
 const lightTheme = themes.github;
-const darkTheme = themes.dracula;
+const darkTheme = themes.github;
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -88,7 +88,18 @@ const config = {
             sidebarId: 'recipesSidebar',
             label: 'Coding Recipes'
           },
-          {to: '/blog', label: 'Blog', position: 'left'},
+          {
+            type: 'docSidebar',
+            position: 'left',
+            sidebarId: 'tbHelpSidebar',
+            label: 'Textbook Help',
+          },
+          {
+            type: 'docSidebar',
+            position: 'left',
+            sidebarId: 'assessmentSidebar',
+            label: 'Assessments',
+          },
           {
             href: 'https://github.com/LLAW3301',
             label: 'Digital Age GitHub',
@@ -123,10 +134,6 @@ const config = {
                 label: 'Docassemble Slack',
                 href: 'https://docassemble.slack.com',
               },
-              {
-                label: 'Blog (TBC)',
-                to: '/blog',
-              },
             ],
           },
           {
@@ -148,7 +155,7 @@ const config = {
       prism: {
         theme: lightTheme,
         darkTheme: darkTheme,
-        additionalLanguages: ['bash', 'diff', 'json'],
+        additionalLanguages: ['bash', 'diff', 'json', 'python'],
       },
       colorMode: {
         defaultMode: 'light',

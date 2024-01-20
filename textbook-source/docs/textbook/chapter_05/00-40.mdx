@@ -1,0 +1,441 @@
+---
+title: Dictionaries
+---
+import {DisplayGlossaryItem} from '@site/src/components';
+import {DisplayImage} from '@site/src/components';
+import {DisplayChapter} from '@site/src/components';
+import {Quizlet,Answer,Explanation} from '@site/src/components'
+
+## Introducing Dictionaries
+A dictionary in Python is defined as a data structure that allows you to look up a value by reference
+to a 'key'.  The name 'dictionary' is used because dictionaries as we know them
+work in a similar way.  In a regular dictionary, the 'key' is the word being looked up, and the 'value'
+is the definition of that word.  Every single definition in a regular dictionary is mapped to one key, 
+and every key points to one definition.  It's a one-to-one mapping in that sense.
+
+Python dictionaries are the same.  Every item in a dictionary is comprised of a key, which is unique
+in the dictionary, and a value which the key points to.
+
+Why is this useful?
+
+We have already seen how Python lists allow us to group ordered lists of data into a single data structure.
+However, data is not always ordered sequentially.  We may instead want to access data based on 
+what the data is.  A good example of this would be accessing personal details for a person.
+
+For example, let's say we have this information about me:
+
+<table className="complexDataTableExamples cdtLeft">
+    <tr>
+        <th>First Name</th>
+        <td>Mark</td>
+    </tr>
+    <tr>
+        <th>Last Name</th>
+        <td>Ferraretto</td>
+    </tr>
+    <tr>
+        <th>Email</th>
+        <td>mark@f.com</td>
+    </tr>
+    <tr>
+        <th>Phone</th>
+        <td>08 1234 5678</td>
+    </tr>
+</table>
+
+Expressing this data in a list eg:
+```python
+user_details = [
+    'Mark',
+    'Ferraretto',
+    'mark@f.com',
+    '08 1234 5678'
+]
+```
+is not that useful to us.  I can remember that my first name is at
+index 0 and last name at index 1 and so-on but those indices don't really
+shed any light on the values they store.  What's more, we're not really after
+the utility of a list here.  That is, this is not the type of data we'd iterate over.
+
+What would be more useful to us would be a data structure that, instead of using
+numerical indices, used a desriptive 'key' to access each value.  For example,
+istead of accessing my last name by typing
+```python
+user_details[1]
+```
+it would be more descriptive if I could use, say,
+```python
+user_details['Last Name']
+```
+This is exactly what Python dictionaries do.  Each item in a dictionary
+is asigned a unique key which points to a value.  Or, to put it another way,
+each item in a dictionary consists of a **key/value pair**.
+
+We can express my user details in a Python dictionary like so:
+```python
+user_details = {
+    'first_name' : 'Mark',
+    'last_name'  : 'Ferraretto',
+    'email'      : 'mark@f.com',
+    'phone'      : '08 1234 5678'
+}
+```
+You can see the syntax has some simliarities to the list syntax but there
+are significant differnces:
+
+Firstly, the list's square brackets (`[]`) are replaced by **braces** (`{}`).
+
+Secondly, the items in the dictionary are laid out sequentially, like a list. 
+However, each item consists of a key/value pair separated by a colon (`:`)
+
+:::note
+#### A number of things to be mindful of
+
+The most important is not to confuse square brackets and braces.  Doing so
+can lead to errors or, even worse, unexpected behaviour.  Always be clear that
+lists are surrounded by square brackets (`[...]`) and dictionaries are surrounded
+by bracces (`{...}`).
+
+Second, you can see we modified the keys by changing the table text into
+lower case and replacing spaces with underscores (eg: 'First Name' --> `first_name`).
+While not required, the custom with Python dictionaries is to have the key
+all in lower case and without spaces.  However, `First Name` is a perfectly
+valid key.
+
+Third, in our example, we padded out the space between the key and the
+colon (`:`) so that all the colons line up one under another.  We've done
+this for cosmetic reasons only.  The code looks nicer! And it's easier to read.
+
+Fourth, some of you may notice that, apart from being key/value pairs, the 
+items in a dictionary are set out much like a list (ie: in sequence).  Does that
+mean we can iterate over them?  The short answer is yes, but there are caveats.
+We will cover these caveats later in this chapter.
+:::
+
+:::tip TODO
+Add link to further down this chapter.
+:::
+
+## Referencing
+Referencing works in a similar way to [referencing in lists](./00-20#referecing).
+Instead of a numeric index, we use the the name of the key.  So,
+```
+user_details['first_name']
+```
+will give us the value `Mark`.
+
+:::note
+You cannot reference, say, the first item in the dictionary by typing
+`user_details[0]`.  This will yield an error as Python will attempt to look 
+for a key called `0` in your dictionary and the lookup will fail.
+
+You can only lookup a value by its keys.
+:::
+
+## Initialising dictionaries
+Much like lists, we can either start with an empty dictionary:
+```python
+user_details = {}
+```
+or we can initialise a dictionary with variables:
+```python
+user_details = {
+    'first_name' : 'Mark',
+    'last_name'  : 'Ferraretto',
+    'email'      : 'mark@f.com',
+    'phone'      : '08 1234 5678'
+}
+```
+Note the use of braces (`{}`) instead of square brackets.
+
+## Adding items
+Once a dictionary is initialised, items can be added to them simply by
+assigning a new value to a new key.  For example, we can add details about
+my office to `user_details` by specifing what we want the value of the `office`
+key to be:
+```python
+user_details['office'] = 'LWCM Room 10'
+```
+This adds the `office` key to `user_details` and assigns it the value
+`LWCM Room 10`.  Our `user_details` dictionary would subsequently look like this:
+```python
+user_details = {
+    'first_name' : 'Mark',
+    'last_name'  : 'Ferraretto',
+    'email'      : 'mark@f.com',
+    'phone'      : '08 1234 5678',
+    'office'     : 'LWCM Room 10'
+}
+```
+:::note
+You must initialise a dictionary before you can add items to it
+:::
+
+## Deleting Items
+Deleting key/value pairs works in way very similar to
+[deleting list items](./00-20#deleting), that is by using `del()`.  
+With dictionaries the name of the key is supplied instead of a numerical index.
+
+To delete the `phone` key/value pair from `user_details` we would do this:
+```python
+del(user_details['phone'])
+```
+
+## List-like properties of dictionaries
+Although a dictionary is not a list, it does have some list-like properties.
+For example, you can find the length of a dictionary, you can iterate over its
+keys and you can check a key exists in a dictionary (but not a value).
+
+This list-like properties come about because, internally, Python treats 
+the keys as a list in many circumstances.  The most obvious of these is
+the `keys()` <DisplayGlossaryItem item='method' /> which returns a list
+of the keys in the dictionary ie this:
+```python
+user_details.keys()
+```
+returns this list:
+```python
+['first_name', 'last_name', 'email', 'phone', 'office']
+```
+The other list-like functions and methods essentially operate on this
+list of keys.
+
+### Length
+Like lists, you can use `len()` to count the number of items in a dictionary.
+`len()` actually counts the number of keys, but this is sufficient to return
+the number of items as each key can only have one value.
+
+This command:
+```python
+len(user_details)
+```
+would return **5**, as we have five key/value pairs in `user_details`.
+
+### Membership
+We can use `in` and `not in` with dictionaries in a similiar way as we do
+for [lists](00-20#list-membership).  However, `in` and `not in` only work
+with keys and with values.  So, this:
+```python
+'first_name' in user_details
+```
+would return `True`, but this:
+```python
+'Mark' in user_details
+```
+would result in an error.
+
+:::tip
+Using `in` is a good way to find if a key exists in a dictionary.  It's
+a good precautionary check to make before getting the value of a key as it
+prevents your program crashing if your key doesn't exist.
+:::
+
+### Iteration
+We've spoken about iteration [already](00-30). Iteration and lists are 
+a potent combination.
+
+We can also iterate over a dictionary or, more specifically, over the keys
+of a dictionary.
+
+:::note
+In theory, a dictionary has no order.  That meant that when iterating over
+a dictionary you would never know the order in which the key/value pairs
+would be displayed.  However, Docassemble preserves the order of keys, 
+meaning that when we iterate over a dictionary the key/value pairs will
+always be presented in the order they are added to the dictionary.
+:::
+
+We will usually use the `keys()` method for iteration.  Here is some 
+example code that displays a Markdown table, uses a Mako `%for` loop
+to iterate over `user_details` (highlighted),
+and prints out the rows of the table:
+```yml showLineNumbers
+---
+mandatory: True
+question: User details table
+subquestion: |
+
+  Key|Value
+  ---|---
+  # highlight-start
+  %for item in user_details.keys():
+  `${item}`|${user_details[item]}
+  %endfor
+  # highlight-end
+---
+code: |
+  user_details = {
+    'first_name' : 'Mark',
+    'last_name'  : 'Ferraretto',
+    'email'      : 'mark@f.com',
+    'phone'      : '08 1234 5678',
+    'office'     : 'LWCM Room 10'
+  }
+---
+```
+
+## An example implementation
+This example code allows a user to add an extra key/value pair to 
+`user_details` and displays `user_details` in a table.
+The code then checks to see if the key added matches a secret key.  If
+it does, then the secret key is displayed, otherwise a message stating
+that the secret key was not guessed is displayed.
+
+This code provides examples of:
+
+* initialising a dictionary
+* adding a key/value pair to a dictionary
+* iterating over a dictionary; and
+* testing for membership.
+
+The code is well commented (in the author's opinion!) and you are enouraged
+to read through the comments and the code.  You are also encouraged to
+copy the code into your Playground and experiment with it.
+
+<details>
+<summary>
+Click here to view the code
+</summary>
+```yml showLineNumbers
+---
+# We haven't learnt about styles and animations yet.  This 'feature' adds a
+# CSS style to this app.  If you'd like to see what it does then do this:
+# - copy the contents of funky.css just below this code in the textbook
+# - Go to Folders -> Static files in your playground
+# - create a new file called funky.css and paste into that file
+# - guess the secret key!
+features:
+  css: funky.css
+---
+# We should be getting used to this now.  First question block is mandatory.
+# Note the %for loop on lines 21 to 23.  This loop iterates over the keys in the dictionary
+# and creates a new row in the table for each key/value pair.
+mandatory: True
+question: User Details
+subquestion: |
+  Here are the contents of `user_details`
+
+  Key|Value
+  ---|---
+  %for item in user_details.keys():
+  `${item}`|${user_details[item]}
+  %endfor
+
+  Press **Continue** to add an extra key/value pair.
+  
+  Try to guess the secret key!
+buttons:
+  - Continue: continue
+---
+# Mandatory code block to drive the app
+mandatory: True
+code: |
+  # Add the new item to user_details
+  # This line will cause the question block below to be asked
+  user_details[new_key] = new_value
+  
+  finish_screen
+---
+# We declare our original user_details dictionary here
+code: |
+  # Declare our initial list
+  user_details = {
+    'first_name' : 'Mark',
+    'last_name'  : 'Ferraretto',
+    'email'      : 'mark@f.com',
+    'phone'      : '08 1234 5678',
+    'office'     : 'LWCM Room 10'
+  }
+---
+question: Extra key/value pair
+subquestion: |
+  Add a new key/value pair.  If you key matches the secret word you get a prize!
+fields:
+  - Enter new key: new_key
+  - Enter new value: new_value
+---
+# We define the secret key in a code block on its own.  It's good practice
+# to make code blocks as small as you can and to do only one thing.
+code: |
+  secret_key = 'please'
+---
+# First, note that lines 81 - 85 are a copy of lines 19 to 23.  That's
+# inefficient.  Docassemble does provide a way (called 'templates') to 
+# avoid repeating ourselves like this.  We cover templates later in 
+# this textbook.
+#
+# Next, note the %if statement on line 87 and the membership test.
+# If the user guessed the secret key, then secret_key will be a member
+# of user_details.  We can then display the value of user_details[secret_key]
+# in the first branch of the %if statement.  If we attempted to display
+# user_details[secret_key] regardless, our program would crash if the user did
+# not guess the secret key.  
+#
+# Try removing the %if statement as an exercise
+event: finish_screen
+question: Updated user details table
+subquestion: |
+  Here are the contents of `user_details`
+  
+  Key|Value
+  ---|---
+  %for item in user_details.keys():
+  `${item}`|${user_details[item]}
+  %endfor
+  
+  %if secret_key in user_details:
+  <div class="funky">
+  Congratulations, you guessed the secret key!!
+  </div>
+  <p></p>
+  The secret key is **${secret_key}** and you assigned
+  it the value **${user_details[secret_key]}**
+  %else:
+  Sorry, you have not guessed the secret key
+  %endif
+---
+```
+</details>
+<details>
+<summary>
+Bonus styling for secret key
+</summary>
+This CSS file (we'll discuss CSS in <DisplayChapter chapter='chapter_07' />)
+provides some funky stuff for when you correctly guess the secret key.
+
+To use it do the following:
+1. copy the css code below
+1. go to your Playground and select Folders --> Static files
+1. click on the 'Add' button and create a new file called `funky.css`
+1. paste in the CSS code
+1. press **Save**
+1. click **`Back`** to go back to your code
+1. run your code
+1. make sure you guess the secret key!!
+
+```css name="funky.css" showLineNumbers
+@keyframes funky {
+    0%, 100% { 
+        color: blue; 
+        transform: scale(1);
+    }
+    25% { 
+        color: red; 
+        transform: scale(1.2);
+    }
+    50% { 
+        color: green; 
+        transform: scale(1.4);
+    }
+    75% { 
+        color: purple; 
+        transform: scale(1.2);
+    }
+}
+
+.funky {
+    text-align: center;
+    animation: funky 2s ease-in-out infinite;
+}
+```
+</details>
