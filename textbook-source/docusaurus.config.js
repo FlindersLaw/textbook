@@ -95,6 +95,12 @@ const config = {
             label: 'Textbook Help',
           },
           {
+            type: 'docSidebar',
+            position: 'left',
+            sidebarId: 'assessmentSidebar',
+            label: 'Assessments',
+          },
+          {
             href: 'https://github.com/LLAW3301',
             label: 'Digital Age GitHub',
             position: 'right',
