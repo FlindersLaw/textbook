@@ -2,16 +2,42 @@
 title: More Advanced Jinja in Docassemble
 ---
 
-Now that we have covered how to add Jinja fields to a template in Docassemble, we will consider how to create more advanced templates, and how to integrate these into the features in Word.
+import * as Components from '@site/src/components'
+import {DisplayChapter} from '@site/src/components';
+
+Now that we have covered how to add Jinja fields to a template in Docassemble, we will consider how to create more advanced templates, and how to integrate these into the features in Word. This section will also cover some more advanced material on groups, which we considered previously in <DisplayChapter chapter='chapter_05' />. 
 
 ## Creating More Advanced Templates
+For this section, we will reuse our Form 17 generator application code. We have been asked to extend our application in a number of ways:
 
-### Designing Our Application
+* Our user should be able to enter a matter number for their application
+* Our NPA/Division choices should be updated depending on whether the user is filing in the Federal Court of Australia or the Federal Circuit and Family Court of Australia
+* Our application should be able to handle multiple applicants or respondents
+* Our application should allow a user to enter their statement of claim as a numbered list
+* If our template is being filed by a lawyer for the applicant or the respondent, our application should allow our user to fill in the following details
+- Law Firm
+- Telephone number
+- Fax number
+- Email
+- Address for service
+
+For this, our overall flowchart we developed [previously](./00-10.mdx) will not be significantly changed.
+
+### Using If Statements
 
 ### Using Complex Data Structures
 
-### Inserting Tables
+### Using Paragraphs
 
-### Adding in Paragraphs
+### Using Functions
+
+### Controlling What Our User Can Download
+You might have noticed when working with Jinja previously that your user can either download a PDF or a DOCX template. In some cases though, we might not want to allow our user to download a DOCX document. In this case, we can control what content we display to our user using the `valid formats` tag. We need to add this to our code in the following format:
+
+```yaml showLineNumbers title="Ch8_Federal_Court_Form_17_PDF_Only.yml"
+```
+When our user fills in their details, they will only be able to download the completed template as a PDF:
+
+<Components.DisplayImage imageURL='/img/textbook/chapter_08/ch08_completed_attachment_PDF_only.PNG' altText='Our completed attachment, only now the user can only download the completed template as a PDF.'/>
 
 ## Summary
