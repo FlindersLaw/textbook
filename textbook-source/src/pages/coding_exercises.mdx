@@ -5,42 +5,40 @@ import Ex1a, * as Ex1a_c from '@site/docs/coding_exercises/_ex1a.mdx';
 import Ex1b, * as Ex1b_c from '@site/docs/coding_exercises/_ex1b.mdx';
 import Ex1c, * as Ex1c_c from '@site/docs/coding_exercises/_ex1c.mdx';
 import Ex1d, * as Ex1d_c from '@site/docs/coding_exercises/_ex1d.mdx';
-import Ex1e, * as Ex1e_c from '@site/docs/coding_exercises/_ex1e.mdx';
-import Ex1f, * as Ex1f_c from '@site/docs/coding_exercises/_ex1f.mdx';
-import Ex1g, * as Ex1g_c from '@site/docs/coding_exercises/_ex1g.mdx';
-import Ex1h, * as Ex1h_c from '@site/docs/coding_exercises/_ex1h.mdx';
 // Ex2 exercises
-import Ex2a, * as Ex2a_c from '@site/docs/coding_exercises/_ex2a.mdx';
-import Ex2b, * as Ex2b_c from '@site/docs/coding_exercises/_ex2b.mdx';
-import Ex2c, * as Ex2c_c from '@site/docs/coding_exercises/_ex2c.mdx';
-import Ex2d, * as Ex2d_c from '@site/docs/coding_exercises/_ex2d.mdx';
-import Ex2e, * as Ex2e_c from '@site/docs/coding_exercises/_ex2e.mdx';
-import Ex2f, * as Ex2f_c from '@site/docs/coding_exercises/_ex2f.mdx';
-// Ex3 exercises
-import Ex3b, * as Ex3b_c from '@site/docs/coding_exercises/_ex3b.mdx';
+import CW2 from '@site/docs/coding_exercises/_cw2_flowchart.mdx';
+import Ex2a, * as Ex2a_c from '@site/docs/coding_exercises/_cw2a.mdx';
+import Ex2b, * as Ex2b_c from '@site/docs/coding_exercises/_cw2b.mdx';
+import Ex2c, * as Ex2c_c from '@site/docs/coding_exercises/_cw2c.mdx';
 
 import {DisplayInlineExercise, DisplayGlossaryItem} from '@site/src/components';
+import {DisplayImage} from '@site/src/components';
 
 # Coding Exercises
+These exercises provide a pathway for working your way through the textbook, starting
+with basic exercises and slowly working up to more sophisticated examples.  These
+exercises are also closely related to your Assessment B and they cover all the aspects
+of coding you will require to complete Assessments B1, B2 and B3.
+
+## Getting Prepared
+The best way for you to become familiar with coding and with these exercises is to try
+them yourself.  In fact, working through these exercises is a better way to to work through
+the textbook than reading through it.  Each exercise has links to recommended reading.  
+Do those readings and then try the exercises.
+
+## Coding Workshops
+We have broken down the coding exercises into Coding Workshops.  We will cover as
+much of  each set of exercises in the specified Coding Workshop.  If we run out
+of time we will focus on the latter exercises.  Therefore, it's a good idea for you
+to have attempted the exercises before you attend the workshops
+
+
 {/* All coding exercises must be enclosed within this <div> so they are
 properly styled. */}
 <div id="codexInline">
-## Ex1 Exercises
+## Coding Workshop 1 
 This first set of exercises introduces you to the basics of coding with Docassemble.
-You'll learn how to:
-
-* ask questions and display answers;
-* format text;
-* generate Word and PDF documents; and
-* use logic to control execution of your app.
-
-These exercises are designed to gradually introduce you to coding. Start with 
-the first and work your way through the list.  Watch the recommended videos before 
-you start each exercise.
-
-:::tip TODO
-Include links to relevant chapters or parts of chapters as well.
-:::
+You'll learn how to: ask questions, display answers and format the text of your answers.
 
 ### Ex1a
 <DisplayInlineExercise video={Ex1a_c.video}><Ex1a /></DisplayInlineExercise>
@@ -50,41 +48,31 @@ Include links to relevant chapters or parts of chapters as well.
 <DisplayInlineExercise video={Ex1c_c.video}><Ex1c /></DisplayInlineExercise>
 ### Ex1d
 <DisplayInlineExercise video={Ex1d_c.video}><Ex1d /></DisplayInlineExercise>
-### Ex1e
-<DisplayInlineExercise video={Ex1e_c.video}><Ex1e /></DisplayInlineExercise>
-### Ex1f
-<DisplayInlineExercise video={Ex1f_c.video}><Ex1f /></DisplayInlineExercise>
-### Ex1g
-<DisplayInlineExercise video={Ex1g_c.video}><Ex1g /></DisplayInlineExercise>
-### Ex1h
-<DisplayInlineExercise video={Ex1h_c.video}><Ex1h /></DisplayInlineExercise>
 
-## Ex2 Exercises
-This set of exercises takes you through using more complex if statements
-and iteration, along with complex data structures, such
-as <DisplayGlossaryItem item='list' plural />, <DisplayGlossaryItem item='dictionary' plural /> and
-combinations of both. Well-written code will make extensive use of 
-complex data structures and the efficiencies that they bring.
+
+## Coding Workshop 2
+<DisplayImage imageURL='/img/coding_exercises/genis.png' align="right" size="11%" />
+This set of exercises introduces you to decision-making logic using if statements.
+
+We'll work on implementing this flowchart to help dog and cat owners who are 
+iterested in selling their dog or cat (the only good cat is a dead cat).
+
+Work through each exercise in order to complete the full version of this app.
+
+:::note
+References to legislation in the flowchart are references to the
+[*Dog and Cat Management Act 1995* (SA)](https://www.legislation.sa.gov.au/lz?path=/c/a/dog%20and%20cat%20management%20act%201995).
+:::
+
+<CW2 />
 
 ### Ex2a
 <DisplayInlineExercise video={Ex2a_c.video}><Ex2a /></DisplayInlineExercise>
+
 ### Ex2b
 <DisplayInlineExercise video={Ex2b_c.video}><Ex2b /></DisplayInlineExercise>
+
 ### Ex2c
 <DisplayInlineExercise video={Ex2c_c.video}><Ex2c /></DisplayInlineExercise>
-### Ex2d
-<DisplayInlineExercise video={Ex2d_c.video}><Ex2d /></DisplayInlineExercise>
-### Ex2e
-<DisplayInlineExercise video={Ex2e_c.video}><Ex2e /></DisplayInlineExercise>
-### Ex2f
-<DisplayInlineExercise video={Ex2f_c.video}><Ex2f /></DisplayInlineExercise>
 
-## Ex3 Exercises
-### Ex3b
-<DisplayInlineExercise video={Ex3b_c.video}><Ex3b /></DisplayInlineExercise>
 </div>
-
-:::tip TODO
-The instructions for Ex2e, Ex2f and Ex3b aren't clear.  They imply list processing
-but no list data is provided
-:::

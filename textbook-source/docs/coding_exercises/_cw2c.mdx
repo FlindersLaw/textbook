@@ -1,0 +1,30 @@
+import {DisplayChapter} from '@site/src/components';
+import {DisplayGlossaryItem} from '@site/src/components';
+import CW2c_f from './_cw2c_flowchart1.mdx';
+import * as Ex2a_c from './_cw2a.mdx';
+import * as Ex2b_c from './_cw2b.mdx';
+
+export const title = 'Ex2b'
+export const video = <div>
+    <DisplayChapter chapter='chapter_03' number />
+    <span> Text </span>
+    <DisplayChapter chapter='chapter_03' number />
+    </div>
+
+Let's modify the code from {Ex2a_c.title} and {Ex2b_c.title} and
+build out the balance of our app
+In this exercise we will implement the following:
+
+<CW2c_f />
+
+The work here is much like the work we did in {Ex2b_c.title} but more.  You need
+to prepare <DisplayGlossaryItem item='questionblock' plural /> for each of the
+three questions, and the two endpoints.
+
+The 'You can sell your dog' endpoint should include additional text about not needing
+to desex a dog if it is a livestock dog.  Much like {Ex2b_c.title}, you can use
+[Mako if statements](/docs/textbook/chapter_04/00-50) in your question screen to 
+display the relevant text depending on whether the dog is a livestock dog or not.
+
+The 'You can't sell your dog' endpoing should point out the requirement to microchip
+and desex your pet is a prerequisite to selling it according to the legislation.

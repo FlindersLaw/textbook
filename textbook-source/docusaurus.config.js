@@ -86,7 +86,7 @@ const config = {
             type: 'docSidebar',
             position: 'left',
             sidebarId: 'recipesSidebar',
-            label: 'Coding Recipes'
+            label: 'Bits, Pieces and Recipes'
           },
           {
             type: 'docSidebar',
