@@ -1,7 +1,16 @@
-export const title = 'Ex1g';
-export const video = 'C1.06, C2.01';
+import * as Ex1f from './ex1f.mdx';
+export const title = 'Exercise 1g';
+export const video = <div>
+  <a href="/docs/textbook/chapter_02/00-60">Vital Statistics</a>
+  <span>, </span>
+  <a href="/docs/textbook/chapter_04/00-30">Elif statements</a>
+  <span>, </span>
+  <a href="https://docassemble.org/docs/modifiers.html#terms">Vocabulary terms</a>
+  <span>, </span>
+  <a href="https://docassemble.org/docs/functions.html">Docassemble Functions</a>
+  </div>
 
-Extend your code from **Ex1f** to do the following:
+Extend your code from **{Ex1f.title}** to do the following:
 
 * ask if the user has a partner;
 * if the user has a partner, then ask for the partner's name and partner's income;
@@ -17,6 +26,7 @@ Extend your code from **Ex1f** to do the following:
 :::
 
 :::tip Hints
-* You can use `show if` to display the partner details if the user has a partner
+* You can use [`show if`](https://docassemble.org/docs/fields.html#show%20if)
+to display the partner details if the user has a partner
 * Remember to account for the case when the user does not have a partner when you create the total household and average household incomes - have another look at Video C1.06
 :::

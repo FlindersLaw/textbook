@@ -4,10 +4,14 @@ title: Hello World 4 - More Mako, Multiple Questions, Tables
 import * as Constants from '@site/src/constants'
 import * as Components from '@site/src/components'
 
+{/* Certain parts have been commented out as we are not currently using GitHub */}
+
+{/*
 :::info
 As we move forwards, this textbook will assume that you have
 [pulled down a copy of the teaching code repository from GitHub](./00-40)
 :::
+*/}
 
 Up to now, our hello world programs have asked us to type in our full name.
 However, what we *really* want is to break our name out into 
@@ -17,8 +21,8 @@ our 'saultation', that is, whether we're addressed as 'Mr', 'Ms', 'Dr' etc.
 Let's see how we do this
 
 ## Our Code
-This code is also available in `C1_04_hello_world.yml` in the teaching code
-repository
+{/* This code is also available in `C1_04_hello_world.yml` in the teaching code
+repository */}
 
 ```yaml showLineNumbers
 ---
@@ -122,13 +126,6 @@ a question block will be presented as a drop-down menut, as ours is.  It's also
 possible to display choices as radio buttons or even as icons.  We will
 cover these alternatives further in this textbook.
 
-:::tip TODO
-And here would be a good place to introduce objects, at least for 
-`Individual`s.  Don't think we should do this in this iteration of the 
-textbook as it would necessitate also updating the teaching code repo but
-raise it as an issue in GitHub for a subsequent revision.
-:::
-
 ## The Mandatory Block
 Our mandatory question block at lines 3 to 30 has a bit that's familiar
 and introduces some new content as well.
@@ -229,9 +226,6 @@ the pipe in line 21.  This is not necessary.  This syntax is also valid:
 ```
   Column1|Column2
   ---|---
+```
 It doesn't look as neat though.
-:::
-
-:::tip TODO
-This section should refer to table blocks once they're set up.
 :::

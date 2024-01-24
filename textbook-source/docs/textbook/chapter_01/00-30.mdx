@@ -5,34 +5,91 @@ import * as Constants from '@site/src/constants';
 import * as Components from '@site/src/components';
 import {dahref} from '@site/src/components';
 
-:::caution
-
-This text assumes that you have [access to Docassemble](./00-10) and
-[have connected to GitHub](./00-20).  Please complete these activities before
-continuing.
-
-:::
-
 ## What is Docassemble?
-:::tip TODO
-Need to build this out.  Give an introduction to:
+Docassemble is what's known as an [open source](https://en.wikipedia.org/wiki/Open_source)
+[web framwork](https://en.wikipedia.org/wiki/Web_framework) written for the purposes or writing
+legal apps.  Docassemble was written by [Jonathan Pyle](https://www.lawnext.com/2022/04/lawnext-podcast-jonathan-pyle-on-why-he-developed-docassemble-and-made-it-open-source.html)
+a US lawyer and software developer working in the not-for-profit legal space.
 
-* That DA allows us to write web apps
-* It's open source, so we dont' need to pay licensing fees and, more importantly, our clients don't need to
-pay licensing fees to use our apps
-* The web apps we write are 'resonsive'.  That is, they will run just as well on a mobile phone 
-or a table as on a desktop computer
-* DA allows us to create document templates easily using Word documents and Jinja code.
-* Despite any hesitations you might have, DA is not that difficult to learn or, more importantly, it allows
-you to write useful apps after learning a few basic conccepts.
-* Docassemble generates some reasonably good looking apps.  Insert examples- iRefer, Hutt Street Centre. 
-Also include clerq and Mass Access apps.
-:::
+Docassemble's main purpose is to create automated interviews to guide users through
+legal issues and then present a result or answers back to the user.
 
+Because it is open source there is no requirement to pay licence fees for its use. Apart
+from the obvious benefit to the University, this also makes Docassemble accessible to
+not-for-profit organisations and allows them to develop and run small legal apps to
+help their organisations.
 
-:::tip TODO
-link to jinja in the textbook
-:::
+### Technologies used in Docassemble
+Docassemble uses a language called [YAML](https://en.wikipedia.org/wiki/YAML) to structure
+its programs, or **Interviews**.
+
+Interviews are primarily composed of <Components.DisplayGlossaryItem item='questionblock' plural />
+and <Components.DisplayGlossaryItem item='codeblock' plural />, although there are many other
+block types which can be used.  
+
+Question blocks are used to display questions to, and collect answers from, the end user.
+Question blocks are also used as display screens.  For example, an initial screen welcoming
+the user to the app and expalining its purpose will be rendered using a question block.
+
+Code blocks are the logic engine of Docassemble. Code blocks are written in a programming
+language called [Python](https://python.org).  Python is one of the
+[most popular languages](https://www.statista.com/statistics/793628/worldwide-developer-survey-most-used-languages/),
+is an excellent general purpose language and happens to be relatively easy to
+teach and to learn.
+
+Python also has a very large presence in data science and artificial intelligence.
+Many data scientists create their learning models using python code.
+
+As Docassemble is used to create web apps, it uses [HTML](https://en.wikipedia.org/wiki/HTML)
+Cascading Style Sheets (or [**CSS**](https://en.wikipedia.org/wiki/CSS)) to lay out
+and style its apps.  These are also industry-standard technolgies that are pervasive
+across the internet.
+
+As HTML can be cumbersome to write, especially for simple text formatting, Docassemble
+also makes use of [Markdown}(https://www.markdownguide.org/basic-syntax/).  Markdown
+allows us to format text in a less cluttered and easier-to-read manner than HTML.
+
+For example, a bullet list in markdown would be input as follows:
+```markdown
+Bullet list:
+
+* item 1
+* item 2
+* item 3
+```
+whereas, in HTML the same list would need to be input as follows:
+```html
+Bullet list:
+<ul>
+    <li>item 1</li>
+    <li>item 2</li>
+    <li>item 3</li>
+</ul>
+```
+
+### Docassemble's capabilities
+Because Docassemble is based on YAML, Python, HTML and CSS, it enables us to create web apps
+very quickly. By making use of the [bootstrap](https://bootstrap.com) theme engine Doccassemble
+automatically resizes webapps for phones, tablets and computers.  This frees us up to focus
+only on creating the legal app itself without having to worry about how it will appear
+on different devices.
+
+Docassemble is able to create Word or PDF documents as part of its output.  For example,
+a legal app that prepares a set answers to a user's queries could also prepare those 
+answers as a PDF for a user to download or email.  Alternatively, Docassemble could be
+used to assist a user to fill out a form and then make the form available for download
+as a Word document.
+
+Because Docassemble uses Python as its logic engine it is possible to code almost any
+decision-makinng logic, regardless of how complex it may be.
+
+Docassemble also has a great number of other features, such as real-time two-way interviews,
+connecting to AI and other systems and accessing data in databases.  We will not explore these
+features in this textbook, but it is worth knowing that we are teaching you the first
+steps to using a very powerful system that could be, and [already is](https://clerq.au), used in
+[legal practice.
+
+That said, let's dive into what Docassemble looks like.
 
 ## The Main Screen
 Let's log in to Docassemble again.  Go to the <Components.DisplayConstants data={dahref} />.  You should end up at this screen.
@@ -41,7 +98,7 @@ Let's log in to Docassemble again.  Go to the <Components.DisplayConstants data=
 
 Let's discuss this screen:
 
-1. The black bar across the top is called the **Navbar**.
+1. The black bar across the top is called the <Components.DisplayGlossaryItem item='navbar' upper />.
 It exists at the top of every screen and contains menu bars and other information.
 1. This is the **Interview Title** or **App Title**.
 When you write your app you'll put its name, and maybe your client's logo in this space.
@@ -50,11 +107,6 @@ We use this menu to navigate around Docassemble.
 We've [already used this once](./00-20#set-up-github-integration) and we'll be using it a lot more!
 1. Without wishing to state the obvious, this is the main body of the app.
 When you're writing this area will display the [Playground](#the-playground), which we will now discuss.
-
-:::tip TODO
-The terms we've just defined here should probably be put into some kind of
-data structure and/or component so they can be extracted into index entries
-:::
 
 ## The Playground
 Docassemble's 'Playground' is where we'll spend most of this topic.  The Playground is where you will edit,
@@ -72,8 +124,8 @@ which we can use to create 'Projects'.
 We won't be using the *Wizard* or *Upload* buttons in this topic.
 3. This is the text editor. It's where you'll be writing your code.
 4. These buttons allow you save and run your code.
-5. This panel contains the variable you use in your code.  We will discuss variables
-in detail later in this book.
+5. This panel contains the <Components.DisplayGlossaryItem item='variable' plural /> you
+use in your code.  We will discuss variables in detail later in <Components.DisplayChapter chapter='chapter_03' />.
 6. The lower part of the Playground contains a Docassemble quick reference.
 
 Let's work through these in a bit more detail.
@@ -150,10 +202,9 @@ The *Share* button will give you a link to a running version of the current file
 a useful way to share an application you're working on with a client or your team.
 
 ### 5. Variables
-Variables are a way of storing data in your program.  We will discuss this later in the textbook.
-:::tip TODO
-Insert link to wherever we will discuss variables
-:::
+<Components.DisplayGlossaryItem item='variable' plural upper /> are
+a way of storing data, such as the answers to questions, in our programs.
+We discuss variables in detail in <Components.DisplayChapter chapter='chapter_03' />.
 
 This panel contains a list of the variables used in your program.  It is a useful debugging tool because:
 

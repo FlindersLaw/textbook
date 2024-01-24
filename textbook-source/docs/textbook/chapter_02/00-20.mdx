@@ -3,6 +3,7 @@ title: Hello World 2 - Introducing Markdown and Mako
 ---
 import * as Constants from '@site/src/constants'
 import * as Components from '@site/src/components'
+import {DisplayImage} from '@site/src/components';
 
 Our existing [Hello World](./00-10) program, while truly a software engineering masterpiece,
 is somewhat impersonal.  What we *really* want it to do is to display the user's name and,
@@ -61,15 +62,11 @@ The text `MJFname` is a <Components.DisplayGlossaryItem item='variable' />. We'r
 
 A variable is kind of like a bucket.  You can put stuff in a bucket and you can put stuff in a variable.
 
-Variable|Bucket
+<DisplayImage imageURL="/img/textbook/chapter_02/variable.png" size="60%" /> Variable|<DisplayImage imageURL="/img/textbook/chapter_02/bucket.png" size="60%" />Bucket
 ---|---
 Used to store stuff|Used to store stuff
 Must have a name|Doesn't usually have a name
 Can (usually) only store one thing|Can store lots of stuff
-
-:::tip TODO
-Picture of a bucket in the table.  Picture of a variable TODO
-:::
 
 A variable is useful because we can change what we put in it each time we run the program.
 
@@ -101,16 +98,8 @@ Docassemble.
 
 :::note
 Mako is used to display the value stored in a variable.  But how do we store
-something in a variable?  We do that using <Components.DisplayGlossaryItem item='field' plural />, which we discuss below
-:::
-
-:::tip TODO
-Complete URL for 'discuss below' above
-:::
-
-:::info
-You can also use Mako in <Components.DisplayGlossaryItem item='fieldlabel' plural />.
-We'll get to that later in this book.
+something in a variable?  We discuss this in
+<Components.DisplayChapter chapter='chapter_03' />.
 :::
 
 :::caution

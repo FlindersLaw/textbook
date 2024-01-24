@@ -1,7 +1,13 @@
-import {DisplayImage} from '@site/src/components';
+import {DisplayChapter} from '@site/src/components';
 
-export const title = 'Ex1h';
-export const video = 'C1.05, C2.01, C3.01, C5.01, C5.02.01';
+export const title = 'Exercise 1h';
+export const video = <div>
+  <a href="/docs/textbook/chapter_02/00-50">Introducing Jinja</a>
+  <span>, </span>
+  <DisplayChapter chapter='chapter_04' />
+  <span>, </span>
+  <DisplayChapter chapter='chapter_08' />
+  </div>
 
 Create an app which assesses a candidate on whether they can stand for Parliament.
 You should base your app on the following flowchart.

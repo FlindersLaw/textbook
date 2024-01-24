@@ -123,6 +123,9 @@ export const glossary = new Map([
     ],
     ['markdown', { text: 'markdown' }],
     ['method', { text: 'method', plural: 'methods' }],
+    ['navbar', {
+        text: 'navbar',
+    }],
     ['parentheses', { text: 'parentheses' }],
     ['playground', { text: 'playground' }],
     ['python', { text: 'python' }],

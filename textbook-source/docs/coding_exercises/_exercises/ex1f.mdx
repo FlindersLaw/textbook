@@ -1,11 +1,22 @@
-export const title = 'Ex1f';
-export const video = 'C1.06, C2.01'
+import * as Ex1e from './ex1e.mdx';
+export const title = 'Exercise 1f';
+export const video = <div>
+  <a href="/docs/textbook/chapter_02/00-60">Vital Statistics</a>
+  <span>, </span>
+  <a href="/docs/textbook/chapter_04/00-30">Elif statements</a>
+  <span>, </span>
+  <a href="https://docassemble.org/docs/modifiers.html#terms">Vocabulary terms</a>
+  <span>, </span>
+  <a href="https://docassemble.org/docs/functions.html">Docassemble Functions</a>
+  <span>, specifically <code>currency()</code></span>
+  </div>
 
-Extend your code from Ex1e to do the following:
+Extend your code from **{Ex1e.title}** to do the following:
 
 * ask for the user's annual income;
 * the term 'annual income' should have a pop-up that defines what annual income means;
-* If the user inputs an income, it should be displayed in the final screen as currency (hint: use the `currency()` function)
+* If the user inputs an income, it should be displayed in the final screen as currency
+(hint: use the [`currency()`](https://docassemble.org/docs/functions.html#currency) function)
 * If the user inputs an income of $0, then the text 'you do not earn an income' should be displayed in the final screen.
 
 :::note Example output
