@@ -74,7 +74,7 @@ flowchart TD;
 ### Constructing Our Application from our Flowchart
 Once we have charted out this flowchart, we can create our application in Docassemble. Remember that the various segments of the flowchart will help us map out how many screens we need.
 
-```yaml showLineNumbers title="Ch8_First_Docassemble_Template_PDF_Only.yml"
+```yaml showLineNumbers title="Ch8_Form_17_Generator.yml"
 # We will deifne an objects block to store our endpoint DADict object
 ---
 objects: 
@@ -92,7 +92,7 @@ subquestion: |
   
   *Please note that forms completed by this application should be checked by a lawyer first. This app does not provide any legal advice.*
   
-  Please click **Continue** to accept these terms. Otherwise, click **Exit*.*
+  Please click **Continue** to accept these terms. Otherwise, click **Exit**.
 
 buttons:
    - Continue: continue
@@ -108,7 +108,7 @@ fields:
     choices:
       - Supreme Court
       - District Court
-      - Magistrates
+      - Magistrates Court
       - Federal Court of Australia
       - Federal Circuit and Family Court of Australia
 ---
