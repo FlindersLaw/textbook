@@ -291,7 +291,7 @@ code: |
 ---
 ```
 
-We also have a new template to include, which you can donwload here. 
+We also have a new template to include, which you can donwload [here](/templates/Federal_Court_Form_17_Final.docx). 
 
 :::tip
 As with the previous code, you can copy and paste this application directly into your Docassemble playground. You can also upload the template above into your Docassemble playground. Legal Aid NSW has a [sample statement of claim](https://www.legalaid.nsw.gov.au/content/dam/legalaidnsw/documents/pdf/my-problem-is-about/my-job/wages-and-entitlements-forms/Sample%20-%20Form%2017%20-%20Statement%20of%20Claim%20-%20unpaid%20wages%20and%20entilements.pdf) that you can use to help test your application as well. 
@@ -300,7 +300,7 @@ As with the previous code, you can copy and paste this application directly into
 ### Using If Statements in Jinja
 The first thing different that we have implemented in this version is a series of if statements in our Jinja template. These if statements allow us to control the content that we insert into our template. 
 
-Jinja if statements are similar to Mako if statements [put in a reference to Chapter 4.4 here], except:
+Jinja if statements are similar to Mako if statements which we previously considered in <DisplayChapter chapter='chapter_04' />, except:
 
 * The if statement needs to be encased in *braces*, or curly brackets
 * The if statement clause should start and end with a `%` symbol
@@ -312,8 +312,30 @@ For example, if our form is being prepared by a lawyer, we only want certain con
 
 Note that in this screenshot we can also can see that for the variable next to Filed on behalf of, we have an `if-elif` statement block. We can use this block if we always want some text to be displayed. 
 
+<Components.DisplayImage imageURL='/img/textbook/chapter_08/ch08_jinja_if_statement_law_firm_complete.PNG' altText='A screenshot of a completed version of our template where the user has indicated that the matter is being filed by a law firm.'/>
+
+We can also use if statements to insert or not insert whole paragraphs of text. For example, in our template we have a certificate signed by the lawyer that the form has been completed on Page 2:
+
+<Components.DisplayImage imageURL='/img/textbook/chapter_08/ch08_jinja_if_statement_certificate_template.PNG' altText='A screenshot of a completed version of our template where the user has indicated that the matter is being filed by a law firm.'/>
+
+We can see from this screenshot that the entire paragraph is encased in an if statement. Therefore, if we state that the person signing this form is either the lawyer for the applicant or the lawyer for the respondent, this text will be displayed. Otherwise, it will not.
+
 ### Using Complex Data Structures
-Where we put our discussion of how to put in the pleadings and how to add multiple pleadings.
+One of the requests for us to modify our application has been to allow the user to enter each pleading as a numbered list in our complete template. We can do this using for loops and objects.
+
+You might recall that in <DisplayChapter chapter='chapter_05' />, we covered data structures such as Lists and Dictionaries. These data structures are Python data structures. Docassemble has its own inbuilt data structures as well. These are donated by the prefix `DA-`.
+
+In this section, we will be covering one of those data structures types called `DAList`. An object of `DAList` is like a regular Python list, but it also has certain properties. 
+
+In our application, we will use our list to store each of our pleadings. We first need to declare our list of pleadings. We do this on Line 7 of our application. 
+
+<Components.DisplayImage imageURL='/img/textbook/chapter_08/ch08_declare_DAList.PNG' altText='A screenshot of where we have declared our DAList, soc, in our application.'/>
+
+You might have noticed that `soc` is declared a little differently to `endpoint` immediately above it. Specifically:
+
+* A `DAList` is an object with methods. One of those methods is `.using`, which we use when we create the object.
+* When we use a method, we follow the method keyword with a set of parentheses or brackets. We can then put in parameters into these brackets.
+* Our first parameter is `there_are_any`. This sets a Boolean attribute for our object on whether there are any values to gather. Because our statement of claim will have at least one pleading, we set this to True.
 
 ### Using Paragraphs
 Where we put in our discussion of how to add in pleadings into our template.
@@ -322,12 +344,14 @@ Where we put in our discussion of how to add in pleadings into our template.
 Where we put in a section on how to format the dates.
 
 ### Controlling What Our User Can Download
-You might have noticed when working with Jinja previously that your user can either download a PDF or a DOCX template. In some cases though, we might not want to allow our user to download a DOCX document. In this case, we can control what content we display to our user using the `valid formats` tag. We need to add this to our code in the following format:
-
-```yaml showLineNumbers title="Ch8_Federal_Court_Form_17_PDF_Only.yml"
-```
-When our user fills in their details, they will only be able to download the completed template as a PDF:
+You might have noticed when working with Jinja previously that your user can either download a PDF or a DOCX template. In some cases though, we might not want to allow our user to download a DOCX document. In this case, we can control what content we display to our user using the `valid formats` tag. When our user fills in their details, they will only be able to download the completed template as a PDF:
 
 <Components.DisplayImage imageURL='/img/textbook/chapter_08/ch08_completed_attachment_PDF_only.PNG' altText='Our completed attachment, only now the user can only download the completed template as a PDF.'/>
 
 ## Summary
+In this section we have covered:
+
+* How to use if statements in Jinja
+* How to insert for loops into a Jinja template
+* How to create paragraphs using Jinja
+* When and how to use functions to format the output from our application
