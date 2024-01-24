@@ -1,0 +1,123 @@
+---
+title: Minimising Mandatory Blocks
+---
+import {DisplayGlossaryItem} from '@site/src/components';
+import {DisplayChapter} from '@site/src/components';
+
+Docassemble follows what is known as a [declarative programming paradigm](https://en.wikipedia.org/wiki/Declarative_programming).
+
+Most programming languages are [imperative](https://en.wikipedia.org/wiki/Imperative_programming),
+that is, the programmer uses the programming language to tell the program what to do and when to do it.
+In Declarative systems the 'when to do it' is left up to the system.  The programmer programs the 
+'what to do' - in Docassemble's case by using blocks such as 
+<DisplayGlossaryItem item='questionblock' plural /> and <DisplayGlossaryItem item='codeblock' plural />,
+amongst others, but it is up to Docassemble to decide which block should be called and when.
+
+Programming in a declarative way is meant to reduce workload on the programmer, as they no longer
+need to write the 'when' code, and should make the program more efficient to run, as the system
+can calculate the optimal execution logic.
+
+## What this means for us
+The declarative nature of Docassemble means we should try to direct it as little as possible.
+Practically, that means we should limit the number of <DisplayGlossaryItem item='mandatoryblock' plural />
+to as few as possible. You will have seen this in <DisplayChapter chapter='chapter_01' /> where usually
+only a single mandatory block is declared, with all other blocks marked as non-mandatory.  The 
+single mandatory block is the starting point and we then let Docacssemble do the rest of the work
+in deciding which other (usually question) blocks to call and when.
+
+More sophisticated examples can be seen in the case studies in <DisplayChapter chapter='chapter_06' />
+and also the styling example worked through in <DisplayChapter chapter='chapter_07' />.  The apps
+in both these chapters are reasonably sophisticated with many code, question and other blocks.  However,
+they are driven by only two mandatory blocks: a question block to display an initial, or 'welcome' screen 
+and then a <DisplayGlossaryItem item='codeblock' /> which controls the execution of the program.
+
+This is a good model and it is one that students should aim to use in their exercises and apps
+they develop.
+
+:::note
+Some [examples](/docs/textbook/chapter_07/00-30#chapter7yml) in this text do sometimes include
+additional manadtory blocks but these are for ancillary purposes, such as to load fonts and
+graphics.  The don't form part of the app's execution path per se.
+:::
+
+## End screens
+You may also have noticed that in the Chapter 1 code examples, the single mandatory block
+is usually the final screen screen of the app.  Essentially, the app is being driven
+from the final outcome and it is up to Docassemble how to get there.
+
+This is an acceptable way for smaller programs.  However, most larger programs will require
+an initial screen explaining what the app does as well as a final screen.  One option then is to
+have both opening and final screens as mandatory blocks:
+```yml
+---
+mandatory: True
+question: Welcome Screen
+subquestion: |
+  Description of the app
+buttons:
+  - Continue: continue
+  - Exit: exit
+---
+mandatory: True
+question: Final Screen
+subquestion: |
+  Display final resuts
+
+  Display ${variables} data. This will prompt
+  Docassemble to ask questions to populate the
+  variable data
+buttons:
+  - Restart: restart
+  - Exit: exit
+---
+```
+While this is possible, for more sophisticated applications it may be desirable
+to insert some control over what Docassemble does.  For example, while Docassemble
+may ask questions in the most efficient order, that order may not be logical
+to the user, and a programmer may want to direct the order of questions to a degree.
+
+Consequently, it is usually best practice *not* to make the final screen mandatory and to
+use a mandatory code block to drive the app instead.
+
+Instead, an [`event`](https://docassemble.org/docs/fields.html#event) tag should
+be used and that event variable called from the mandatory code block.  It is best
+to write apps in this way even if all the mandatory code block does is call the 
+final screen, as per [this example](/docs/textbook/chapter_06/filtering/00-70#mainyml).
+
+## Example of best practice use of mandatory blocks
+This is an illustration of the best practice usage for mandatory blocks.
+
+```yml
+---
+mandatory: True
+question: Welcome Screen
+subquestion: |
+  Information about app goes here
+buttons:
+  - Continue: continue
+  - Exit: exit
+---
+# This code block drives the execution of the app
+mandatory: True
+code: |
+  code_goes_here
+
+  # Finish by calling the final screen
+  final_screen
+---
+event: final_screen
+question: Final Screen
+subquestion: |
+  This is the end screen.  It will contain
+  data drawn from ${variables} and displayed
+  as Mako.  
+buttons:
+  - Restart: restart
+  - Exit: exit
+---  
+```
+
+## More Information
+The Docassemble manual contains a detailed explanation on 
+[how Docassemble executes programs](https://docassemble.org/docs/logic.html) and the
+declarative programming paradigm.

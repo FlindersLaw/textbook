@@ -1,17 +1,15 @@
 import {DisplayChapter} from '@site/src/components';
 import {DisplayGlossaryItem} from '@site/src/components';
-import CW2a_f from './_cw2a_flowchart1.mdx';
+import CW2a_f from '../_flowcharts/cw2a_flowchart1.mdx';
 
-export const title = 'Ex2a'
+export const title = 'Exercise 2a'
 export const video = <div>
-    <DisplayChapter chapter='chapter_03' number />
-    <span> Text </span>
-    <DisplayChapter chapter='chapter_03' number />
+    <a href="/docs/textbook/chapter_03/00-30#logic-tests">Logic tests</a>
+    <span>, </span>
+    <a href="/docs/recipes/minimising_mandatory_blocks">Minimising Mandatory Blocks</a>
+    <span>, </span>
+    <DisplayChapter chapter='chapter_04' />
     </div>
-
-:::tip TODO
-Add proper references to chapters
-:::
 
 We are going to create this part of the app:
 <CW2a_f />
@@ -54,13 +52,6 @@ fields:
 Create a <DisplayGlossaryItem item='questionblock' /> with an <DisplayGlossaryItem item='eventtag' />
 and set the event tag as `W2ineligible`. The contents of this question block should explain to users
 that 
-
-:::tip TODO
-Need part of ch 2 that deals with event screens
-
-Where do we introduce code blocks?  Maybe introduce the welcome screen -> mandatory code block
--> final screen template in ch 2?
-:::
 
 #### Code block
 Just below your Welcome screen you should create a mandatory <DisplayGlossaryItem item='codeblock' />.

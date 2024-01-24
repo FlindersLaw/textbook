@@ -78,9 +78,10 @@ const config = {
             label: 'Textbook',
           },
           {
-            label: 'Coding Exercises',
-            href: '/coding_exercises',
+            type: 'docSidebar',
+            sidebarId: 'codingExercisesSidebar',
             position: 'left',
+            label: 'Coding Exercises',
           },
           {
             type: 'docSidebar',
@@ -88,12 +89,13 @@ const config = {
             sidebarId: 'recipesSidebar',
             label: 'Bits, Pieces and Recipes'
           },
+          /* Not currently used
           {
             type: 'docSidebar',
             position: 'left',
             sidebarId: 'tbHelpSidebar',
             label: 'Textbook Help',
-          },
+          }, */
           {
             type: 'docSidebar',
             position: 'left',

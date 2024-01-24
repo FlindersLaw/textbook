@@ -1,10 +1,12 @@
 import {DisplayDAButtons} from '@site/src/components';
+import {DisplayChapter} from '@site/src/components';
 import {da_exit_prop} from '@site/src/constants';
+import * as Ex1b from './ex1b.mdx';
 
-export const title = 'Ex1c'
-export const video = 'C1.03'
+export const title = 'Exercise 1c'
+export const video = <DisplayChapter chapter='chapter_02' number />
 
-Modify your **Ex1b** code to:
+Modify your **{Ex1b.title}** code to:
 
 - add exit and restart buttons;
 - re-format your question block so that the question is asked in the `subquestion` tag;

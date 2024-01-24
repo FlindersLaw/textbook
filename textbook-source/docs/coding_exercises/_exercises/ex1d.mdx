@@ -1,7 +1,10 @@
-export const title = 'Ex1d';
-export const video = 'C1.04, G1.01, G1.02';
+import {DisplayChapter} from '@site/src/components';
+import * as Ex1c from './ex1c.mdx';
 
-Modify your **Ex1c** code to:
+export const title = 'Exercise 1d';
+export const video = <DisplayChapter chapter='chapter_02' />
+
+Modify your **{Ex1c.title}** code to:
 
 - add a question to ask for your salutation;
 - replace the name question with two fields for a first and last name;
