@@ -23,7 +23,7 @@ For this section, we will reuse our Form 17 generator application code. We have 
    - Fax Number
    - Email
    - Address for service
-* All dates should be formatted in an AGLC format
+* All dates should be formatted in an Australian Guide to Legal Citation format
 * The user can only download the file as a PDF
 
 ### Amending our Flowchart
@@ -402,8 +402,42 @@ If you look at our template, you will see that we have replicated the logic of o
 
 We can see that there are some differences between the for loop syntax we use in Mako and Jinja:
 
+* Like an if statement in Jinja, our for loop must be encased in a single pair of curly brackets or braces
+* The variable that we are referring to must be encased in a double pair of brackets
+* Our `for` loop and `endfor` statements need to be encased in a pair of `%` symbols.  
+
+However, we want to make sure that we avoid extra line breaks. We do this by putting a `p` immediately after our first `%` symbol and before the start of our for loop clause. This tells Docassemble that we need to remove the paragraph where our `for` loop clause is located.
+
+<Components.DisplayImage imageURL='/img/textbook/chapter_08/ch08_federal_court_template_pleadings_for_loop_output.PNG' altText='The output from our template using the pleadings we previously entered. Note that the paragraph where our if statement would be has been removed.'/>
+
 ### Using Functions
-Where we put in a section on how to format the dates.
+Our final instruction to improve our application was to ensure that the date of filing and the date of certificate are formatted in an AGLC format. We also need to extract the date from the date of filing to insert the matter year. 
+
+To do so, we need to format our dates using another inbuilt function in Docassemble - `format_date`:
+
+```yaml"
+---
+code: |
+  dateOfFilingAGLC = format_date(dateOfFiling, format='d MMMM YYYY')
+  matterYear = format_date(dateOfFiling, 'YYYY')
+  if capacityOfFiler == 'Lawyer for the Applicant' or capacityOfFiler == 'Lawyer for the Respondent':
+    dateOfCertAGLC = format_date(dateOfCert, format='d MMMM YYYY')
+---
+```
+
+First, we need to declare a new variable, `dateOfFilingAGLC`. We then use the `format_date` function. We pass `dateOfFiling` as the variable that we want to format as the first parameter. We then pass the date format we want to use as the second parameter. Dates in [AGLC](https://law.unimelb.edu.au/__data/assets/pdf_file/0005/3181325/AGLC4-with-Bookmarks-1.pdf) are formatted in a Day-Month-Year format, and the day should not be an ordinal number. Therefore, we use the format 'd MMMM YYYY'. 
+
+Second, we declare another new variable, `matterYear`. The only difference here is that we extract just the year of filing by using the `YYYY` format.
+
+Third, we only declare a new variable called `dateOfCertAGLC` if `capacityOfFiler` is set to 'Lawyer for the Applicant' or 'Lawyer for the Respondent'. Note that `dateOfCert` will only be assigned a value if `capacityOfFiler` is set to 'Lawyer for the Applicant' or 'Lawyer for the Respondent'.
+
+:::caution
+If we want to use variables that would only be displayed in certain circumstances, it is good coding practice to use `show if` clauses and `if statements` in both our question block and our templates.
+:::
+
+When we run our application, our dates will be formatted in an AGLC style:
+
+<Components.DisplayImage imageURL='/img/textbook/chapter_08/ch08_federal_court_template_pleadings_date_highlighted.PNG' altText='The output from our template using the pleadings we previously entered, with the date highlighted in an AGLC compliant format.'/>
 
 ## Summary
 In this section we have covered:
