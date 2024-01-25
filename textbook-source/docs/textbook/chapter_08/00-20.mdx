@@ -119,7 +119,7 @@ subquestion: |
   
   Because you are not submitting a form to either of these courts, you are not eligible to use this application.
   
-  Please press **Exit* to exit this application or **Restart** to restart.
+  Please press **Exit** to exit this application or **Restart** to restart.
 buttons:
   - Exit: exit
   - Restart: restart
@@ -327,26 +327,83 @@ You might recall that in <DisplayChapter chapter='chapter_05' />, we covered dat
 
 In this section, we will be covering one of those data structures types called `DAList`. An object of `DAList` is like a regular Python list, but it also has certain properties. 
 
-In our application, we will use our list to store each of our pleadings. We first need to declare our list of pleadings. We do this on Line 7 of our application. 
+#### Declaring a List of Pleadings
+In our application, we will use our list to store each of our pleadings. We first need to declare our list of pleadings. We do this in the `objects` block on Line 7 of our application. 
 
-<Components.DisplayImage imageURL='/img/textbook/chapter_08/ch08_declare_DAList.PNG' altText='A screenshot of where we have declared our DAList, soc, in our application.'/>
+```yaml"
+---
+objects: 
+  - endpoint: DADict
+  - soc: DAList.using(there_are_any=True, object_type=DAObject, complete_attribute='pleading')
+---
+```
 
-You might have noticed that `soc` is declared a little differently to `endpoint` immediately above it. Specifically:
+You might have noticed that `soc` (which stands for 'statement of claim') is declared a little differently to `endpoint` immediately above it. Specifically:
 
 * A `DAList` is an object with methods. One of those methods is `.using`, which we use when we create the object.
 * When we use a method, we follow the method keyword with a set of parentheses or brackets. We can then put in parameters into these brackets.
-* Our first parameter is `there_are_any`. This sets a Boolean attribute for our object on whether there are any values to gather. Because our statement of claim will have at least one pleading, we set this to True.
+* Our first parameter is `there_are_any`. This sets a Boolean attribute for our object on whether there are any values to gather. Because our statement of claim will have at least one pleading, we set this to True.]
+* Our second parameter is our object type. This will be the object which will be contained in our list. We will set this to a `DAObject`, which is a special Docassemble object type. 
+* Our third parameter is `complete_attribute`. This sets the name of an attribute for each object in our `DAList`. To gather an object and add it to a list, we need to set the value for this attribute. In our application, we are setting our `complete_attribute` to 'pleading'.
+
+If you do not know what all of these terms mean, do not worry. For now, this is all you need to know in order to create a `DAList` in Docassemble. 
+
+:::info
+If you want to learn more about how to use lists, you can read the sections on [Objects](https://docassemble.org/docs/objects.html) and [Groups](https://docassemble.org/docs/groups.html) Docassemble developers manual. 
+:::
+
+#### Filling In Our List
+Now that we have declared our `DAList` obiject, the next step is to fill our list. We can do that with the two question blocks that we have defined on Lines 153 to 164.
+
+```yaml"
+---
+# Pleadings initial question
+# This question asks for the first pleading
+question: |
+  What is the ${ ordinal(i) } pleading in your statement of claim?
+fields:
+  - Pleading: soc[i].pleading
+---
+# This question asks if there is another pleading
+question: |
+  Is there another pleading?
+yesno: soc.there_is_another
+---
+```
+
+What will these two question blocks do? We know that because we have declared our `DAList` with `there_are_any` set to `True`, there must always be one pleading. Therefore, the first question block asking our user to set the pleading will be fired first. 
+
+The `i` in our code refers to the current index (or position) our `DAList`, as we discussed in <DisplayChapter chapter='chapter_05' />. When we use the words `ordinal`, we are using an inbuilt Docassemble function which turns an integer into that integer plus one expressed as a word.
+
+:::info
+As we covered in <DisplayChapter chapter='chapter_05' />, the first index for a list in Python (or any programming language) is position 0.
+:::
+
+Therefore, the question block from Lines 154 to 160 will be executed first, which will ask for the first pleading in the statement of claim.
+
+<Components.DisplayImage imageURL='/img/textbook/chapter_08/ch08_federal_court_first_pleading_screen.PNG' altText='A screenshot of the question screen which asks for the user to enter in the first pleading.'/>
+
+Once we have entered this pleading, the application will then fire the question on Lines 160 to 165. This question screen will ask the user to indicate whether there is another pleading.
+
+<Components.DisplayImage imageURL='/img/textbook/chapter_08/ch08_federal_court_is_another_pleading_screen.PNG' altText='A screenshot of the question screen which is displayed once the user enters a pleading. This screen will be continually displayed until the presses no.'/>
+
+If the user presses Yes, they will be prompted to enter a statement of claim. This process continues until the user presses No, which will set the attribute `there_is_another` to `False`. At this point, the final eligible screen will be displayed, along with the full list of pleadings presented in a numbered list, which is generated by the for loop on Lines 209 to 211 of our application.
+
+<Components.DisplayImage imageURL='/img/textbook/chapter_08/ch08_federal_court_complete_pleadings_docassemble.PNG' altText='A screenshot of the final eligible screen with our completed list of pleadings.'/>
+
+:::info
+Note that we only have one numbered item on Line 210 of our application. However, Markdown will automatically number this list for us. 
+:::
 
 ### Using Paragraphs
-Where we put in our discussion of how to add in pleadings into our template.
+If you look at our template, you will see that we have replicated the logic of our if statement. 
+
+<Components.DisplayImage imageURL='/img/textbook/chapter_08/ch08_federal_court_template_pleadings_for_loop.PNG' altText='A screenshot of our template with the for loop which will be used to generate a list of pleadings.'/>
+
+We can see that there are some differences between the for loop syntax we use in Mako and Jinja:
 
 ### Using Functions
 Where we put in a section on how to format the dates.
-
-### Controlling What Our User Can Download
-You might have noticed when working with Jinja previously that your user can either download a PDF or a DOCX template. In some cases though, we might not want to allow our user to download a DOCX document. In this case, we can control what content we display to our user using the `valid formats` tag. When our user fills in their details, they will only be able to download the completed template as a PDF:
-
-<Components.DisplayImage imageURL='/img/textbook/chapter_08/ch08_completed_attachment_PDF_only.PNG' altText='Our completed attachment, only now the user can only download the completed template as a PDF.'/>
 
 ## Summary
 In this section we have covered:
