@@ -7,8 +7,8 @@ const darkTheme = themes.github;
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Law in a Digital Age',
-  tagline: 'Textbook',
+  title: 'Understanding Legal Technology',
+  tagline: 'Coding Legal Software using Docassemble',
   favicon: '/img/favicon.ico',
 
   // Set the production url of your site here

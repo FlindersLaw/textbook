@@ -4,30 +4,27 @@ import styles from './styles.module.css';
 
 const FeatureList = [
   {
-    title: 'Easy to Use',
+    title: 'Mark Ferraretto',
+    postnominals: 'BSc (Math Sc), LLB, GDLP',
     Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
+    headshot: '/img/headshot_mjf.jpg',
     description: (
       <>
-        This layout comes from the Docusaurus default classic theme.
-        It looks nice and I think we should keep this layout but with
-        relevant text in each of these parts.
+        Mark is a Senior Lecturer in Law at Flinders University. Mark
+        worked as an IT professional for over 20 years before returning
+        to study law in 2011 and graduating in 2016.  Mark has taught
+        law and technology topics at Flidners University since 2019.
+
+        In his private time Mark enjoys running, cycling and is a
+        private pilot.
       </>
     ),
   },
   {
-    title: 'Focus on What Matters',
+    title: 'Dr James Scheibner',
+    postnominals: 'LLB GDLP PhD',
     Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
-    description: (
-      <>
-        This layout comes from the Docusaurus default classic theme.
-        It looks nice and I think we should keep this layout but with
-        relevant text in each of these parts.
-      </>
-    ),
-  },
-  {
-    title: 'Powered by React',
-    Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
+    headshot: '/img/headshot_jks.jpg',
     description: (
       <>
         This layout comes from the Docusaurus default classic theme.
@@ -38,14 +35,16 @@ const FeatureList = [
   },
 ];
 
-function Feature({Svg, title, description}) {
+function Feature({headshot, title, description}) {
   return (
-    <div className={clsx('col col--4')}>
+    <div className={clsx('col')}>
       <div className="text--center">
-        <Svg className={styles.featureSvg} role="img" />
+        <img className={styles.featureSvg} role="img" src={headshot} />
       </div>
       <div className="text--center padding-horiz--md">
         <h3>{title}</h3>
+      </div>
+      <div className="text--justified padding-horiz--md">
         <p>{description}</p>
       </div>
     </div>
