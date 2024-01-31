@@ -5,15 +5,13 @@ import styles from './styles.module.css';
 const FeatureList = [
   {
     title: 'Mark Ferraretto',
-    postnominals: 'BSc (Math Sc), LLB, GDLP',
-    Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
     headshot: '/img/headshot_mjf.jpg',
     description: (
       <>
         Mark is a Senior Lecturer in Law at Flinders University. Mark
         worked as an IT professional for over 20 years before returning
         to study law in 2011 and graduating in 2016.  Mark has taught
-        law and technology topics at Flidners University since 2019.
+        law and technology topics at Flinders University since 2019.
 
         In his private time Mark enjoys running, cycling and is a
         private pilot.
@@ -21,15 +19,15 @@ const FeatureList = [
     ),
   },
   {
-    title: 'Dr James Scheibner',
-    postnominals: 'LLB GDLP PhD',
-    Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
+    title: 'James Scheibner',
     headshot: '/img/headshot_jks.jpg',
     description: (
       <>
-        This layout comes from the Docusaurus default classic theme.
-        It looks nice and I think we should keep this layout but with
-        relevant text in each of these parts.
+        James is a Lecturer in Law at Flinders University. He joined
+        the College of Business, Government and Law in 2021 after an
+        overseas appointment. James specialises in data privacy, copyright,
+        patent and human rights law, with a particular focus on
+        information technology and health technologies.
       </>
     ),
   },

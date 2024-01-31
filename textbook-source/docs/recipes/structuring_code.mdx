@@ -1,0 +1,136 @@
+---
+title: Structuring Your Code
+---
+import {DisplayGlossaryItem} from '@site/src/components';
+import {DisplayChapter} from '@site/src/components';
+
+Through most of this textbook you will encounter code that is contained within a single file,
+for example, our [Vital Statistics](/docs/textbook/chapter_02/00-60) app.  As we develop more
+and more sophisticated apps we write more and more lines of code.  As we write more code
+the need to organise the code we write becomes more and more necessary, so that we can
+reduce the amount of time we spend looking for the code.
+
+## Code in multiple files
+It is well within your capabilities, after working through this textbook, to write reasonably
+sophisticated apps consisting of many hundreds or even thousands of lines of code.
+Storing all your code in a single file becomes impractical when we approach these kinds of numbers.
+That's because, firstly, it simply becomes too hard to find the code we want to work on and, secondly,
+we can also run up against computer system limitations for displaying large files.
+
+The solution to this issue is to split out your code into multiple files and then incorporate them
+all together some how.  The 'some how' in Docassemble is achieved by way of an
+[`include`](https://docassemble.org/docs/initial.html#include) block. 
+
+The [Docassemble manual](https://docassemble.org/docs/initial.html#include) discusses what
+`include` blocks are and how they work.  In this part of the textbook we want to talk more
+about how best to use them and to suggest a way to organise your code.
+
+## Use `main.yml`
+Firstly, as soon as we start breaking up our code into multiple files, it follows that we need to
+nominate one of these files to load and run our app. By convention in programming this file
+is referred to as the 'main file'. Also by convention it should be named `main.yml` or something
+that contains the word `main` in it.  Our recommendation is that you use `main.yml` as the name
+of your main file.
+
+## What should be in `main.yml`
+Now that we have a main file the next question is what it should contain.  In principle 
+the main file should contain [only the code that drives the application overall](minimising_mandatory_blocks).  This
+should consist of any <DisplayGlossaryItem item='mandatoryblock' plural />, final screens
+and any other blocks required to set up the app, such as [`metadata`](https://docassemble.org/docs/initial.html#metadata)
+and [`features`](https://docassemble.org/docs/initial.html#features) blocks.  We should also
+have an `include` block to incorporate our other program files into our app.
+
+Here is an example of what a `main.yml` might look like:
+```yml showLineNumbers
+---
+include:
+  - questions.yml
+  - database.yml
+  - code_logic.yml
+---
+features:
+  css: styles.css
+---
+mandatory: True
+question: Welcome screen
+subquestion: |
+  This is the welcome screen
+buttons:
+  - Continue: continue
+  - Exit: exit
+---
+mandatory: True
+code: |
+  # Code that drives the app goes here
+
+  # Then call the final screen
+---
+event: final_screen
+question: Final Screen
+subquestion: |
+  Text for final screen goes here
+buttons:
+  - Restart: restart
+  - Exit: exit
+---
+```
+
+### Lines 2 to 5
+This is our `include` block.  It tells Docassmble to make `questions.yml`, `database.yml` and
+`code_logic.yml` part of our app.
+
+### Lines 7 and 8
+This is a `features` block that directs the app to load the styles in `styles.css` into our
+app.
+
+:::note
+Styles and basic app design is covered in <DisplayChapter chapter='chapter_07' />.
+:::
+
+### Lines 10 to 30
+This is the recommended structure for the logic of `main.yml`.  That is, the first screen
+of the app is a <DisplayGlossaryItem item='mandatoryblock' />, followed by a mandatory
+<DisplayGlossaryItem item='codeblock' /> and then a final screen.  This architecture is
+discussed in more detail [here](minimising_mandatory_blocks).
+
+:::note
+If your app had many different final screens you would want to separate them out 
+into another file instead of including them in your `main.yml`.
+:::
+
+## Organising your files
+There are no set rules for organising your code into files.  In short, you need to find
+what works best for you.  Having said that here are some suggestions you may want to
+consider.
+
+### Organise by function
+This method is alluded to in the [example above](#what-should-be-in-mainyml).  Question
+blocks get put into one file, code blocks into another file and databases into another file.
+
+If nothing else, this is a good place to start.  If you're not sure how to organise your app
+then at least start breaking out your code by function.  Any organisation is better than no
+organisation at all. Often as you develop your app you may find a more suitable organisational
+scheme.  It's not too much effort to move away from this function-based scheme to any other
+scheme.
+
+### Organise by role
+This is suitable for larger apps.  For example, you may group all your code that deals with,
+say, legal analysis into one file (or set of files), and code that deals with presentation 
+of information to the user in another file and so-on.  
+
+Neither role is necessarily better than the other, although this author usually starts out
+organising by function and building from there.
+
+Students that have work assessed may find that organising your code into multiple files
+may form part of your assessment criteria.
+
+## Examples
+Here are some examples of applications using multiple files and `include` blocks.  They
+also demonstrate the principle of keeping as little information possible in `main.yml`.
+
+<DisplayChapter chapter='chapter_06' /> contains case studies which consider sophisticated
+app examples.
+
+<DisplayChapter chapter='chapter_07' /> discusses styling your app.  The example code produced
+in this chapter also is split into multiple files and structured according to the guidelines set
+out in this part of the textbook.

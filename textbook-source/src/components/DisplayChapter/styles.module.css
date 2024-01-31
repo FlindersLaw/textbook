@@ -1,0 +1,5 @@
+/* Style to display an error message */
+.DCError {
+    font-weight: bold;
+    color: red;
+}

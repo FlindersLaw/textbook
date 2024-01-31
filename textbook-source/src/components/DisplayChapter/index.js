@@ -2,6 +2,7 @@ import React from "react";
 import {Link} from 'react-router-dom';
 import chapter_list from './chapter_list.js';
 import {capitalizeWords} from './utilities.js';
+import styles from './styles.module.css';
 
 /**
  * DisplayChapter component displays a link or text for a chapter.
@@ -10,8 +11,6 @@ import {capitalizeWords} from './utilities.js';
  * each word capitalised and numbers converted to words). Use 
  * props upper, lower, number as described to modify display
  * of output.
- * TODO: Check if chapter exists and display an error otherwise.
- * TODO: Allow for chapters to exist in paths other than chapterDocPath
  *
  * @param {Object} props - Component props.
  * @param {string} props.chapter - Name of the chapter folder, e.g., 'chapter_01'.
@@ -43,7 +42,7 @@ export function DisplayChapter(props) {
 
     if ( ! chapter_list.hasOwnProperty(props.chapter) ) {
         return(
-            <a href={chapterPath} className="TODOerror">
+            <a href={chapterPath} className={styles.DCError}>
              Error: path to {chapterPath} does not exist
             </a>
         );

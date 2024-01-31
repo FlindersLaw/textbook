@@ -65,7 +65,7 @@ const config = {
       // Replace with your project's social card
       image: 'img/docusaurus-social-card.jpg',
       navbar: {
-        title: 'Law in a Digital Age',
+        title: 'Understanding Legal Technology',
         logo: {
           alt: 'Flinders University Logo',
           src: 'img/Flinders_University_Logo_Horizontal_RGB_Master.png',
@@ -102,11 +102,6 @@ const config = {
             sidebarId: 'assessmentSidebar',
             label: 'Assessments',
           },
-          {
-            href: 'https://github.com/LLAW3301',
-            label: 'Digital Age GitHub',
-            position: 'right',
-          },
         ],
       },
       footer: {
@@ -123,10 +118,6 @@ const config = {
                 label: 'Docassemble Manual',
                 href: 'https://docassemble.org/docs.html',
               },
-              {
-                label: 'Digital Age GitHub',
-                href: 'https://github.com/LLAW3301',
-              },
             ],
           },
           {
@@ -141,10 +132,6 @@ const config = {
           {
             title: 'More',
             items: [
-              {
-                label: 'FLO',
-                href: 'https://flo.flinders.edu.au',
-              },
               {
                 label: 'Canvas',
                 href: 'https://canvas.flinders.edu.au',
@@ -163,6 +150,12 @@ const config = {
         defaultMode: 'light',
         disableSwitch: true,
         respectPrefersColorScheme: false,
+      },
+      algolia: {
+        appId: 'E707TIU8AU',
+        apiKey: 'f78411c0ddf750f26cdb62f114b3a9b0',
+        indexName: 'happy-sea-0fbd5ba00-3-azurestaticapps',
+        insights: true,
       },
     }),
 

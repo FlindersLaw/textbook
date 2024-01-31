@@ -1,4 +1,5 @@
 import React from "react";
+import styles from './styles.module.css';
 import * as Constants from '@site/src/constants';
 
 /** Link to Flinders Docassemble Server */
@@ -40,7 +41,7 @@ export function DisplayConstants(props) {
     } else if ( props.data == teachingcodeurl ) {
         return <code>{Constants.github_teaching_code}</code>
     } else {
-        return <span className="TODOerror">Unknown data supplied: {props.data}</span>
+        return <span className={styles.DCError}>Unknown data supplied: {props.data}</span>
     }
 }
 

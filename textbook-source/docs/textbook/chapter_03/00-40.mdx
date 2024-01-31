@@ -112,14 +112,22 @@ The better way to address this logic would be to break it out into two code bloc
 code block:
 ```python showLineNumbers
 ---
+# A lovely, short easy to read code block
 code: |
+  # Check if MJFname is one of the authors
   if MJFname == 'Mark Ferraretto' or MJFname == 'James Scheibner':
+    # Set MJFauthor to true if so
     MJFauthor = True
   else:
+    # If we're here then MJFname is not an author
     MJFauthor = False
 ```
 and then deal with `MJFchapter` in a separate block:
 ```python showLineNumbers
+---
+# Long but not as long as before.  And at
+# least it deals with just one piece of logic
+# (and it would be much shorter without these comments)
 code: |
   # Our list of chapters as before
   marks_chapters = [1, 2, 3, 5, 6, 7]
@@ -172,6 +180,7 @@ Idempotence becomes an issue when we deal with complex data structures, particul
 <DisplayGlossaryItem item='list' plural />, as we discuss in <DisplayChapter chapter='chapter_05'/>.  It
 usually becomes a problem when we add an item to a list.  For example this code block:
 ```python
+---
 code: |
   # Do some stuff
   # Do some more stuff

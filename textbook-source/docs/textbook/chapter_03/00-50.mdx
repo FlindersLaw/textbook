@@ -1,0 +1,97 @@
+---
+title: Code and Mako
+---
+import {DisplayChapter} from '@site/src/components';
+import {DisplayGlossaryItem} from '@site/src/components';
+
+We have already come across <DisplayGlossaryItem item='mako' upper /> in
+<DisplayChapter chapter='chapter_02' />, where we used it to
+[display the value of variables](/docs/textbook/chapter_02/00-42).  In 
+<DisplayChapter chapter='chapter_04' /> we will see Mako used to
+[embed decision-making logic](/docs/textbook/chapter_04/00-50) in our
+<DisplayGlossaryItem item='questionblock' plural />.
+
+What we want to draw out in this part of the chapter is the relationship between Mako
+and <DisplayGlossaryItem item='python' upper />.  In short, we use Mako to embed
+Python expressions into the 'display' parts of our app, such as question blocks.
+
+## What is a Python Expression?
+Python expressions are a [reasonably complex concept](https://docs.python.org/3/reference/expressions.html).
+However, we will limit ourselves to just this definition:
+
+> A Python expression is Python code that can be evaluated to a single value.
+
+For example, the Python expression `1 + 1` evaluates to `2`.  The expression `MJFname` evaluates
+to whatever the value of `MJFname` is.  The expression `MJFfirstname + ' ' + MJFlastname` evaluates
+to a [string](/docs/textbook/chapter_03/00-20#strings) containing the valueof `MJFfirstname`, then a space,
+then the value of `MJFlastname` all joined together.
+
+The key to all of these is that evaluate to a single 'thing' or a single value.
+
+## Mako and Python Expressions
+Mako takes any Python expression and evaluates it.  By embedding our expression in the `${...}`
+enclosure we're telling Docassemble to fire up Mako for what's inside the braces, evaluate the
+expression and then display the result.
+
+We would call our above examples as follows:
+```yml showLineNumbers
+---
+question: Mako demonstrator
+subquestion: |
+  What does 1 + 1 equal?  ${ 1 + 1 }
+
+  The value of `MJFname` is ${MJFname}
+
+  The full name is ${ MJFfirstname + ' ' + MJFlastname }
+---
+```
+
+:::info Mako and spaces
+You may have noticed that in some of our expressions we space things out
+(eg: `${ 1 + 1 }` instead of `${1+1}`).  
+
+Mako ignores spaces inside the braces, much like how Python also ignores 
+spaces.  So, we can use spaces to, well, space things out (!) and make our
+code easier to read.
+:::
+
+So, for example, this Mako:
+```
+  ${MJFname}
+```
+
+## Mako in Fields and Data Blocks
+We have already used Mako in question blocks, but Mako can be used in many other
+parts of Docassemble.  For example, it can be used in the question title:
+```yml showLineNumbers
+---
+question: Hello ${MJFname}
+subquestion: |
+    This question block displays the value
+    of `MJFname` in its title.
+---
+```
+It can also be used in fields:
+```yml showLineNumbers
+---
+question: Get last name
+fields:
+  - ${MJFfirstname}, what is your last name?: MJFlastname
+---
+```
+Mako can also be used in the `subject` key of [template blocks](/docs/recipes/templates).
+
+By a long way we will use Mako  in question blocks, but it is worth keeping in mind that
+almost any part of Docassemble that contains string literals can also utilise Mako.
+
+## Mako and Logic
+In addition to displaying Python expressions, Mako has a second syntax which serves a
+second function, namely logic.
+
+We can use Mako to embed decision-making logic into our display text using the `%` 
+syntax.  This `%` syntax applies only to two elements: `%if` for
+[if statements](/docs/textbook/chapter_04/00-50) and `%for` for
+[iteration](/docs/textbook/chapter_05/00-30#python-format-and-mako-format).
+
+We will cover if statements in more detail in <DisplayChapter chapter='chapter_03' />
+and iteration in <DisplayChapter chapter='chapter_05'/>.
