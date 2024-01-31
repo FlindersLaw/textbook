@@ -1,0 +1,61 @@
+---
+title: Template blocks
+---
+import {DisplayGlossaryItem} from '@site/src/components';
+
+[Template blocks](https://docassemble.org/docs/initial.html#template) are a way of storing
+boilerplate text that you may want to re-use in multiple places in your app.  They are
+particularly useful when displaying information that has to be displayed on a screen and
+in an attachment.
+
+Templates are assigned a variable name, like any other data in Docassemble.  Templates consist of
+two parts: a 'subject' and 'content'.
+```yml
+---
+template: variable_name
+subject: Subject goes here
+content: |
+  Content goes here
+---
+```
+You can use <DisplayGlossaryItem item='markdown' upper /> and <DisplayGlossaryItem item='mako' upper />j
+in both the `subject` and `content` parts of the template. Doing so is encouraged in the `content` as it
+allows you to re-use your template and make your coding more efficient.  For example, this template 
+would be displayed to tell a user whether their potential action was out of time.  It makes a
+decision based on the `out_of_time` variable which would be set elsewhere in the app.
+```yml
+---
+template: oot_template
+subject: Information about Your Claim
+content: |
+  Based on your answers it appears that you
+  %if out_of_time:
+  **may not**
+  %else:
+  **may**
+  %endif
+  be able to bring an action for breach of contract against ${other_party}.
+  
+  According to section 35 of the *Limitations of Actions Act 1936* (SA) actions
+  in contract must be brought within six years of the occurrence of the breach.
+---
+```
+You could subsequently display this template in a final screen:
+```yml
+---
+event: final_screen
+question: Final Scren
+subquestion: |
+  Some other text
+  ...
+  
+  ### ${oot_template.subject}
+
+  ${oot_template}
+---
+```
+In this example we format the subject as a level 3 heading and then display the template
+contents underneath it.
+
+Please refer to the [Docassemble manual](https://docassemble.org/docs/initial.html#template) for
+more information about template blocks.

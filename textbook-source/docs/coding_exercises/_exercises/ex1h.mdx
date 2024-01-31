@@ -1,0 +1,52 @@
+import {DisplayChapter} from '@site/src/components';
+
+export const title = 'Exercise 1h';
+export const video = <div>
+  <a href="/docs/textbook/chapter_02/00-50">Introducing Jinja</a>
+  <span>, </span>
+  <DisplayChapter chapter='chapter_04' />
+  <span>, </span>
+  <DisplayChapter chapter='chapter_08' />
+  </div>
+
+Create an app which assesses a candidate on whether they can stand for Parliament.
+You should base your app on the following flowchart.
+
+```mermaid
+flowchart TD;
+    id0[Start]
+    id0 --> id1(Welcome Screen)
+    id1 -- User clicks exit --> id2[End]
+    id1 -- User clicks continue --> id3(Ask the user for<ul><li>their name</li><li>their age and</li><li>whether they are<br>an Australian citizen</li></ul>)
+    id3 --> id4{{Is the user an elector?}}
+    id4 -- No --> id5(Display exit screen)
+    id5 --> id6[End]
+    id4 -- Yes --> id7(Ask more questions)
+    id7 --> id8[End]
+
+    %% Define the comments here and then assign them below
+    co1(Welcome screen should contain:<ul><li>Explanation of what application does</li><li>Disclaimer that this app does not<br>provide legal advice</li><li>Continue and Exit buttons</li><li>Exit button directs to the <a href="https://aec.gov.au">AEC</a></li></ul>)
+    co2(If the user is over 18 and is an Australian<br>citizen, they are an elector and can<br>therefore stand as a candidate in a<br>Federal election)
+    co3(Explain that only electors can run<br>as candidates in Federal elections) 
+    co4(You will need to ask some more questions<br>to see whether the candidate can stand<br> for a Federal election see s 44 of the<br>*Constitution* for the criteria ) 
+
+    %% Assign comments to elements in the flowchart
+    co1 -.- id1
+    co2 -.- id3
+    co3 -.- id5
+    co4 -.- id7
+
+    %% Define styles for flowchart items.  We want to make comments yellow
+    %% and have a larger font size for regular items
+    classDef commentClass fill:#faffd6,text-align:left
+    classDef questionClass fill:#ffe6bc
+    classDef boundaryClass fill:#eeeeee,text-fill-color:#fff
+    classDef itemClass font-size:16pt
+    classDef leftListClass text-align:left
+
+    %% Then assign flowchart items to styles here
+    class co1,co2,co3,co4 commentClass; 
+    class id4 questionClass
+    class id0,id2,id6,id8 boundaryClass
+    class id3 leftListClass
+```

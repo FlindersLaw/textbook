@@ -1,0 +1,32 @@
+import {DisplayChapter} from '@site/src/components';
+import {DisplayGlossaryItem} from '@site/src/components';
+import CW2b_f from '../_flowcharts/cw2b_flowchart1.mdx';
+import * as Ex2a_c from './cw2a.mdx';
+
+export const title = 'Exercise 2b'
+export const video = <div>
+    <a href="/docs/textbook/chapter_04/00-40">Nested If Statements</a>
+    <span>, </span>
+    <a href="/docs/recipes/templates">Templates</a>
+    </div>
+
+Let's modify the code from {Ex2a_c.title} and build out the next part of our app.
+In this exercise we will implement the following:
+
+<CW2b_f />
+
+For this you will need these question screens:
+* Ask if the user wants to sell their pet
+* Ask if the user is a breeder
+* Ask if the user's pet is a livestock dog
+
+The chart shows three exit screens but you should consolidate the two left
+screens into one using [templates](https://docassemble.org/docs/initial.html#template).
+
+Once the screens are made,  update the mandatory code block with nested
+if statements to direct the user to the appropriate screen.
+
+:::tip
+Your nested if statement should go where we had entered `pass` in
+{Ex2a_c.title}.
+:::

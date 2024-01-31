@@ -7,8 +7,8 @@ const darkTheme = themes.github;
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Law in a Digital Age',
-  tagline: 'Textbook',
+  title: 'Understanding Legal Technology',
+  tagline: 'Coding Legal Software using Docassemble',
   favicon: '/img/favicon.ico',
 
   // Set the production url of your site here
@@ -65,7 +65,7 @@ const config = {
       // Replace with your project's social card
       image: 'img/docusaurus-social-card.jpg',
       navbar: {
-        title: 'Law in a Digital Age',
+        title: 'Understanding Legal Technology',
         logo: {
           alt: 'Flinders University Logo',
           src: 'img/Flinders_University_Logo_Horizontal_RGB_Master.png',
@@ -78,32 +78,29 @@ const config = {
             label: 'Textbook',
           },
           {
-            label: 'Coding Exercises',
-            href: '/coding_exercises',
+            type: 'docSidebar',
+            sidebarId: 'codingExercisesSidebar',
             position: 'left',
+            label: 'Coding Exercises',
           },
           {
             type: 'docSidebar',
             position: 'left',
             sidebarId: 'recipesSidebar',
-            label: 'Coding Recipes'
+            label: 'Bits, Pieces and Recipes'
           },
+          /* Not currently used
           {
             type: 'docSidebar',
             position: 'left',
             sidebarId: 'tbHelpSidebar',
             label: 'Textbook Help',
-          },
+          }, */
           {
             type: 'docSidebar',
             position: 'left',
             sidebarId: 'assessmentSidebar',
             label: 'Assessments',
-          },
-          {
-            href: 'https://github.com/LLAW3301',
-            label: 'Digital Age GitHub',
-            position: 'right',
           },
         ],
       },
@@ -121,10 +118,6 @@ const config = {
                 label: 'Docassemble Manual',
                 href: 'https://docassemble.org/docs.html',
               },
-              {
-                label: 'Digital Age GitHub',
-                href: 'https://github.com/LLAW3301',
-              },
             ],
           },
           {
@@ -139,10 +132,6 @@ const config = {
           {
             title: 'More',
             items: [
-              {
-                label: 'FLO',
-                href: 'https://flo.flinders.edu.au',
-              },
               {
                 label: 'Canvas',
                 href: 'https://canvas.flinders.edu.au',
@@ -161,6 +150,12 @@ const config = {
         defaultMode: 'light',
         disableSwitch: true,
         respectPrefersColorScheme: false,
+      },
+      algolia: {
+        appId: 'E707TIU8AU',
+        apiKey: 'f78411c0ddf750f26cdb62f114b3a9b0',
+        indexName: 'happy-sea-0fbd5ba00-3-azurestaticapps',
+        insights: true,
       },
     }),
 

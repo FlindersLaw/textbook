@@ -1,0 +1,222 @@
+---
+title: Code Blocks
+---
+import {DisplayChapter} from '@site/src/components';
+import {DisplayGlossaryItem} from '@site/src/components';
+import F1 from './_flowcharts/00-40-1.mdx';
+
+Now that we've learnt what variables are, what to store in them and how to test
+them, how do we bring this all together?  How do we use variables 'in the real world'?
+
+Docassemble has two ways for us to use variables.  One is in <DisplayGlossaryItem item='codeblock' plural />
+and another is by using <DisplayGlossaryItem item='mako' upper />.
+
+We will cover code blocks in this part of this chapter.  Mako is covered in the next part.
+
+## Introducing Code Blocks
+We are already familiar with the idea of **blocks**.  A block is some code that
+is enclosed by `---` characters.  For example:
+```yml
+---
+question: Title
+subquestion: |
+  This is a question block
+---
+```
+So far we have worked with <DisplayGlossaryItem item='questionblock' plural />. As we know,
+question blocks are used to display information to a user and to ask the user for information.
+As we have also already discussed, we use Python to implement the decision-making part of our apps.
+The way we tell Docassemble to carry out our decision-making logic is to place it into a code block.
+
+Code blocks are blocks containing Python code.  Like question blocks, code blocks can also be
+<DisplayGlossaryItem item='mandatory' />.  Also like question blocks, Docassemble will look for
+a variable name inside a code block as part of its [execution order](/docs/textbook/chapter_02/00-20#execution-order).
+
+Here's an example code block that sets the value of `MJFauthor` to `True` depending on what is in
+the variable `MJFname`.
+```python
+---
+code: |
+  if MJFname == 'Mark Ferraretto' or MJFname == 'James Scheibner':
+    MJFauthor = True
+  else:
+    MJFauthor = False
+---
+```
+If our app was looking for the value of `MJFauthor` it would find this code block and execute it,
+much like how Docassemble looks for a variable in a question block and executes that block.
+
+## Writing good code blocks
+There are two basic principles to be mindful of when writing code blocks.
+
+### One variable one block
+Firstly, you should only contain enough code to set *one* variable in a code block.  This means
+that code blocks are usually short, maybe 10 lines or tens of lines.  If you find yourself writing
+a 100-line code block that's probably a good indication you're doing too much work in one block.
+
+For example, let's say we want to implement this logic flow:
+
+<F1 />
+
+We could do this in a single code block, however we shouldn't do this:
+```python showLineNumbers
+---
+code: |
+  # There are the chapters that Mark wrote
+  # We assume that James wrote everything else
+  marks_chapters = [1, 2, 3, 5, 6, 7];
+  
+  # Check if MJFname is one of the authors
+  if MJFname == 'Mark Ferraretto' or MJFname == 'James Scheibner':
+    # Set MJFauthor to true if so
+    MJFauthor = True
+  else:
+    # If we're here then MJFname is not an author
+    MJFauthor = False
+  
+  # Now check the chapter numbers
+  # If we're an author and we're Mark
+  if MJFauthor and MJFname == 'Mark Ferraretto':
+      # ... and the chapter is one of ours
+      if MJFchapternumber in marks_chapters:
+        # ...then set to true
+        MJFchapter = True
+      else:
+        # ...otherwise set to false
+        MJFchapter = False
+  # Otherwise we might be an author and we're James
+  elif MJFauthor and MJFname == 'James Scheibner':
+    # We're here if we're James (ie: not Mark)
+    # So, if we're James and the chapter is not one of Mark's...
+    if MJFchapternumber not in marks_chapters:
+      # ...then it must be one of James' chapters
+      MJFchapter = True
+    else:
+      # ...otherwise, it's not
+      MJFchapter = False
+```
+The most imortant reason for not coding this way is that the code blocks sets two 
+variables: `MJFauthor` and `MJFchapter`.  This means the code block may be run twice
+and, clearly, it makes for a rather hard to read code block.
+
+:::note
+This code block contains nested if statements which we discuss in <DisplayChapter chatper='chapter_04' />
+and also uses a <DisplayGlossaryItem item='list' />, which is discussed in <DisplayChapter chapter='chapter_05'/>.
+
+The comments should provide you with enough commentary to describe the code without you having to read
+these other chapters, although you are welcome to do so if you wish.
+:::
+
+The better way to address this logic would be to break it out into two code blocks, one that sets
+`MJFauthor`, one that sets `MJFchapter`.  For example, we would deal with `MJFauthor` in this
+code block:
+```python showLineNumbers
+---
+# A lovely, short easy to read code block
+code: |
+  # Check if MJFname is one of the authors
+  if MJFname == 'Mark Ferraretto' or MJFname == 'James Scheibner':
+    # Set MJFauthor to true if so
+    MJFauthor = True
+  else:
+    # If we're here then MJFname is not an author
+    MJFauthor = False
+```
+and then deal with `MJFchapter` in a separate block:
+```python showLineNumbers
+---
+# Long but not as long as before.  And at
+# least it deals with just one piece of logic
+# (and it would be much shorter without these comments)
+code: |
+  # Our list of chapters as before
+  marks_chapters = [1, 2, 3, 5, 6, 7]
+
+  # If we're an author and we're Mark
+  if MJFauthor and MJFname == 'Mark Ferraretto':
+      # ... and the chapter is one of ours
+      if MJFchapternumber in marks_chapters:
+        # ...then set to true
+        MJFchapter = True
+      else:
+        # ...otherwise set to false
+        MJFchapter = False
+  # Otherwise we might be an author and we're James
+  elif MJFauthor and MJFname == 'James Scheibner':
+    # We're here if we're James (ie: not Mark)
+    # So, if we're James and the chapter is not one of Mark's...
+    if MJFchapternumber not in marks_chapters:
+      # ...then it must be one of James' chapters
+      MJFchapter = True
+    else:
+      # ...otherwise, it's not
+      MJFchapter = False
+  # Catchall if, for example MJFauthor is false or
+  # MJFname is not Mark or James.
+  else:
+    MJFchapter = False
+---
+```
+This makes for clearer coding and for more efficient execution as, in our example, Docassemble doesn't
+need to go to the trouble of determining `MJFchapter` when all it needs is the value of `MJFauthor`.
+
+### Idempotence
+[Idempotence](https://en.wikipedia.org/wiki/Idempotence) is a rather advanced IT concept that
+is often encountered in declarative languages such as Docassemble.
+
+:::info
+See [this discussion](/docs/recipes/minimising_mandatory_blocks) on mandatory blocks and declarative sysystems.
+:::
+
+From our perspective this means two things:
+
+Firstly, Docassemble may run our code block more than once 'behind the scenes' as it does what it needs to do
+to get the information it means.
+
+Secondly, because of this first point, we need to make sure that our code always yields the same result
+regardless of how many times our code block is run.
+
+Idempotence becomes an issue when we deal with complex data structures, particularly
+<DisplayGlossaryItem item='list' plural />, as we discuss in <DisplayChapter chapter='chapter_05'/>.  It
+usually becomes a problem when we add an item to a list.  For example this code block:
+```python
+---
+code: |
+  # Do some stuff
+  # Do some more stuff
+  an_item = something
+
+  # Add an item to our list
+  our_list.append(an_item)
+
+  # Do some more stuff etc
+```
+We may expect this code block to run once only, but Docassemble may run it three or four times internally.
+As a result `an_item` may get added to our list three or four times instead of the one time we expected.
+
+We usually guard against this by initialising our lists at the beginning of the code block ie:
+```python
+---
+code: |
+  # Initialise our list
+  our_list = [] # [] means an empty list
+
+  # Do some stuff
+  # Do some more stuff
+  an_item = something
+
+  # Add an item to our list
+  our_list.append(an_item)
+
+  # Do some more stuff etc
+```
+Now, each time this code block is run the list is initialised to an empty list, so we always know
+where we're starting from.  as a result we'll always end up with only one `an_item` in our list.
+
+Idempotence is rather complex and we don't need to go into it in more detail than this. For
+practical purposes keep this in mind, especially when working with code blocks and lists.
+
+:::info
+For more information on idempotence and a more complex discussion please
+refer to the [Docassemble manual](https://docassemble.org/docs/logic.html#idempotency)
+:::

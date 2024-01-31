@@ -1,0 +1,20 @@
+import {DisplayDAButtons} from '@site/src/components';
+import {DisplayChapter} from '@site/src/components';
+import {da_exit_prop} from '@site/src/constants';
+import * as Ex1b from './ex1b.mdx';
+
+export const title = 'Exercise 1c'
+export const video = <div>
+    <a href="/docs/texbook/chapter_02/00-30">Hello World 3</a>
+    </div>
+
+Modify your **{Ex1b.title}** code to:
+
+- add exit and restart buttons;
+- re-format your question block so that the question is asked in the `subquestion` tag;
+- Diplay the user's name in **bold**; and
+- when pressing <DisplayDAButtons button={da_exit_prop} /> your app should send you to the [Flinders University BGL website](https://flinders.edu.au/cbgl).
+
+:::info Challenge
+Add a second question that asks for the user's age. Display the result in the app's output.
+:::
