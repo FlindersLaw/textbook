@@ -153,7 +153,7 @@ const config = {
       },
       algolia: {
         appId: 'E707TIU8AU',
-        apiKey: 'f78411c0ddf750f26cdb62f114b3a9b0',
+        apiKey: '7b718c003082c441d9c635ddd2027344',
         indexName: 'happy-sea-0fbd5ba00-3-azurestaticapps',
         insights: true,
       },
