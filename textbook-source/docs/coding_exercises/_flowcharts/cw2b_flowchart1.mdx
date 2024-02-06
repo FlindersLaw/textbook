@@ -6,7 +6,9 @@ flowchart TD
     id1 -- No --> id3(Display microchip<br>and desex requirement:<br>s 42A, s 42D)
     
     id0 -- Yes --> id4{{Are  you a breeder?}}
-    id4 -- Yes --> id5(You have to<br>register: s 69)
+    id4 -- Yes --> id4a{{Are you registered?}}
+    id4a -- Yes --> id6
+    id4 -- No --> id5(You have to<br>register: s 69)
 
     id4 -- No --> id6(continue...)
 

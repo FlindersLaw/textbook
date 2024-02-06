@@ -58,3 +58,22 @@ Just below your Welcome screen you should create a mandatory <DisplayGlossaryIte
 The code block should use an if statement to check if the value of `W2pet`. If `W2pet` is `cat` or `dog`
 then we shouldn't do anything (that will come later).  Just put `pass` under this part of the if statement.
 If the user hasn't chosen cat or dog then the exit screen should be displayed.
+
+```yml
+---
+mandatory: True
+question: Welcome Screen
+subquestion: |
+  text goes here
+buttons:
+  - buttons go here
+---
+# This code block drives the application
+mandatory: True
+code: |
+  # If statement that tests whether W2pet is a cat or dog goes here
+  if ......:
+---
+# Other blocks go here, including the block that
+# asks for W2pet
+```
