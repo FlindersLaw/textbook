@@ -65,6 +65,10 @@ export const glossary = new Map([
         text: 'escape character',
         plural: 'escape characters'
     }],
+    ['eventtag', {
+        text: 'event tag',
+        plural: 'event tags',
+    }],
     ['field', {
         text: 'field',
         plural: 'fields'}

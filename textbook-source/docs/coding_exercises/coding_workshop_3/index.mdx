@@ -1,0 +1,50 @@
+---
+title: Coding Workshop 3
+---
+import CW3 from '../_flowcharts/cw3_flowchart.mdx';
+import Ex3a, * as Ex3a_c from '@site/docs/coding_exercises/_exercises/cw3a.mdx';
+import Ex3b, * as Ex3b_c from '@site/docs/coding_exercises/_exercises/cw3b.mdx';
+import Ex3c, * as Ex3c_c from '@site/docs/coding_exercises/_exercises/cw2c.mdx';
+
+import {DisplayInlineExercise, DisplayGlossaryItem} from '@site/src/components';
+import {DisplayImage} from '@site/src/components';
+import {DisplayChapter} from '@site/src/components';
+
+In this set of exercises we continue to work on if statements.  We use a more
+complex example to look at how to use `if/elif/else` statements.  We also touch
+on using `include` blocks and templates.
+
+You will use all these concepts in Assessment B1.
+
+## Pre-reading
+If you haven't already done so make sure you have read through:
+* <DisplayChapter chapter='chapter_03' /> - Datatypes and Variables; and
+* <DisplayChapter chapter='chapter_04' /> - Logic and If statements
+
+To learn about `include` blocks read through [Structuring Your Code](/docs/recipes/structuring_code)
+
+To learn about templates read through [Template Blocks](/docs/recipes/templates)
+
+## The Exercise
+We are going to write an app that assists users in contacting the appropriate Government
+body if they have experienced discrimination.
+
+:::note
+This exercise is based on the *Equal Opportunity Act 1984* (SA) (**Act** or **EOA**) as it was at 
+before 31 August 2023.  Before this date the Act only allowed the 
+Equal Opportunity Commission (**EOC**) to deal with discrimination relating to
+age, sex, gender identity, disability and race.  This meant that discrimination 
+based on other categories, such pregnancy or religious dress, could not be dealt
+with the EOC and had to be dealt with by either the Australian Human Rights 
+Commission (**AHRC**) at a Federal level, or by bodies such as Consumer and Business
+Services or the South Australian Employment Tribunal.
+
+On 31 August 2023 an amended version of the Act came into force.  This amended
+version covers all of the categories of discrimination mentioned in our exercises.
+However, so that we can learn the different coding concepts required for this 
+coding workshop, we have decided to use the pre-August 2023 version of the Act.
+:::
+
+We can represent our app in this flowchart:
+
+<CW3 />

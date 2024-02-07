@@ -9,8 +9,10 @@ flowchart TD
     id1 -- Yes --> id2(Display microchip<br>and desex exemption:<br>s 42A, s42E)
     id1 -- No --> id3(Display microchip<br>and desex requirement:<br>s 42A, s 42D)
     
-    id0 -- Yes --> id4{{Are  you a breeder?}}
-    id4 -- Yes --> id5(You have to<br>register: s 69)
+    id0 -- Yes --> id4{{Are you a breeder?}}
+    id4 -- Yes --> id4a{{Are you registered?}}
+    id4a -- No --> id5(You have to<br>register: s 69)
+    id4a -- Yes --> id6
 
     id4 -- No --> id6{{Is your pet<br>microchipped?<br>s 42A}}
     id6 -- Yes --> id7
@@ -33,6 +35,6 @@ flowchart TD
     classDef itemClass font-size:16pt
     classDef leftListClass text-align:left
 
-    class id1,id4,id6,id7,id9 questionClass;
+    class id1,id4,id4a,id6,id7,id9 questionClass;
     class id01,id2,id3,id5,id10,id11 boundaryClass;
 ```
