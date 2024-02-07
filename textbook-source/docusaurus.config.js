@@ -154,8 +154,9 @@ const config = {
       algolia: {
         appId: 'E707TIU8AU',
         apiKey: '62783a1bb20ada3fd86e34175888e5c5',
-        indexName: 'happy-sea-0fbd5ba00-3-azurestaticapps',
+        indexName: 'Understanding Legal Technology',
         insights: true,
+        debug: true,
       },
     }),
 
