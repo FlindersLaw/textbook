@@ -1,12 +1,70 @@
 import {DisplayGlossaryItem} from '@site/src/components';
+import {DisplayImage} from '@site/src/components';
 
-export const title = 'Exercise 3a'
+export const title = 'Exercise 4a'
 export const video = <div>
-    <a href="/docs/recipes/structuring_code">Structuring Code</a>
+    <a href="/docs/textbook/chapter_05/00-20">Lists</a>
     <span>, </span>
-    <a href="/docs/recipes/minimising_mandatory_blocks">Minimising Mandatory Blocks</a>
+    <a href="/docs/textbook/chapter_05/00-30">Introducing Iteration</a>
     </div>
-    
-## Ex4a
-- regular python list
-- display items in a for loop
+
+## Background
+The code for this exercise is supplied for you below.  You should copy this code into your Playground
+so you can modify it according to this exercise.
+
+:::tip
+You might want to consider setting up a new
+[Playground Project](/docs/textbook/chapter_01/00-30#1-navbar-and-playground-menu)
+for these coding exercises.
+:::
+
+This code contains a single <DisplayGlossaryItem item='mandatoryquestionblock' /> and a single
+<DisplayGlossaryItem item='codeblock' />.  The code block defines a list called `display_list`.
+
+## Your Task
+In this exercise you must modify the code to display the contents of `display_list` as a bullet list.  
+That is, you should display the list so that the output of the list is as follows:
+
+<DisplayImage imageURL='/img/coding_exercises/cw4a-1.png' size="70%" />
+
+Currently line 11 of the code has a <DisplayGlossaryItem item='mako' upper /> command that
+displays the list items as, well, a list!  Start by removing that line.  You will need to
+replace that line with a Mako for loop.
+
+You should only require an additional three lines of code to complete this exercise.
+
+## Code
+Copy this code into your playground as a starting point for this exercise.
+
+```yml showLineNumbers
+# Coding Exercise 4a
+#
+# Introducing Iteration
+---
+mandatory: True
+question: Coding Workshop 4a
+subquestion: |
+  Display the names in `display_list` as
+  a bullet items list.
+
+  ${display_list}
+
+buttons:
+  - Exit: exit
+---
+# This code block defines the list with the 
+# items to display
+code: |
+  display_list = [
+    'Ida Noe',
+    'Hugo First',
+    'Moda Lawn',
+    'Kate Jupp',
+    'Ayfor Gott',
+    'Justin Thyme',
+    'Ray Member',
+    'Studie Harde',
+    'Slacke Hearse'
+  ]
+---
+```
