@@ -1,0 +1,25 @@
+import {DisplayGlossaryItem} from '@site/src/components';
+
+export const title = 'Exercise 3a'
+export const video = <div>
+    <a href="/docs/recipes/structuring_code">Structuring Code</a>
+    <span>, </span>
+    <a href="/docs/recipes/minimising_mandatory_blocks">Minimising Mandatory Blocks</a>
+    </div>
+
+This exercise is about setting ourselves up so that we can get organised.  We will to use
+good coding structure, multiple files and a separate [project](/docs/textbook/chapter_01/00-30#1-navbar-and-playground-menu)
+to keep ourselves organised:
+
+1. Create a new [Project](https://docassemble.org/docs/playground.html#projects) in your Playground.  Call it `Ex3a`.
+1. In your new project create these files:
+    - `main.yml`
+    - `questions.yml`
+    - `templates.yml`
+    - `screens.yml`
+    - `code.yml`
+1. In your `main.yml` add an `include` block which includes all these files (except `main.yml`!)
+1. Create a <DisplayGlossaryItem item='mandatoryquestionblock' /> as a welcome screen.  Add some 
+basic explanatory text that describes what this app is going to do.
+1. Create a mandatory <DisplayGlossaryItem item='codeblock' /> underneath your question block.  The
+code block should just contain a `pass` command in it.

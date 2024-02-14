@@ -1,0 +1,51 @@
+import {DisplayChapter} from '@site/src/components';
+import {DisplayGlossaryItem} from '@site/src/components';
+import CW3b_f from './_flowcharts/cw3b_flowchart1.mdx';
+
+export const title = 'Exercise 3b'
+export const video = <div>
+    <a href="/docs/textbook/chapter_04/00-20">If Statements</a>
+    <span>, </span>
+    <a href="/docs/textbook/chapter_04/00-30">If-Elif-Else statements</a>
+    <span>, </span>
+    <a href="/docs/textbook/chapter_04/00-40">Nested if statements</a>
+    </div>
+
+The EOA allows for 'protected' and 'unprotected' categories of discrimination.  If the
+discrimination is of a 'protected' nature then the EOA allows for the EOC to deal with
+the complaint.  If the discrimiation is 'unprotected' then an alternative body must
+deal with the discrimination.
+
+:::note
+Remember, we are dealing with an [old version](../coding_workshop_3/#the-exercise) of the EOC!
+:::
+
+Let's code out the first two questions.
+
+<CW3b_f />
+
+
+In `questions.yml` create a <DisplayGlossaryItem item='questionblock' /> to ask the first
+question and a question block for the grounds question.
+* The first question is a 'Yes/No' type question.  You can use a [`yesno`](https://docassemble.org/docs/fields.html#yesornoquestions)
+or a [`yesnoradio`](https://docassemble.org/docs/fields.html/yes) datatype to capture responses.
+* The grounds question requires a list of choices to be used.  You can use a
+[dropdown menu](https://docassemble.org/docs/fields.html/yes) or
+[radio buttons](https://docassemble.org/docs/fields.html/yes).
+    :::note
+    For the second ('On what grounds...') question we'll need to present the user with a 
+    list of choices.  As we did in [Exercise 2a](/docs/coding_exercises/coding_workshop_2/cw2a) of
+    Coding Workshop 2 we can use
+    key/value pairs for the choices.  This time though, instead of using unique values for each
+    choice, we can simply use `protected` for the protected grounds and `unprotected` for the
+    unprotected grounds.  This saves us from having to write the mother of all if statements
+    to deal with the 10 different grounds in the app.
+    :::
+* In `screens.yml` create a question block with an <DisplayGlossaryItem item='eventtag' />
+for the first exit screen.  Set the tag to be `exit_ineligible`.
+* In `screens.yml` create another two question blocks with <DisplayGlossaryItem item='eventtag' plural />
+set to `exit_state_level` and `exit_other`.  For now put some simple explanatory text into the
+`subquestion` part of each block.  We'll change these later.
+* Now, remove the `pass` from the mandatory code block in `main.yml` and add if statements to implement the logic
+in the flowchart. You will need to use a combination of if statements (for the first question) and 
+`if/elif/else` statements (for the second question). 

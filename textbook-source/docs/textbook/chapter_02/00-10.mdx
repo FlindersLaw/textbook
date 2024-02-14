@@ -3,6 +3,8 @@ title: Hello World!
 ---
 import * as Constants from '@site/src/constants'
 import * as Components from '@site/src/components'
+import Ex1a, * as Ex1a_c from '@site/docs/coding_exercises/_exercises/ex1a.mdx';
+import {DisplayInlineExercies} from '@site/src/components';
 
 It is a tradition in coding, long before this author was a boy, that the first program a programmer should write is
 one that simply announces its presence to the world by way of simply displaying the text 'Hello World!'.
@@ -147,14 +149,6 @@ Pressing the Tab key in the text editor automatically indents your text for you
 by two spaces.
 :::
 
-:::tip TODO
-We should link all the different tags to the Docassemble manual.
-
-We also might need to link the bold terms into a glossary.
-
-UPDATE: I have a `DisplayGlossaryItem` component.  Glossary items need to
-be stored either in there or in chapter 6 (as originally planned)
-:::
 ## Run the program
 
 Press <Components.DisplayDAButtons button={Constants.da_save_and_run_prop} />. Your program
@@ -163,7 +157,3 @@ will run and should display this output:
 <Components.DisplayImage altText='Hello World output' imageURL='/img/textbook/chapter_02/hello_world3.png' />
 
 Congratulations! You have run your first Docassemble program!
-
-:::tip TODO
-Ex1a should get inserted here.
-:::

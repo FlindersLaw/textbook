@@ -3,6 +3,7 @@ title: Hello World 2 - Introducing Markdown and Mako
 ---
 import * as Constants from '@site/src/constants'
 import * as Components from '@site/src/components'
+import {DisplayImage} from '@site/src/components';
 
 Our existing [Hello World](./00-10) program, while truly a software engineering masterpiece,
 is somewhat impersonal.  What we *really* want it to do is to display the user's name and,
@@ -18,7 +19,7 @@ We'll paste it into the new file shortly.
 1. Click on the <Components.DisplayImage altText='Add' imageURL='/img/textbook/add_button.png' inline />
 button and create a new file called `hello_world2.yml`.
 :::tip
-Refer to how we did this [previously](./00-10/#your-first-program).
+Refer to how we did this [previously](00-10#your-first-program).
 :::
 1. Paste the code you copied from `hello_world.yml` into this new file and 
 press <Components.DisplayDAButtons button={Constants.da_save_prop} />.
@@ -28,7 +29,7 @@ to make sure the program still runs OK.
 ## Make some changes
 Edit the file in your playground and make it look like this.
 Remember to pay particular
-attention to [indents, spacing and dashes](./00-10/#indents-spacing-and-dashes-oh-my) and your braces and brackes (more on this [below](./00-20/#mako))
+attention to [indents, spacing and dashes](00-10#indents-spacing-and-dashes-oh-my) and your braces and brackes (more on this [below](00-20#mako))
 
 ```yaml title="hello_world2.yml" showLineNumbers
 ---
@@ -61,15 +62,11 @@ The text `MJFname` is a <Components.DisplayGlossaryItem item='variable' />. We'r
 
 A variable is kind of like a bucket.  You can put stuff in a bucket and you can put stuff in a variable.
 
-Variable|Bucket
+<DisplayImage imageURL="/img/textbook/chapter_02/variable.png" size="60%" /> Variable|<DisplayImage imageURL="/img/textbook/chapter_02/bucket.png" size="60%" />Bucket
 ---|---
 Used to store stuff|Used to store stuff
 Must have a name|Doesn't usually have a name
 Can (usually) only store one thing|Can store lots of stuff
-
-:::tip TODO
-Picture of a bucket in the table.  Picture of a variable TODO
-:::
 
 A variable is useful because we can change what we put in it each time we run the program.
 
@@ -101,20 +98,12 @@ Docassemble.
 
 :::note
 Mako is used to display the value stored in a variable.  But how do we store
-something in a variable?  We do that using <Components.DisplayGlossaryItem item='field' plural />, which we discuss below
-:::
-
-:::tip TODO
-Complete URL for 'discuss below' above
-:::
-
-:::info
-You can also use Mako in <Components.DisplayGlossaryItem item='fieldlabel' plural />.
-We'll get to that later in this book.
+something in a variable?  We discuss this in
+<Components.DisplayChapter chapter='chapter_03' />.
 :::
 
 :::caution
-Just like the [indents, spacing and dashes](./00-10/#indents-spacing-and-dashes-oh-my), Docassemble is also very fussy about 
+Just like the [indents, spacing and dashes](00-10#indents-spacing-and-dashes-oh-my), Docassemble is also very fussy about 
 brackets.  
 There's few different kinds that you should remember:
 * `{ }` are <Components.DisplayGlossaryItem item='brace' plural /> or <Components.DisplayGlossaryItem item='curlybrace' plural />

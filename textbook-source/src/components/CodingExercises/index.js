@@ -23,7 +23,7 @@ export function DisplayInlineExercise({video, children}) {
         <div id="codexInline">
             <div className='video-section'>
                 <div className='bordered-label'>
-                    Videos:
+                    References:
                 </div>
                 <div className='bordered-text'>
                     {video}
