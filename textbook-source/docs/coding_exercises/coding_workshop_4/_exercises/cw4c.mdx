@@ -1,14 +1,100 @@
 import {DisplayGlossaryItem} from '@site/src/components';
 
-export const title = 'Exercise 3a'
+export const title = 'Exercise 4c'
 export const video = <div>
-    <a href="/docs/recipes/structuring_code">Structuring Code</a>
+    <a href="/docs/textbook/chapter_05/00-40">Dictionaries</a>
     <span>, </span>
-    <a href="/docs/recipes/minimising_mandatory_blocks">Minimising Mandatory Blocks</a>
+    <a href="/docs/recipes/templates">Templates</a>
     </div>
     
-## Ex4c
-- checkboxes
-- Display a list of selected items
-- If no items are selected then display text stating as much
-Hint: use templates
+## Background
+In this exercise we're going to start looking at how to deal with [checkboxes](https://docassemble.org/docs/fields.html#fields%20checkboxes).
+
+Checkboxes are Dictionaries (or [`DADict`s](https://docassemble.org/docs/objects.html#DADict) to be
+more precise).  The key for each dictionary item is usually the text displayed to the user,
+and the value being either `True` or `False` depending on whether the checkbox item has been
+selected or not.
+
+Like lists, we can [iterate over dictionaries](/docs/textbook/chapter_05/00-40#iteration), which is what
+we'll do in this exercise.
+
+Because our dictionaries actually are the `DADict` datatype we get some extra features over 'vanilla'
+Python dictionaries.  Specifically, we get a `true_values()` method that we can use to generate a list
+of the selected dictionary items.
+
+In the example code below we've introduced a new question  block which displays the checkboxes and
+stores the results in `CWpeople`.  The [choices](https://docassemble.org/docs/fields.html#choices)
+for the `CWpeople` are supplied by a [`code`](https://docassemble.org/docs/fields.html#code)
+specifier which pull in our `display_list`.
+
+## Your Task
+You need to complete these three parts to complete your task:
+
+Modify the example code and:
+1. create a `template` block that will display a list of all the *selected* names as a bullet list;
+1. create another `template` that will display text if no names are selected; and
+1. modify the code to call the relevant template depending on whether any names are selected.
+
+:::tip
+You can include `%for` loops and `%if` statements in templates.  Templates work in a similar
+way to content in a `subquestion` part of a <DisplayGlossaryItem item='questionblock' />.
+:::
+
+:::tip
+Your code is starting to get more sophisticated.  You might want to consider
+[structuring your code](/docs/recipes/structuring_code) to help you stay organised.
+:::
+
+## Code
+Copy and paste this example code into your Playground and modify it to complete your task.
+
+```yml showLineNumbers
+# Coding Exercise 4c
+#
+# Iteration and Checkboxes
+---
+objects:
+  - display_list: DAList.using(auto_gather=False)
+---
+mandatory: True
+question: Coding Workshop 4c
+subquestion: |
+  1. Display the selected names in `CWpeople` as`
+  a bullet list. 
+  2. Display a special screen if no names are selected.
+
+  ${CWpeople}
+
+buttons:
+  - Exit: exit
+---
+question: Select people
+fields:
+  - Select any number of people: CWpeople
+    datatype: checkboxes
+    choices:
+      code: |
+        display_list
+---
+# This code block defines the list with the 
+# items to display
+code: |
+  # Always clear our the list before you start work
+  # on it in a code block
+  display_list.clear()
+
+  # Add the data
+  display_list.append('Ida Noe')
+  display_list.append('Hugo First'),
+  display_list.append('Moda Lawn'),
+  display_list.append('Kate Jupp'),
+  display_list.append('Ayfor Gott'),
+  display_list.append('Justin Thyme'),
+  display_list.append('Ray Member'),
+  display_list.append('Studie Harde'),
+  display_list.append('Slacke Hearse')
+
+  # Finish by setting gathered to True
+  display_list.gathered = True
+---
+```
