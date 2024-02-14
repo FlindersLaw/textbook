@@ -1,0 +1,79 @@
+import {DisplayChapter} from '@site/src/components';
+import {DisplayGlossaryItem} from '@site/src/components';
+import CW2a_f from './_flowcharts/cw2a_flowchart1.mdx';
+
+export const title = 'Exercise 2a'
+export const video = <div>
+    <a href="/docs/textbook/chapter_03/00-30#logic-tests">Logic tests</a>
+    <span>, </span>
+    <a href="/docs/recipes/minimising_mandatory_blocks">Minimising Mandatory Blocks</a>
+    <span>, </span>
+    <DisplayChapter chapter='chapter_04' />
+    </div>
+
+We are going to create this part of the app:
+<CW2a_f />
+
+We need to make:
+* the welcome screen
+* A screen to ask the user what pet they own
+* An exit screen for users that don't own a dog or cat
+* some code to drive our app
+
+#### Welcome Screen
+Let's start with a <DisplayGlossaryItem item='mandatoryquestionblock' /> that 
+displays a welcome screen explaining what this app does. You may also want to
+include a disclaimer stating that this app does not provide legal advice.
+
+#### Question Screen
+Create a <DisplayGlossaryItem item='questionblock' /> that asks the user what
+kind of pet they have.  They should be able to choose from this list:
+* Cat
+* Dog
+* Fish
+* Crocodile
+* Something else
+
+Use [radio buttons](https://docassemble.org/docs/fields.html#radio) to present the choices.  Also,
+use [key/value pairs](https://docassemble.org/docs/fields.html#choices) to help in making the names
+easier for the user to read your code easier to process eg:
+```yml
+...
+fields:
+  - What is your pet?: W2pet
+    choices:
+      - Dog: dog
+      - Cat: cat
+      ...
+      - Something else: other
+---
+```
+#### Exit Screen
+Create a <DisplayGlossaryItem item='questionblock' /> with an <DisplayGlossaryItem item='eventtag' />
+and set the event tag as `W2ineligible`. The contents of this question block should explain to users
+that 
+
+#### Code block
+Just below your Welcome screen you should create a mandatory <DisplayGlossaryItem item='codeblock' />.
+The code block should use an if statement to check if the value of `W2pet`. If `W2pet` is `cat` or `dog`
+then we shouldn't do anything (that will come later).  Just put `pass` under this part of the if statement.
+If the user hasn't chosen cat or dog then the exit screen should be displayed.
+
+```yml
+---
+mandatory: True
+question: Welcome Screen
+subquestion: |
+  text goes here
+buttons:
+  - buttons go here
+---
+# This code block drives the application
+mandatory: True
+code: |
+  # If statement that tests whether W2pet is a cat or dog goes here
+  if ......:
+---
+# Other blocks go here, including the block that
+# asks for W2pet
+```

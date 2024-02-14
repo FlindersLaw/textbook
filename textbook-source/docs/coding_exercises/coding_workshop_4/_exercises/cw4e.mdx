@@ -1,0 +1,84 @@
+import {DisplayGlossaryItem} from '@site/src/components';
+import {DisplayChapter} from '@site/src/components';
+import * as Ex4d from '../_exercises/cw4d.mdx'
+
+export const title = 'Exercise 4e'
+export const video = <div>
+    <a href="/docs/textbook/chapter_08/">Chapter 8</a>
+    </div>
+    
+## Ex4e
+- Modify 4d to display results in an attachment as well as screen
+Hints:
+ - use `attachments` as a block on its own (show example in manual)
+   - remember to give it a `variable name`
+ - use `attachment code` in the main question block
+ - pass a 'list' of attachments to `attachment code`. Create a code block
+ that creates a list with a single item (ie: the attachemnt) if anyone has
+ been selected, and an empty list if nobody has been selected.
+
+## Background
+In this exercises we'll work on our code {Ex4d.title} and create a PDF attachment
+for the user to download or email to themselves.
+
+## Task
+:::note
+You must have completed [{Ex4d.title}](cw4d) before commencing this exercise.
+:::
+
+Modify your code so that if any names are selected, the same table as in 
+{Ex4d.title} is displayed but also a PDF is made available for download.  However,
+if no names are selected then no attachment should be created.
+
+## Task notes
+The first thing to do is to create the Word document template.  We suggest that
+you display the selected names in a [Word table](https://docassemble.org/docs/documents.html#docx%20tables)
+using Jinja code.
+
+Once the you've created your attachment you can add an
+[attachment specifier](https://docassemble.org/docs/documents.html#attachment) to your final screen
+to display the attachment and make sure it works.  You'll only need to test your
+attachment for the use case where at least one name is selected.  You don't need
+to test for the no names selected use case.
+
+Once we've got the attachment sorted we need to find a way to display the attachment on our final 
+screen *only if* more than one name is selected.  For this we'll use
+[`attachment code`](https://docassemble.org/docs/documents.html#attachment%20code). 
+`attachment code` allows us to provide a list of attachments to display.  Importantly, if the 
+list is empty then no attachment will be displayed!  Therefore, what we can do is 
+create a list with a single attachment in it if one or more names is selected, and create
+an empty list if no names are selected.  We should do this in a
+<DisplayGlossaryItem item='codeblock' />.  Let's get back to that later.
+
+As we're using `attachment code` we need to remove our `attachment` from the final screen
+and set it up [as its own block](https://docassemble.org/docs/documents.html#variable%20name) and
+assign it a variable name. Then we can reference that variable name in our list-making code block.
+
+Overall, our code should look something like this:
+```yml
+---
+objects:
+  - display_names: DAList.using(auto_gather=False)
+---
+mandatory: True
+question: Coding Workshop 4e
+subquestion: |
+  Final screen text and code goes here
+  ...
+attachment code: CWdoc_list
+buttons:
+  - Exit: exit
+  - Restart: restart
+---
+other code blocks from Ex4d go here
+---
+attachment:
+  set up our attachment here
+  remember to assign it a variable name
+---
+code: |
+  set the value of CWdoc_list depending on whether
+  any names were checked.
+  Hint: use an if statement
+---
+```
