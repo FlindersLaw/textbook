@@ -5,13 +5,11 @@ title: How to Decide What Questions You Need
 This section will explain how to write questions for your legal application. 
 
 ## Design Your Application Before Writing Questions
-
-In carpentry, there is a saying; 'measure twice, cut once'. The same is true for legal application design. You should plan what your application will look like before you start writing any code.
+In carpentry, there is a proverb; '[measure twice, cut once](https://en.wiktionary.org/wiki/measure_twice_and_cut_once)'. The same is true for legal application design. You should plan what your application will look like before you start writing any code.
 
 If you have been following along with this textbook so far, you would have seen that we first map out all of our applications as flowcharts. Doing so can help you visualise your application flow of control.
 
 ## Think About What Values You Need From Your User
-
 In [Chapter 3](/docs/textbook/chapter_03), you learned about variables. You can *assign* a value to a variable, as well as *evaluate* that variable. 
 
 In [Chapter 4](/docs/textbook/chapter_04/00-20), you learned about how to use variables to drive the logic of your application.
@@ -37,12 +35,14 @@ flowchart LR;
 
 When you are designing your application, only collect the information from your user that you need. Do not ask for unnecessary information. Doing so could frustrate your user, as well as raise issues around privacy.
 
-## Grouping your questions together
+:::tip
+Remember that you should only collect the information that you need from your user! If you can complete the application without certain information you should do so.
+:::
 
+## Grouping your questions together
 When you start thinking about what questions you need, you should also think about how you will group your questions together. This will largely depend on the type of app you have been commissioned to develop, as well as the relevant law. This section will provide some general advice on how to structure your application.
 
 ### Open with an introductory screen
-
 Your application should always start with an introductory screen. You might include different things in this screen depending on your application. However, there are a few features you should include:
 
 First, you should include the name of the application, as well as which organisation is providing the application.
@@ -58,7 +58,6 @@ Fifth, you should also consider any requirements under the [Australian Solicitor
 Sixth, your landing screen should tell the user that they can exit the application if they do not agree to the terms of this disclaimer. Otherwise, they can continue with using the application. Pressing a continue button or agreeing to the terms of service amounts to consent to collect and use the user's information. 
 
 ### Start with Filtering Questions
-
 Filtering questions help determine whether someone is eligible for a service or can use your application. For example:
 
 * Your app might refer to services that are only available to people in a particular age range, such as the Aged Pension
@@ -67,20 +66,24 @@ Filtering questions help determine whether someone is eligible for a service or 
 
 Start broad with filtering questions, and then narrow them down depending on the legal requirements you have identified.
 
-### Do Not Eject Users Without Helpful Information
+### Include Any Assumptions About Your User
+Most of your users might give only one answer to a particular question. You might just want to make your application as easy to use as possible. Therefore, you should work out where these pain points are in your application. You can use default values to help your user.
 
+### Do Not Eject Users Without Helpful Information
 Someone might use your app and discover that they are not eligible for a particular service, or do not meet other criteria. If so, they should not be ejected from the application without any helpful information.
 
 For example, let's say that your app is only targeted at people in particular state of Australia, such as South Australia. If your user answers that they are located in the Northern Territory, you might want to refer them on to another service.
 
 ### Consider the Order of Your Questions
-
 In previous chapters (insert appropriate ref) we would have explained how to control the logic of your application. We usually recommend that you design your application with one mandatory code block. You can then put references into this code block to each variable assigned by a question block or an ```event``` for an endpoint (see below).
 
 ### Consider How Many Endpoints You Will Need
-
 Depending on the answers that your users enter, they will be directed to an endpoint.
 
 Sometimes, you might only need one endpoint. For example, if you are designing a client intake form for a law firm, your application should ask a user several questions, and then send their information onto the law firm. 
 
-For other applications, you might have two or more endpoints. You can direct users to different endpoints using an ```event:``` tag, followed by a variable name. You can refer to this variable name in your mandatory code block.
+For other applications, you might have two or more endpoints. You can direct users to different endpoints using an ```event:``` tag, followed by a variable name. You can refer to this variable name in your mandatory code block which drives your application.
+
+:::tip
+Flowcharts can help you map out the scope of your application, as well as how many endpoints you need.
+:::
