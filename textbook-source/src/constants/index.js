@@ -1,7 +1,7 @@
 // Global constants used throughout the site
 
 // Our teaching docassemble server
-export const flinders_da_server_url = 'https://flinders.docassemble.edu.au';
+export const flinders_da_server_url = 'https://docassemble.flinders.edu.au';
 export const flinders_da_server_name = 'Docassemble server';
 
 // Official Docassemble website URLs
