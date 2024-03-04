@@ -3,6 +3,8 @@ title: Vital Statistics - A More Sophisticated Example
 ---
 import * as Constants from '@site/src/constants'
 import * as Components from '@site/src/components'
+import {DisplayGlossaryItem} from '@site/src/components';
+import {DisplayChapter} from '@site/src/components';
 
 We've learnt lots of things over this chapter.  We can write code!  We can also:
 *  ask questions;
@@ -367,3 +369,93 @@ the 'Are you employed' question and
 press <Components.DisplayDAButtons button={Constants.da_save_prop} button_text='Continue' />
 nothing happens.  Why is this?
 
+Let's go back to the code and look at the mandatory block.
+```yml showLineNumbers
+---
+mandatory: True
+question: Vital Statistics
+subquestion: |
+  Thanks for completing the Vital Statistics Survey.
+  We have collected this data from you
+  
+  Information|Your Input
+  -----------|----------
+  Your name             | ${ MJFsalutation } ${ MJFfirstname } ${ MJFlastname }
+  Your age              | ${ MJFage }
+  Are you employed?     | ${ MJFisemployed }
+  Your annual income    | ${ currency(MJFannualincome) }
+  Your favourite hobbies| ${ MJFhobbies.true_values() }
+buttons:
+  - I'm done: exit
+  - Do it again!: restart
+---
+```
+As we know, Docassemble works its way through the mandatory block line by line, top to bottom.
+As it sees <DisplayGlossaryItem item='mako' upper /> blocks it processes the necessary
+<DisplayGlossaryItem item='questionblock' plural /> to get the values it needs to display the
+output.
+
+In our example, Docassemble will come across `MJFsalutation` first.  It needs a value for that
+variable, so it finds and processes the question block at line 19.  In the process it also
+collects answers to `MJFfirstname` and `MJFlastname` as both of these are in the same question
+block.
+
+The next Mako blocks contain `MJFfirstname` and `MJFlastname`.  Docassemble already has these
+(as per above!) and doesn't ask the question block on line 19 again.
+
+Now we go to the next line.  Docassemble sees a Mako for `MJFage`.  It then finds and processes
+the question block on line 30 to get the user's age.  Next line it sees `MJFisemployed`, so it
+processes the question block on line 35.  Now our problems start.
+
+If we answer `Yes` to the employment question the program runs fine.  If we answer `No` then 
+the program stops here.  Why?  Well, it's because the *next* line in the mandatory block contains
+Mako requring a value for `MJFannualincome`.  But, if we say we're not employed the question for
+`MJFannualincome` (on lines 42 to 46) is never asked.  This is because the `show if` only displays
+this question if `MJFisemployed` is set to `Yes`.  Here's our problem.  We can never move past
+this point when we're not employed.
+
+When we use `show if` and other conditional displays we need to make sure we account for the
+case where the variable is never populated.  There are a number of ways to do this but for now
+what we'll do is hide line 13 if we're not employed.
+
+We hide line 13 by wrapping it in an <DisplayGlossaryItem item='ifstatement' />.  That is,
+we'll tell Docassemble that *if* we are employed *then* display line 13, and by implication
+if we're not employed then line 13 will be skipped.  Our new code will look something like
+this:
+```yml showLineNumbers
+---
+mandatory: True
+question: Vital Statistics
+subquestion: |
+  Thanks for completing the Vital Statistics Survey.
+  We have collected this data from you
+  
+  Information|Your Input
+  -----------|----------
+  Your name             | ${ MJFsalutation } ${ MJFfirstname } ${ MJFlastname }
+  Your age              | ${ MJFage }
+  Are you employed?     | ${ MJFisemployed }
+  // highlight-next-line
+  %if MJFisemployed == 'Yes': 
+  Your annual income    | ${ currency(MJFannualincome) }
+  // highlight-next-line
+  %endif
+  Your favourite hobbies| ${ MJFhobbies.true_values() }
+buttons:
+  - I'm done: exit
+  - Do it again!: restart
+---
+```
+Our line 13 is now line 14.  It is wrapped with a `%if` statement.  That statements says
+that if the value of `MJFisemployed` is equal to `Yes` then carry out the instructions between
+the `%if` and `%endif` lines.  In this case, the instructions are to display the
+`MJFannualincome` line.
+
+Try updating your code and insert the `%if`/`%endif` statements as per above.  Run your application
+and this time say that you are not employed.  The application should now run to completion.
+
+:::note
+We cover `%if` statements in more detail in <DisplayChapter chapter='chapter_04' />.  If you're
+confused as to why we use `==` instead of `=` to check if `MJFisemployed` is equal to `Yes` then
+check out [Testing Variables](/docs/textbook/chapter_03/00-30).
+:::
