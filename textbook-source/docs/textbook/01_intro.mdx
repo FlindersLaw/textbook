@@ -80,6 +80,34 @@ Usefully, the code snippets have a copy button built in.  Hover over the snippet
 see a <DisplayImage imageURL='/img/textbook/copy_button.png' inline /> button.  Click on this to copy the code 
 in the snippet.
 
+:::caution
+When copying code from code snippets into your Playground please be mindful that there is some padding on the left
+side of the snippet that **should** not be copied.  For example, this snippet with line numbers contains padding
+after the line number that is not part of the code:
+
+```yml showLineNumbers
+---
+# Our first program
+mandatory: True
+question: Hello World!
+subquestion: |
+  Hello!
+---
+```
+
+When typing the code above, lines 1 to 5 and line 7 should start at the left margin of your
+Playground editor and line 6 should be indented two spaces.  Here's an image of the same code in
+the Playground editor:
+
+<DisplayImage imageURL='/img/intro01.png' caption='Code properly formatted' />
+
+**Do not** place any leading spaces between the code and the left margin. This will lead to errors.
+
+<DisplayImage imageURL='/img/intro02.png' caption='INCORRECT. Do not start each line with a space' />
+:::
+
+Code snippets assume that code is positioned against the left margin.  
+
 #### Syntax highlighting
 Many code snippets use different colours to higlight syntax.  When you copy these snippets into your
 <DisplayGlossaryItem item='playground' upper /> you might find the colours change.  This is not an issue.
