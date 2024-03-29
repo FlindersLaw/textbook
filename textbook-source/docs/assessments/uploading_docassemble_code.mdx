@@ -1,0 +1,134 @@
+---
+title: Uploading your Docassemble code to FLO
+---
+import {DisplayImage} from '@site/src/components';
+import {DisplayDAButtons} from '@site/src/components';
+import * as Constants from '@site/src/constants';
+
+Some assessments may require you to upload Docassemble code to FLO (Canvas) and
+may instruct you to create a Docassemble [package](https://docassemble.org/docs/packages.html)
+to do so.  This document explains one way to do this.
+
+Docassemble packages are essentially a zip file containing all your code and other
+information to run your app.  This document takes you the the process of creating 
+that package Zip file, downloading it and testing it to make sure it works.
+
+This document does not cover how to upload a zip to Canvas.  You upload zip files like
+you would upload any file.
+
+## Create a Project
+If you haven't already done so create a Playground Project for your assessment.
+
+Click on your Playground menu and select *Manage Projects*
+
+<DisplayImage imageURL='/img/textbook/Assessments/upload1.png' />
+
+Create a Project for your assessment by:
+1. clicking on Add Project
+2. Entering a name for your Project; and
+3. clicking <DisplayDAButtons button={Constants.da_save_prop} />.
+
+<DisplayImage imageURL='/img/textbook/Assessments/upload2.png' />
+<DisplayImage imageURL='/img/textbook/Assessments/upload3.png' />
+
+:::note
+A Project name must:
+* start with a letter
+* contain only letters and numbers
+
+You will get an error if you try to enter a project name with
+spaces or dashes or underscores.
+<DisplayImage imageURL='/img/textbook/Assessments/upload4.png' />
+:::
+
+## Add your assessment files
+After you save your project you're taken to your Playground Project and
+you'll see it has no files.
+
+<DisplayImage imageURL='/img/textbook/Assessments/upload5.png' caption='Empty Playground :-(' />
+
+Now create your assessment files.  If you already had your assessment files somewhere
+else you'll need to copy and paste your existing files into files in this project.
+
+<DisplayImage imageURL='/img/textbook/Assessments/upload6.png' caption='Playground with project files' />
+
+## Create a Package for export
+Go to Folders -> Packages
+
+<DisplayImage imageURL='/img/textbook/Assessments/upload7.png' />
+
+### Set Package metadata
+* Give your package a name
+* Check the other information fields are correct.
+
+<DisplayImage imageURL='/img/textbook/Assessments/upload8.png' />
+
+:::note
+Your Assessment Instructions should tell you:
+1. how to name your package; and
+2. which other fields must be checked and set.
+:::
+
+### Add files to your package
+:::caution WARNING
+**You must complete this step otherwise your pacakage export will be empty!!**
+
+Just because you have code in your Playground it does not mean that code will
+automatically be added to your Packages.  Packages and Playgrounds are two separate
+and unrelated things in Docassemble.
+
+You **must explicity** add **all** your assessment files to your package
+:::
+
+Scroll down until you see the different file selector dialogs.
+
+Check each of the *Interview files*, *Template files*, *Static files* and *Modules* for
+files to add to your package.
+
+You can click, control-click and shift-click to select the files you need.  In the example
+below only the Interview files `main.yml`, `questions.yml` and `screens.yml` are being
+added to this package.  Your file names and number of files may vary from assessment to assessment.
+
+<DisplayImage imageURL='/img/textbook/Assessments/upload9.png' />
+
+:::note
+#### Interview files
+This is where the `.yml` files you create in your Playground are listed.
+
+#### Template files
+This is where any attachment templates (eg files used for `docx template file`) are listed.
+
+#### Static files
+This is where any CSS files and image files are listed
+
+#### Source files
+This is not usually used in the topics taught using this textbook
+
+#### Modules
+This is not usually used in the topics taught in this textbook but it is where custom
+python modules are listed.
+:::
+
+### Save and download your package
+Scroll down to the bottom of the screen.  Press <DisplayDAButtons button={Constants.da_save_prop} />
+and then press <DisplayDAButtons button={Constants.da_download_prop} />.  A zip file will be saved
+to your computer.
+
+**This zip file is the file you must upload to FLO.**
+
+## Test your Package
+You can test your exported Package before you submit it.  Do the following:
+
+1. Create another empty Playground project
+1. Go to Folders -> Packages in your new Project
+1. Select **Upload**
+<DisplayImage imageURL='/img/textbook/Assessments/upload10.png' />
+1. Upload your zip file
+1. In the package window you should see your package information
+<DisplayImage imageURL='/img/textbook/Assessments/upload11.png' />
+1. Click on the `<Back` button at the top left of the Navbar to go back to your Playground
+1. Check all your files
+1. Run your app and make sure it works.
+
+If your upload hasn't worked then it means that your Package was not created properly.  Run through
+the Package creation process described above again and follow the steps carefully.
