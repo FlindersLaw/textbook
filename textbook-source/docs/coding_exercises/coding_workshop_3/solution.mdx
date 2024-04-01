@@ -1,0 +1,232 @@
+---
+title: Solution Code
+---
+Below is example code for Coding Workshop 3
+
+## `main.yml`
+```yml
+---
+include:
+  - questions.yml
+  - screens.yml
+  - templates.yml
+  - code.yml
+---
+mandatory: True
+question: Welcome
+subquestion: |
+  Welcome screen
+buttons:
+  - Continue: continue
+  - Exit: exit
+---
+mandatory: True
+code: |
+  # An alternative to using an if statement with a long 'else' clause
+  # is to check that something was false first. You can omit the 'else'
+  # part as if the test fails we continue anyway.
+  if not CW3discrimination:
+    exit_ineligible
+  
+  # Now process based on grounds of discrimination
+  if CW3grounds == 'protected':
+    if CW3publiclife:
+      if CW3level == 'state':
+        exit_state_level
+      elif CW3level == 'federal':
+        exit_federal_level
+      else:
+        # Something should go here to catch 
+        # any bugs
+        error_message = 'Invalid value for `CW3level`: {}'.format(CW3level)
+        exit_error
+    else:
+      # Calling exit_other forces the CW3complaint question to be asked
+      # and the appropriate text to be displayed in the final screen
+      exit_other
+  elif CW3grounds == 'other':
+    # See comments above.
+    exit_other
+  else:
+    error_message = 'Invalid value for `CW3grounds`: {}'.format(CW3grounds)
+    exit_error
+---
+```
+
+## `code.yml`
+```yml
+# Miscellaneous code blocks go here
+---
+# This one sets display message for the exit_other screen
+code: |
+  if CW3complaint == 'consumer':
+    display_message = t_cbs
+  elif CW3complaint == 'employment':
+    display_message = t_saet
+  elif CW3complaint == 'whs':
+    display_message = t_safeworksa
+  elif CW3complaint == 'workplace':
+    display_message = t_fwo
+  elif CW3complaint == 'other':
+    display_message = t_other
+  elif CW3complaint == 'housing' or CW3complaint == 'medical' or CW3complaint == 'government':
+    display_message = t_sacat
+  else:
+    # If we're there's a bug, so display an error message
+    display_message = 'Error: Invalid value for `CW3complaint`: {}'.format(CW3complaint)
+---
+```
+
+## `questions.yml`
+```yml
+---
+question: Was there discrimination?
+fields:
+  - no label: CW3discrimination
+    datatype: yesnoradio
+  - On what grounds?: CW3grounds
+    datatype: radio
+    choices:
+      - Sex, sexual orientation or sexual identity: protected
+      - Race: protected
+      - Disability: protected
+      - Age: protected
+      - Marital or domestic partnership: other
+      - Identity of spouse or domestic partner: other
+      - Pregnancy: other
+      - Association with a child: other
+      - Caring responsibilities: other
+      - Religious appearance or dress: ohter
+    show if:
+      variable: CW3discrimination
+      is: True
+---
+question: Did discrimination occur in an area of public life?
+subquestion: |
+  Explain what 'public life means'
+yesno: CW3publiclife
+---
+question: Do you want to proceed at state or federal level
+subquestion: |
+  Explain state and federal level
+fields:
+  - no label: CW3level
+    datatype: radio
+    choices:
+      - State level: state
+      - Federal level: federal
+---
+question: What is your complaint related to?
+subquestion: |
+  Some explanatory text goes here eg:
+
+  You have selected a category of discrimination that the EOC 
+  cannot deal with directly.  Please let us know the circumtances 
+  in which the discrimination occurred and we may be able to refer
+  you to the relevant body
+fields:
+  - no label: CW3complaint
+    choices:
+      - Consumer rights: consumer
+      - Employment: employment
+      - Health, safety and workplace relations: whs
+      - Housing dispute: housing
+      - Medical and Mental Health: medical
+      - Review of Government decisions: government
+      - Workplace discrimination: workplace
+      - Other: other
+---
+```
+
+## `screens.yml`
+```yml
+---
+# If user hasn't experienced discrimination
+event: exit_ineligible
+question: Please contact us
+subquestion: |
+  This app is designed to help you if you have been discriminated against.
+  As you believe you have not been discriminated against this app cannot
+  help you.
+
+  Please contact us on XXXX if you'd like to pursue this further
+buttons:
+  - Restart: restart
+  - Exit: exit
+---
+# Screen to display if user wants to take matter to EOC
+event: exit_state_level
+question: Taking your matter further
+subquestion: |
+  Text about how to contact the EOC.
+
+  Provide link to form
+buttons:
+  - Restart: restart
+  - Exit: exit
+---
+# Screen to display if user wants to go to AHRC
+event: exit_federal_level
+question: Taking your matter further
+subquestion: |
+  Text about contacting the AHRC
+buttons:
+  - Restart: restart
+  - Exit: exit
+---
+# Screen for non-protected categories directing user
+# to the correct agency
+event: exit_other
+question: Next steps
+subquestion: |
+  Some generic introductory text goes here
+
+  ${display_message}
+buttons:
+  - Restart: restart
+  - Exit: exit
+---
+# For displaying error messages
+event: exit_error
+question: Error
+subquestion: |
+  An error was enountered during the execution of the app.  The error is:
+
+  ${error_message}
+
+  Please go back and enter in different values or press **Restart** to
+  try again.
+buttons:
+  - Restart: restart
+  - Exit: exit
+---
+```
+
+## `templates.yml`
+```yml
+---
+template: t_sacat
+content: |
+  Instructions on how to refer complaint to SACAT
+---
+template: t_saet
+content: |
+  Instructions on how to refer complaint to SAET
+---
+template: t_safeworksa
+content: |
+  Instructions on how to refer complaint to SafeworkSA
+---
+template: t_cbs
+content: |
+  Instructions on how to refer complaint to CBS
+---
+template: t_fwo
+content: |
+  Instructions on how to refer complaint to Fair Work Ombudsman
+---
+template: t_other
+content: |
+  Instructions on how to contact EOC for more help.
+---
+```
