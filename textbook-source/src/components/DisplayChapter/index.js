@@ -44,8 +44,8 @@ export function DisplayChapter(props) {
 
     // Add the target if it exists
     let chapterTarget = ''
-    if ( props.target ) {
-        chapterTarget = '/' + props.target;
+    if ( props.pinpoint ) {
+        chapterTarget = '/' + props.pinpoint;
     } 
     chapterPath = chapterPath + chapterTarget
 
