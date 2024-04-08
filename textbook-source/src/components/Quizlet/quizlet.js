@@ -61,7 +61,7 @@ export const Quizlet = ({ children, title }) => {
   return (
     <div className='quizlet'>
       <div className='title'>
-        <img src="/img/quiz-icon.svg" height='30px' />
+        <img src="/textbook/img/quiz-icon.svg" height='30px' />
         {quizTitle}
       </div>
       <div className='question'>

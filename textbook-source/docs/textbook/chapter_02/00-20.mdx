@@ -16,7 +16,7 @@ First thing is to create a new file and copy the code over.
 
 1. Before you create the new file, copy the existing code in the text editor.
 We'll paste it into the new file shortly.
-1. Click on the <Components.DisplayImage altText='Add' imageURL='/img/textbook/add_button.png' inline />
+1. Click on the <Components.DisplayImage altText='Add' imageURL='/textbook/img/textbook/add_button.png' inline />
 button and create a new file called `hello_world2.yml`.
 :::tip
 Refer to how we did this [previously](00-10#your-first-program).
@@ -160,7 +160,7 @@ Docassemble know to execute the second block?
 
 Let's work through the execution step using this diagram.
 
-<Components.DisplayImage imageURL='/img/textbook/chapter_02/execution_order1.png' />
+<Components.DisplayImage imageURL='/textbook/img/textbook/chapter_02/execution_order1.png' />
 
 1. Docassemble scans the program code from the top of the file...
 2. ...until it finds a mandatory block.  It then executes the mandatory
@@ -173,14 +173,14 @@ block line by line.
 4. Docassemble scans our code file again, now looking for a block that sets
 a value for `MJFname`.  It finds our question block at line 10 and processes
 that block.  That causes this question to be asked:
-  <Components.DisplayImage imageURL='/img/textbook/chapter_02/execution_order2.png' />
+  <Components.DisplayImage imageURL='/textbook/img/textbook/chapter_02/execution_order2.png' />
 5. Now that it has the value of `MJFname`, Docassemble starts processing the
 mandatory question block again.
 6. Docassemble comes to this Mako again.  Now it *does* have a value for
 `MJFname`, so it can display it.
  Docassemble scans the rest of the question block.  Because there's no other
 Mako to process, Docassemble is ready to display this question block, which it does.
-  <Components.DisplayImage imageURL='/img/textbook/chapter_02/execution_order3.png' />
+  <Components.DisplayImage imageURL='/textbook/img/textbook/chapter_02/execution_order3.png' />
 7. The execution stops now.
 
 :::note
@@ -191,7 +191,7 @@ Docassemble would have continued scanning the rest of our file looking for
 another mandatory block to execute.  We don't have any other mandatory
 blocks.  Docassemble therefore would have scanned our code, not found any
 additional mandatory blocks and would then have generated this error.
-<Components.DisplayImage imageURL='/img/textbook/chapter_02/execution_order4.png' />
+<Components.DisplayImage imageURL='/textbook/img/textbook/chapter_02/execution_order4.png' />
 
 As we generate more sophisticated code you'll see that we try to keep the 
 number of mandatory blocks in our code to a minimum.  In fact, we should never

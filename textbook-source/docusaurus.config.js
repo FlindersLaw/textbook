@@ -9,18 +9,20 @@ const darkTheme = themes.github;
 const config = {
   title: 'Understanding Legal Technology',
   tagline: 'Coding Legal Software using Docassemble',
-  favicon: '/img/favicon.ico',
+  favicon: '/textbook/img/favicon.ico',
 
   // Set the production url of your site here
-  url: 'https://your-docusaurus-test-site.com',
+  url: 'https://flinderslaw.github.io',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/',
+  baseUrl: '/textbook/',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'facebook', // Usually your GitHub org/user name.
-  projectName: 'docusaurus', // Usually your repo name.
+  organizationName: 'FlindersLaw', // Usually your GitHub org/user name.
+  projectName: 'textbook', // Usually your repo name.
+  deploymentBranch: 'gh-pages',
+  trailingSlash: false,
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',

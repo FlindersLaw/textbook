@@ -136,7 +136,7 @@ An [**integer** data type](https://docassemble.org/docs/fields.html#numbers)
 allows us to store whole numbers only (ie: 1, 2,
 3, 4 etc).  We can't store a string in an integer data type.  If we do we'll
 get an error:
-<Components.DisplayImage imageURL='/img/textbook/chapter_02/vitalstatistics-1.png' />
+<Components.DisplayImage imageURL='/textbook/img/textbook/chapter_02/vitalstatistics-1.png' />
 
 Using a data type can be useful to control, or *validate* the input a user
 enters.  In our case, we are forcing the user to enter a number and not words
@@ -158,7 +158,7 @@ Here we again see a variable declaration at line 37, with a `datatype` modifier
 at line 38.  This time, the data type is `radio`.
 A [radio data type](https://docassemble.org/docs/fields.html#radio) presents
 a list of choices to the user and requires them to select only one choice.
-<Components.DisplayImage imageURL='/img/textbook/chapter_02/vitalstatistics-2.png' />
+<Components.DisplayImage imageURL='/textbook/img/textbook/chapter_02/vitalstatistics-2.png' />
 
 This means only the values `Yes` or `No` can be placed into `MJFisemployed`.
 
@@ -186,15 +186,15 @@ data type is used, unsurprisingly, to display money amounts.  It forces the
 user to enter a number with two or more digits after the decimal point.  If
 more than two digits are entered, they are rounded up to two digits, so that
 this:
-<Components.DisplayImage imageURL='/img/textbook/chapter_02/vitalstatistics-4.png' />
+<Components.DisplayImage imageURL='/textbook/img/textbook/chapter_02/vitalstatistics-4.png' />
 Is rounded to this:
-<Components.DisplayImage imageURL='/img/textbook/chapter_02/vitalstatistics-5.png' />
+<Components.DisplayImage imageURL='/textbook/img/textbook/chapter_02/vitalstatistics-5.png' />
 
 Just like the `integer` data type, it is not possible to enter non-integer 
 values, such as characters:
-<Components.DisplayImage imageURL='/img/textbook/chapter_02/vitalstatistics-6.png' />
+<Components.DisplayImage imageURL='/textbook/img/textbook/chapter_02/vitalstatistics-6.png' />
 or even the dollar sign!
-<Components.DisplayImage imageURL='/img/textbook/chapter_02/vitalstatistics-7.png' />
+<Components.DisplayImage imageURL='/textbook/img/textbook/chapter_02/vitalstatistics-7.png' />
 
 #### Line 44
 Line 44, like line 43 above it, are aligned with the label on line 42.  As 
@@ -215,9 +215,9 @@ Therefore, lines 44, 45 and 46 together tell Docassemble that the variable set
 out on line 42 should only be displayed if the value of `MJFisemployed` is set
 to `Yes`.  If we select the `Yes` radio button, we can see that the question
 is automatically displayed:
-<Components.DisplayImage imageURL='/img/textbook/chapter_02/vitalstatistics-8.png' />
+<Components.DisplayImage imageURL='/textbook/img/textbook/chapter_02/vitalstatistics-8.png' />
 and if we select `No` for `MJFisemployed` then the question is hidden:
-<Components.DisplayImage imageURL='/img/textbook/chapter_02/vitalstatistics-9.png' />
+<Components.DisplayImage imageURL='/textbook/img/textbook/chapter_02/vitalstatistics-9.png' />
 
 This is a good way of displaying to a user only the relevant questions in an
 application.
@@ -246,7 +246,7 @@ terms:
 The braces (`{}`) surrounding the word `income` tell Docassemble to look for 
 a [term](https://docassemble.org/docs/modifiers.html#terms).  Terms are used
 to display pop-up text when the word is clicked on:
-<Components.DisplayImage imageURL='/img/textbook/chapter_02/vitalstatistics-3.png' />
+<Components.DisplayImage imageURL='/textbook/img/textbook/chapter_02/vitalstatistics-3.png' />
 
 Terms are a great way to display pop-up help text.
 
@@ -335,7 +335,7 @@ like a functionn, in that it helps us manipulate variable, but a method is
 attached to a variable.  In this case, the `true_values()` method will display
 the values in our checkbox list that have been selected as a nice
 comma-separated list.
-<Components.DisplayImage imageURL='/img/textbook/chapter_02/vitalstatistics-10.png' />
+<Components.DisplayImage imageURL='/textbook/img/textbook/chapter_02/vitalstatistics-10.png' />
 
 :::info
 The difference between functions and methods and their syntax is something

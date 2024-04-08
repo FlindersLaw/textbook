@@ -5,7 +5,7 @@ import styles from './styles.module.css';
 const FeatureList = [
   {
     title: 'Mark Ferraretto',
-    headshot: '/img/headshot_mjf.jpg',
+    headshot: '/textbook/img/headshot_mjf.jpg',
     description: (
       <>
         Mark is a Senior Lecturer in Law at Flinders University. Mark
@@ -20,7 +20,7 @@ const FeatureList = [
   },
   {
     title: 'James Scheibner',
-    headshot: '/img/headshot_jks.jpg',
+    headshot: '/textbook/img/headshot_jks.jpg',
     description: (
       <>
         James is a Lecturer in Law at Flinders University. He joined
