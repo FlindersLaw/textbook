@@ -50,11 +50,11 @@ In order to use an if statement in a code block, we need to follow three rules (
 :::info
 Note that we do not need to add an ```else``` clause when writing an if statement. However, it is good practice to do so. We use if statements in Docassemble to redirect users to different endpoints or different questions. If our user enters a value which is not covered by our if statement, Docassemble will exit with the following error screen:
 
-<Components.DisplayImage imageURL='/textbook/img/textbook/chapter_04/docassemble_finished.png' altText='Docassemble has finished executing and will show this screen' />
+<Components.DisplayImage imageURL='/img/textbook/chapter_04/docassemble_finished.png' altText='Docassemble has finished executing and will show this screen' />
 
 In the alternative, if we are declaring a variable in our if statement (see [Chapter 3](/docs/textbook/chapter_03)), we might encounter an error. For example, if we do not have an else statement we might get this error:
 
-<Components.DisplayImage imageURL='/textbook/img/textbook/chapter_04/docassemble_error_no_else.png' altText='Docassemble has finished executing and will show this screen' />
+<Components.DisplayImage imageURL='/img/textbook/chapter_04/docassemble_error_no_else.png' altText='Docassemble has finished executing and will show this screen' />
 
 These are things to be mindful of when planning how you will use if statements.
 :::
@@ -94,7 +94,7 @@ What we have used here is an equality operator. That allows us to test a particu
 
 Let's consider how our application will execute. It will first display a button which asks the user whether they are 18 or over. 
 
-<Components.DisplayImage imageURL='/textbook/img/textbook/chapter_04/over_18_question_choice.png' altText='A Docassemble application with two options - yes or no' />
+<Components.DisplayImage imageURL='/img/textbook/chapter_04/over_18_question_choice.png' altText='A Docassemble application with two options - yes or no' />
 
 If the user presses **Yes**, that variable will contain the value True. Otherwise, if the user presses **No**, it will contain the value False. 
 
@@ -104,11 +104,11 @@ The line ```if user18OrOver:``` is effectively the same as writing ```if user18O
 
 Lines 7 to 10 in our code block direct the flow of control of the application. If the user presses yes on the first screen (that is, ```user18OrOver``` is True), the final screen will display that they are an adult.
 
-<Components.DisplayImage imageURL='/textbook/img/textbook/chapter_04/adult_endpoint_screen_if_statement.png' altText='The endpoint displayed if the user says they are over 18' />
+<Components.DisplayImage imageURL='/img/textbook/chapter_04/adult_endpoint_screen_if_statement.png' altText='The endpoint displayed if the user says they are over 18' />
 
 Otherwise, the application will display that they are a child.
 
-<Components.DisplayImage imageURL='/textbook/img/textbook/chapter_04/child_endpoint_screen_if_statement.png' altText='The endpoint displayed if the user says they are under 18' />
+<Components.DisplayImage imageURL='/img/textbook/chapter_04/child_endpoint_screen_if_statement.png' altText='The endpoint displayed if the user says they are under 18' />
 
 ### Flipping the Logic
 We can also flip the logic of our if statement around. In Ch4_Age_Eligibility, Line 7 tests whether the user is 18 years or older. We can reverse this logic with the following code:

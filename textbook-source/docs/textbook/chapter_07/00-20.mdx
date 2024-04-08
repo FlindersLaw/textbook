@@ -77,7 +77,7 @@ So, let's get to it.
 
 Step 1 is to get a logo image.  Unsurprisingly we have already found one for you.  Here it is:
 
-<DisplayImage imageURL='/textbook/img/textbook/chapter_07/flinders_logo.png' />
+<DisplayImage imageURL='/img/textbook/chapter_07/flinders_logo.png' />
 
 Wait What?
 
@@ -150,7 +150,7 @@ buttons:
 
 Run your app.  It should look like this:
 
-<DisplayImage imageURL='/textbook/img/textbook/chapter_07/makingchanges1.png' />
+<DisplayImage imageURL='/img/textbook/chapter_07/makingchanges1.png' />
 
 ## Changing the Navbar colour
 Now we get into the CSS goodness.
@@ -340,7 +340,7 @@ buttons:
 
 Our app should now look like this.  Note the colour of the navbar.
 
-<DisplayImage imageURL='/textbook/img/textbook/chapter_07/makingchanges2.png' />
+<DisplayImage imageURL='/img/textbook/chapter_07/makingchanges2.png' />
 
 ## Change the colour of the right-side menu
 The contrast between our new background colour and our grey menu
@@ -366,16 +366,16 @@ Developer Tools.
 Once we have the developer tools running we use element picker to click on our menu.  The element picker is
 usually on the top left of the developer tools, like so in Firefox:
 
-<DisplayImage imageURL='/textbook/img/textbook/chapter_07/elementpicker1.png' />
+<DisplayImage imageURL='/img/textbook/chapter_07/elementpicker1.png' />
 
 and like so in Chrome:
 
-<DisplayImage imageURL='/textbook/img/textbook/chapter_07/elementpicker2.png' />
+<DisplayImage imageURL='/img/textbook/chapter_07/elementpicker2.png' />
 
 Click on the element picker and then hover the mouse over the menu.  When we do so, we see the corresponding
 code higlighted in the Developer Tools.  We also see that the menu bar's class is called `nav-link`
 
-<DisplayImage imageURL='/textbook/img/textbook/chapter_07/elementpicker3.png' 
+<DisplayImage imageURL='/img/textbook/chapter_07/elementpicker3.png' 
     caption="Hard to see, but true!" />
 
 ### Update the styles
@@ -397,7 +397,7 @@ font a little bolder to increase the contrast between our Flinders blue backgrou
 We don't need to make any changes to our app's code as it's already configured to read in any changes we make
 to `styles.css`.  So, if we run the app we should now get something like this:
 
-<DisplayImage imageURL='/textbook/img/textbook/chapter_07/makingchanges3.png' />
+<DisplayImage imageURL='/img/textbook/chapter_07/makingchanges3.png' />
 
 ## Make the menu bar transparent
 If you run the app as it is now and click on the menu bar you'll the see menu bar itself still  appears black 
@@ -440,7 +440,7 @@ Developer Tools are our friend again.  Let's run the app and then start the Deve
 Now click on the menu so the menu bar appears.  *Then* use the element picker to click on an item in the
 menu bar:
 
-<DisplayImage imageURL='/textbook/img/textbook/chapter_07/elementpicker4.png' />
+<DisplayImage imageURL='/img/textbook/chapter_07/elementpicker4.png' />
 
 Once again, we can see that by hovering over a menu item, we've identified that its class is `dropdown-item`.
 In the developer tools we can see the list of menu items/`dropdown-item`s and, casting our eyes up a bit, 
@@ -511,7 +511,7 @@ Updated `styles.css`
 
 The menu bar in your app should now be a lovely transparent Flinders yellow.
 
-<DisplayImage imageURL='/textbook/img/textbook/chapter_07/makingchanges4.png' />
+<DisplayImage imageURL='/img/textbook/chapter_07/makingchanges4.png' />
 
 ## Add styled text
 We've seen how styles in a CSS style sheet can modify existing elements in a web app.  CSS can do much more than
@@ -525,7 +525,7 @@ to explore CSS further.
 With that said, our next task is to this (rather ugly) text box to our app.  (Unfortunately, your authors
 are neither artists nor web designers)
 
-<DisplayImage imageURL='/textbook/img/textbook/chapter_07/makingchanges5.png' />
+<DisplayImage imageURL='/img/textbook/chapter_07/makingchanges5.png' />
 
 If you look at the screenshot [at the beginning of this chapter](00-10) you will also see we've changed 
 the text in the app.  Let's do this part as it's easy.  Let's replace the text in our app so it reads as follows:
@@ -591,7 +591,7 @@ Add these two paragraphs to the end of the <DisplayGlossaryItem item='subquestio
 
 If you save and run the app you should see this:
 
-<DisplayImage imageURL='/textbook/img/textbook/chapter_07/makingchanges6.png' />
+<DisplayImage imageURL='/img/textbook/chapter_07/makingchanges6.png' />
 
 Nothing special so far.
 
@@ -618,7 +618,7 @@ So, let's wrap our text in a `<div>`:
 If we do a <DisplayDAButtons button={Constants.da_save_and_run_prop} /> we'll see our text formatting for
 those last two paragraphs has gone away.
 
-<DisplayImage imageURL='/textbook/img/textbook/chapter_07/makingchanges7.png' />
+<DisplayImage imageURL='/img/textbook/chapter_07/makingchanges7.png' />
 
 That's because we can't use Markdown formatting inside a `<div>`.  Instead we need to use HTML formatting.
 HTML is a text markup language, like Markdown.  HTML and CSS are the two technologies that drive the 
@@ -648,7 +648,7 @@ This said, let's adjust our text to add two paragraph markers and correctly form
 ```
 Our two paragraphs look better now: 
 
-<DisplayImage imageURL='/textbook/img/textbook/chapter_07/makingchanges8.png' />
+<DisplayImage imageURL='/img/textbook/chapter_07/makingchanges8.png' />
 
 Now it's time to style it up
 
@@ -716,7 +716,7 @@ For more information on making fonts bold see [this page](https://www.w3schools.
 Once we have saved `styles.css` we can re-run our app.  Our text should now appear in our box, in red and
 in a larger font:
 
-<DisplayImage imageURL='/textbook/img/textbook/chapter_07/makingchanges9.png' />
+<DisplayImage imageURL='/img/textbook/chapter_07/makingchanges9.png' />
 
 All we have left to do now is to update our <DisplayDAButtons button={Constants.da_continue_prop} /> button.
 
@@ -767,4 +767,4 @@ black border in line 4.
 
 Save the file and re-run the app.  We now have all our styling components in place.
 
-<DisplayImage imageURL='/textbook/img/textbook/chapter_07/makingchangesa.png' />
+<DisplayImage imageURL='/img/textbook/chapter_07/makingchangesa.png' />

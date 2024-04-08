@@ -211,7 +211,7 @@ buttons:
 ### Uploading Our Template
 Immediately if we save this form we can see that we have an error:
 
-<Components.DisplayImage imageURL='/textbook/img/textbook/chapter_08/ch08_missing_template_syntax_error.PNG' altText='This is the error that you will see if you just copy this code from above and paste it in without uploading anything else.'/>
+<Components.DisplayImage imageURL='/img/textbook/chapter_08/ch08_missing_template_syntax_error.PNG' altText='This is the error that you will see if you just copy this code from above and paste it in without uploading anything else.'/>
 
 We see this error because we are missing a template. Instead, we need to upload a template file called `Federal_Court_Form_17.docx` exactly. We also need to make sure that we insert the correct Jinja codes for each field that the user will fill in.
 
@@ -227,7 +227,7 @@ As we did in Chapter 3, you will need to press on the **Folders** menu in the Do
 
 Once you do, the syntax error message should disappear. However, we now have a new error:
 
-<Components.DisplayImage imageURL='/textbook/img/textbook/chapter_08/ch08_undefined_name_error.PNG' altText='This is the error that you will see if you upload the template from this textbook without making any changes.'/>
+<Components.DisplayImage imageURL='/img/textbook/chapter_08/ch08_undefined_name_error.PNG' altText='This is the error that you will see if you upload the template from this textbook without making any changes.'/>
 
 Why are we getting this error? Docassemble normally generates an Undefined Name error message if we use a variable without referring to it in a question block or giving it a value in a code block. In other words, we are referring to the variable `whoFileForm` without defining it first.
 
@@ -237,21 +237,21 @@ We cover some more detail on how to debug our application in <DisplayChapter cha
 
 We can use the search feature in our playground in Docassemble to look for an undefined variable. Doing so shows that there is no variable called `whoFileForm` in our Docassemble playground:
 
-<Components.DisplayImage imageURL='/textbook/img/textbook/chapter_08/ch08_undefined_name_error_playground.PNG' altText='A screenshot of a user searching for the variable `whoFileForm` in the Docassemble playground. The closest match is `whoFiledForm`'/>
+<Components.DisplayImage imageURL='/img/textbook/chapter_08/ch08_undefined_name_error_playground.PNG' altText='A screenshot of a user searching for the variable `whoFileForm` in the Docassemble playground. The closest match is `whoFiledForm`'/>
 
 As we can see, the closest match is `whoFiledForm`.  Another way to check is if we run our application and then check the debug output. We will see that needs a definition of `whoFileForm` to display our eligible endpoint:
 
-<Components.DisplayImage imageURL='/textbook/img/textbook/chapter_08/ch08_undefined_name_error_debug.PNG' altText='A screenshot of our application running. '/>
+<Components.DisplayImage imageURL='/img/textbook/chapter_08/ch08_undefined_name_error_debug.PNG' altText='A screenshot of our application running. '/>
 
 That indicates the error is somewhere in our template. Sure enough, on page one of our template we have a reference to `whoFileForm`:
 
-<Components.DisplayImage imageURL='/textbook/img/textbook/chapter_08/ch08_undefined_name_error_template.PNG' altText='A screenshot of our template, with the error on page one (a reference to the variable `whoFileForm`) highlighted'/>
+<Components.DisplayImage imageURL='/img/textbook/chapter_08/ch08_undefined_name_error_template.PNG' altText='A screenshot of our template, with the error on page one (a reference to the variable `whoFileForm`) highlighted'/>
 
 Once we have uploaded and corrected our template again, the error will disappear. If we run the application, we will see that Docassemble has filled in the variables that we have defined:
 
-<Components.DisplayImage imageURL='/textbook/img/textbook/chapter_08/ch08_federal_court_complete_screen.PNG' altText='A screenshot of our application if the user selects the eligible branch and enters in values.'/>
+<Components.DisplayImage imageURL='/img/textbook/chapter_08/ch08_federal_court_complete_screen.PNG' altText='A screenshot of our application if the user selects the eligible branch and enters in values.'/>
 
-<Components.DisplayImage imageURL='/textbook/img/textbook/chapter_08/ch08_federal_court_complete_template.PNG' altText='A screenshot of the same completed template.'/>
+<Components.DisplayImage imageURL='/img/textbook/chapter_08/ch08_federal_court_complete_template.PNG' altText='A screenshot of the same completed template.'/>
 
 ## Summary and Next Steps
 In this section, we have covered:

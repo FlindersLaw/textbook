@@ -1,4 +1,5 @@
 import React from "react";
+import useBaseURL from '@docusaurus/useBaseUrl';
 import {Link} from 'react-router-dom';
 import chapter_list from './chapter_list.js';
 import {capitalizeWords} from './utilities.js';
@@ -30,15 +31,26 @@ import styles from './styles.module.css';
 export function DisplayChapter(props) {
 
     // We'll set up some constants in here
-    const chapterDocPath = '/docs/textbook';
+    const chapterDocPath = useBaseURL('/docs/textbook');
     const chapterTextPrefix  = 'chapter';
 
     // First check this chapter exists.  Otherwise return an error
     let chapterPath = chapterDocPath + '/' + props.chapter;
+    // console.log('chapterDocPath', chapterDocPath);
+    // console.log('chapterTextPrefix:', chapterTextPrefix)
+    // console.log('props.chapter:', props.chapter);
+    // console.log('chapterPath:', chapterPath);
+    // console.log('props.target:', props.target);
 
     // Add the target if it exists
-    let chapterTarget = '/' + props.target || '';
+    let chapterTarget = ''
+    if ( props.target ) {
+        chapterTarget = '/' + props.target;
+    } 
     chapterPath = chapterPath + chapterTarget
+
+    // console.log('chapterTarget:', chapterPath)
+    // console.log('chapterPath2:', chapterPath)
 
     if ( ! chapter_list.hasOwnProperty(props.chapter) ) {
         return(
@@ -64,6 +76,9 @@ export function DisplayChapter(props) {
         linkText = capitalizeWords(linkText);
     }
 
+    // console.log('chapterRecord:', chapterRecord);
+    // console.log('props.text:', props.text);
+    // console.log('linkText:', linkText);
 
     if ( props.nourl ) {
         return <span class="displayChapterSpan">{linkText}</span>

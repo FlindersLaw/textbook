@@ -43,7 +43,7 @@ that line could be represented as follows as Jinja in a Word document.
 Download and open this [Word document](/templates/First_Docassemble_Template.docx).
 Let's take a look at it.
 
-<Components.DisplayImage imageURL='/textbook/img/textbook/chapter_02/hello_world5-1.png' />
+<Components.DisplayImage imageURL='/img/textbook/chapter_02/hello_world5-1.png' />
 
 Note how the first two Jinja variables are in bold.  We've done this by 
 simply bolding the text in Word, as we would any other text.  We control 
@@ -52,7 +52,7 @@ text formatting using Word's usual formatting.
 We can, for example, change the colour of the Jina on the third line to red
 by using Word's usual formatting. No Markdown required!
 
-<Components.DisplayImage imageURL='/textbook/img/textbook/chapter_02/hello_world5-2.png' />
+<Components.DisplayImage imageURL='/img/textbook/chapter_02/hello_world5-2.png' />
 
 Make change the colour of the third line to red and save the word document.  
 Then, let's upload it to Docassemble.
@@ -77,17 +77,17 @@ Now we're ready to upload
 :::
 
 Word documents must be stored in the **Templates** folder of your app.
-<Components.DisplayImage imageURL='/textbook/img/textbook/chapter_02/hello_world5-3.png' />
+<Components.DisplayImage imageURL='/img/textbook/chapter_02/hello_world5-3.png' />
 
 #### To upload your document:
 1. go to the Templates folder;
 1. click on Browse and select your Word document; and
 1. click on <Components.DisplayDAButtons button={Constants.da_save_prop} button_text='Upload' />.
-<Components.DisplayImage imageURL='/textbook/img/textbook/chapter_02/hello_world5-4.png' />
+<Components.DisplayImage imageURL='/img/textbook/chapter_02/hello_world5-4.png' />
 
 
 The document will be uploaded and appear in your 'Existing template files' list.
-<Components.DisplayImage imageURL='/textbook/img/textbook/chapter_02/hello_world5-5.png' />
+<Components.DisplayImage imageURL='/img/textbook/chapter_02/hello_world5-5.png' />
 
 :::note
 It's not clear from the screenshot but the file has actually been uploaded
@@ -180,7 +180,7 @@ question block contains our `attachment` on lines 26 and 27.  So, Docassemble
 will display our file when it displays this question block.
 
 If you run the app you will see a final screen that looks something like this.
-<Components.DisplayImage imageURL='/textbook/img/textbook/chapter_02/hello_world5-6.png' />
+<Components.DisplayImage imageURL='/img/textbook/chapter_02/hello_world5-6.png' />
 
 Additional content has been added below our exit and restart buttons.  This
 content allows a user to download the Word document, or the Word document as 
@@ -189,7 +189,7 @@ a PDF.  It also allows the user to email the document to themselves.
 If we open the Word document we will see that our Jinja has been replaced with
 the variables from our app.  Note also that our formatting (including the
 red text!) has been preserved.
-<Components.DisplayImage imageURL='/textbook/img/textbook/chapter_02/hello_world5-7.png' />
+<Components.DisplayImage imageURL='/img/textbook/chapter_02/hello_world5-7.png' />
 
 :::note
 You may not want your app users to download a Word *and* a PDF document.  
