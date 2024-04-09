@@ -4,7 +4,7 @@
   <ShortName>Understanding Legal Technology</ShortName>
   <Description>Search Understanding Legal Technology</Description>
   <InputEncoding>UTF-8</InputEncoding>
-  <Image width="16" height="16" type="image/x-icon">https://flinderslaw.github.io/textbook/undefined/img/favicon.ico</Image>
+  <Image width="16" height="16" type="image/x-icon">https://flinderslaw.github.io/textbook/textbook/img/favicon.ico</Image>
   <Url type="text/html" method="get" template="https://flinderslaw.github.io/textbook/search?q={searchTerms}"/>
   <Url type="application/opensearchdescription+xml" rel="self" template="https://flinderslaw.github.io/textbook/opensearch.xml" />
   <moz:SearchForm>https://flinderslaw.github.io/textbook/</moz:SearchForm>
