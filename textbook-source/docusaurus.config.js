@@ -9,7 +9,7 @@ const darkTheme = themes.github;
 const config = {
   title: 'Understanding Legal Technology',
   tagline: 'Coding Legal Software using Docassemble',
-  favicon: this.baseUrl + '/img/favicon.ico',
+  favicon: '/textbook/img/favicon.ico',
 
   // Set the production url of your site here
   url: 'https://flinderslaw.github.io',
@@ -65,7 +65,7 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       // Replace with your project's social card
-      image: 'img/docusaurus-social-card.jpg',
+      image: 'img/Flinders_University_Logo_Horizontal_RGB_Master.png',
       navbar: {
         title: 'Understanding Legal Technology',
         logo: {
