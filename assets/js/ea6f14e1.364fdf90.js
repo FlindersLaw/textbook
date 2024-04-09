@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunktextbook_source=self.webpackChunktextbook_source||[]).push([[5813],{3769:e=>{e.exports=JSON.parse('{"name":"docusaurus-plugin-content-docs","id":"default"}')}}]);
