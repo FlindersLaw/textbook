@@ -6,98 +6,138 @@ export const title = 'Exercise 4b'
 export const video = <Ref />
 
 ## Background
-The code for this exercise is supplied for you below.  You should copy this code into your Playground
-so you can modify it according to this exercise.
+In this exercise we are looking at <DisplayGlossaryItem item='dictionary' plural /> and iteration.
 
-This code is very similar to the code in [Exercise 4a](cw4a), the difference being
-that we are using a [`DAList`](https://docassemble.org/docs/objects.html#DAList) instead of
-a regular Python list.
+You will modify the [code](#code) below and:
+1. add some items to `favourite_things`; and
+1. display the contents of `favourite_things` in a table
 
-Note that we need an `objects` block to declare our `DAList` and our <DisplayGlossaryItem item='codeblock' />
-looks quite different.  Line 24 is the first line in our code block and it clears any items in `display_list`.
-We need to do this as Docassemble sometimes runs our code block more than once as it executes our app
-(this is called [**idempotence**](/docs/textbook/chapter_03/00-40#idempotence)).
+That is, you should display the list so that the output of the list looks something like this:
 
-Lines 27 to 35 add the items to our list.  In Exercise 4a we defined the list and its elements all in one
-go.  With a `DAList` the definition happens in the `objects` block so we need to add our elements to our
-already-defined list.  That's what the `append()` method does.
+<DisplayImage imageURL='/img/coding_exercises/cw4b-1.png' size="70%" />
 
-Finally, line 38 tells Docassemble that we have gathered all the elements we need into `display_list`
-and we don't want to add any more.  Gathering is discussed more in [this case study](/docs/textbook/chapter_06/filtering/00-50#bringing-it-all-together)
+## Steps
+1. Copy the [example code](#code) below into a file called `cw4b.yml` in your `CodingWorkshop4` playground
+1. Delete 'First Choice' and 'Second Choice' from the `favourite_things` question and replace them with five of your own choices
+1. Use a <DisplayGlossaryItem item='mako' upper /> `for` loop to display the checkbox items in a table showing which items were selected
 
-:::tip
-You might want to consider setting up a new
-[Playground Project](/docs/textbook/chapter_01/00-30#1-navbar-and-playground-menu)
-for these coding exercises.
+:::tip hints
+#### Adding choices
+This is very simple. Just find the `choices:` part of the question and replace the two choices with five of your own.
+
+#### Displaying in a table
+First, the table header has been created for you already. All you need to do is replace the line
+```
+  ${favourite_things}
+```
+with a `for` loop.  Like Exercise 4a you will only need three lines of code.  The body of the loop (the part between `% for` and `% endfor`) will be a bit more complex.
+You need to display the dictionary key (which is the text) and the dictionary value.  Refer to the readings for how to do this.
 :::
-
-:::note
-A `DAList` is part of Docassemble.  Basically, it's a Python list on steroids.
-`DAList`s come with extra functionality over a Python list.  One of these you can see
-if you run the test code as it is.  The list of names is displayed as a sentence with each
-name separated by a comma and the last name preceded with an 'and'.  Compare this to
-the Python list displayed in [Exercise A](cw4a) which was very much the raw Python
-list, including the square brackets.
-
-As a general rule when using lists we should use `DAList`s and when using dictionaries
-we should use `DADict`s.
-:::
-
-## Your Task
-Like in Exercise 4a you must modify the code to display the contents of `display_list` as
-a bullet list.  However, for this exercise you must only display entries that contain the 
-letter 'H' in them.
-
-:::tip hint
-1. Remember that you should test for both upper-case and lower-case 'H'.
-1. You might want to consider using a [logical 'or' test](/docs/textbook/chapter_04/00-60).
-:::
-
-Replace the code on line 14 with your code.  Your code should be about five lines long. You will
-need to use the same `%for` loop you wrote in Exercise 4a but embed an additional `%if` statement
-in it.
 
 ## Code
 Copy this code into your playground as a starting point for this exercise.
 
-```yml showLineNumbers
+```yml
 # Coding Exercise 4b
 #
-# Introducing Iteration with DAList()
+# Iteration and dictionaries
 ---
-objects:
-  - display_list: DAList.using(auto_gather=False)
----
+# Our welcome screen
 mandatory: True
 question: Coding Workshop 4b
 subquestion: |
-  Display only the names in `display_list` that
-  contain the letter 'H' in them.
+  In this exercise we look at a `checkboxes` data type and use iteration
+  to display each element in our variable.
 
-  ${display_list}
+  Checkboxes are dictionaries.  Each checkbox item is the key and the value of
+  each item is `True` or `False` depening on whether that item has been checked or not.
 
+  Even though a checkbox is a dictionary, we can still treat it as a list by iterating
+  over its keys.
+buttons:
+  - Continue: continue
+---
+# Our mandatory code block. It just calls the final screen
+mandatory: True
+code: |
+  final_screen
+---
+# Our final screen
+event: final_screen
+question: Final Screen
+subquestion: |
+  Display the names in `favourite_things` in a table.
+
+  Checkbox Item|Selected?
+  ---|---
+  ${favourite_things}
 buttons:
   - Exit: exit
+  - Restart: restart
 ---
-# This code block defines the list with the 
-# items to display
+question: Things you like
+fields:
+  - What are a few of your favourite things?: favourite_things
+    datatype: checkboxes
+    choices:
+      - First Choice
+      - Second Choice
+---
+```
+<details>
+<summary>
+Solution Code
+</summary>
+```yml
+# Coding Exercise 4b
+#
+# Iteration and dictionaries
+---
+# Our welcome screen
+mandatory: True
+question: Coding Workshop 4b
+subquestion: |
+  In this exercise we look at a `checkboxes` data type and use iteration
+  to display each element in our variable.
+
+  Checkboxes are dictionaries.  Each checkbox item is the key and the value of
+  each item is `True` or `False` depening on whether that item has been checked or not.
+
+  Even though a checkbox is a dictionary, we can still treat it as a list by iterating
+  over its keys.
+buttons:
+  - Continue: continue
+---
+# Our mandatory code block. It just calls the final screen
+mandatory: True
 code: |
-  # Always clear our the list before you start work
-  # on it in a code block
-  display_list.clear()
-
-  # Add the data
-  display_list.append('Ida Noe')
-  display_list.append('Hugo First'),
-  display_list.append('Moda Lawn'),
-  display_list.append('Kate Jupp'),
-  display_list.append('Ayfor Gott'),
-  display_list.append('Justin Thyme'),
-  display_list.append('Ray Member'),
-  display_list.append('Studie Harde'),
-  display_list.append('Slacke Hearse')
-
-  # Finish by setting gathered to True
-  display_list.gathered = True
+  final_screen
 ---
-:::
+# Our final screen
+event: final_screen
+question: Final Screen
+subquestion: |
+  Display the names in `favourite_things` in a table.
+
+  Checkbox Item|Selected?
+  ---|---
+  % for item in favourite_things.items():
+  ${item}|${favourite_things[item]}
+  % endfor
+buttons:
+  - Exit: exit
+  - Restart: restart
+---
+question: Things you like
+fields:
+  - What are a few of your favourite things?: favourite_things
+    datatype: checkboxes
+    choices:
+      - Raindrops on roses
+      - Whiskers on kittens
+      - Bright copper kettles
+      - Warm woollen mittens
+      - Brown paper packages tied up with strings
+---
+```
+</details>

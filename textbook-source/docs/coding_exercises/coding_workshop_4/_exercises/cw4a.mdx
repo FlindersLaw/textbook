@@ -6,62 +6,155 @@ export const title = 'Exercise 4a'
 export const video = <Ref />
 
 ## Background
-The code for this exercise is supplied for you below.  You should copy this code into your Playground
-so you can modify it according to this exercise.
+In this exercise we are looking at <DisplayGlossaryItem item='list' plural /> and iteration.
 
-:::tip
-You might want to consider setting up a new
-[Playground Project](/docs/textbook/chapter_01/00-30#1-navbar-and-playground-menu)
-for these coding exercises.
-:::
+You will modify the [code](#code) below and:
+1. add some items to `display_list`; and
+1. display the contents of `display_list` as a bullet list.  
 
-This code contains a single <DisplayGlossaryItem item='mandatoryquestionblock' /> and a single
-<DisplayGlossaryItem item='codeblock' />.  The code block defines a list called `display_list`.
-
-## Your Task
-In this exercise you must modify the code to display the contents of `display_list` as a bullet list.  
-That is, you should display the list so that the output of the list is as follows:
+That is, you should display the list so that the output of the list looks something like this:
 
 <DisplayImage imageURL='/img/coding_exercises/cw4a-1.png' size="70%" />
 
-Currently line 11 of the code has a <DisplayGlossaryItem item='mako' upper /> command that
-displays the list items as, well, a list!  Start by removing that line.  You will need to
-replace that line with a Mako for loop.
+## Steps
+1. Create a new [Playground Project](/docs/recipes/making_a_project) called `CodingWorkshop4`
+2. Copy the [example code](#code) below into a file called `cw4a.yml`
+3. Add an extra four names to `display_list`
+4. Use a <DisplayGlossaryItem item='mako' upper /> `for` loop to display the list items formatted as a bullet list
+  :::tip hints
+  #### Adding the names to the list
+  There's a code block at the end of the example code.  The first name has been added for you. Use this as an example.
 
-You should only require an additional three lines of code to complete this exercise.
+  #### Displaying the bullet list
+  To display the bullet list you will need to:
+  
+  1.delete this line from `final_screen`
+  ```
+    ${display_list}
+  ```
+  2 replace that line with your `for` loop.  You should only need three lines of code
+  :::
 
 ## Code
 Copy this code into your playground as a starting point for this exercise.
 
-```yml showLineNumbers
+```yml
 # Coding Exercise 4a
 #
-# Introducing Iteration
+# Introducing Iteration with DAList()
 ---
+# This is an 'object declaration' We're telling Docassemble
+# we want the variable display_list to be a 'DAList' (which is
+# basically just a list). Don't worry about the details of how this
+# works for now. Just accept we need this object declaration so we
+# can use lists.
+objects:
+  - display_list: DAList.using(auto_gather=False)
+---
+# Our welcome screen
 mandatory: True
 question: Coding Workshop 4a
 subquestion: |
-  Display the names in `display_list` as
-  a bullet items list.
+  In this exercise we look at a list data type and use iteration
+  to display the elements in the list
+buttons:
+  - Continue: continue
+---
+# Our mandatory code block. It just calls the final screen
+mandatory: True
+code: |
+  final_screen
+---
+# Our final screen
+event: final_screen
+question: Final Screen
+subquestion: |
+  Display the names in `display_list` as a bullet list.
 
   ${display_list}
-
 buttons:
   - Exit: exit
+  - Restart: restart
 ---
 # This code block defines the list with the 
 # items to display
 code: |
-  display_list = [
-    'Ida Noe',
-    'Hugo First',
-    'Moda Lawn',
-    'Kate Jupp',
-    'Ayfor Gott',
-    'Justin Thyme',
-    'Ray Member',
-    'Studie Harde',
-    'Slacke Hearse'
-  ]
+  # Always clear our the list before you start work
+  # on it in a code block
+  display_list.clear()
+
+  # Add the data
+  # Use display_list.append() statements to add data here
+  display_list.append('Ida Noe')
+
+  # Finish by setting gathered to True
+  display_list.gathered = True
 ---
 ```
+<details>
+<summary>
+Solution Code
+</summary>
+```yml
+# Coding Exercise 4a
+#
+# Introducing Iteration with DAList()
+---
+# This is an 'object declaration' We're telling Docassemble
+# we want the variable display_list to be a 'DAList' (which is
+# basically just a list). Don't worry about the details of how this
+# works for now. Just accept we need this object declaration so we
+# can use lists.
+objects:
+  - display_list: DAList.using(auto_gather=False)
+---
+# Our welcome screen
+mandatory: True
+question: Coding Workshop 4a
+subquestion: |
+  In this exercise we look at a list data type and use iteration
+  to display the elements in the list
+buttons:
+  - Continue: continue
+---
+# Our mandatory code block. It just calls the final screen
+mandatory: True
+code: |
+  final_screen
+---
+# Our final screen
+event: final_screen
+question: Final Screen
+subquestion: |
+  Display the names in `display_list` as a bullet list.
+
+  % for item in display_list:
+  * ${item}
+  % endfor
+buttons:
+  - Exit: exit
+  - Restart: restart
+---
+# This code block defines the list with the 
+# items to display
+code: |
+  # Always clear our the list before you start work
+  # on it in a code block
+  display_list.clear()
+
+  # Add the data
+  display_list.append('Ida Noe')
+  display_list.append('Hugo First'),
+  display_list.append('Moda Lawn'),
+  display_list.append('Kate Jupp'),
+  display_list.append('Ayfor Gott'),
+  display_list.append('Justin Thyme'),
+  display_list.append('Ray Member'),
+  display_list.append('Studie Harde'),
+  display_list.append('Slacke Hearse')
+
+  # Finish by setting gathered to True
+  display_list.gathered = True
+---
+```
+</details>
