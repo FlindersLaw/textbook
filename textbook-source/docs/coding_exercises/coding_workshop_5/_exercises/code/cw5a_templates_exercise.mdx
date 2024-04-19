@@ -24,17 +24,20 @@ content: |
 template: t_mittens
 subject: Warm woolen mittens
 content: |
-  % if mitten_colour == 'Blue':
-  <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimg0.etsystatic.com%2F115%2F0%2F6614227%2Fil_fullxfull.911803148_ny9q.jpg&f=1&nofb=1&ipt=0e1028208a5c6b8e809e685003e7ff86638c797d371b48ad673b903226379219&ipo=images" height="200px">
-  % elif mitten_colour == 'Red':
-  <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmedia.istockphoto.com%2Fphotos%2Fmittens-picture-id119838752%3Fk%3D6%26m%3D119838752%26s%3D612x612%26w%3D0%26h%3DtQnfnsNmU9yP2S3JKKHxgMhJfaCGVW-g1x40Pk3QqZU%3D&f=1&nofb=1&ipt=aa445c79f14ba886312107043dc481bc77b1d171673f095641cbe7857f87fd91&ipo=images" height="200px">
-  % elif mitten_colour == 'Pink':
-  <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fthumbs.dreamstime.com%2Fb%2Fwarm-woolen-knitted-mittens-isolated-white-background-pink-k-warm-woolen-knitted-mittens-isolated-white-background-pink-171830683.jpg&f=1&nofb=1&ipt=b1bfc12c53725435421ab344b12cae13a627ef93f782265838b5db3358265c6c&ipo=images" height="300px">
-  % elif mitten_colour == 'Yellow':
-  <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2F4a%2Ff7%2F8e%2F4af78ec5b844c14e56fac573c690006f.jpg&f=1&nofb=1&ipt=f4a87a0175574626b52f87bd9712be5d48b8b2f8ab12b5f4f77223de727060b6&ipo=images" height="200px">
-  % else:
-  I can't find any mittens that are the colour ${mitten_colour}
-  % endif
+  Replace this content with a Mako if statement that will display the correct image.  You will
+  need to place the appropriate `<img src....>` on a line by itself in each branch of your
+  `if/elif` statement
+
+  Remember to delete this table too!
+
+  Colour|Image
+  ------|-----
+  Blue  | <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimg0.etsystatic.com%2F115%2F0%2F6614227%2Fil_fullxfull.911803148_ny9q.jpg&f=1&nofb=1&ipt=0e1028208a5c6b8e809e685003e7ff86638c797d371b48ad673b903226379219&ipo=images" height="200px">
+  Red   | <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmedia.istockphoto.com%2Fphotos%2Fmittens-picture-id119838752%3Fk%3D6%26m%3D119838752%26s%3D612x612%26w%3D0%26h%3DtQnfnsNmU9yP2S3JKKHxgMhJfaCGVW-g1x40Pk3QqZU%3D&f=1&nofb=1&ipt=aa445c79f14ba886312107043dc481bc77b1d171673f095641cbe7857f87fd91&ipo=images" height="200px">
+  Pink  | <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fthumbs.dreamstime.com%2Fb%2Fwarm-woolen-knitted-mittens-isolated-white-background-pink-k-warm-woolen-knitted-mittens-isolated-white-background-pink-171830683.jpg&f=1&nofb=1&ipt=b1bfc12c53725435421ab344b12cae13a627ef93f782265838b5db3358265c6c&ipo=images" height="300px">
+  Yellow| <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2F4a%2Ff7%2F8e%2F4af78ec5b844c14e56fac573c690006f.jpg&f=1&nofb=1&ipt=f4a87a0175574626b52f87bd9712be5d48b8b2f8ab12b5f4f77223de727060b6&ipo=images" height="200px">
+
+  Don't forget to delete this table!
 ---
 template: t_packages
 subject: Brown paper packages tied up with strings

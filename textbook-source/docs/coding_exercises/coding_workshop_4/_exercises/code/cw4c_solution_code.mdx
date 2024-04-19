@@ -1,4 +1,7 @@
-```
+```yml
+# Coding Exercise 4c
+#
+# Displaying a list of templates
 ---
 code: |
   temp = []
@@ -9,23 +12,8 @@ code: |
       # If it is selected we add the appropriate template to temp
       if item == 'a_raindrops':
         temp.append(t_raindrops)
-
-      # We have a followup question if we like whiskers on kittens
       elif item == 'b_kittens':
-        if whiskers_followup == 'kittens':
-          temp.append(t_kittens)
-        elif whiskers_followup == 'chinchilla':
-          temp.append(t_chinchilla)
-        elif whiskers_followup == 'elephant':
-          temp.append(t_elephant)
-        elif whiskers_followup == 'catfish':
-          temp.append(t_catfish)
-        else:
-          error_subject = 'Unknown followup question'
-          error_content = 'Unknown for `whiskers_followup`: {}'.format(whiskers_followup)
-          temp.append(t_error)
-
-      # Now we get onto the rest of the elifs
+        temp.append(t_kittens)
       elif item == 'c_kettles':
         temp.append(t_kettles)
       elif item == 'd_mittens':
@@ -37,6 +25,8 @@ code: |
         error_content = 'Do not have a template for item: `{}`'.format(item)
         temp.append(t_error)
 
+  # Always assigne the temp variable to the 'real' variable last. 
+  # This guarantees that Docassemble always runs the entire code block
   template_list = temp
 ---
 ```

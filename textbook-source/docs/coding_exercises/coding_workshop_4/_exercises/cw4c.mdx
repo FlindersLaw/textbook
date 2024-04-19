@@ -2,6 +2,13 @@ import {DisplayGlossaryItem} from '@site/src/components';
 import {DisplayImage} from '@site/src/components';
 import Ref from './cw4c_references.mdx';
 
+import CW4cExerciseMain from './code/cw4c_exercise_main.mdx';
+import CW4cExerciseCode from './code/cw4c_exercise_code.mdx';
+import CW4cSolutionMain from './code/cw4c_solution_main.mdx';
+import CW4cSolutionCode from './code/cw4c_solution_code.mdx';
+import CW4cSolutionQuestions from './code/cw4c_solution_questions.mdx';
+import CW4cSolutionTemplates from './code/cw4c_solution_templates.mdx';
+
 export const title = 'Exercise 4c'
 export const video = <Ref />
 
@@ -59,274 +66,59 @@ and to display each template's content we can use:
 ## Code
 Copy this code into your playground as a starting point for this exercise.
 
-### `cw4c_main.yml`
-```yml
-# Coding Exercise 4c
-#
-# Displaying a list of templates
----
-include:
-  - cw4c_code.yml
-  - cw4c_questions.yml
-  - cw4c_templates.yml
----
-# Our welcome screen
-mandatory: True
-question: Coding Workshop 4b
-subquestion: |
-  In this exercise we look at a `checkboxes` data type and use iteration
-  to display each element in our variable.
-
-  Checkboxes are dictionaries.  Each checkbox item is the key and the value of
-  each item is `True` or `False` depening on whether that item has been checked or not.
-
-  Even though a checkbox is a dictionary, we can still treat it as a list by iterating
-  over its keys.
-buttons:
-  - Continue: continue
----
-# Our mandatory code block. It just calls the final screen
-mandatory: True
-code: |
-  final_screen
----
-# Our final screen
-event: final_screen
-question: Final Screen
-subquestion: |
-  Display each favourite thing
-
-  ${favourite_things}
-
-buttons:
-  - Exit: exit
-  - Restart: restart
----
-```
-### `cw4c_code.yml`
-```yml
-# Coding Exercise 4c
-#
-# Displaying a list of templates
----
-objects:
-  - template_list: DAList.using(auto_gather=False)
----
-code: |
-  template_list.clear()
-  # We iterate over all of the favourite things
-  for item in favourite_things.keys():
-    # First we check if this favourite thing is selected
-    if favourite_things[item]:
-      # If it is selected we add the appropriate template to template_list
-      if item == 'raindrops':
-        template_list.append(t_raindrops)
-      elif item == 'kittens':
-        template_list.append(t_kittens)
-      # Add the rest of the elifs here
-
-      else:
-        # Add a call to t_error as a fallback
-        pass
-
-  template_list.gathered = True
----
-```
-### `cw4c_questions.yml`
-```yml
----
-question: Things you like
-fields:
-  - What are a few of your favourite things?: favourite_things
-    datatype: checkboxes
-    choices:
-      - Raindrops on roses: raindrops
-      - Whiskers on kittens: kittens
-      - Bright copper kettles: kettles
-      - Warm woollen mittens: mittens
-      - Brown paper packages tied up with strings: packages
----
-```
-### `cw4c_templates.yml`
-```yml
-# Each of these templates downloads an image from the internet and sizes it to
-# be 200 pixels tall. This is not part of your course and you don't need to 
-# know how this works. I just thought displaying pictures was less boring than
-# displaying text - MJF
----
-template: t_raindrops
-subject: Raindrops on roses
-content: |
-  <img src="https://i.pinimg.com/originals/ff/94/99/ff9499300b6b09c000d6553f3ce686c9.jpg" height="200px">
----
-template: t_kittens
-subject: Whiskers on kittens
-content: |
-  <img src="https://i.pinimg.com/736x/78/0e/d5/780ed526f1b2234971534827c9788cb8.jpg" height="200px">
----
-template: t_kettles
-subject: Bright copper kettles
-content: |
-  <img src="https://i.pinimg.com/originals/2b/7f/5f/2b7f5ffe1bc9a2611d0e25900bb217e4.jpg" height="200px">
----
-template: t_mittens
-subject: Warm woolen mittens
-content: |
-  <img src="https://www.woolblankets.ca/media/catalog/product/cache/1/image/600x600/9df78eab33525d08d6e5fb8d27136e95/e/k/eksharad-gra-wool-mittens-canada-1.jpg" height="200px">
----
-template: t_packages
-subject: Brown paper packages tied up with strings
-content: |
-  <img src="https://i.pinimg.com/originals/e2/5a/31/e25a3122da9a3936b10d3be36de14c0b.jpg" height="200px">
----
-# This template requires error_subject and error_content to be set before it's
-# called. Otherwise we'll get an error
-template: t_error
-subject: |
-  ${error_subject}
-content: |
-  ${error_content}
----
-```
+<details>
+<summary>
+`cw4c_main.yml`
+</summary>
+<CW4cExerciseMain />
+</details>
 
 <details>
 <summary>
-Solution Code
+`cw4c_code.yml`
 </summary>
-### `cw4c_main.yml`
-```yml
-# Coding Exercise 4c
-#
-# Displaying a list of templates
----
-include:
-  - cw4c_code.yml
-  - cw4c_questions.yml
-  - cw4c_templates.yml
----
-# Our welcome screen
-mandatory: True
-question: Coding Workshop 4b
-subquestion: |
-  In this exercise we look at a `checkboxes` data type and use iteration
-  to display each element in our variable.
+<CW4cExerciseCode />
+</details>
 
-  Checkboxes are dictionaries.  Each checkbox item is the key and the value of
-  each item is `True` or `False` depening on whether that item has been checked or not.
+<details>
+<summary>
+`cw4c_questions.yml`
+</summary>
+<CW4cSolutionQuestions />
+</details>
 
-  Even though a checkbox is a dictionary, we can still treat it as a list by iterating
-  over its keys.
-buttons:
-  - Continue: continue
----
-# Our mandatory code block. It just calls the final screen
-mandatory: True
-code: |
-  final_screen
----
-# Our final screen
-event: final_screen
-question: Final Screen
-subquestion: |
-  Display each favourite thing
+<details>
+<summary>
+`cw4c_templates.yml`
+</summary>
+<CW4cSolutionTemplates />
+</details>
 
-  % for item in template_list:
-  #### ${item.subject}
-  ${item}
-  % endfor
-buttons:
-  - Exit: exit
-  - Restart: restart
----
-```
-### `cw4c_code.yml`
-```yml
-# Coding Exercise 4c
-#
-# Displaying a list of templates
----
-objects:
-  - template_list: DAList.using(auto_gather=False)
----
-code: |
-  template_list.clear()
-  # We iterate over all of the favourite things
-  for item in favourite_things.keys():
-    # First we check if this favourite thing is selected
-    if favourite_things[item]:
-      # If it is selected we add the appropriate template to template_list
-      if item == 'raindrops':
-        template_list.append(t_raindrops)
-      elif item == 'kittens':
-        template_list.append(t_kittens)
-      elif item == 'kettles':
-        template_list.append(t_kettles)
-      elif item == 'mittens':
-        template_list.append(t_mittens)
-      elif item == 'packages':
-        template_list.append(t_packages)
-      else:
-        error_subject = 'Unknown item'
-        error_content = 'Do not have a template for item: `{}`'.format(item)
-        template_list.append(t_error)
+## Solution Code
+<details>
+<summary>
+`cw4c_main.yml`
+</summary>
+<CW4cSolutionMain />
+</details>
 
-  template_list.gathered = True
----
-```
-### `cw4c_questions.yml`
-```yml
----
-question: Things you like
-fields:
-  - What are a few of your favourite things?: favourite_things
-    datatype: checkboxes
-    choices:
-      - Raindrops on roses: raindrops
-      - Whiskers on kittens: kittens
-      - Bright copper kettles: kettles
-      - Warm woollen mittens: mittens
-      - Brown paper packages tied up with strings: packages
----
-```
-### `cw4c_templates.yml`
-```yml
-# Each of these templates downloads an image from the internet and sizes it to
-# be 200 pixels tall. This is not part of your course and you don't need to 
-# know how this works. I just thought displaying pictures was less boring than
-# displaying text - MJF
----
-template: t_raindrops
-subject: Raindrops on roses
-content: |
-  <img src="https://i.pinimg.com/originals/ff/94/99/ff9499300b6b09c000d6553f3ce686c9.jpg" height="200px">
----
-template: t_kittens
-subject: Whiskers on kittens
-content: |
-  <img src="https://i.pinimg.com/736x/78/0e/d5/780ed526f1b2234971534827c9788cb8.jpg" height="200px">
----
-template: t_kettles
-subject: Bright copper kettles
-content: |
-  <img src="https://i.pinimg.com/originals/2b/7f/5f/2b7f5ffe1bc9a2611d0e25900bb217e4.jpg" height="200px">
----
-template: t_mittens
-subject: Warm woolen mittens
-content: |
-  <img src="https://www.woolblankets.ca/media/catalog/product/cache/1/image/600x600/9df78eab33525d08d6e5fb8d27136e95/e/k/eksharad-gra-wool-mittens-canada-1.jpg" height="200px">
----
-template: t_packages
-subject: Brown paper packages tied up with strings
-content: |
-  <img src="https://i.pinimg.com/originals/e2/5a/31/e25a3122da9a3936b10d3be36de14c0b.jpg" height="200px">
----
-# This template requires error_subject and error_content to be set before it's
-# called. Otherwise we'll get an error
-template: t_error
-subject: |
-  ${error_subject}
-content: |
-  ${error_content}
----
-```
+<details>
+<summary>
+`cw4c_code.yml`
+</summary>
+<CW4cSolutionCode />
+</details>
+
+<details>
+<summary>
+`cw4c_questions`
+</summary>
+<CW4cSolutionQuestions />
+</details>
+
+<details>
+<summary>
+`cw4c_templates`
+</summary>
+<CW4cSolutionTemplates />
 </details>

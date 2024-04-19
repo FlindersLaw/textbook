@@ -1,0 +1,40 @@
+```yml
+# Each of these templates downloads an image from the internet and sizes it to
+# be 200 pixels tall. This is not part of your course and you don't need to 
+# know how this works. I just thought displaying pictures was less boring than
+# displaying text - MJF
+---
+template: t_raindrops
+subject: Raindrops on roses
+content: |
+  <img src="https://i.pinimg.com/originals/ff/94/99/ff9499300b6b09c000d6553f3ce686c9.jpg" height="200px">
+---
+template: t_kittens
+subject: Whiskers on kittens
+content: |
+  <img src="https://i.pinimg.com/736x/78/0e/d5/780ed526f1b2234971534827c9788cb8.jpg" height="200px">
+---
+template: t_kettles
+subject: Bright copper kettles
+content: |
+  <img src="https://i.pinimg.com/originals/2b/7f/5f/2b7f5ffe1bc9a2611d0e25900bb217e4.jpg" height="200px">
+---
+template: t_mittens
+subject: Warm woolen mittens
+content: |
+  <img src="https://www.woolblankets.ca/media/catalog/product/cache/1/image/600x600/9df78eab33525d08d6e5fb8d27136e95/e/k/eksharad-gra-wool-mittens-canada-1.jpg" height="200px">
+---
+template: t_packages
+subject: Brown paper packages tied up with strings
+content: |
+  <img src="https://i.pinimg.com/originals/e2/5a/31/e25a3122da9a3936b10d3be36de14c0b.jpg" height="200px">
+---
+# This template requires error_subject and error_content to be set before it's
+# called. Otherwise we'll get an error
+template: t_error
+subject: |
+  ${error_subject}
+content: |
+  ${error_content}
+---
+```

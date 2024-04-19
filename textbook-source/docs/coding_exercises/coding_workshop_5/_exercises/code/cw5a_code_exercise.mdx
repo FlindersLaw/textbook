@@ -1,45 +1,42 @@
 ```
 ---
-objects:
-  - template_list: DAList.using(auto_gather=False)
----
 code: |
-  template_list.clear()
+  temp = []
   # We iterate over all of the favourite things
   for item in favourite_things.keys():
     # First we check if this favourite thing is selected
     if favourite_things[item]:
-      # If it is selected we add the appropriate template to template_list
-      if item == 'raindrops':
-        template_list.append(t_raindrops)
+      # If it is selected we add the appropriate template to temp
+      if item == 'a_raindrops':
+        temp.append(t_raindrops)
 
-      elif item == 'kittens':
+      elif item == 'b_kittens':
         # We need to process our followup question here
         # Use an if/elif statement to process each possible answer
         # to whiskers_followup and append the appropriate template
         # (the templates have been completed for you)
         if whiskers_followup == 'kittens':
-          template_list.append(t_kittens)
+          temp.append(t_kittens)
         # the elif statements go in here
 
         # This is our catchall in case we get an error 
         else:
           error_subject = 'Unknown answer'
           error_content = 'Do not have a template for `whiskers_followup`: `{}`'.format(whiskers_followup)
-          template_list.append(t_error)
-      
-      # Now we get onto the rest of the elifs
-      elif item == 'kettles':
-        template_list.append(t_kettles)
-      elif item == 'mittens':
-        template_list.append(t_mittens)
-      elif item == 'packages':
-        template_list.append(t_packages)
+          temp.append(t_error)
+
+      # Now we get onto the rest of the favourite things elifs
+      elif item == 'c_kettles':
+        temp.append(t_kettles)
+      elif item == 'd_mittens':
+        temp.append(t_mittens)
+      elif item == 'e_packages':
+        temp.append(t_packages)
       else:
         error_subject = 'Unknown item'
         error_content = 'Do not have a template for item: `{}`'.format(item)
-        template_list.append(t_error)
+        temp.append(t_error)
 
-  template_list.gathered = True
+  template_list = temp
 ---
 ```
