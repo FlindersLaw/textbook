@@ -1,0 +1,39 @@
+```yml
+# Coding Exercise 5a
+#
+# Asking followup questions
+---
+include:
+  - cw5a_code.yml
+  - cw5a_questions.yml
+  - cw5a_templates.yml
+---
+# Our welcome screen
+mandatory: True
+question: Coding Workshop 5a
+subquestion: |
+  This exercise builds on Coding Workshop 4.  In this particular
+  exercise we ask followup questions to our original
+  'Favourite Things' question and we implement them two different ways.
+buttons:
+  - Continue: continue
+---
+# Our mandatory code block. It just calls the final screen
+mandatory: True
+code: |
+  final_screen
+---
+# Our final screen
+event: final_screen
+question: Your Favourite Things
+subquestion: |
+
+  % for item in template_list:
+  #### ${item.subject}
+  ${item}
+  % endfor
+buttons:
+  - Exit: exit
+  - Restart: restart
+---
+```

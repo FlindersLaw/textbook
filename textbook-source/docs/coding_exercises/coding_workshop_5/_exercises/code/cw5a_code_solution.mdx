@@ -1,0 +1,44 @@
+```
+---
+objects:
+  - template_list: DAList.using(auto_gather=False)
+---
+code: |
+  template_list.clear()
+  # We iterate over all of the favourite things
+  for item in favourite_things.keys():
+    # First we check if this favourite thing is selected
+    if favourite_things[item]:
+      # If it is selected we add the appropriate template to template_list
+      if item == 'raindrops':
+        template_list.append(t_raindrops)
+
+      # We have a followup question if we like whiskers on kittens
+      elif item == 'kittens':
+        if whiskers_followup == 'kittens':
+          template_list.append(t_kittens)
+        elif whiskers_followup == 'chinchilla':
+          template_list.append(t_chinchilla)
+        elif whiskers_followup == 'elephant':
+          template_list.append(t_elephant)
+        elif whiskers_followup == 'catfish':
+          template_list.append(t_catfish)
+        else:
+          error_subject = 'Unknown whiskers followup'
+          error_content = 'Do not have a template for followup: `{}`'.format(whiskers_followup)
+
+      # Now we get onto the rest of the elifs
+      elif item == 'kettles':
+        template_list.append(t_kettles)
+      elif item == 'mittens':
+        template_list.append(t_mittens)
+      elif item == 'packages':
+        template_list.append(t_packages)
+      else:
+        error_subject = 'Unknown item'
+        error_content = 'Do not have a template for item: `{}`'.format(item)
+        template_list.append(t_error)
+
+  template_list.gathered = True
+---
+```

@@ -1,0 +1,95 @@
+import {DisplayGlossaryItem} from '@site/src/components';
+import {DisplayImage} from '@site/src/components';
+import * as Ex4c from '../_exercises/cw5a.mdx'
+import Ref from './cw5a_references.mdx';
+
+import CW5aMain from './code/cw5a_main.mdx';
+import CW5aCode from './code/cw5a_code.mdx';
+import CW5aCodeSolution from './code/cw5a_code_solution.mdx';
+import CW5aQuestions from './code/cw5a_questions.mdx';
+import CW5aTemplates from './code/cw5a_templates.mdx';
+import CW5aTemplatesSolution from './code/cw5a_templates_solution.mdx';
+
+export const title = 'Exercise 4d'
+export const video = <Ref />
+
+## Background
+In this exercise we're going to take the code from [Exercise 4c](../../coding_workshop_4/cw4c.mdx) from
+[Coding Workshop 4](../../coding_workshop_4/) and build on it so that we ask followup questions.
+
+We're going to ask two questions and we're going to implement them in two different ways.  Both ways are equally valid and have their (slight) advantages and disadvantages, as we'll discuss in class.
+
+#### Whiskers on Kittens
+It may be that many people like whiskers but not on kittens.  We're going to add some other animals on which people might like whiskers.  If people select 'Whiskers on Kittens' they'll be asked a followup question confirming which animal they *really* like whiskers on.
+
+We'll implement this followup question using a nested `if/elif` statement, much like how we did in
+[Coding Workshop 3](../../coding_workshop_3/).
+
+#### Warm Woolen Mittens
+Again, we want to give people choice.  If a user selects 'Warm Woolen Mittens' we want to ask a followup question so we can determine what colour they'd prefer their warm woolen mittens to be.
+
+We'll implement this followup question directly in the `t_mittens` template.
+
+## Steps
+1. Make a new Playground [Project](/docs/recipes/making_a_project) called `CodingWorkshop5`
+1. Copy the [example code](#code) below into files in your `CodingWorkshop5` playground. The file names must **match exactly*..
+1. Complete the code in `cw4c_code.yml` so that all the templates are part of the `if/elif` statement.
+1. Update `final_screen` to display `template_list`
+
+## Code
+<details>
+<summary>
+`cw5a_main.yml`
+</summary>
+<CW5aMain />
+</details>
+
+<details>
+<summary>
+`cw5a_code.yml`
+</summary>
+<CW5aCode />
+</details>
+
+<details>
+<summary>
+`cw5a_questions.yml`
+</summary>
+<CW5aQuestions />
+</details>
+
+<details>
+<summary>
+`cw5a_templates.yml`
+</summary>
+<CW5aTemplates />
+</details>
+
+## Solution Code
+<details>
+<summary>
+`cw5a_main.yml`
+</summary>
+<CW5aMain />
+</details>
+
+<details>
+<summary>
+`cw5a_code.yml`
+</summary>
+<CW5aCodeSolution />
+</details>
+
+<details>
+<summary>
+`cw5a_questions.yml`
+</summary>
+<CW5aQuestions />
+</details>
+
+<details>
+<summary>
+`cw5a_templates.yml`
+</summary>
+<CW5aTemplatesSolution />
+</details>
