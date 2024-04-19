@@ -1,0 +1,74 @@
+```yml
+---
+question: Your Query
+subquestion: |
+  This app provides information on pilot logbooks, recording time
+  and charging passengers.
+
+  To request information please select from the list below.  You may
+  select more than one query.
+fields:
+  - I have a question about: ABInformation
+    datatype: radio
+    choices:
+      - My pilot's logbook: logbook
+      - Recording flight time as a pilot in command: flighttime
+      - Charging passengers: pax
+---
+question: Logbook Enquiry
+subquestion: |
+  You have requested information about your pilot's logbook.
+
+  CASR Part 61.D regulates the use, retention and data that
+  must be contained in pilot logbooks.
+
+  Select your enquiry from the choices below:
+fields:
+  - no label: logbook_query
+    datatype: radio
+    choices:
+      - What information must I keep in my logbook?: logbook_info
+      - How long must I keep my old logbook for?: logbook_retention
+      - Can I keep my logbook online?: logbook_online
+---
+question: Your online logbook
+subquestion: |
+  Any pilot's logbook must comply with CASR Part 61 regarding 
+  the retention, certification and alteration of logbook entries.
+
+  CASR regulations mean ath spreadsheet tools such as Microsoft Excel and
+  Google Sheets **are not valid online logbooks**.
+
+  This last regulation means that logbooks kept in software such as Microsoft Excel
+  or Google Sheets **are not valid online logbooks** as entries can be altered after
+  they are made.
+
+  If you are already using an online logbook then check the relevant checkboxes below to
+  determine if your logbook may meet the relevant CASRs.  If you are not using an
+  online logbook press **Continue** to be provided information about the relevant
+  CASRs.
+fields:
+  - My online logbook: logbook_online_valid
+    datatype: checkboxes
+    choices:
+      - Ensures I cannot change an entry after I have made it, or keeps an audit trail of all the changes made (CASR r 61.355(2)(b))
+      - Allows me to produce a printed copy of my logbook (CASR r 61.365(3)(a))
+      - Includes on each printed page a certification that I and a certifier can sign (CASR r 61.365(3)(b))
+    none of the above: False
+---
+question: Charging Passengers
+subquestion: |
+  You have asked if you can charge passengers that you carry on your flights.
+
+  The regulations for charging passengers depend on the licence you hold.  Please
+  select your licence from the list below.
+fields:
+  - no label: pax_licence
+    datatype: radio
+    choices:
+      - Recreational Pilot Certificate: rpc
+      - Recreational Pilot Licence: rpl
+      - Private Pilot Licence: ppl
+      - Commercial Pilot Licence: cpl
+---
+```

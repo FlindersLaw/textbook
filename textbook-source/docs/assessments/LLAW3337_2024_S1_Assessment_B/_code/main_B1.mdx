@@ -1,0 +1,81 @@
+```yml
+# Assessment B code but modified for B1 (ask a single question only)
+---
+include:
+  - questions_B1.yml
+  - templates_B1.yml
+---
+mandatory: True
+question: Ross and Keith Smith Aviation Law<
+subquestion: |
+  Welcome to Ross and Keith Smith Aviation Law's Aviation Enquiry Tool.
+
+  We get quite a few enquiries from pilots about matters to do with their
+  logbooks, logging time and how much they can charge their passengers.
+
+  This app allows you to navigate these questions yourself and provide you
+  with some immediate assistance without necessarily needing to book time
+  with us.
+
+  **Disclaimer:**
+
+  This app **is not** a substitute for providing legal advice.  It is a means
+  to give you some information and refer you to the relevant legislation.  If
+  you need advice on these matters please contact us to make an appointment.
+
+  By pressing **I Agree** below you agree that you are not seeking legal advice.
+buttons:
+  - I Agree: continue
+  - Exit: exit
+  - Restart: restart
+---
+# Drives the app
+mandatory: True
+code: |
+  # Process each of the radio button values here
+  # store the result in display_answer which we can then
+  # pass to the final screen.  This way we don't need to 
+  # create eight different screens all with the same buttons.
+
+  # Logbook category
+  if ABInformation == 'logbook':
+    if logbook_query == 'logbook_info':
+      display_answer = logbook_info
+    elif logbook_query == 'logbook_retention':
+      display_answer = logbook_retention
+    elif logbook_query == 'logbook_online':
+      display_answer = logbook_online
+    else:
+      display_answer = 'ERROR: unknown value for `logbook_query`: `{}`'.format(logbook_query)
+
+  # Logging time
+  elif ABInformation == 'flighttime':
+    display_answer = time_answer
+  
+  # Charging passengers
+  elif ABInformation == 'pax':
+    if pax_licence == 'rpc':
+      display_answer = pax_rpc
+    elif pax_licence == 'rpl' or pax_licence == 'ppl':
+      display_answer = pax_rpl_ppl
+    elif pax_licence == 'cpl':
+      display_answer = pax_cpl
+    else:
+      display_answer = 'ERROR: unknown value for `pax`: `{}`'.format(pax)
+  
+  # Catchall - we should never get here
+  else:
+    display_answer = 'ERROR: unknown value for `ABInformation`: `{}`'.format(ABInformation)
+
+  # Display on final screen
+  final_screen
+---
+event: final_screen
+question: ${display_answer.subject}
+subquestion: |
+  ${display_answer}
+buttons:
+  - Exit: exit
+  - Restart: restart
+---
+```
