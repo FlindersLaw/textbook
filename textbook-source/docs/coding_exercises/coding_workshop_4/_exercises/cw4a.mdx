@@ -1,6 +1,8 @@
 import {DisplayGlossaryItem} from '@site/src/components';
 import {DisplayImage} from '@site/src/components';
 import Ref from './cw4a_references.mdx';
+import CW4aExercise from './code/cw4a_exercise.mdx';
+import CW4aSolution from './code/cw4a_solution.mdx';
 
 export const title = 'Exercise 4a'
 export const video = <Ref />
@@ -38,123 +40,11 @@ That is, you should display the list so that the output of the list looks someth
 ## Code
 Copy this code into your playground as a starting point for this exercise.
 
-```yml
-# Coding Exercise 4a
-#
-# Introducing Iteration with DAList()
----
-# This is an 'object declaration' We're telling Docassemble
-# we want the variable display_list to be a 'DAList' (which is
-# basically just a list). Don't worry about the details of how this
-# works for now. Just accept we need this object declaration so we
-# can use lists.
-objects:
-  - display_list: DAList.using(auto_gather=False)
----
-# Our welcome screen
-mandatory: True
-question: Coding Workshop 4a
-subquestion: |
-  In this exercise we look at a list data type and use iteration
-  to display the elements in the list
-buttons:
-  - Continue: continue
----
-# Our mandatory code block. It just calls the final screen
-mandatory: True
-code: |
-  final_screen
----
-# Our final screen
-event: final_screen
-question: Final Screen
-subquestion: |
-  Display the names in `display_list` as a bullet list.
+<CW4aExercise />
 
-  ${display_list}
-buttons:
-  - Exit: exit
-  - Restart: restart
----
-# This code block defines the list with the 
-# items to display
-code: |
-  # Always clear our the list before you start work
-  # on it in a code block
-  display_list.clear()
-
-  # Add the data
-  # Use display_list.append() statements to add data here
-  display_list.append('Ida Noe')
-
-  # Finish by setting gathered to True
-  display_list.gathered = True
----
-```
 <details>
 <summary>
 Solution Code
 </summary>
-```yml
-# Coding Exercise 4a
-#
-# Introducing Iteration with DAList()
----
-# This is an 'object declaration' We're telling Docassemble
-# we want the variable display_list to be a 'DAList' (which is
-# basically just a list). Don't worry about the details of how this
-# works for now. Just accept we need this object declaration so we
-# can use lists.
-objects:
-  - display_list: DAList.using(auto_gather=False)
----
-# Our welcome screen
-mandatory: True
-question: Coding Workshop 4a
-subquestion: |
-  In this exercise we look at a list data type and use iteration
-  to display the elements in the list
-buttons:
-  - Continue: continue
----
-# Our mandatory code block. It just calls the final screen
-mandatory: True
-code: |
-  final_screen
----
-# Our final screen
-event: final_screen
-question: Final Screen
-subquestion: |
-  Display the names in `display_list` as a bullet list.
-
-  % for item in display_list:
-  * ${item}
-  % endfor
-buttons:
-  - Exit: exit
-  - Restart: restart
----
-# This code block defines the list with the 
-# items to display
-code: |
-  # Always clear our the list before you start work
-  # on it in a code block
-  display_list.clear()
-
-  # Add the data
-  display_list.append('Ida Noe')
-  display_list.append('Hugo First'),
-  display_list.append('Moda Lawn'),
-  display_list.append('Kate Jupp'),
-  display_list.append('Ayfor Gott'),
-  display_list.append('Justin Thyme'),
-  display_list.append('Ray Member'),
-  display_list.append('Studie Harde'),
-  display_list.append('Slacke Hearse')
-
-  # Finish by setting gathered to True
-  display_list.gathered = True
----
-```
+<CW4aSolution />
 </details>

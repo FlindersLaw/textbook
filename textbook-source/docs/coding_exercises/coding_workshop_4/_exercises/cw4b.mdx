@@ -1,6 +1,8 @@
 import {DisplayGlossaryItem} from '@site/src/components';
 import {DisplayImage} from '@site/src/components';
 import Ref from './cw4b_references.mdx';
+import CW4bExercise from './code/cw4b_exercise.mdx';
+import CW4bSolution from './code/cw4b_solution.mdx';
 
 export const title = 'Exercise 4b'
 export const video = <Ref />
@@ -37,107 +39,10 @@ You need to display the dictionary key (which is the text) and the dictionary va
 ## Code
 Copy this code into your playground as a starting point for this exercise.
 
-```yml
-# Coding Exercise 4b
-#
-# Iteration and dictionaries
----
-# Our welcome screen
-mandatory: True
-question: Coding Workshop 4b
-subquestion: |
-  In this exercise we look at a `checkboxes` data type and use iteration
-  to display each element in our variable.
-
-  Checkboxes are dictionaries.  Each checkbox item is the key and the value of
-  each item is `True` or `False` depening on whether that item has been checked or not.
-
-  Even though a checkbox is a dictionary, we can still treat it as a list by iterating
-  over its keys.
-buttons:
-  - Continue: continue
----
-# Our mandatory code block. It just calls the final screen
-mandatory: True
-code: |
-  final_screen
----
-# Our final screen
-event: final_screen
-question: Final Screen
-subquestion: |
-  Display the names in `favourite_things` in a table.
-
-  Checkbox Item|Selected?
-  ---|---
-  ${favourite_things}
-buttons:
-  - Exit: exit
-  - Restart: restart
----
-question: Things you like
-fields:
-  - What are a few of your favourite things?: favourite_things
-    datatype: checkboxes
-    choices:
-      - First Choice
-      - Second Choice
----
-```
+<CW4bExercise />
 <details>
 <summary>
 Solution Code
 </summary>
-```yml
-# Coding Exercise 4b
-#
-# Iteration and dictionaries
----
-# Our welcome screen
-mandatory: True
-question: Coding Workshop 4b
-subquestion: |
-  In this exercise we look at a `checkboxes` data type and use iteration
-  to display each element in our variable.
-
-  Checkboxes are dictionaries.  Each checkbox item is the key and the value of
-  each item is `True` or `False` depening on whether that item has been checked or not.
-
-  Even though a checkbox is a dictionary, we can still treat it as a list by iterating
-  over its keys.
-buttons:
-  - Continue: continue
----
-# Our mandatory code block. It just calls the final screen
-mandatory: True
-code: |
-  final_screen
----
-# Our final screen
-event: final_screen
-question: Final Screen
-subquestion: |
-  Display the names in `favourite_things` in a table.
-
-  Checkbox Item|Selected?
-  ---|---
-  % for item in favourite_things.items():
-  ${item}|${favourite_things[item]}
-  % endfor
-buttons:
-  - Exit: exit
-  - Restart: restart
----
-question: Things you like
-fields:
-  - What are a few of your favourite things?: favourite_things
-    datatype: checkboxes
-    choices:
-      - Raindrops on roses
-      - Whiskers on kittens
-      - Bright copper kettles
-      - Warm woollen mittens
-      - Brown paper packages tied up with strings
----
-```
+<CW4bSolution />
 </details>
