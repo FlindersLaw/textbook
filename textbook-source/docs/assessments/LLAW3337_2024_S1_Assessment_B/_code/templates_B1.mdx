@@ -1,0 +1,170 @@
+```yml
+---
+template: time_answer
+subject: Logging Flight Time
+content: |
+  Flight time should be logged from the time your aircraft commences taxiing for
+  the purposes of going flying, until the time your aircraft returns to the apron and is shut down.
+
+  CASR r 61.345(3)(f) requires a pilot to log 'flight time' in their logbook.
+  The definition of 'flight time' is in regulation 61.090 which, for pilots, refers to 
+  reg 61.080.  Regulation 61.080 defines flight time for a pilot as the 'duration' of certain
+  flights.
+  
+  The term 'duration' is defined in reg 61.010, and for a flight in an aeroplane means
+  'the time from the moment the aircraft begins moving...in preparation for flight...until the
+  moment it comes to rest at the end of the flight'.
+
+---
+template: logbook_info
+subject: Logbooks - Information that must be kept in your pilot's logbook
+content: |
+  CASR regulations 61.345(2) and (3) set out what must be recorded in a pilot's logbook.
+  
+  You must include:
+
+  * Your full name and date of birth;
+  * the date the flight began;
+  * the type of aircraft, its registration and whether it is single or multi-engine
+  * take-off and landing points for the flight and each segment of the flight
+  * the flight time
+  * whether the flight was a daytime or night-time flight, or both;
+  * any instrument time; and
+  * any instrument approaches conducted.
+
+  This is not a comprehensive list but serves as a summary of the requirements.  The requirements
+  for actual flights and also flights conducted in an approved simulator are set out in
+  regs 61.345(3) and 61.345(4) respectively.
+
+  Non-compliance with reg 61.345 makes a pilot liable for a 50 penalty unit fine, amounting
+  to $13,750 at the time this information was written.
+---
+template: logbook_retention
+subject: Logbooks - Retaining your old pilot's logbooks
+content: |
+  Paper logbooks must be retained for **7 years** after the date of the last entry
+  in the logbook (CASR r 31.355(b)).  The CASRs do not specifically mention retention
+  periods for online logbook entries.
+
+  A pilot is liable for a 50 penalty unit fine ($13,750 at time of writing) for not properly
+  retaining old logbooks
+---
+template: logbook_online
+subject: Logbooks - Keeping an online logbook
+content: | 
+  A pilot's logbook must comply with CASR regulations 61.345, 61.355,
+  61.360 and 61.365.  Online logbooks
+  must meet the same criteria as paper logbooks but must also meet the 
+  additional requirements set out in CASR r 61.365(3).  Specifically:
+
+  - the logbook holder must be able to print a copy of the logbook (CASR r 61.365(3)(a)); and
+  - each printed page must be certified by the logbook holder (CASR r 61.365(3)(b)).
+
+  In addition, CASR reg 61.355(2)(b) states that logbook entries cannot be altered.  This is
+  a particular challenge for pilots keeping their logbooks online.  This regulation means
+  that logbooks kept in software such as Microsoft Excel
+  or Google Sheets **are not valid online logbooks** as entries can be altered.
+
+  There are commercial logbook providers, such as
+  [lockr.aero](https://lockr.aero), [BreezyLog](https://breezylog.com) and
+  [MyFlightBook](https://myflightbook.com) that you can subscribe to.  However,
+  before doing so you should confirm with the provider that they meet the
+  relevant CASRs. The liability for logbook compliance rests with you, not
+  the provider.
+
+  Not properly keeping an online logbook exposes the holder to a fine of
+  50 penalty units, or $13,750 at the time of writing.
+---
+template: pax_rpc
+subject: Charging Passengers (RPC)
+content: |
+  An RPC holder should **not** seek any form of payment, in cash or otherwise,
+  for carrying a passenger or cargo on a flight.
+
+  A Recreational Pilot's Certificate is limited by Civil Aviation Order 95.55,
+  which sets the legislative framework for light sport aircraft (**LSA**) and their 
+  governance by Recreational Aviation Australia Limited (**RAAus**).
+
+  Order 8.3 of CAO 95.55 states that a LSA cannot be used to carry passengers or cargo
+  for 'hire or reward'.  This phrase 'hire and reward' has been determined by a court 
+  to have a very broad meaning and essentially means that a LSA pilot cannot ask for
+  any compensation, monetary or otherwise, for carrying a passenger.
+
+  This interpretation of 'hire or reward' prevents a LSA pilot from 'cost sharing' with a friend.  The pilot must
+  bear all the cost.  It also prevents a LSA pilot being compensated in some other
+  manner, for example, free accommodation in exchange for a flight.
+
+  Contravention of Order 8.3 may result in disciplinary action from CASA and/or RAAus.
+---
+template: pax_rpl_ppl
+subject: Charging Passengers (${rpl_ppl_short})
+content: |
+  If you hold a ${rpl_ppl_subject} then you may charge your passengers on a 
+  'cost sharing' basis only.
+  
+  ${rpl_ppl_casr} allows a ${rpl_ppl_pilot} to exercise their licence only when
+  conducting 'private operations'.  The CASR Dictionary defines private operations to
+  mean, amongst other things, any operation that would *not* require an AOC under Part 119.
+
+  Part 119 requires an AOC for any 'air transport operation' which is defined in Part
+  2 cl 3 of the CASR Dictionary and includes a 'passenger transport operation' carried
+  out for 'hire or reward'.  'Passenger transport operation'
+  is defined in Part 2 cl 75 of the CASR Dictionary and means essentially the carriage
+  of any passengers unless the carriage is on a 'cost-sharing flight' (CASR Dictionary cl 75(2)(b)).
+
+  Therefore, if a flight is a 'cost-sharing flight' then it is excluded from the defition of
+  'passenger transport operation' which excludes it from the definition of 'air transport operation'
+  which in turn excludes the flight from being subject to Part 119.  Consequently (and someone
+  convolutedly), a 'cost-sharing flight' is a 'private operation'.
+
+  The term 'cost-sharing flight' is also defined in the CASR Dictionary and it imposes these limitations:
+
+  * Not more than five passengers plus the pilot (ie: six in total) can be carried on the flight;
+  * the pilot is not paid for the flight; and
+  * the pilot pays for his or her proportion of the flight costs.
+
+  For example, if there were a total of five people on board the flight including the pilot,
+  the pilot must pay at least 20% of the cost of the flight.
+
+  **Note:** It is not a requirement that passengers also pay an equal portion.  It is only necessary
+  that the pilot pays his or her portion as per above.
+
+  In summary, this means that a ${rpl_ppl_pilot} *can* charge to carry passengers as long as the
+  pilot also pays his or her share.
+---
+template: pax_cpl
+subject: Charging Passengers (CPL)
+content: |
+  A commercial pilot may, subject to some conditions, charge for carrying passengers.
+
+  According to CASR r 61.570 a holder of a commercial pilot licence may, subject to some conditions
+  relating to multi-crew aircraft and flight experience set out in CASR 61.570(a)(i) - (iii), pilot
+  any aircraft in any operation.
+
+  In short, a commercial pilot may charge for carriage of passengers.  However, commercial pilots should
+  be aware of other requirements, including CASR Parts 119, 121, 135 and 137, which may impose other
+  requirements on commercial operations.
+---
+# Because the answers to the RPL and PPL questions are so similar I have written only
+# one template.  The parts of the answer that are different (ie: the licence name and
+# its abbreviations and the relevant CASR) are set here.
+#
+# This means I don't need to write two templates for what is substantially the same answer.
+code: |
+  if pax_licence == 'rpl':
+    rpl_ppl_subject = "Recreational Pilot's Licence"
+    rpl_ppl_pilot = 'recreational pilot'
+    rpl_ppl_short = 'RPL'
+    rpl_ppl_casr = 'CASR r 61.460(e)(i)'
+  elif pax_licence == 'ppl':
+    rpl_ppl_subject = "Private Pilot's Licence"
+    rpl_ppl_pilot = 'private pilot'
+    rpl_ppl_short = 'PPL'
+    rpl_ppl_casr = 'CASR r 61.505(a)'
+  else:
+    rpl_ppl_subject = "ERROR: Unknown value for pax_licence: {}".format(pax_licence)
+    rpl_ppl_pilot = rpl_ppl_subject
+    rpl_ppl_short = rpl_ppl_subject
+    rpl_ppl_casr = rpl_ppl_subject
+---
+```

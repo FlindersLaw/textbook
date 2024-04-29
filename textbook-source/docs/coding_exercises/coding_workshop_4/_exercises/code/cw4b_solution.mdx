@@ -1,0 +1,52 @@
+```yml
+# Coding Exercise 4b
+#
+# Iteration and dictionaries
+---
+# Our welcome screen
+mandatory: True
+question: Coding Workshop 4b
+subquestion: |
+  In this exercise we look at a `checkboxes` data type and use iteration
+  to display each element in our variable.
+
+  Checkboxes are dictionaries.  Each checkbox item is the key and the value of
+  each item is `True` or `False` depening on whether that item has been checked or not.
+
+  Even though a checkbox is a dictionary, we can still treat it as a list by iterating
+  over its keys.
+buttons:
+  - Continue: continue
+---
+# Our mandatory code block. It just calls the final screen
+mandatory: True
+code: |
+  final_screen
+---
+# Our final screen
+event: final_screen
+question: Final Screen
+subquestion: |
+  Display the names in `favourite_things` in a table.
+
+  Checkbox Item|Selected?
+  ---|---
+  % for item in favourite_things:
+  ${item}|${favourite_things[item]}
+  % endfor
+buttons:
+  - Exit: exit
+  - Restart: restart
+---
+question: Things you like
+fields:
+  - What are a few of your favourite things?: favourite_things
+    datatype: checkboxes
+    choices:
+      - Raindrops on roses
+      - Whiskers on kittens
+      - Bright copper kettles
+      - Warm woollen mittens
+      - Brown paper packages tied up with strings
+---
+```
