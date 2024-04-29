@@ -1,13 +1,115 @@
 import {DisplayGlossaryItem} from '@site/src/components';
 import {DisplayImage} from '@site/src/components';
 import Ref from './cw5b_references.mdx';
+import CW5bMainExercise from './code/cw5b_main_exercise.mdx';
+import CW5bMainSolution from './code/cw5b_main_solution.mdx';
+import CW5bTemplatesSolution from './code/cw5b_templates_solution.mdx';
 
 export const title = 'Exercise 5b'
 export const video = <Ref />
 
 ## Background
-In this exercise we're going to prepare an attachment
+In this exercise we're going to take the code from [Exercise 5a](cw5a) and modify it so the user can download their results as a PDF file if they choose.
 
-:::caution under construction
-We're still working on this one. Check back soon!
+In order for us to do this we need to use <DisplayGlossaryItem item='jinja' upper />.  Jinja is essentially like <DisplayGlossaryItem item='mako' upper />.
+Jinja and Mako serve a similar purpose, being to insert data into text.  They do the same thing but their syntax is different, as can be seen in this table:
+
+What we want to do|The Mako way|The Jinja way
+---|---|---
+Display the value of a variable|`${variable_name}`|`{{variable_name}}`
+Use if statements|`% if ....:`/`% elif .....:`/`% else:`/`% endif`|`{%p if....:%}`/`{%p elif....: %}`/`{%p else: %}`/`{%p endif %}`
+Use for loops|`% for ... in ...:`/`% endfor`|`{%p for ... in ...:%}`/`{%p endfor %}`
+
+In our <DisplayGlossaryItem item='subquestion' /> blocks we use Mako to format text. In a Word document we simply use Word formatting to format our text.  This has the benefit of using much more sophisticated formatting in our attachments than on our application screens.
+
+In this exercise we'll be bringing in data from our templates into the attachment.  That way, the same information the user sees on the screen will also be in the attachment.
+Our templates are formatted using Markdown.  
+By default Jinja will copy text over from a template as plain text.
+We need to instruct Jinja to display the text formatted. 
+To do this we use a [filter](https://docassemble.org/docs/documents.html#markdown%20to%20docx).  Specifically, we use the `inline_markdown` and `markdown` filters.
+
+:::note
+How Jinja filters work is beyond the scope of this topic. It's enough for you to keep the filters we already use in the document template in this exercise and not change them.
 :::
+
+In addition to Jinja we also need to upload some images to our app. Our [Coding Workshop 4](../coding_workshop_4) code displayed images off the internet.  Jinja doesn't support this, so we to download those images and upload them directly into the app.  Images are uploaded into the `Static Files` folder in your Project.
+
+Finally, we'll also need to upload our document template. A boilerplate template has been provided for you to modify. You'll need to upload the template into the `Templates` folder in your project.
+
+:::note
+One really annoying thing about Docassemble is that you can't edit your template after you've uploaded it.
+Therefore, it's best to keep a local copy of the template somewhere handy on your laptop.
+Edit that local copy and upload it to `Templates` each time you make a change.
+:::
+
+## Steps
+#### Preparation
+1. You should already have a project called `CodingWorkshop5` in your Playground
+1. Upload the solution code from [Exercise 5a](cw5a) into `CodingWorkshop5`.
+1. Upload the [Code](#code) below.  Make sure you keep the file names the same.
+1. Upload each of these images into `Static Files` in your Project
+    * [`catfish.jpg`](/img/coding_exercises/cw5b/catfish.jpg)
+    * [`chinchilla.jpg`](/img/coding_exercises/cw5b/chinchilla.jpg)
+    * [`elephant.jpg`](/img/coding_exercises/cw5b/elephant.jpg)
+    * [`kettle.jpg`](/img/coding_exercises/cw5b/kettle.jpg)
+    * [`kittens.jpg`](/img/coding_exercises/cw5b/kittens.jpg)
+    * [`mittens_blue.jpg`](/img/coding_exercises/cw5b/mittens_blue.jpg)
+    * [`mittens_pink.jpg`](/img/coding_exercises/cw5b/mittens_pink.jpg)
+    * [`mittens_red.jpg`](/img/coding_exercises/cw5b/mittens_red.jpg)
+    * [`mittens_yellow.jpg`](/img/coding_exercises/cw5b/mittens_yellow.jpg)
+    * [`packages.jpg`](/img/coding_exercises/cw5b/packages.jpg)
+    * [`raindrops.jpg`](/img/coding_exercises/cw5b/raindrops.jpg)
+1. Upload [`cw5b_exercise.docx`](/templates/cw5b_exercise.docx) to the `Templates` folder in your Playground.
+
+:::note
+Your exercise program **will not run** until you have completed all the above steps.
+:::
+#### Task
+Once the prerequiste steps are completed you'll have a working program but you'll see that, regardless of which favourite things you select, only the raindrops are displayed in the PDF.
+
+Your task is to modify the document template to contain a loop that displays all the selected templates.
+
+:::tip hints
+1. You'll need to use a `for` loop
+1. The structure of the `for` loop will be very similar to the `for` loop in your `final_screen`
+1. But, you need to modify the syntax from Mako to Jina.  See the above table for direction.
+:::
+
+## Code
+:::caution
+Remember that this exercise also requires:
+1. the solution code from [Exercise 5a](cw5a); and
+1. that the [preparation](#preparation) is complete.
+:::
+<details>
+<summary>
+`cw5b_main_exercise.yml`
+</summary>
+<CW5bMainExercise />
+</details>
+<details>
+<summary>
+`cw5b_templates_solution.yml`
+</summary>
+<CW5bTemplatesSolution />
+</details>
+
+## Solution code
+<details>
+<summary>
+`cw5b_main_solution.yml`
+</summary>
+<CW5bMainSolution />
+</details>
+<details>
+<summary>
+`cw5b_templates_solution.yml`
+</summary>
+<CW5bTemplatesSolution />
+</details>
+<details>
+<summary>
+`cw5b_solution.docx`
+</summary>
+Download [`cw5b_solution.docx`](/templates/cw5b_solution.docx)
+</details>
