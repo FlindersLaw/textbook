@@ -11,7 +11,7 @@ include:
 ---
 # Our welcome screen
 mandatory: True
-question: Coding Workshop 5a
+question: Coding Workshop 5
 subquestion: |
   This exercise builds on Coding Workshop 4.  In this particular
   exercise we ask followup questions to our original
@@ -29,10 +29,14 @@ event: final_screen
 question: Your Favourite Things
 subquestion: |
 
-  % for item in template_list:
+  % if len(template_list) != 0:
+    % for item in template_list:
   #### ${item.subject}
   ${item}
-  % endfor
+    % endfor
+  % else:
+  You do not seem to like anything.
+  % endif
 attachments:
   - docx template file: cw5b_solution.docx
     name: Your Favourite Things
