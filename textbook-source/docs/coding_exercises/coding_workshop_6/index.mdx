@@ -1,12 +1,54 @@
 ---
 title: Coding Workshop 6
 ---
-:::caution
-To be completed
-:::
+import {DisplayChapter} from '@site/src/components';
+import {DisplayImage} from '@site/src/components';
+import {DisplayDAButtons} from '@site/src/components';
+import {da_restart_prop} from '@site/src/constants';
 
-Coding workshop 6 will focus on styling ie:
-- displaying images
-- changing fonts
-- setting colours of elements
-- creating custom CSS styles to display content
+In this workshop we're going to look at how to make our app beautiful.
+
+Styling of apps is managed through *Cascading Style Sheets* or CSS.
+CSS is the industry standard when it comes to setting out the layout, fonts, colours, images and anythhing to do with the appearance of a web app.
+
+## Pre-reading
+* <DisplayChapter chapter='chapter_07' />
+
+## Background
+Chapter 7 describes how to style a Docassemble app.  It provides a great starting point for us as all Docassemble apps contain the same standard elements to style.  So, we can take the
+Chapter 7 <DisplayChapter chapter='chapter_07' pinpoint='00-30' text='solution code' />, or at least the `styles.css` file, and add it to our existing code.  That gives us a fully styled app that we can work on.
+
+We are going to work in our `CodingWorkshop5` Project.  We will use the code from [Exercise 5b](../coding_workshop_5/cw5b) and work from there.
+
+## Steps
+### Let's get ready
+1. Go to your `CodingWorkshop5` project
+1. Copy <DisplayChapter chapter='chapter_07' pinpoint='00-30#stylescss' text='styles.css' /> from Chapter 7 into your `Static Files` folder.
+1. Copy <DisplayChapter chapter='chapter_07' pinpoint='00-30#flinderslogopng' text='Flinders Logo' /> from Chapter 7 into your `Static Files` folder.
+1. Add a `features` block and a `css` feature into your main program (should be `cw5b_main_solution.yml`)
+1. Add this code below your `features` block.  This is used to display the logo.
+```yml
+---
+objects:
+  - MJFlogo: DAStaticFile.using(filename='flinders_logo.png')
+---
+mandatory: True
+code: |
+  set_parts(logo='<img src="' + MJFlogo.url_for() + '" style="height: 50px;">')
+---
+```
+1. Run your application.  It should look like this:
+    <DisplayImage imageURL='/img/coding_exercises/cw6-1.png' caption='Look at the pretty colours!!' />
+
+### Tasks
+1. Change the colour of the menu bar.  Pick your own colour.
+1. Change the colour of the <DisplayDAButtons button={da_restart_prop} /> button.
+1. Replace the Flinders logo with the logo from the Assessment design.
+1. Change the background colour of the main screen
+  :::tip hint
+  You will need to use the <DisplayChapter chapter='chapter_07' pinpoint='00-10#accessing-developer-tools' text='Developer Tools' /> to find the element to style.
+  :::
+
+:::note challenge
+Try changing the fonts in the app.  The Case Study in <DisplayChapter chapter='chapter_06' /> will give you some guidance.
+:::
