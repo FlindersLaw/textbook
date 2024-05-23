@@ -1,0 +1,42 @@
+```python
+---
+# Gathers the answers into ABAnswers
+code: |
+  temp = []
+  for item in ABInformation.true_values():
+    # Code for logbook
+    if item == 'a_logbook':
+      if logbook_query == 'logbook_info':
+        temp.append(t_logbook_info)
+      elif logbook_query == 'logbook_retention':
+        temp.append(t_logbook_retention)
+      elif logbook_query == 'logbook_online':
+        temp.append(t_logbook_online)
+      else:
+        error_content = 'ERROR: unknown value for logbook_query: {}'.format(logbook_query)
+        temp.append(t_error)
+
+    # Code for flight time
+    elif item == 'b_flighttime':
+      temp.append(t_flighttime)
+
+    # Code for charging pax
+    elif item == 'c_pax':
+      if pax_licence == 'rpc':
+        temp.append(t_pax_rpc)
+      elif pax_licence == 'ppl' or pax_licence == 'rpl':
+        temp.append(t_pax_rpl_ppl)
+      elif pax_licence == 'cpl':
+        temp.append(t_pax_cpl)
+      else:
+        error_content = 'ERROR: unknown value for pax_licence: {}'.format(pax_licence)
+        temp.append(t_error)
+
+    # Just in case we're supplied an invalid value
+    else:
+      error_content = 'ERROR: unknown value for item: {}'.format(item)
+      temp.append(t_error)
+      
+  ABAnswers = temp
+---
+```
