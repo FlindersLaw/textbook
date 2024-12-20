@@ -1,0 +1,50 @@
+```yml
+---
+question: Your Query
+subquestion: |
+  This app provides information on pilot logbooks, recording time
+  and charging passengers.
+
+  To request information please select from the list below.  You may
+  select more than one query.
+fields:
+  - I have a question about: ABInformation
+    datatype: checkboxes
+    choices:
+      - My pilot's logbook: a_logbook
+      - Recording flight time as a pilot in command: b_flighttime
+      - Charging passengers: c_pax
+    none of the above: False
+---
+question: Logbook Enquiry
+subquestion: |
+  You have requested information about your pilot's logbook.
+
+  CASR Part 61.D regulates the use, retention and data that
+  must be contained in pilot logbooks.
+
+  Select your enquiry from the choices below:
+fields:
+  - no label: logbook_query
+    datatype: radio
+    choices:
+      - What information must I keep in my logbook?: logbook_info
+      - How long must I keep my old logbook for?: logbook_retention
+      - Can I keep my logbook online?: logbook_online
+---
+question: Charging Passengers
+subquestion: |
+  You have asked if you can charge passengers that you carry on your flights.
+
+  The regulations for charging passengers depend on the licence you hold.  Please
+  select your licence from the list below.
+fields:
+  - no label: pax_licence
+    datatype: radio
+    choices:
+      - Recreational Pilot Certificate: rpc
+      - Recreational Pilot Licence: rpl
+      - Private Pilot Licence: ppl
+      - Commercial Pilot Licence: cpl
+---
+```

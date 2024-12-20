@@ -1,0 +1,40 @@
+```yml
+---
+question: Things you like
+fields:
+  - What are a few of your favourite things?: favourite_things
+    datatype: checkboxes
+    choices:
+      - Raindrops on roses: a_raindrops
+      - Whiskers on kittens: b_kittens
+      - Bright copper kettles: c_kettles
+      - Warm woollen mittens: d_mittens
+      - Brown paper packages tied up with strings: e_packages
+---
+question: Whiskers on other animals?
+subquestion: |
+  We understand that not all people are cat people (please refer to Coding Exercise 2).
+
+  In the interest of being inclusive, we would like to offer you the option of having whiskers on some other animal as one of your favourite things
+fields:
+  - What's your faviourite animal with whiskers: whiskers_followup
+    datatype: radio
+    choices:
+      - I'll stick with the kitties: kittens
+      - Chinchillas! I love chinchillas!: chinchilla
+      - Elephants! Elephants have whiskers!: elephant
+      - Catfish! They're cats for pescatarians!: catfish
+---
+question: What colour do you like your mittens?
+subquestion: |
+  Warm woolen mittens are many people's favourite things but nothing ups a favourite pair of warm woolen mittens than warm woolen mittens in your favourite colour!
+fields:
+  - My favourite colour is: mitten_colour
+    datatype: radio
+    choices:
+      - Blue
+      - Red
+      - Pink
+      - Yellow
+---
+```

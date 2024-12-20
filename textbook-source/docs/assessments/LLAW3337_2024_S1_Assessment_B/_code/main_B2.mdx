@@ -1,0 +1,59 @@
+```yml
+---
+include:
+  - code.yml
+  - questions.yml
+  - templates.yml
+---
+mandatory: True
+question: Ross and Keith Smith Aviation Law
+subquestion: |
+  Welcome to Ross and Keith Smith Aviation Law's Aviation Enquiry Tool.
+
+  We get quite a few enquiries from pilots about matters to do with their
+  logbooks, logging time and how much they can charge their passengers.
+
+  This app allows you to navigate these questions yourself and provide you
+  with some immediate assistance without necessarily needing to book time
+  with us.
+
+  **Disclaimer:**
+
+  This app **is not** a substitute for providing legal advice.  It is a means
+  to give you some information and refer you to the relevant legislation.  If
+  you need advice on these matters please contact us to make an appointment.
+
+  By pressing **I Agree** below you agree that you are not seeking legal advice.
+buttons:
+  - I Agree: continue
+  - Exit: exit
+---
+# Drives the app
+mandatory: True
+code: |
+  final_screen
+---
+event: final_screen
+question: Your queries
+subquestion: |
+  Please find answers to your queries below.  You will find links
+  to email and download this information at the bottom of this page.
+
+  %if len(ABAnswers) == 0:
+  You did not specify any queries.  Please press **Restart** below for another attempt.
+  %else:
+    %for item in ABAnswers:
+  #### ${item.subject}
+
+  ${item.content}
+    %endfor
+  %endif
+buttons:
+  - Exit: exit
+  - Restart: restart
+---
+terms:
+  CASR: |
+    means the [*Civil Aviation Safety Regulations 1998 (Cth)*](https://www.legislation.gov.au/F1998B00220/2017-09-12/text)
+---
+```

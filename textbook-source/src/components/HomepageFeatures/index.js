@@ -1,4 +1,5 @@
 import React from 'react';
+import useBaseUrl from '@docusaurus/useBaseUrl';
 import clsx from 'clsx';
 import styles from './styles.module.css';
 
@@ -37,7 +38,7 @@ function Feature({headshot, title, description}) {
   return (
     <div className={clsx('col')}>
       <div className="text--center">
-        <img className={styles.featureSvg} role="img" src={headshot} />
+        <img className={styles.featureSvg} role="img" src={useBaseUrl(headshot)} />
       </div>
       <div className="text--center padding-horiz--md">
         <h3>{title}</h3>

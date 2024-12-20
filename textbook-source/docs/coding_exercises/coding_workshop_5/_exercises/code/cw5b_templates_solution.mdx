@@ -1,0 +1,92 @@
+```yml
+# Each of these templates downloads an image from the internet and sizes it to
+# be 200 pixels tall. This is not part of your course and you don't need to 
+# know how this works. I just thought displaying pictures was less boring than
+# displaying text - MJF
+---
+# This images block defines a variable name (on the left side) for each image uploaded
+# to the Static Files folder (on the right side)
+images:
+  raindrops: raindrops.jpg
+  kittens: kittens.jpg
+  kettle: kettle.jpg
+  mittens_blue: mittens_blue.jpg
+  mittens_red: mittens_red.jpg
+  mittens_pink: mittens_pink.jpg
+  mittens_yellow: mittens_yellow.jpg
+  packages: packages.jpg
+  chinchilla: chinchilla.jpg
+  elephant: elephant.jpg
+  catfish: catfish.jpg
+---
+template: t_raindrops
+subject: Raindrops on roses
+content: |
+  [FILE raindrops, 200px]
+---
+template: t_kittens
+subject: Whiskers on kittens
+content: |
+  [FILE kittens, 200px]
+---
+template: t_kettles
+subject: Bright copper kettles
+content: |
+  [FILE kettle.jpg, 200px]
+---
+# This template asks the favourite colour question so it can 
+# display the appropriate coloured mittens
+template: t_mittens
+subject: Warm woolen mittens
+content: |
+  % if mitten_colour == 'Blue':
+  [FILE mittens_blue, 200px]
+  % elif mitten_colour == 'Red':
+  [FILE mittens_red, 200px]
+  % elif mitten_colour == 'Pink':
+  [FILE mittens_pink, 200px]
+  % elif mitten_colour == 'Yellow':
+  [FILE mittens_yellow, 200px]
+  % else:
+  I can't find any mittens that are the colour ${mitten_colour}
+  % endif
+---
+template: t_packages
+subject: Brown paper packages tied up with strings
+content: |
+  [FILE packages, 200px]
+---
+# This template requires error_subject and error_content to be set before it's
+# called. Otherwise we'll get an error
+template: t_error
+subject: |
+  ${error_subject}
+content: |
+  ${error_content}
+---
+# Additional templates for CW5
+# These are the kitten templates.  The followup question
+# is asked in the question code block
+template: t_chinchilla
+subject: Whiskers on Chinchillas
+content: |
+  Chinchillas have longer whiskers than kittens
+
+  [FILE chinchilla, 200px]
+---
+template: t_elephant
+subject: Whiskers on Elephants
+content: |
+  Yes, elephants also have whiskers. They are located on their trunks and help elephants feel and balance objects.   TIL!!!
+
+  [FILE elephant, 200px]
+---
+template: t_catfish
+subject: Whiskers on Catfish
+content: |
+  You might be hungry and pescatarian, so cats just aren't on the menu.
+  Fear not, catfish have whiskers and are tasty too!
+
+  [FILE catfish, 200px]
+---
+```

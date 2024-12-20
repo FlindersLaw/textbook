@@ -1,5 +1,6 @@
 // Quizlet.jsx
 import React, { useState, Children, cloneElement } from 'react';
+import useBaseUrl from '@docusaurus/useBaseUrl';
 import Answer from './answer';
 import Explanation from './explanation';
 
@@ -58,10 +59,12 @@ export const Quizlet = ({ children, title }) => {
     answerID += 1;
   });
 
+  let quizletIcon = useBaseUrl('/img/quiz-icon.svg');
+
   return (
     <div className='quizlet'>
       <div className='title'>
-        <img src="/img/quiz-icon.svg" height='30px' />
+        <img src={quizletIcon} height='30px' />
         {quizTitle}
       </div>
       <div className='question'>

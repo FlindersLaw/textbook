@@ -1,16 +1,10 @@
 import {DisplayChapter} from '@site/src/components';
 import {DisplayGlossaryItem} from '@site/src/components';
 import CW3d_f from './_flowcharts/cw3d_flowchart1.mdx';
+import Ref from './cw3d_references.mdx';
 
 export const title = 'Exercise 3d'
-export const video = <div>
-    Most of <DisplayChapter chapter='chapter_04'/> and specifically
-    <code>if/elif/else</code> statements
-    <span>, </span>
-    <a href="/docs/recipes/templates">Templates</a>
-    <span>, </span>
-    <a href="/docs/textbook/chapter_03/00-30#logic-tests">Logic tests</a>
-    </div>
+export const video = <Ref />
 
 Finally, we'll build out the `exit_other` screen.  We'll use a single 
 screen but we'll populate it with templates depending on how the user
@@ -107,4 +101,4 @@ of your variable to any error string you might want to construct.
 
 ### Bringing it all together
 Congratulations! You should now have a complete version of your app.  Open your `main.yml` file in your
-Playground project and run your app to see if it works!
+Playground project and run your app to see if it works!./cw3d_references.mdx

@@ -1,0 +1,27 @@
+```yml
+# Coding Exercise 4c
+#
+# Displaying a list of templates
+---
+code: |
+  temp = []
+  # We iterate over all of the favourite things
+  for item in favourite_things.keys():
+    # First we check if this favourite thing is selected
+    if favourite_things[item]:
+      # If it is selected we add the appropriate template to temp
+      if item == 'a_raindrops':
+        temp.append(t_raindrops)
+      elif item == 'b_kittens':
+        temp.append(t_kittens)
+      # Add the rest of the elifs here
+
+      else:
+        # Add a call to t_error as a fallback
+        pass
+
+  # Always assigne the temp variable to the 'real' variable last. 
+  # This guarantees that Docassemble always runs the entire code block
+  template_list = temp
+---
+```

@@ -1,6 +1,7 @@
 // Display an image with a border and other decoration suitable
 // for this textbook
 import React from "react";
+import useBaseUrl from '@docusaurus/useBaseUrl';
 import './styles.css';
 
 /**
@@ -18,7 +19,9 @@ import './styles.css';
  * @returns <img /> component
  */
 export function DisplayImage(props) {
-  const imageURL = props.imageURL;
+  const imageURL = useBaseUrl(props.imageURL);
+  // console.log('props.imageURL:', props.imageURL);
+  // console.log('imageURL:', imageURL);
   const size = props.size || "100%";
   const align = props.align || "center";
   const altText = props.altText || 'image';

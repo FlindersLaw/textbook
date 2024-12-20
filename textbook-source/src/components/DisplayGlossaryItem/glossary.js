@@ -165,6 +165,10 @@ export const glossary = new Map([
         text: 'table block',
         plural: 'table blocks' }
     ],
+    ['template', {
+        text: 'template',
+        plural: 'templates' }
+    ],
     ['variable', {
         text: 'variable',
         plural: 'variables' }

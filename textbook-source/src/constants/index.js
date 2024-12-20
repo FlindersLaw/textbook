@@ -1,7 +1,7 @@
 // Global constants used throughout the site
 
 // Our teaching docassemble server
-export const flinders_da_server_url = 'https://flinders.docassemble.edu.au';
+export const flinders_da_server_url = 'https://docassemble.flinders.edu.au';
 export const flinders_da_server_name = 'Docassemble server';
 
 // Official Docassemble website URLs
@@ -42,6 +42,9 @@ const da_btn_warning_bg = '#FFCA2C';
 const da_btn_warning_fg = '#000';
 const da_btn_danger_bg  = '#BB2D3B';
 const da_btn_danger_fg  = '#fff';
+const da_btn_download_fg = '#2dd2f2';
+const da_btn_download_bg = '#000';
+
 export const da_button_map = {
     [da_save_prop] : {
         button_colour: da_btn_primary_bg,
