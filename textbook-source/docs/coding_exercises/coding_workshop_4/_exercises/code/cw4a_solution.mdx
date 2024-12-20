@@ -1,0 +1,53 @@
+```yml
+# Coding Exercise 4a
+#
+# Introducing Iteration with DAList()
+---
+# Our welcome screen
+mandatory: True
+question: Coding Workshop 4a
+subquestion: |
+  In this exercise we look at a list data type and use iteration
+  to display the elements in the list
+buttons:
+  - Continue: continue
+---
+# Our mandatory code block. It just calls the final screen
+mandatory: True
+code: |
+  final_screen
+---
+# Our final screen
+event: final_screen
+question: Final Screen
+subquestion: |
+  Display the names in `display_list` as a bullet list.
+
+  % for item in display_list:
+  * ${item}
+  % endfor
+buttons:
+  - Exit: exit
+  - Restart: restart
+---
+# This code block defines the list with the 
+# items to display
+code: |
+  temp = []
+
+  # Add the data
+  temp.append('Ida Noe')
+  temp.append('Hugo First'),
+  temp.append('Moda Lawn'),
+  temp.append('Kate Jupp'),
+  temp.append('Ayfor Gott'),
+  temp.append('Justin Thyme'),
+  temp.append('Ray Member'),
+  temp.append('Studie Harde'),
+  temp.append('Slacke Hearse')
+
+  # Always assigne the temp variable to the 'real' variable last. 
+  # This guarantees that Docassemble always runs the entire code block
+  display_list = temp
+---
+```

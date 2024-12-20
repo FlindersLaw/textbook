@@ -1,0 +1,49 @@
+```yml
+# Coding Exercise 5b
+#
+# Adding an attachment.
+# Note: This code includes code files from Exercise 5a
+---
+include:
+  - cw5a_code_solution.yml
+  - cw5a_questions.yml
+  - cw5b_templates_solution.yml
+---
+# Our welcome screen
+mandatory: True
+question: Coding Workshop 5
+subquestion: |
+  This exercise builds on Coding Workshop 4.  In this particular
+  exercise we ask followup questions to our original
+  'Favourite Things' question and we implement them two different ways.
+buttons:
+  - Continue: continue
+---
+# Our mandatory code block. It just calls the final screen
+mandatory: True
+code: |
+  final_screen
+---
+# Our final screen
+event: final_screen
+question: Your Favourite Things
+subquestion: |
+
+  % if len(template_list) != 0:
+    % for item in template_list:
+  #### ${item.subject}
+  ${item}
+    % endfor
+  % else:
+  You do not seem to like anything.
+  % endif
+attachments:
+  - docx template file: cw5b_solution.docx
+    name: Your Favourite Things
+    valid formats:
+      - pdf
+buttons:
+  - Exit: exit
+  - Restart: restart
+---
+```

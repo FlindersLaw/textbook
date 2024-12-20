@@ -1,0 +1,45 @@
+```yml
+# Coding Exercise 4c
+#
+# Displaying a list of templates
+---
+include:
+  - cw4c_code.yml
+  - cw4c_questions.yml
+  - cw4c_templates.yml
+---
+# Our welcome screen
+mandatory: True
+question: Coding Workshop 4b
+subquestion: |
+  In this exercise we look at a `checkboxes` data type and use iteration
+  to display each element in our variable.
+
+  Checkboxes are dictionaries.  Each checkbox item is the key and the value of
+  each item is `True` or `False` depening on whether that item has been checked or not.
+
+  Even though a checkbox is a dictionary, we can still treat it as a list by iterating
+  over its keys.
+buttons:
+  - Continue: continue
+---
+# Our mandatory code block. It just calls the final screen
+mandatory: True
+code: |
+  final_screen
+---
+# Our final screen
+event: final_screen
+question: Final Screen
+subquestion: |
+  Display each favourite thing
+
+  % for item in template_list:
+  #### ${item.subject}
+  ${item}
+  % endfor
+buttons:
+  - Exit: exit
+  - Restart: restart
+---
+```

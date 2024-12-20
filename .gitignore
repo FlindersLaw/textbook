@@ -102,4 +102,7 @@ dist
 
 # TernJS port file
 .tern-port
+
 textbook-source/static/img/textbook/chapter_01/.~lock.docassemble_main_screen1_annotated.odg#
+textbook-source/package-lock.json
+package-lock.json

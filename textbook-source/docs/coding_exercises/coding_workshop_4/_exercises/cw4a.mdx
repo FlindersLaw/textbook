@@ -1,70 +1,50 @@
 import {DisplayGlossaryItem} from '@site/src/components';
 import {DisplayImage} from '@site/src/components';
+import Ref from './cw4a_references.mdx';
+import CW4aExercise from './code/cw4a_exercise.mdx';
+import CW4aSolution from './code/cw4a_solution.mdx';
 
 export const title = 'Exercise 4a'
-export const video = <div>
-    <a href="/docs/textbook/chapter_05/00-20">Lists</a>
-    <span>, </span>
-    <a href="/docs/textbook/chapter_05/00-30">Introducing Iteration</a>
-    </div>
+export const video = <Ref />
 
 ## Background
-The code for this exercise is supplied for you below.  You should copy this code into your Playground
-so you can modify it according to this exercise.
+In this exercise we are looking at <DisplayGlossaryItem item='list' plural /> and iteration.
 
-:::tip
-You might want to consider setting up a new
-[Playground Project](/docs/textbook/chapter_01/00-30#1-navbar-and-playground-menu)
-for these coding exercises.
-:::
+You will modify the [code](#code) below and:
+1. add some items to `display_list`; and
+1. display the contents of `display_list` as a bullet list.  
 
-This code contains a single <DisplayGlossaryItem item='mandatoryquestionblock' /> and a single
-<DisplayGlossaryItem item='codeblock' />.  The code block defines a list called `display_list`.
-
-## Your Task
-In this exercise you must modify the code to display the contents of `display_list` as a bullet list.  
-That is, you should display the list so that the output of the list is as follows:
+That is, you should display the list so that the output of the list looks something like this:
 
 <DisplayImage imageURL='/img/coding_exercises/cw4a-1.png' size="70%" />
 
-Currently line 11 of the code has a <DisplayGlossaryItem item='mako' upper /> command that
-displays the list items as, well, a list!  Start by removing that line.  You will need to
-replace that line with a Mako for loop.
+## Steps
+1. Create a new [Playground Project](/docs/recipes/making_a_project) called `CodingWorkshop4`
+2. Copy the [example code](#code) below into a file called `cw4a.yml`
+3. Add an extra four names to `display_list`
+4. Use a <DisplayGlossaryItem item='mako' upper /> `for` loop to display the list items formatted as a bullet list
+  :::tip hints
+  #### Adding the names to the list
+  There's a code block at the end of the example code.  The first name has been added for you. Use this as an example.
 
-You should only require an additional three lines of code to complete this exercise.
+  #### Displaying the bullet list
+  To display the bullet list you will need to:
+  
+  1.delete this line from `final_screen`
+  ```
+    ${display_list}
+  ```
+  2 replace that line with your `for` loop.  You should only need three lines of code
+  :::
 
 ## Code
 Copy this code into your playground as a starting point for this exercise.
 
-```yml showLineNumbers
-# Coding Exercise 4a
-#
-# Introducing Iteration
----
-mandatory: True
-question: Coding Workshop 4a
-subquestion: |
-  Display the names in `display_list` as
-  a bullet items list.
+<CW4aExercise />
 
-  ${display_list}
-
-buttons:
-  - Exit: exit
----
-# This code block defines the list with the 
-# items to display
-code: |
-  display_list = [
-    'Ida Noe',
-    'Hugo First',
-    'Moda Lawn',
-    'Kate Jupp',
-    'Ayfor Gott',
-    'Justin Thyme',
-    'Ray Member',
-    'Studie Harde',
-    'Slacke Hearse'
-  ]
----
-```
+<details>
+<summary>
+Solution Code
+</summary>
+<CW4aSolution />
+</details>
