@@ -98,12 +98,13 @@ const config = {
             sidebarId: 'tbHelpSidebar',
             label: 'Textbook Help',
           }, */
-          {
-            type: 'docSidebar',
-            position: 'left',
-            sidebarId: 'assessmentSidebar',
-            label: 'Assessments',
-          },
+          // This was used in 2024 but will not be used in 2025
+          // {
+          //   type: 'docSidebar',
+          //   position: 'left',
+          //   sidebarId: 'assessmentSidebar',
+          //   label: 'Assessments',
+          // },
         ],
       },
       footer: {
