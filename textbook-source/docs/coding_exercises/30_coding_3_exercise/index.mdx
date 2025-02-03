@@ -3,13 +3,284 @@ title: Coding 3 Exercise Instructions
 ---
 import {DisplayImage} from '@site/src/components';
 import {DisplayChapter} from '@site/src/components';
+import {DisplayGlossaryItem} from '@site/src/components';
 import {DisplayDAButtons} from '@site/src/components';
 import {da_restart_prop,da_continue_prop,da_exit_prop} from '@site/src/constants';
 import * as Resources from './../_resources';
 
-## Introduction
-In this exercise you will continue working on the app you developed in
-the [Coding 1 Exercise](coding_1_exercise). We will work through the steps below
-and finish creating our screens and then implement decision-making logic.
+## The Exercise
+In this exercise you will build a Section **52** Calculator App. The app will be based on the
+[flowchart](s52_calculator_chart.mdx) and [screens](s52_calculator_screens.mdx) that appear as the resources for this exercise.
 
-<Resources.Section52CalculatorChart />
+Unlike the last two weeks you will not be provided with step-by-step instructions. The principles for this Section 52 app are more or less identical to the Section 58 app. The difference in the Section 52 app is the calculations are a bit more complex.
+
+Consequently, we anticipate you'll use the same approach to develop this Section 52 app ie:
+1. Make the first mandatory question block
+1. Make an empty mandatory code block
+1. Make the rest of the question blocks
+    * follow the instruction in each screen. There are instructions on setting out the questions and the datatypes
+    * update the code block to call them as you go
+1. Make *End Screen 1* and add it to your code block
+1. Add if statements so the user is exited to *Exit Screen 1* and *Exit Screen 2*
+1. Add an if statement for the 'Year of injury' decision. Make both the true branch and false branch to go *End Screen 1*
+
+:::note
+Before you jump into things, you'll see that this app contains more screens, more decisions (and more maths!) than the previous app. You might want to consider using [`include` blocks](/docs/recipes/structuring_code) to split your code into multiple files to make it more manageable.
+:::
+
+### Adding the calculations
+If you wish you can attempt to add the calculations yourself. However, we anticipate you might struggle as we haven't taught you how to implement lookup tables in Docassemble.  Nonetheless, you're welcome to try!
+
+For those of you less adventurous, we have created a file called `s52calculator_maths.yml` for you. It contains all the mathematical calculations. All the maths are based only on two variables: `
+* `MJFyearofinjury` which contains only the year (ie: 2002, 2024 etc) the user was injured; and
+* `MJFscalevalue` - which contains the s 52(2)(a) scale value.
+
+You can insert our example code and change all references to these two variables to whatever variable names you have chosen.  The calculations should then work.
+
+### Displaying the calculations
+*End Screen 1* contains placeholders called `[insert unadjusted damages]` and `[insert adjusted damages]`. This is where you're meant to insert your unadjusted and adjusted damages.
+
+To do this you should use use <DisplayGlossaryItem item='mako' /> and the `currency()` function. Check out the <DisplayChapter chapter='chapter_02' pinpoint='00-60' text='Vital Statistics' /> example in this textbook. You may also want to review the [C1.06 video](coding_1_prerequisites#watch-the-videos).
+
+## Solution Code
+This code adopts the [code structuring](/docs/recipes/structuring_code) discussed above. Namely, the solution code is split into multiple files.  We do this because a single file with hundreds of lines of code can become unwieldy to manage. Also, the use of multiple files allows us to organise our code logically.
+
+In this example we've decided to put the main code logic and the exit and end screens in `main.yml`. We have then created a separate file for the questions (`s52calculator_questions.yml`) and another file for the math calculations (`s52calculator_maths.yml`)
+
+<details>
+<summary>
+`main.yml`
+</summary>
+```yml showLineNumbers
+# Model code for Section 52 non-economic loss calculator
+---
+# Include the other files that make up this app
+include:
+  - s52calculator_questions.yml
+  - s52calculator_maths.yml
+---
+mandatory: True
+question: Welcome
+subquestion: |
+  This application will help you to calculate damages for non-economic loss
+  according to section 52 of the *Civil Liability Act 1936* (SA)
+buttons:
+  - Continue: continue
+  - Exit: exit
+---
+# Drives the app
+mandatory: True
+code: |
+  # We have to meet extent of impairment OR expenses threshold
+  if MJFimpairment or MJFexpenses:
+    if MJFmva:
+      # Exit if injurries arise from MVA
+      MJFexit02
+    else:
+      # We can just display the end screen here.
+      # Docassemble will take care of the rest
+      MJFend01
+  else:
+    MJFexit01
+---
+#
+# Exit and end screens are in this file. 
+# All the other questions screens are in s52calculator_questions.yml
+#
+---
+# Exit screen 1
+event: MJFexit01
+question: Ineligible
+subquestion: |
+  You cannot claim damages for non-economic loss as your medical
+  expenses do not exceed the prescribed minimum.
+buttons:
+  - Exit: exit
+  - Restart: restart
+---
+# Exit Screen 2
+event: MJFexit02
+question: Motor Vehicle Accident
+subquestion: |
+  Sorry, this calculator only calculates damages for non-economic loss for people
+  who have suffered an injury **not** arising from a motor vehicle accident.
+
+  You may still be able to claim damages for non-economic loss. Please seek legal advice.
+buttons:
+  - Exit: exit
+  - Restart: restart
+---
+# End screen
+event: MJFend01
+question: Damages Calculation
+subquestion: |
+  Your unadjusted damages has been calculated to be **${currency(MJFunadjusted_damages)}**.
+
+  After adjustment for CPI your damages for non-economic loss have been
+  calculated to be **${currency(MJFadjusted_damages)}**.
+---
+```
+</details>
+
+<details>
+<summary>
+`s52calculator_questions.yml`
+</summary>
+```yml showLineNumbers
+# I've separated all the question screens into this
+# file to make the code more readable
+---
+# Screen 2
+question: Extent of impairment
+subquestion: |
+  Did the injury you sustained cause you to be impaired from leading your normal
+  life for seven (7) days or more?
+fields:
+  - no label: MJFimpairment
+    datatype: yesnoradio
+---
+# Screen 3
+question: Medical Expenses
+subquestion: |
+  Do the medical expenses you incurred exceed the prescribed minimum set out
+  in section 52(1)(b)?
+fields:
+  - no label: MJFexpenses
+    datatype: yesnoradio
+---
+# Screen 4
+question: Motor Vehicle Accident
+subquestion: |
+  Were your injuries caused by a motor vehicle accident?
+fields:
+  - no label: MJFmva
+    datatype: yesnoradio
+---
+# Screen 5
+question: Year of Injury
+subquestion: |
+  In what year did your injury occur?
+
+  **Note:** this calculator works only for injuries sustained
+  between 2002 and 2025.
+fields:
+  - Year of injury: MJFyearofinjury
+    datatype: integer
+    min: 2002
+    max: 2025
+---
+# Screen 6
+question: Scale value
+subquestion: |
+  Please enter the scale value.
+
+  The scale value must be between 0 and 60 and can be a whole number only
+fields:
+  - Scale value: MJFscalevalue
+    datatype: integer
+    min: 0
+    max: 60
+---
+```
+</details>
+
+<details>
+<summary>
+`s52calculator_maths.yml`
+</summary>
+```python showLineNumbers
+# This contains the code blocks that perform the calculations
+---
+# This is the CPI table. It comes from ABS data. Refer to LLAW3337 teaching
+# materials for more information
+code: |
+  MJFcpi_table = {
+    2002 : 76.4,
+    2003 : 79.2,
+    2004 : 81.2,
+    2005 : 83.6,
+    2006 : 86.8,
+    2007 : 88.0,
+    2008 : 92.5,
+    2009 : 93.7,
+    2010 : 96.2,
+    2011 : 100.0,
+    2012 : 101.7,
+    2013 : 103.7,
+    2014 : 105.9,
+    2015 : 107.1,
+    2016 : 108.4,
+    2017 : 110.4,
+    2018 : 112.4,
+    2019 : 114.5,
+    2020 : 115.7,
+    2021 : 118.6,
+    2022 : 128.6,
+    2023 : 136.2,
+    2024 : 140.6,
+  }
+---
+# Scale multiplier table. We base this on
+# The index is based on the scale minimum value.
+# The tuple contains the base first and then the multiplier
+code: |
+  MJFmultiplier_table = {
+    0 : (0,1150),
+    10 : (11500,2300),
+    20 : (34500,3450),
+    30 : (69000,4600),
+    40 : (115000,5750),
+    50 : (127500,6900)
+  }
+---
+# This is the multiplier for injuries sustained in 2002
+code: |
+  MJF2002multiplier = 1710
+---
+# Calculates the scale minimum value 
+# We do this by rounding down to the nearest 10
+code: |
+  MJFscale_min = round(MJFscalevalue // 10) * 10
+---
+# Now we can calculate the remainder as it's the scale value - the min value
+code: |
+  MJFscale_remainder = MJFscalevalue - MJFscale_min
+---
+# Calculate the previous year
+code: |
+  MJFpreviousyear = MJFyearofinjury - 1
+---
+# Calculate post-2002 damages
+# This is the base value plus the remainder multiplied by the multiplier
+# Our cacluations don't work if the value is 60, so we need to calculate this
+# explicitly here
+code: |
+  if MJFscalevalue == 60:
+    # Special calculations for 60
+    base_value, multiplier = MJFmultiplier_table[50]
+    MJFpost2002damages = base_value + (multiplier * 10)
+  else:
+    # Otherwise we use regular calcs
+    base_value, multiplier = MJFmultiplier_table[MJFscale_min]
+    MJFpost2002damages = base_value + ( MJFscale_remainder * multiplier)
+---
+# Now we calculate the unadjusted amount. We account here
+# for 2002 and post-2002 rules
+code: |
+  if MJFyearofinjury == 2002:
+    MJFunadjusted_damages = MJFscalevalue * MJF2002multiplier;
+  else:
+    MJFunadjusted_damages = MJFpost2002damages
+---
+# We need to adjust for CPI
+# For 2002 and 2003 we don't need to adjust at all.
+# For the others we calculate
+code: |
+  if MJFyearofinjury <= 2003:
+    MJFadjusted_damages = MJFunadjusted_damages
+  else:
+    cpi_adjustment = MJFcpi_table[MJFpreviousyear] / MJFcpi_table[2002]
+    MJFadjusted_damages = MJFunadjusted_damages * cpi_adjustment
+---
+```
+</details>
