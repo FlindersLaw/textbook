@@ -1,0 +1,445 @@
+---
+title: Coding 2 Exercise Instructions
+---
+import {DisplayImage} from '@site/src/components';
+import {DisplayChapter} from '@site/src/components';
+import {DisplayDAButtons} from '@site/src/components';
+import {da_restart_prop,da_continue_prop,da_exit_prop} from '@site/src/constants';
+
+## Introduction
+In this exercise you will continue working on the app you developed in
+the [Coding 1 Exercise](coding_1_exercise). We will work through the steps below
+and finish creating our screens and then implement decision-making logic.
+
+## Preparation Work
+* You should read <DisplayChapter chapter='chapter_04' /> before attempting this exercise.
+* You should be familiar with the entire chapter, but pay particular attention to if-else statements
+and nested if statements.
+* You should have completed working code from the Coding 1 Exercise. If you don't have completed
+code you can refer to the [solution code](coding_1_exercise#this-weeks-solution-code).
+
+
+## The Exercise
+Last week we built out Screen 1, all the question screens and Screen 8, one of the exit screens.
+This week we are going to implement the decision-making logic. As we do so we will build out
+the rest of the exit screens.
+
+### Make the rest of the exit screens
+Last week we created Screen 8. Screens 3, 5 and 7 follow the same formula. Use the instructions
+for Screen 8 from last week and create question blocks (with `event` tags) for screens 3, 5 and 7.
+
+<details>
+<summary>
+**Hint:** Your code should look something like this
+</summary>
+```yml
+---
+# Screen 3
+event: MJFexit_screen3
+question: Not Eligible
+subquestion: |
+  According to the *Civil Liability Act* you cannot claim for
+  the services you incurred as they were not provided on a
+  gratuitous basis.
+buttons:
+  - Exit: exit
+  - Restart: restart
+---
+# Screen 5
+event: MJFexit_screen5
+question: Not Eligible
+subquestion: |
+  You can only be compensated if the person who provided the gratuitous services
+  was your parent, spouse, domestic partner or child.
+buttons:
+  - Exit: exit
+  - Restart: restart
+---
+# Screen 7
+event: MJFexit_screen7
+question: Not Eligible
+subquestion: |
+  Your claim must be limited to four times State average weekly earnings.
+  State Average weekly earnings are currently $[insert current earnings].
+buttons:
+  - Exit: exit
+  - Restart: restart
+---
+```
+</details>
+
+### Comparing Against State Weekly Earnings
+Now we need to do some maths (!!!) According to s 58(2) a person is limited as to the amount
+of damages they can claim for gratuitous services, and this limit is 'not to exceed an 
+amount equivalent to 4 times State average weekly earnings'.
+
+Consequently, we need to know, firstly, what State average weekly earnings are, and then we
+need to use that figure to calculate the s 58(2) limit.
+
+The term 'State average weekly earnings' is defined is s 3 of the Act and, so you don't have to,
+I have extracted for you the current State average weekly earnings as of the date this exercise
+was written.  That amount is:
+
+<div style={{ display: 'flex', justifyContent: 'center'}}>
+  <table className="complexDataTableExamples" >
+    <tr>
+      <th> **$1,776.90**</th>
+    </tr>
+  </table>
+</div>
+
+We will use this figure for this exercise.
+
+First thing we need to do is to let our app know this amount.  We do this by setting a variable
+in a code block, as follows:
+
+```python
+---
+code: |
+  MJFavg_earnings = 1776.9
+---
+```
+Whenever we need to know what the average weekly earnings are we can just query this variable.
+
+* Add this code block to the end of your code.
+
+Next we need to calculate the s 58(2) limit. Arithmetically, this is easy, just multiply 
+`MJFavg_earnings` by 4.  We can do this in another code block.
+
+```python
+---
+code: |
+  MJFs58_limit = MJFavg_earnings * 4
+---
+```
+:::note notes
+1. If you don't know what the `*` does in the code block above, please check out 'Data Types' in <DisplayChapter chapter='chapter_03'/>.
+1. If you don't know what `<=` means you should also consult Chapter 3. We'll be using these symbols shortly.
+1. We could have put both these statements into a single code block and saved ourselves some typing.
+However, it's good practice to separate out logically different components into their own blocks.
+1. `MJFavg_earnings` is set to `1776.9` and not `1776.90` or `$1776.90`. This is for two reasons.
+    * Firstly, Python doesn't care whether a number represents money or anything else - it's just a number.  You will remember that we had to use the `currency()` functions in our Coding 1 Preparation exercises.
+    * Secondly, as `MJFavg_earnings` is just a number, the trailing `0` is redundant.
+:::
+
+OK. Now we're ready to start making decisions!
+
+### Decision-making with code
+When implementing decisions in code, everything is reduced to a true/false proposition. We usually
+re-phrase questions so that the answer is true or false. For example, the question 'Were the
+service provided gratuitous' is expressed as the statement 'The services provided were gratuitous'.
+If this statement is true, then one path is taken. If this statement is false, then another path is 
+taken.
+
+Sometimes not all questions have a yes or no answer. For example, the question 'Who provided the
+gratuitous services?' has more than just a yes/no answer. The possible answers, according to our
+flowchart, are 'Parent', 'Spouse', 'Domestic Partner', 'Child' and 'Someone Else'. In this case 
+we would express each potential answer as a statemend. For example 'The person who provided
+gratuitous services was my parent', 'The person who provided gratuitous services was my child' 
+and so-on. We could then test each one  in turn and then act depending on whether that statement
+is true or not.  To do this we would use an if/elif/else statement.  For example:
+
+```python
+code: |
+  if MJFwho_provided == 'Parent':
+    # Move to next step
+  elif MJFwho_provided == 'Spouse':
+    # Move to next step
+  elif MJFwho_provided == 'Domestic Partner':
+    # Move to next step
+  elif MJFwho_provided == 'Child':
+    # Move to next step
+  elif MJFwho_provided == 'Someone Else':
+    # Display screen 5 as user is not eligible
+---
+```
+Each statement resolves to true or false.
+
+:::note
+If you look at that if/elif statement closely you'll see that the same action ('move to next step')
+is performed for every possibility *except* if the person providing gratuitous servicse is
+'Someone Else'. Because this is the case we could re-express the statement to essentially say 'If
+the person providing gratuitous services is Someone Else then we exit the app, *otherwise* we 
+move to the next step'. This statement now has only two options - the person either is Someone Else
+or it isn't.  That's an easier if statement to write, and we would do so like this:
+
+```python
+code: |
+  if MJFwho_provided == 'Someone Else':
+    # Display Screen 5 as user is not eligible
+  else:
+    # Move to next step
+---
+```
+:::
+
+### Making Multiple Decisions
+Our Section 58 Calculator chart requires us to make a set of followup decisions after we make
+our first decision. For example, if we decide the services were gratuitous, then we need to decide
+if the person who provided those services falls within s 58. If that person does so fall then we
+need to subsequently decide if the amount claimed falls within the limit.
+
+Let's express this as follows:
+* if the services are gratuitous, then
+* if the person who provided them is not someone else, then
+* if the amount claimed is less than the limit, then the person may be able to claim damages.
+
+You see we need to have three `True` answers to arrive at the conclusion that the user may be
+able to claim damages.
+
+We express this sequence of positive decisions in code as follows (using the variables from the
+example code in the solution)
+
+```yml showLineNumbers
+---
+code: |
+  if MJFis_gratuitous:
+    if MJFwho_provided != 'Someone Else':
+      if MJFamount_claimed <= MJFavg_earnings
+        exit_screen8
+---
+```
+You can see that each of the three if statements on lines 3 to 5 mirror the three statements we 
+expressed previously.
+:::note
+The symbol `!=` means 'not equal to' in Python. Thus, the code on line 5 can be read as
+'if `MJFwho_provided` is not equal to Someone Else'
+:::
+
+Each if statement needs to be indented under its parent so that Python only executes it if the
+previous statement is true. That is, each if statement sits under its parent if statement's 
+true branch.
+
+You could copy the above code block into your mandatory code block (replacing what is already there).
+If you did so, and you answered each question correctly then you would arrive at Screen 8 - the
+'You May be Eligible' screen.
+
+* Replace the contents of your mandatory code block with the nested if statements above
+* Save and run your app. Enter in the correct answers.  Do you arrive at Screen 8?
+
+### Populating the False Branches
+As we already know, each if statement evaluates to true *or* false. Consequently, just as every
+if statement has a true branch it must also have a false branch. This is represented by the `else:`
+part of an if-else or an if-elif-else statement.
+
+```python
+---
+code: |
+  if something_is_true:
+    # This is the true branch
+    # Do the true things
+  else:
+    # This is the false branch
+    # Do the false things
+---
+```
+or
+```python
+---
+code: |
+  if something_is_true:
+    # This is the true branch
+    # Do the true things
+  elif something_else_is_true:
+    # This is another true branch
+    # Do different true things
+  elif another_thing_is_true:
+    # This is another true branch
+    # Yes, everyone has their truth!
+  else:
+    # This is the false branch. All the true branches must 
+    # have failed to get here.
+    # Do the false things
+---
+```
+In our app code we have three if statements nested within one another. Each of our if statements
+also requires a false branch, where we can display exit screens 3, 5 and 7.
+
+Let's do this one at a time.
+
+:::note
+A challenge with nesting if statements is that the corresponding `else` **must** line up with
+the `if` that it belongs to. As nested if statements get bigger and bigger it becomes a challenge
+to line up an `else` that's far away from its `if`. 
+
+This is why we'll start from the bottom of our nested if statements and work out to the top.
+:::
+
+#### False branch if exceeding the s 58(2) limit
+For convenience here's what our mandatory code block should look like:
+```yml
+---
+mandatory: True
+code: |
+  if MJFis_gratuitous:
+    if MJFwho_provided != 'Someone Else':
+      if MJFamount_claimed <= MJFavg_earnings:
+        exit_screen8
+---
+```
+The s58(2) limit decision is the last one made (check the flowchart), and it's consequently the last of our nested if statements.  Add a false branch by adding an `else:` statement that displays
+screen 7.  Your code should look like this:
+
+```yml
+---
+mandatory: True
+code: |
+  if MJFis_gratuitous:
+    if MJFwho_provided != 'Someone Else':
+      if MJFamount_claimed <= MJFavg_earnings
+        exit_screen8
+      else:
+        exit_screen7
+---
+```
+Note how the `else` lines up with its corresponding `if`. This is **essential** and many a student has shed many a tear for want of not lining up their `if`s and `else`s properly.
+
+Please be a happy student.
+
+#### False branch if Someone else provided the services
+The next decision up from the bottom is the eligibility check for who provided the services, which is the test of the value of `MJFwho_provided`. Our statement tests if `MJFwho_provided` is *not* 'Someone Else'. If `MJFwho_provided` *is* 'Someone Else' then we need to display `exit_screen5`.
+
+Modify your code block so that it contains this new false branch
+```yml
+---
+mandatory: True
+code: |
+  if MJFis_gratuitous:
+    if MJFwho_provided != 'Someone Else':
+      if MJFamount_claimed <= MJFavg_earnings:
+        exit_screen8
+      else:
+        exit_screen7
+    else:
+      exit_screen5
+---
+```
+Note where this new `else` statement appears. It appears *below* our `MJFamount_claimed` if/else statement. Why? This is because, the entirety `MJFamount_claimed` if-else statement is executed inside the true branch of the `MJFamount_claimed` if-else statement. That is, we're only making a decision about `MJFamount_claimed` if the `MJFwho_provided != 'Someone Else'` test evaluates to `True`.
+
+Note also that we have had to line up this `else` with the `if` for `MJFwho_provided`. You might be able to see now how lining up these `if`s and `else`s can be challenging.
+
+#### False branch if services are not gratuitous
+This is left as an exercise for you. Please be aware of the following
+* The false branch must sit outside of the true branch for `MJFis_gratuitous`. 
+* The true branch for `MJFis_gratuitous` contains two nested if statements. So, our false branch must sit outside these
+* The `else` must align with the `if` for `MJFis_gratuitous`
+
+Once you have done this you should now have a fully working app!
+
+### Testing
+Now that we have an app we need to test it. A thorough test involved testing out each possible combinations of answers that could be input into the app to ensure there are no bugs. Thankfully, our app is not too complicated and so this should not take too long.
+
+* Test your app. Did you find any bugs?
+
+## Solution Code
+The solution for the completed app is provided here for you as a reference.
+```yml showLineNumbers
+---
+mandatory: True
+question: Welcome
+subquestion: |
+  Welcome to the Gratuitous Services Calculator App.  This app helps you to work out if you can claim for gratuitous services provided to you by your family when you were injured.
+
+  Gratuitous services are services that are provided to you for free
+buttons:
+  - Continue: continue
+  - Exit: exit
+---
+# Mandatory code block. Drives the app
+mandatory: True
+code: |
+  if MJFis_gratuitous:
+    if MJFwho_provided != 'Someone Else':
+      if MJFamount_claimed <= MJFavg_earnings:
+        MJFexit_screen8
+      else:
+        MJFexit_screen7
+    else:
+      MJFexit_screen5
+  else:
+    MJFexit_screen3
+---
+# Screen 2
+question: Gratuitous Services
+subquestion:
+  Did you receive gratuitous services while you were injured?
+
+  Gratuitous services are services, such as cleaning or caring provided to you at no cost.
+fields:
+  - no label: MJFis_gratuitous
+    datatype: radio
+    choices:
+      - I received services and I did not pay for any of them: True
+      - I received services but I did pay for them: False
+---
+# Screen 4
+question: Provision of Services
+subquestion: |
+  Who provided the gratuitous services to you?
+fields:
+  - no label: MJFwho_provided
+    datatype: radio
+    choices:
+      - Parent
+      - Spouse
+      - Domestic Partner
+      - Child
+      - Someone Else
+---
+# Screen 6
+question: Amount Claimed
+subquestion: |
+  What amount of damages are you claiming for the provision
+  of gratuitous services to you while you were injured?
+fields:
+  - no label: MJFamount_claimed
+    datatype: currency
+---
+# Screen 8
+event: MJFexit_screen8
+question: You May be Eligible
+subquestion: |
+  According to section 58 of the *Civil Liability Act* you may be
+  able to claim for gratuitous services
+buttons:
+  - Exit: exit
+  - Restart: restart
+---
+# Screen 3
+event: MJFexit_screen3
+question: Not Eligible
+subquestion: |
+  According to the *Civil Liability Act* you cannot claim for
+  the services you incurred as they were not provided on a
+  gratuitous basis.
+buttons:
+  - Exit: exit
+  - Restart: restart
+---
+# Screen 5
+event: MJFexit_screen5
+question: Not Eligible
+subquestion: |
+  You can only be compensated if the person who provided the gratuitous services
+  was your parent, spouse, domestic partner or child.
+buttons:
+  - Exit: exit
+  - Restart: restart
+---
+# Screen 7
+event: MJFexit_screen7
+question: Not Eligible
+subquestion: |
+  Your claim must be limited to four times State average weekly earnings.
+  State Average weekly earnings are currently $[insert current earnings].
+buttons:
+  - Exit: exit
+  - Restart: restart
+---
+code: |
+  MJFavg_earnings = 1776.9
+---
+code: |
+  MJFs58_limit = MJFavg_earnings * 4
+---
+```

@@ -7,7 +7,8 @@ import Ex1a, * as Ex1a_c from '@site/docs/coding_exercises/_exercises/ex1a.mdx';
 import {DisplayInlineExercies} from '@site/src/components';
 
 It is a tradition in coding, long before this author was a boy, that the first program a programmer should write is
-one that simply announces its presence to the world by way of simply displaying the text 'Hello World!'.
+one that simply announces its presence to the world by displaying the text 'Hello World!'.
+
 Who are we to shirk tradition?
 
 ## Your first program
@@ -125,29 +126,6 @@ our block is a question block with `mandatory: True` set, then we call that bloc
 These lines are the content of the `subquestion` tag.  Note how the content is indented
 two spaces in from the tag itself.  Docassemble will assume that any indented text forms
 part of the text to be displayed. 
-
-## Indents, spacing and dashes, Oh my!
-:::caution
-Docassemble's syntax is heavily dependent on *where* code appears in a file. So...
-
-* All tags and block separators must start at the left margin.
-* All content following a `: |` *must* be indented by **two spaces**.  Docassemble
-will not accept, one or three or five.  It must be two spaces.
-* All tags are case sensitive.  `Question:` is not the same as `question:`.  If you input
-`Question:` Docassemble will generate a syntax error.  Case is important in Docassemble.
-* There *must* be a space between a `:` and a `|`.  That is, `subquestion: |` is fine.  But
-`subquestion:|` (no space), `subquestion:  |` (two spaces) and `Subquestion: |`
-(two spaces but a capital 'S') will all generate syntax errors.
-
-Docasemble is very fussy with syntax.  If you get errors when writing your code, you 
-should check syntax first.  Make sure your spaces, cases, braces, brackets,
-colons, vertical bars, dashes are all correct.
-:::
-
-:::tip
-Pressing the Tab key in the text editor automatically indents your text for you
-by two spaces.
-:::
 
 ## Run the program
 
