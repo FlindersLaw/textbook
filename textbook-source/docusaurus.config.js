@@ -57,6 +57,10 @@ const config = {
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
+        gtag: {
+          trackingID: 'G-343E4QY259',
+          anonymizeIP: false,
+        },
       }),
     ],
   ],
@@ -155,10 +159,10 @@ const config = {
         respectPrefersColorScheme: false,
       },
       algolia: {
-        appId: 'E707TIU8AU',
-        apiKey: '62783a1bb20ada3fd86e34175888e5c5',
-        indexName: 'Understanding Legal Technology',
-        insights: true,
+        appId: '1MH2O85WDK',
+        apiKey: '941ca67bfa57ec97b1af167876077407',
+        indexName: 'Textbook',
+        insights: false,
         debug: true,
       },
     }),
